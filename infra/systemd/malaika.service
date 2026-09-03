@@ -1,0 +1,9 @@
+[Unit]
+Description=Malaika to HLS
+After=network.target
+[Service]
+User=www-data
+Restart=always
+ExecStart=/usr/bin/ffmpeg -re -i rtp://@239.0.0.2:1234 -c:v libx264 -preset veryfast -b:v 1000k -c:a aac -b:a 128k -hls_time 4 -hls_list_size 450 -hls_flags delete_segments -hls_segment_filename /var/www/hls/live/cle_malaika_1m_vllq-%%05d.ts /var/www/hls/live/cle_malaika_1m_vllq.m3u8
+[Install]
+WantedBy=multi-user.target

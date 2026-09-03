@@ -1,0 +1,4123 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import { Channel } from './types';
+
+export const ADMIN_PASSWORD = 'Microsoft';
+
+export const AFRI_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" width="100%" height="100%"><rect width="600" height="350" fill="%23ffffff"/><g transform="translate(10, 10)"><path d="M 125,45 C 150,35 195,50 210,60 C 220,68 232,72 235,85 C 237,98 220,105 225,122 C 230,135 242,145 245,158 C 247,172 235,182 222,195 C 212,210 208,228 198,245 C 188,262 175,280 162,295 C 150,305 138,285 135,268 C 130,250 124,236 115,222 C 105,208 112,195 112,176 C 112,160 102,152 90,148 C 75,145 52,155 40,140 C 28,125 24,105 30,85 C 38,65 62,50 90,45 C 105,42 115,48 125,45 Z" fill="%23001aa3"/><path d="M 90,75 C 130,65 178,75 188,105 C 192,118 188,132 175,142 C 160,150 132,150 115,160 C 92,170 92,190 115,200 C 138,208 170,202 192,195 L 192,218 C 165,228 125,228 98,218 C 70,208 65,178 82,162 C 100,146 132,146 150,138 C 162,132 162,122 158,114 C 152,105 128,102 98,110 C 82,115 75,102 78,92 C 80,84 85,78 90,75 Z" fill="%23ffffff"/><path d="M 110,168 C 132,160 160,165 165,182 C 170,200 142,212 120,210 C 102,208 98,190 110,168 Z" fill="%23e61c1c"/><text x="220" y="215" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="150" fill="%23001aa3" letter-spacing="-6">fri</text><text x="415" y="215" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="150" fill="%23f33800" letter-spacing="-6">tv</text></g></svg>`;
+
+export const CCPV_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" width="100%" height="100%"><rect width="600" height="350" fill="%23000000"/><g transform="translate(35, 40)"><polygon points="10,20 100,20 80,180 1,180" fill="%2360c0ea" stroke="%23000" stroke-width="2"/><path d="M 40,75 Q 50,55 60,75 Q 50,105 40,75 M 35,105 Q 50,90 65,105 Q 50,120 35,105" fill="%230a2540"/><path d="M 45,65 Q 50,45 55,65" fill="none" stroke="%23fff" stroke-width="3"/><polygon points="105,20 195,20 175,180 85,180" fill="%2360c0ea" stroke="%23000" stroke-width="2"/><text x="115" y="140" font-family="Arial Black, sans-serif" font-weight="900" font-size="100" fill="%23ffffff">C</text><polygon points="200,20 290,20 270,180 180,180" fill="%2360c0ea" stroke="%23000" stroke-width="2"/><text x="210" y="140" font-family="Arial Black, sans-serif" font-weight="900" font-size="100" fill="%23ffffff">C</text><polygon points="295,20 385,20 365,180 275,180" fill="%2360c0ea" stroke="%23000" stroke-width="2"/><text x="310" y="140" font-family="Arial Black, sans-serif" font-weight="900" font-size="100" fill="%23ffffff">P</text><polygon points="390,20 530,20 510,180 370,180" fill="%2360c0ea" stroke="%23000" stroke-width="2"/><text x="400" y="140" font-family="Arial Black, sans-serif" font-weight="900" font-size="95" fill="%23ffffff">V</text><text x="465" y="140" font-family="Arial Black, sans-serif" font-weight="900" font-size="80" fill="%230a2560">TV</text><text x="95" y="174" font-family="Arial, sans-serif" font-weight="900" font-size="13" fill="%230a2560" letter-spacing="1">CENTRE CHRETIEN PAROLE DE VIE</text><rect x="0" y="185" width="520" height="45" fill="%23ffffff" rx="4"/><text x="135" y="220" font-family="Arial Black, sans-serif" font-weight="900" font-size="32" fill="%2300bcd4" letter-spacing="2">MONTRÉAL</text></g></svg>`;
+
+export const HORIZON_2000_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" width="100%" height="100%"><rect width="500" height="350" fill="%231b35e8"/><circle cx="90" cy="175" r="140" fill="%232542f5" opacity="0.6"/><circle cx="410" cy="175" r="140" fill="%232542f5" opacity="0.6"/><circle cx="250" cy="175" r="140" fill="%23ffffff"/><text x="145" y="200" font-family="'Times New Roman', Georgia, serif" font-weight="900" font-size="160" fill="%23221bb8" letter-spacing="-10">HD</text><text x="145" y="260" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="22" fill="%23221bb8" letter-spacing="1">HORIZON 2000 TV</text></svg>`;
+
+export const ESPOIR_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" width="100%" height="100%"><rect width="600" height="240" fill="%23ffffff"/><circle cx="120" cy="120" r="95" fill="%23ff1a1a"/><circle cx="120" cy="120" r="85" fill="%23ffd700"/><circle cx="120" cy="120" r="75" fill="%230015b0"/><text x="75" y="160" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="115" fill="%23ffe600">E</text><text x="220" y="140" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="75" fill="%23ff0000" letter-spacing="-1">ESPOIR TV</text><line x1="220" y1="165" x2="570" y2="165" stroke="%23ff0000" stroke-width="12"/><text x="270" y="215" font-family="'Arial Black', sans-serif" font-weight="900" font-size="42" fill="%230015b0">Télévision</text><path d="M 360,55 Q 430,10 490,40" fill="none" stroke="%23ff0000" stroke-width="6"/><circle cx="430" cy="22" r="10" fill="%230015b0"/><circle cx="480" cy="38" r="8" fill="%23ffe600"/><circle cx="445" cy="85" r="9" fill="%23ff0000"/></svg>`;
+
+export const BALADE_MONDE_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23000000"/><path d="M 120 400 A 200 200 0 1 1 450 350" fill="none" stroke="%23ffd700" stroke-width="14"/><path d="M 100 370 A 210 210 0 1 1 430 380" fill="none" stroke="%2300c853" stroke-width="14"/><path d="M 80 340 A 220 220 0 1 1 440 310" fill="none" stroke="%2300b0ff" stroke-width="14"/><path d="M 60 310 A 230 230 0 1 1 420 270" fill="none" stroke="%232979ff" stroke-width="14"/><path d="M 280 60 A 180 180 0 0 1 435 240" fill="none" stroke="%23d50000" stroke-width="14"/><path d="M 300 40 A 190 190 0 0 1 410 210" fill="none" stroke="%23aa00ff" stroke-width="14"/><g transform="translate(100, 70)"><path d="M 170,70 C 230,50 290,100 290,160 C 290,200 270,230 260,280 C 255,300 250,330 250,340 C 240,340 230,290 220,270 C 205,250 190,240 170,240 C 150,240 145,260 135,280 L 120,280 C 130,240 130,200 120,170 C 100,160 80,180 60,160 C 40,140 40,110 70,80 C 100,50 130,90 170,70 Z" fill="%238d847b"/><path d="M 180,200 Q 150,240 120,250 Q 150,230 175,190 Z" fill="%23fff8e7"/><path d="M 250,190 Q 280,240 310,250 Q 275,230 245,185 Z" fill="%23fff8e7"/><path d="M 70,180 C 110,160 140,200 140,240 C 140,270 125,300 120,340 L 105,340 C 105,310 110,280 100,260 C 90,250 80,260 70,280 L 55,280 C 60,250 50,230 40,210 C 25,190 40,170 70,180 Z" fill="%23aa9e94"/></g><text x="250" y="445" font-family="'Arial Black', sans-serif" font-weight="900" font-size="36" fill="%23ffffff" text-anchor="middle" letter-spacing="1">BALADE MONDE</text><text x="250" y="480" font-family="'Arial', sans-serif" font-weight="bold" font-size="28" fill="%2300b0ff" text-anchor="middle">télévision</text></svg>`;
+
+export const CENTRAL_VOICE_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%2304091e"/><circle cx="250" cy="250" r="235" fill="none" stroke="%23d4af37" stroke-width="18"/><circle cx="250" cy="250" r="222" fill="%230b2484"/><text x="80" y="310" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="250" fill="%23ffffff">CV</text><g transform="translate(290, 185)"><rect x="0" y="0" width="140" height="110" rx="28" fill="%23ffffff" stroke="%23d4af37" stroke-width="4"/><line x1="40" y1="-25" x2="60" y2="0" stroke="%23cccccc" stroke-width="4"/><line x1="100" y1="-25" x2="80" y2="0" stroke="%23cccccc" stroke-width="4"/><circle cx="40" cy="-25" r="5" fill="%23cccccc"/><circle cx="100" cy="-25" r="5" fill="%23cccccc"/><text x="18" y="78" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="75" fill="%231b5e20">T</text><text x="62" y="78" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="75" fill="%23d50000">V</text></g><text x="250" y="380" font-family="'Arial Black', sans-serif" font-weight="900" font-size="24" fill="%23ffffff" text-anchor="middle" letter-spacing="1">CENTRAL VOICE TELEVISION</text><g transform="translate(130, 400)"><rect x="10" y="20" width="14" height="30" rx="6" fill="%23ffffff"/><rect x="35" y="0" width="14" height="50" rx="6" fill="%23d50000"/><rect x="60" y="15" width="14" height="35" rx="6" fill="%232979ff"/><rect x="85" y="25" width="14" height="25" rx="6" fill="%23ffffff"/><rect x="110" y="5" width="14" height="45" rx="6" fill="%23d50000"/><rect x="135" y="18" width="14" height="32" rx="6" fill="%23ffffff"/><rect x="160" y="10" width="14" height="40" rx="6" fill="%232979ff"/><rect x="185" y="0" width="14" height="50" rx="6" fill="%23d50000"/><rect x="210" y="22" width="14" height="28" rx="6" fill="%232979ff"/></g></svg>`;
+
+export const METEO_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 450" width="100%" height="100%"><rect width="500" height="450" fill="%23ffffff"/><path d="M 180,70 L 320,70 L 380,140 L 400,240 L 360,320 L 320,360 L 260,340 L 200,320 L 160,250 L 140,150 Z" fill="%2380d8ff" opacity="0.6" stroke="%2340c4ff" stroke-width="4"/><circle cx="170" cy="120" r="35" fill="%23ffab00"/><path d="M 140,150 C 130,130 160,110 190,120 C 210,100 250,110 260,130 C 280,130 290,160 270,180 C 250,190 140,190 140,150 Z" fill="%23ffffff" stroke="%23b3e5fc" stroke-width="4"/><polygon points="230,140 200,200 220,200 190,260 250,180 225,180" fill="%23ffd600" stroke="%23ffab00" stroke-width="2"/><g transform="translate(80, 160)"><text x="0" y="100" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="110" fill="%23ffffff" stroke="%2301579b" stroke-width="12" paint-order="stroke fill">M</text><text x="110" y="100" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="110" fill="%23ffd600" stroke="%2301579b" stroke-width="12" paint-order="stroke fill">T</text><text x="210" y="100" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="110" fill="%2300e676" stroke="%2301579b" stroke-width="12" paint-order="stroke fill">V</text></g><rect x="140" y="280" width="220" height="36" fill="%232e7d32" rx="4"/><text x="250" y="308" font-family="'Arial Black', sans-serif" font-weight="900" font-size="28" fill="%23ffffff" text-anchor="middle">RDC</text><rect x="120" y="325" width="260" height="34" fill="%2301579b" rx="4"/><text x="250" y="349" font-family="'Arial Black', sans-serif" font-weight="900" font-size="18" fill="%23ffffff" text-anchor="middle">MÉTÉO TÉLÉVISION</text></svg>`;
+
+export const MSTV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" width="100%" height="100%"><rect width="500" height="300" fill="%23ffffff"/><rect x="40" y="50" width="420" height="200" fill="%230d47a1" stroke="%2342a5f5" stroke-width="8" rx="8"/><rect x="52" y="62" width="396" height="176" fill="none" stroke="%23ffffff" stroke-width="4" rx="4"/><text x="250" y="190" font-family="'Times New Roman', Georgia, serif" font-weight="bold" font-size="120" fill="%23ffffff" text-anchor="middle" letter-spacing="4">MSTV</text></svg>`;
+
+export const NURU_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" width="100%" height="100%"><rect width="600" height="320" fill="%230091ea"/><g transform="translate(110, 150)"><circle cx="0" cy="0" r="85" fill="none" stroke="%23ffffff" stroke-width="8"/><ellipse cx="0" cy="0" rx="85" ry="30" fill="none" stroke="%23ffffff" stroke-width="6"/><ellipse cx="0" cy="0" rx="85" ry="60" fill="none" stroke="%23ffffff" stroke-width="6"/><ellipse cx="0" cy="0" rx="30" ry="85" fill="none" stroke="%23ffffff" stroke-width="6"/></g><text x="220" y="195" font-family="'Arial Black', sans-serif" font-weight="900" font-size="120" fill="%23ffffff" letter-spacing="-2">NURU</text><rect x="430" y="60" width="110" height="50" rx="8" fill="%23d50000"/><text x="485" y="98" font-family="'Arial Black', sans-serif" font-weight="900" font-size="32" fill="%23ffffff" text-anchor="middle">RTV</text><text x="225" y="245" font-family="'Arial', sans-serif" font-weight="bold" font-size="22" fill="%23ffffff">Le Média qui éclaire le Monde</text></svg>`;
+
+export const SM_VIDEO_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" width="100%" height="100%"><rect width="600" height="350" fill="%23000000"/><polygon points="50,40 550,40 520,110 80,110" fill="%23d50000"/><text x="300" y="90" font-family="'Arial Black', Impact, sans-serif" font-style="italic" font-weight="900" font-size="55" fill="%23ffffff" text-anchor="middle" letter-spacing="2">SM VIDEO</text><text x="300" y="270" font-family="'Arial Black', Impact, sans-serif" font-style="italic" font-weight="900" font-size="170" fill="%23cfd8dc" stroke="%2390a4ae" stroke-width="6" text-anchor="middle" letter-spacing="-5">TV</text><ellipse cx="300" cy="240" rx="260" ry="45" fill="none" stroke="%232979ff" stroke-width="8" transform="rotate(-12, 300, 240)"/><ellipse cx="300" cy="240" rx="240" ry="35" fill="none" stroke="%23ff1744" stroke-width="6" transform="rotate(-15, 300, 240)"/></svg>`;
+
+export const TVLB_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" width="100%" height="100%"><rect width="500" height="350" fill="%23ffffff"/><path d="M 50 180 C 40 110 70 60 190 120 L 260 40 L 210 125 L 100 160 C 80 230 110 320 110 320 C 110 320 60 250 50 180 Z" fill="%230f05a0"/><circle cx="95" cy="58" r="8" fill="%230f05a0"/><line x1="95" y1="58" x2="190" y2="120" stroke="%230f05a0" stroke-width="6"/><text x="140" y="270" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="140" fill="%230f05a0" letter-spacing="-2">TVLB</text></svg>`;
+
+export const ACK_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><circle cx="250" cy="250" r="235" fill="none" stroke="%230b3580" stroke-width="28"/><path d="M 60 250 A 190 190 0 0 1 440 250" fill="none" stroke="%2300b0ff" stroke-width="20"/><g transform="translate(250, 130)" opacity="0.45"><ellipse cx="0" cy="-35" rx="18" ry="22" fill="%230b3580"/><path d="M -35,25 Q 0,-25 35,25 L 30,70 L -30,70 Z" fill="%230b3580"/></g><text x="75" y="300" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="145" fill="%23082566" letter-spacing="-4">ACK</text><g transform="translate(355, 190)"><rect x="0" y="0" width="115" height="95" rx="20" fill="%23ff9100" stroke="%23e65100" stroke-width="4"/><text x="57" y="68" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="65" fill="%23ffffff" text-anchor="middle">TV</text></g><text x="250" y="340" font-family="'Arial Black', sans-serif" font-weight="900" font-size="14" fill="%23082566" text-anchor="middle">ASSOCIATION CONFESSIONNELLE KINTUADI KIA BANGUNZA</text></svg>`;
+
+export const PAROLE_VIVANTE_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><path d="M 80,260 A 180,180 0 1,1 420,260" fill="none" stroke="%2329b6f6" stroke-width="50" stroke-linecap="round"/><path d="M 85,260 A 180,180 0 0,1 415,260" fill="none" stroke="%230288d1" stroke-width="48" stroke-linecap="round"/><path d="M 95 240 Q 150 120 250 120 Q 350 120 405 240" id="textPathArch" fill="none"/><text font-family="'Arial Black', sans-serif" font-weight="900" font-size="28" fill="%23ffffff" letter-spacing="3"><textPath href="%23textPathArch" startOffset="50%" text-anchor="middle">PAROLE VIVANTE TV.</textPath></text><circle cx="250" cy="270" r="125" fill="%23ffeb3b" stroke="%23fbc02d" stroke-width="6"/><g transform="translate(185, 180)"><rect x="10" y="10" width="110" height="110" fill="none" stroke="%230d47a1" stroke-width="5" rx="8"/><text x="65" y="30" font-family="'Arial', sans-serif" font-weight="bold" font-size="10" fill="%230d47a1" text-anchor="middle">ASSEMBLEES DE DIEU</text><path d="M 35,42 Q 65,48 95,42 L 95,72 Q 65,78 35,72 Z" fill="none" stroke="%230d47a1" stroke-width="3"/><line x1="65" y1="46" x2="65" y2="76" stroke="%230d47a1" stroke-width="3"/><text x="65" y="105" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="45" fill="%230d47a1" text-anchor="middle">AD</text><rect x="30" y="102" width="70" height="16" fill="%230d47a1" rx="3"/><text x="65" y="115" font-family="'Arial Black', sans-serif" font-weight="bold" font-size="13" fill="%23ffffff" text-anchor="middle">TV</text></g><path d="M 100 400 Q 250 330 400 400 Q 250 360 100 400 Z" fill="%230288d1"/><path d="M 120 420 Q 250 360 380 420 Q 250 385 120 420 Z" fill="%2329b6f6"/></svg>`;
+
+export const LA_BORNE_MPASA_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" width="100%" height="100%"><rect width="600" height="320" fill="%23ffffff"/><rect x="40" y="70" width="370" height="180" fill="%23000080"/><text x="60" y="165" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="64" fill="%23ffffff" letter-spacing="-1">LA BORNE</text><text x="215" y="215" font-family="'Arial Black', sans-serif" font-weight="900" font-size="28" fill="%23ffffff" letter-spacing="8">MPASA</text><g transform="translate(370, 50)"><polygon points="40,20 160,20 185,120 135,220 20,200" fill="%23ffea00"/><text x="88" y="150" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="95" fill="%23dd0000">tv</text></g></svg>`;
+
+export const WALK_OF_FAITH_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%"><rect width="600" height="400" fill="%23ffffff"/><ellipse cx="300" cy="200" rx="270" ry="170" fill="%231a237e" stroke="%23ff6d00" stroke-width="14"/><ellipse cx="300" cy="200" rx="255" ry="155" fill="%23ff9100"/><path d="M 80 280 Q 300 100 520 280 L 550 350 L 50 350 Z" fill="%230d47a1"/><line x1="300" y1="60" x2="300" y2="170" stroke="%23ffea00" stroke-width="18"/><line x1="250" y1="100" x2="350" y2="100" stroke="%23ffea00" stroke-width="18"/><g transform="translate(250, 100)" opacity="0.8"><ellipse cx="0" cy="0" rx="10" ry="12" fill="%23ffffff"/><path d="M -15,40 L 0,15 L 15,40 L 5,80 L -5,80 Z" fill="%23ffffff"/></g><text x="300" y="250" font-family="'Brush Script MT', 'Georgia', cursive" font-weight="bold" font-size="80" fill="%23ffffff" stroke="%230d47a1" stroke-width="8" paint-order="stroke fill" text-anchor="middle">Walk of Faith</text><rect x="360" y="240" width="100" height="60" rx="12" fill="%23ff6d00" stroke="%23ffffff" stroke-width="3"/><text x="410" y="285" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="45" fill="%23ffffff" text-anchor="middle">TV</text><path d="M 60,280 C 150,330 450,330 540,280 L 500,340 C 400,370 200,370 100,340 Z" fill="%230d47a1"/><text x="300" y="325" font-family="'Georgia', serif" font-style="italic" font-weight="bold" font-size="24" fill="%23ffffff" text-anchor="middle">Changing Lives through the gospel</text></svg>`;
+
+export const OCEAN_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%"><rect width="600" height="400" fill="%23ffffff"/><path d="M 80,240 C 60,110 180,50 340,90 C 240,130 140,180 140,250 C 140,320 280,360 450,320 C 300,380 100,340 80,240 Z" fill="%230288d1"/><path d="M 120,230 C 100,140 200,80 360,110 C 260,150 170,190 170,250 C 170,300 290,340 480,290 C 320,350 140,310 120,230 Z" fill="%2329b6f6"/><text x="140" y="230" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="110" fill="%230d47a1" letter-spacing="-2">OCEAN</text><g transform="translate(390, 110)"><rect x="0" y="20" width="160" height="120" rx="24" fill="%230288d1" stroke="%23ffffff" stroke-width="6"/><line x1="40" y1="-10" x2="60" y2="20" stroke="%230288d1" stroke-width="6"/><line x1="120" y1="-10" x2="100" y2="20" stroke="%230288d1" stroke-width="6"/><polygon points="55,50 115,80 55,110" fill="%23ffffff"/><text x="80" y="175" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="50" fill="%230d47a1" text-anchor="middle">TV</text></g><rect x="150" y="250" width="280" height="32" rx="6" fill="%230d47a1"/><text x="290" y="273" font-family="'Arial', sans-serif" font-style="italic" font-weight="bold" font-size="16" fill="%23ffffff" text-anchor="middle">Toujours prêt à vous servir</text></svg>`;
+
+export const DIESKOLUS_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%"><rect width="600" height="400" fill="%23080d1a"/><line x1="260" y1="70" x2="200" y2="140" stroke="%23ff9100" stroke-width="10" stroke-linecap="round"/><line x1="340" y1="70" x2="400" y2="140" stroke="%23ff9100" stroke-width="10" stroke-linecap="round"/><circle cx="250" cy="60" r="14" fill="%23ffea00"/><circle cx="350" cy="60" r="14" fill="%23ffea00"/><rect x="170" y="140" width="290" height="190" rx="35" fill="%230277bd" stroke="%23ff9100" stroke-width="16"/><path d="M 140 160 Q 300 80 460 160 Q 480 240 450 300 Q 300 360 150 300 Z" fill="none" stroke="%23ffea00" stroke-width="14" stroke-linecap="round"/><text x="310" y="245" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="%2340c4ff" stroke="%2301579b" stroke-width="6" paint-order="stroke fill" text-anchor="middle" letter-spacing="-1">DIESKOLUS TV</text><circle cx="410" cy="285" r="10" fill="%23ffffff"/><circle cx="375" cy="285" r="6" fill="%23ffffff"/></svg>`;
+
+export const PAROLE_DESPERANCE_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" width="100%" height="100%"><rect width="600" height="320" fill="%23556b2f"/><g transform="translate(30, 30)"><polygon points="10,0 310,0 280,65 0,65" fill="%23ff5722"/><text x="50" y="48" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="%23ffffff">Parole</text><rect x="10" y="65" width="450" height="130" fill="%230a0e2a"/><text x="25" y="155" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="62" fill="%23ffffff">d'Espérance</text><g transform="translate(340, 115)"><circle cx="60" cy="40" r="45" fill="none" stroke="%23ff5722" stroke-width="6" stroke-dasharray="4,6"/><path d="M 20 60 Q 60 0 110 50" fill="none" stroke="%23ffffff" stroke-width="8"/><path d="M 30 70 Q 70 20 120 60" fill="none" stroke="%23ffffff" stroke-width="6"/><text x="35" y="62" font-family="'Arial Black', Impact, sans-serif" font-style="italic" font-weight="900" font-size="55" fill="%23ffffff">TV</text></g></g></svg>`;
+
+export const A_LA_UNE_TELEVISION_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%"><rect width="600" height="300" fill="%23000000"/><g transform="translate(140, 70)"><text x="0" y="80" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="70" fill="%23ffffff" letter-spacing="-2">À LA UNE</text><path d="M 320 40 A 25 25 0 0 1 320 80" fill="none" stroke="%23ffffff" stroke-width="8" stroke-linecap="round"/><path d="M 335 30 A 40 40 0 0 1 335 90" fill="none" stroke="%23ffffff" stroke-width="8" stroke-linecap="round"/><polygon points="20,100 240,100 220,150 0,150" fill="%232e7d32"/><text x="20" y="138" font-family="'Arial Black', sans-serif" font-weight="900" font-size="36" fill="%23ffffff">télévision</text></g></svg>`;
+
+export const CNA_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23000000"/><text x="80" y="280" font-family="'Arial Black', sans-serif" font-weight="900" font-size="130" fill="%23ffffff" letter-spacing="-4">CNA</text><polygon points="300,180 420,180 420,300" fill="%23ff0000"/></svg>`;
+
+export const ALBANIAN_MUSIC_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><circle cx="250" cy="200" r="140" fill="%23000000"/><path d="M 170 250 L 220 130 L 260 210" fill="none" stroke="%23ffffff" stroke-width="18" stroke-linecap="round"/><path d="M 230 160 L 290 250" fill="none" stroke="%23d50000" stroke-width="18" stroke-linecap="round"/><line x1="210" y1="200" x2="250" y2="200" stroke="%23ffffff" stroke-width="10"/><text x="250" y="410" font-family="'Arial Black', sans-serif" font-weight="900" font-size="42" fill="%23d50000" text-anchor="middle">Albanian Music</text></svg>`;
+
+export const BAKU_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%231a1a1a"/><text x="40" y="310" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="140" fill="%23ffffff">baku</text><circle cx="410" cy="180" r="55" fill="%23d50000"/><text x="410" y="196" font-family="'Arial Black', sans-serif" font-weight="900" font-size="45" fill="%23ffffff" text-anchor="middle">TV</text></svg>`;
+
+export const BELARUS_5_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23d32f2f" rx="60"/><rect x="0" y="370" width="500" height="130" fill="%232e7d32"/><text x="250" y="310" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="320" fill="%23ffffff" text-anchor="middle">5</text><text x="250" y="460" font-family="'Arial Black', sans-serif" font-weight="900" font-size="62" fill="%23ffffff" text-anchor="middle">БЕЛАРУСЬ</text></svg>`;
+
+export const BELARUS_24_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23d32f2f" rx="60"/><rect x="0" y="370" width="500" height="130" fill="%232e7d32"/><text x="250" y="300" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="250" fill="%23ffffff" text-anchor="middle" letter-spacing="-10">24</text><text x="250" y="460" font-family="'Arial Black', sans-serif" font-weight="900" font-size="62" fill="%23ffffff" text-anchor="middle">БЕЛАРУСЬ</text></svg>`;
+
+export const BX1_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%231b003a"/><rect x="25" y="250" width="230" height="225" fill="%23ff80ab"/><text x="140" y="210" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="170" fill="%23ffffff" text-anchor="middle">B</text><text x="380" y="210" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="170" fill="%23ffffff" text-anchor="middle">X</text><text x="140" y="415" font-family="'Arial Black', sans-serif" font-weight="900" font-size="75" fill="%231b003a" text-anchor="middle">pub</text><text x="380" y="440" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="210" fill="%23ffffff" text-anchor="middle">1</text></svg>`;
+
+export const CITY_NEWS_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><path d="M 200,80 A 110,110 0 1,0 200,300 L 200,240 A 50,50 0 1,1 200,140 Z" fill="%23006699"/><circle cx="150" cy="190" r="45" fill="%23ff9900"/><path d="M 150 145 A 45 45 0 0 1 195 190 L 170 190 A 20 20 0 0 0 150 170 Z" fill="%23ffffff"/><text x="220" y="260" font-family="'Arial Black', sans-serif" font-weight="900" font-size="110" fill="%23006699">ity</text><text x="100" y="410" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="120" fill="%23006699" letter-spacing="-2">news</text></svg>`;
+
+export const THIRTEEN_CULTURA_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="100%" height="100%"><rect width="600" height="360" fill="%23ff6f00"/><text x="70" y="270" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="260" fill="%23ffffff">13</text><text x="320" y="160" font-family="'Arial Black', sans-serif" font-weight="900" font-size="70" fill="%23ffffff">Cul</text><text x="320" y="240" font-family="'Arial Black', sans-serif" font-weight="900" font-size="70" fill="%23ffffff">tura</text></svg>`;
+
+export const THIRTEEN_TELE_SERIE_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="100%" height="100%"><rect width="600" height="360" fill="%23ffffff"/><g transform="translate(30, 20)"><text x="40" y="270" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="280" fill="%237e57c2">13</text><text x="270" y="140" font-family="'Arial Black', sans-serif" font-weight="900" font-size="80" fill="%237e57c2">Tele</text><text x="270" y="235" font-family="'Arial Black', sans-serif" font-weight="900" font-size="80" fill="%237e57c2">series</text></g></svg>`;
+
+export const CCTV_4_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" width="100%" height="100%"><rect width="600" height="240" fill="%23ffffff"/><g transform="translate(20, 20)"><text x="10" y="150" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="120" fill="%23000000">C</text><text x="100" y="150" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="120" fill="%23d50000">C</text><text x="190" y="150" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="120" fill="%23000000">TV</text><path d="M 370 20 L 540 20 C 580 20 580 180 540 180 L 370 180 Z" fill="%23000000"/><text x="455" y="155" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="150" fill="%23ffffff" text-anchor="middle">4</text><line x1="10" y1="180" x2="550" y2="180" stroke="%23000000" stroke-width="12"/></g></svg>`;
+
+export const EIGHTYEIGHT_STEREO_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><g transform="translate(30, 20)"><text x="220" y="320" font-family="'Arial Black', Impact, sans-serif" font-style="italic" font-weight="900" font-size="360" fill="%23d50000" text-anchor="middle" letter-spacing="-20">88</text><path d="M 180 320 C 140 260 200 200 220 160 C 240 200 300 260 260 320 Z" fill="%23ffffff"/><text x="220" y="400" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="62" fill="%23d50000" text-anchor="middle">STEREO</text><text x="220" y="445" font-family="'Arial Black', sans-serif" font-weight="900" font-size="36" fill="%23546e7a" text-anchor="middle">88.7 FM</text></g></svg>`;
+
+export const CMC_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 250" width="100%" height="100%"><rect width="600" height="250" fill="%23ffffff"/><text x="30" y="180" font-family="'Arial Black', sans-serif" font-weight="900" font-size="180" fill="%23000000" letter-spacing="-10">CMC</text><rect x="420" y="25" width="160" height="190" fill="%23d50000"/><text x="500" y="165" font-family="'Comic Sans MS', 'Brush Script MT', cursive, sans-serif" font-style="italic" font-weight="900" font-size="130" fill="%23ffffff" text-anchor="middle">Tv</text></svg>`;
+
+export const TWENTYFOUR_SATA_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" width="100%" height="100%"><rect width="600" height="220" fill="%23d32f2f"/><rect x="0" y="220" width="600" height="120" fill="%23fbc02d"/><text x="300" y="180" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="200" fill="%23ffffff" text-anchor="middle">24</text><text x="300" y="300" font-family="'Arial Black', sans-serif" font-weight="900" font-size="65" fill="%23ffffff" text-anchor="middle" letter-spacing="24">SATA</text></svg>`;
+
+export const KOOGI_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><rect x="80" y="50" width="310" height="310" rx="35" fill="none" stroke="%23b71c1c" stroke-width="28"/><text x="235" y="310" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="270" fill="%23ffd600" stroke="%23b71c1c" stroke-width="14" paint-order="stroke fill" text-anchor="middle">K</text><text x="425" y="360" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="60" fill="%23b71c1c">TV</text><text x="235" y="445" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="75" fill="%23b71c1c" text-anchor="middle" letter-spacing="2">KOOGI</text></svg>`;
+
+export const TWO_ETV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><rect x="40" y="40" width="420" height="420" rx="100" fill="%2300bfa5"/><text x="250" y="310" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="300" fill="%23ffffff" text-anchor="middle">2</text><text x="250" y="415" font-family="'Arial Black', sans-serif" font-weight="900" font-size="85" fill="%23ffffff" text-anchor="middle">etv</text></svg>`;
+
+export const ETV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 250" width="100%" height="100%"><rect width="600" height="250" fill="%23ffffff"/><g transform="translate(20, 20)"><text x="10" y="170" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="190" fill="%23d500f9" letter-spacing="-10">etv</text><rect x="490" y="60" width="40" height="100" fill="%23d500f9" rx="10"/><polygon points="540,60 590,110 540,160" fill="%23d500f9"/></g></svg>`;
+
+export const ALFA_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 550" width="100%" height="100%"><rect width="500" height="550" fill="%23ffffff"/><rect x="40" y="30" width="420" height="420" rx="90" fill="%23d32f2f"/><text x="250" y="350" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="340" fill="%23ffffff" text-anchor="middle">A</text><text x="250" y="515" font-family="'Arial Black', sans-serif" font-weight="900" font-size="62" fill="%23d32f2f" text-anchor="middle">AlfaTV</text></svg>`;
+
+export const A_MUSIC_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23c2185b" rx="40"/><text x="250" y="340" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="320" fill="%23ffffff" text-anchor="middle">A</text><text x="250" y="440" font-family="'Arial Black', sans-serif" font-weight="900" font-size="52" fill="%23ffffff" text-anchor="middle" letter-spacing="2">MUSIC TV</text></svg>`;
+
+export const CTV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%"><rect width="600" height="300" fill="%23ffffff"/><circle cx="110" cy="150" r="80" fill="%23d50000"/><text x="110" y="190" font-family="'Arial Black', sans-serif" font-weight="900" font-size="110" fill="%23ffffff" text-anchor="middle">C</text><rect x="220" y="70" width="160" height="160" fill="%232979ff"/><text x="300" y="190" font-family="'Arial Black', sans-serif" font-weight="900" font-size="110" fill="%23ffffff" text-anchor="middle">T</text><polygon points="410,70 570,70 490,230" fill="%2300c853"/><text x="490" y="160" font-family="'Arial Black', sans-serif" font-weight="900" font-size="110" fill="%23ffffff" text-anchor="middle">V</text></svg>`;
+
+export const CAMARA_DOS_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 250" width="100%" height="100%"><rect width="600" height="250" fill="%234caf50"/><rect x="0" y="0" width="180" height="250" fill="%231565c0"/><path d="M 40,20 L 40,230 M 40,180 L 160,180 Q 120,220 160,230" stroke="%23ffffff" stroke-width="12" fill="none"/><text x="200" y="110" font-family="'Arial Black', sans-serif" font-weight="900" font-size="46" fill="%23ffffff">CÂMARA DOS</text><text x="200" y="195" font-family="'Arial Black', sans-serif" font-weight="900" font-size="56" fill="%23ffffff">DEPUTADOS</text></svg>`;
+
+export const EGLISE_ESPEC_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><circle cx="250" cy="200" r="160" fill="none" stroke="%23111111" stroke-width="8"/><ellipse cx="250" cy="200" rx="160" ry="70" fill="none" stroke="%23111111" stroke-width="8"/><ellipse cx="250" cy="200" rx="90" ry="160" fill="none" stroke="%23111111" stroke-width="8"/><line x1="90" y1="200" x2="410" y2="200" stroke="%23111111" stroke-width="8"/><path d="M 180 150 Q 280 40 440 90 Q 340 130 310 170 Q 360 140 410 150 Q 330 200 240 180 Z" fill="%2378909c"/><polygon points="250,180 285,210 250,245 215,210" fill="%2329b6f6" stroke="%230288d1" stroke-width="4"/><path d="M 100 270 Q 180 200 245 270 L 245 320 Q 180 250 100 320 Z" fill="%230288d1"/><path d="M 400 270 Q 320 200 255 270 L 255 320 Q 320 250 400 320 Z" fill="%230288d1"/><text x="250" y="380" font-family="'Arial Black', sans-serif" font-weight="900" font-size="34" fill="%23d32f2f" text-anchor="middle" letter-spacing="4">EGLISE</text><text x="250" y="440" font-family="'Arial Black', sans-serif" font-weight="900" font-size="54" fill="%23d32f2f" text-anchor="middle" letter-spacing="6">ESPEC</text></svg>`;
+
+export const RTVD_4_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%"><rect width="600" height="300" fill="%23ffffff"/><g transform="translate(40, 60)"><circle cx="45" cy="110" r="38" fill="none" stroke="%230288d1" stroke-width="12"/><text x="45" y="125" font-family="'Arial Black', sans-serif" font-weight="900" font-size="44" fill="%230288d1" text-anchor="middle">R</text><circle cx="135" cy="110" r="38" fill="none" stroke="%230288d1" stroke-width="12"/><text x="135" y="125" font-family="'Arial Black', sans-serif" font-weight="900" font-size="44" fill="%230288d1" text-anchor="middle">T</text><circle cx="225" cy="110" r="38" fill="none" stroke="%230288d1" stroke-width="12"/><text x="225" y="125" font-family="'Arial Black', sans-serif" font-weight="900" font-size="44" fill="%230288d1" text-anchor="middle">V</text><circle cx="315" cy="110" r="38" fill="none" stroke="%230288d1" stroke-width="12"/><text x="315" y="125" font-family="'Arial Black', sans-serif" font-weight="900" font-size="44" fill="%230288d1" text-anchor="middle">D</text><line x1="375" y1="50" x2="375" y2="170" stroke="%230288d1" stroke-width="12"/><rect x="400" y="25" width="65" height="32" rx="6" fill="%23d50000"/><text x="432" y="48" font-family="'Arial Black', sans-serif" font-weight="900" font-size="18" fill="%23ffffff" text-anchor="middle">LIVE</text><path d="M 470 20 A 25 25 0 0 1 495 45" fill="none" stroke="%23d50000" stroke-width="6" stroke-linecap="round"/><path d="M 470 10 A 35 35 0 0 1 505 45" fill="none" stroke="%23d50000" stroke-width="6" stroke-linecap="round"/><text x="440" y="170" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="140" fill="%230288d1">4</text></g></svg>`;
+
+export const OCKO_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23e50914"/><text x="250" y="290" font-family="'Arial Black', sans-serif" font-weight="900" font-size="120" fill="%23ffffff" text-anchor="middle" letter-spacing="-2">ÓČKO</text></svg>`;
+
+export const O80_NEWS_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" width="100%" height="100%"><rect width="600" height="260" fill="%23f5f5f7"/><g transform="translate(20, 40)"><circle cx="70" cy="90" r="55" fill="none" stroke="%23c62828" stroke-width="26"/><circle cx="160" cy="60" r="30" fill="none" stroke="%23c62828" stroke-width="16"/><circle cx="160" cy="120" r="34" fill="none" stroke="%23c62828" stroke-width="16"/><circle cx="260" cy="90" r="35" fill="none" stroke="%23c62828" stroke-width="14" stroke-dasharray="10 10"/><text x="320" y="125" font-family="'Arial Black', sans-serif" font-weight="900" font-size="100" fill="%23c62828" letter-spacing="-4">news</text></g></svg>`;
+
+export const OLIVE_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><g transform="translate(40, 60)"><path d="M 120 70 C 80 10 130 0 130 0 C 130 0 170 30 130 70 Z" fill="%23689f38"/><path d="M 130 70 C 160 20 200 30 200 30 C 200 30 190 75 130 70 Z" fill="%23558b2f"/><rect x="50" y="70" width="160" height="130" rx="25" fill="none" stroke="%23558b2f" stroke-width="16"/><circle cx="130" cy="180" r="10" fill="%23558b2f"/><text x="220" y="150" font-family="'Segoe UI', sans-serif" font-weight="300" font-size="95" fill="%23111111">live</text><text x="140" y="270" font-family="'Segoe UI', sans-serif" font-weight="300" font-size="110" fill="%23111111">TV</text></g></svg>`;
+
+export const NEWS_24_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23e0e0e0"/><g fill="%231565c0"><rect x="50" y="120" width="12" height="12"/><rect x="80" y="100" width="12" height="12"/><rect x="110" y="120" width="12" height="12"/><rect x="140" y="120" width="12" height="12"/><rect x="170" y="100" width="12" height="12"/><rect x="200" y="120" width="12" height="12"/><rect x="230" y="100" width="12" height="12"/></g><g fill="%23c62828"><rect x="270" y="100" width="12" height="12"/><rect x="300" y="120" width="12" height="12"/><rect x="330" y="100" width="12" height="12"/><rect x="360" y="120" width="12" height="12"/><rect x="390" y="120" width="12" height="12"/><rect x="420" y="100" width="12" height="12"/></g><text x="40" y="270" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="95" fill="%231565c0" letter-spacing="-2">NEWS</text><text x="340" y="270" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="95" fill="%23c62828">24</text><g fill="%231565c0"><rect x="50" y="340" width="12" height="12"/><rect x="80" y="340" width="12" height="12"/><rect x="110" y="320" width="12" height="12"/><rect x="140" y="340" width="12" height="12"/><rect x="170" y="340" width="12" height="12"/><rect x="200" y="320" width="12" height="12"/><rect x="230" y="340" width="12" height="12"/></g><g fill="%23c62828"><rect x="270" y="340" width="12" height="12"/><rect x="300" y="320" width="12" height="12"/><rect x="330" y="340" width="12" height="12"/><rect x="360" y="340" width="12" height="12"/><rect x="390" y="320" width="12" height="12"/><rect x="420" y="340" width="12" height="12"/></g></svg>`;
+
+export const MBC_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><rect x="60" y="40" width="380" height="320" fill="%23d32f2f"/><path d="M 120 300 C 140 120 280 60 380 230 C 260 210 240 280 220 300 Z" fill="%23ffffff"/><text x="250" y="440" font-family="'Arial Black', sans-serif" font-weight="900" font-size="90" fill="%23d32f2f" text-anchor="middle" letter-spacing="-2">mbc</text></svg>`;
+export const MBC_MASR_LOGO = MBC_LOGO;
+
+export const ISTV_HD_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><circle cx="250" cy="250" r="220" fill="%23cfd8dc"/><circle cx="250" cy="250" r="200" fill="url(%23rainbow)"/><defs><linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2300acc1"/><stop offset="35%" stop-color="%234caf50"/><stop offset="70%" stop-color="%23fbc02d"/><stop offset="100%" stop-color="%23e53935"/></linearGradient></defs><text x="250" y="275" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="120" fill="%23ffffff" text-anchor="middle" letter-spacing="-4">ISTV</text><text x="250" y="375" font-family="'Arial Black', sans-serif" font-weight="900" font-size="60" fill="%23ffffff" text-anchor="middle">HD</text></svg>`;
+
+export const KANAL_HOVEDSTADEN_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><circle cx="250" cy="180" r="140" fill="%230277bd"/><text x="180" y="230" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="170" fill="%23ffffff" opacity="0.9">k</text><text x="250" y="230" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="170" fill="%23ffffff">h</text><text x="250" y="390" font-family="'Arial Black', sans-serif" font-weight="900" font-size="62" fill="%230277bd" text-anchor="middle">kanal</text><text x="250" y="450" font-family="'Arial Black', sans-serif" font-weight="900" font-size="38" fill="%230277bd" text-anchor="middle">HOVEDSTADEN</text></svg>`;
+
+export const ICI_RDI_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" width="100%" height="100%"><rect width="600" height="240" fill="%23d32f2f" rx="30"/><g transform="translate(30, 20)"><text x="30" y="145" font-family="'Arial Black', sans-serif" font-weight="900" font-size="80" fill="%23ffffff">ICI</text><g transform="translate(270, 100)" fill="%23ffffff"><circle cx="0" cy="0" r="30"/><path d="M -30,-45 A 50 50 0 0 1 30,-45 L 30,-30 A 30 30 0 0 0 -30,-30 Z"/><path d="M -30,45 A 50 50 0 0 0 30,45 L 30,30 A 30 30 0 0 1 -30,30 Z"/><path d="M -45,-30 A 50 50 0 0 0 -45,30 L -30,30 A 30 30 0 0 1 -30,-30 Z"/><path d="M 45,-30 A 50 50 0 0 1 45,30 L 30,30 A 30 30 0 0 0 30,-30 Z"/></g><text x="370" y="145" font-family="'Arial Black', sans-serif" font-weight="900" font-size="80" fill="%23ffffff">RDI</text></g></svg>`;
+
+export const SPORTS_LIVE_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><circle cx="160" cy="180" r="60" fill="none" stroke="%230d47a1" stroke-width="10"/><circle cx="340" cy="180" r="70" fill="none" stroke="%23e65100" stroke-width="10"/><ellipse cx="270" cy="220" rx="60" ry="35" fill="none" stroke="%234e342e" stroke-width="10" transform="rotate(-25 270 220)"/><rect x="40" y="270" width="420" height="120" fill="%230d47a1"/><text x="250" y="355" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="80" fill="%23ffffff" text-anchor="middle" letter-spacing="4">SPORTS</text></svg>`;
+
+export const TV_CULTURA_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><g transform="translate(100, 30)"><rect x="110" y="20" width="80" height="110" fill="%234caf50"/><rect x="0" y="130" width="300" height="80" fill="%234caf50"/><path d="M 110 210 L 110 320 Q 150 320 150 280 L 150 210 Z" fill="%234caf50"/><path d="M 190 210 L 190 320 Q 150 320 150 280 L 150 210 Z" fill="%234caf50"/><text x="150" y="410" font-family="'Arial Black', sans-serif" font-weight="900" font-size="44" fill="%233f51b5" text-anchor="middle" letter-spacing="2">CULTURA</text></g></svg>`;
+
+export const TAEVAS_TV7_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><g transform="translate(30, 40)"><text x="220" y="170" font-family="'Segoe UI', 'Arial Black', sans-serif" font-weight="900" font-size="75" fill="%23333333" text-anchor="middle" letter-spacing="6">TAEVAS</text><circle cx="120" cy="310" r="95" fill="%2300acc1"/><path d="M 75 310 Q 130 250 160 300 Q 110 340 75 310 Z" fill="%23ffffff"/><path d="M 100 270 Q 140 230 165 270 Z" fill="%23ffffff"/><text x="240" y="350" font-family="'Segoe UI', 'Arial Black', sans-serif" font-weight="900" font-size="110" fill="%23333333">TV</text><text x="380" y="350" font-family="'Segoe UI', 'Arial Black', sans-serif" font-weight="900" font-size="110" fill="%2300acc1">7</text></g></svg>`;
+
+export const TBN_BALTIA_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" width="100%" height="100%"><rect width="500" height="300" fill="%23f4f6f9"/><g transform="translate(30, 40)"><text x="110" y="140" font-family="'Arial Black', Impact, sans-serif" font-style="italic" font-weight="900" font-size="130" fill="%230d47a1">t</text><text x="190" y="140" font-family="'Arial Black', Impact, sans-serif" font-style="italic" font-weight="900" font-size="140" fill="%230288d1">b</text><text x="290" y="140" font-family="'Arial Black', Impact, sans-serif" font-style="italic" font-weight="900" font-size="130" fill="%230d47a1">n</text><text x="220" y="210" font-family="'Arial Black', sans-serif" font-weight="900" font-size="52" fill="%230288d1" text-anchor="middle" letter-spacing="8">BALTIA</text></g></svg>`;
+
+export const TORONTO_360_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><g transform="translate(20, 30)"><line x1="370" y1="20" x2="370" y2="150" stroke="%23b71c1c" stroke-width="12"/><polygon points="370,10 360,50 380,50" fill="%23b71c1c"/><rect x="345" y="100" width="50" height="40" rx="8" fill="%23b71c1c"/><text x="230" y="230" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="115" fill="%23b71c1c" text-anchor="middle" letter-spacing="-2">TORONTO</text><text x="140" y="380" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="140" fill="%23000000" text-anchor="middle">360</text><text x="350" y="380" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="140" fill="%23000000" text-anchor="middle">TV</text></g></svg>`;
+
+export const TROPOJA_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 240" width="100%" height="100%"><rect width="700" height="240" fill="%23ffffff"/><g transform="translate(30, 20)"><text x="30" y="165" font-family="'Arial Black', sans-serif" font-weight="900" font-size="140" fill="%231b75bc">Tr</text><g transform="translate(265, 25)" fill="%231b75bc"><path d="M 60 0 C 45 30 15 30 0 45 L 20 80 L 10 110 L 40 100 L 60 140 L 80 100 L 110 110 L 100 80 L 120 45 C 105 30 75 30 60 0 Z"/><circle cx="40" cy="70" r="6" fill="%23ffffff"/><circle cx="80" cy="70" r="6" fill="%23ffffff"/><polygon points="60,95 50,82 70,82" fill="%23ffffff"/></g><text x="400" y="165" font-family="'Arial Black', sans-serif" font-weight="900" font-size="140" fill="%231b75bc">poja</text></g></svg>`;
+
+export const TVN3_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 250" width="100%" height="100%"><rect width="650" height="250" fill="%23ffffff"/><g transform="translate(10, 10)"><text x="30" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="160" fill="%23222222" letter-spacing="-6">TVn</text><defs><linearGradient id="tvn3grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ff3366"/><stop offset="100%" stop-color="%23b8004f"/></linearGradient></defs><circle cx="510" cy="115" r="105" fill="url(%23tvn3grad)"/><polygon points="445,100 445,130 475,115" fill="%23ccff00"/><text x="535" y="155" font-family="'Arial Black', sans-serif" font-weight="900" font-size="140" fill="%23ffffff" text-anchor="middle">3</text></g></svg>`;
+
+export const UTV_NEWS_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%232b2b2b"/><rect x="70" y="70" width="360" height="360" rx="24" fill="%23ffffff"/><rect x="70" y="250" width="360" height="180" rx="0 0 24 24" fill="%23ff6600"/><g transform="translate(100, 110)"><polygon points="10,20 30,20 10,40" fill="%23d32f2f"/><text x="180" y="105" font-family="'Arial Black', sans-serif" font-weight="900" font-size="110" fill="%23ff9900" text-anchor="middle" letter-spacing="-2">UTV</text></g><text x="250" y="370" font-family="'Arial Black', sans-serif" font-weight="900" font-size="80" fill="%23ffffff" text-anchor="middle" letter-spacing="4">NEWS</text></svg>`;
+
+export const SAVOIR_MEDIA_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><circle cx="250" cy="250" r="230" fill="%23ff4500"/><text x="250" y="215" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="82" fill="%23ffffff" text-anchor="middle" letter-spacing="-1">savoir.</text><text x="250" y="325" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="82" fill="%23ffffff" text-anchor="middle" letter-spacing="-1">média</text></svg>`;
+
+export const WATAN_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%231b5e20" rx="40"/><text x="250" y="270" font-family="'Arial Black', sans-serif" font-weight="900" font-size="110" fill="%23ffffff" text-anchor="middle">WATAN</text><text x="250" y="380" font-family="'Arial Black', sans-serif" font-weight="900" font-size="80" fill="%23ffd54f" text-anchor="middle">TV</text></svg>`;
+
+export const VIVO_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="100%" height="100%"><rect width="800" height="400" fill="%23f5f5f7"/><g transform="translate(20, 130)"><path d="M 0,22 C 0,10 10,0 22,0 C 33,0 43,8 46,19 L 68,90 L 90,19 C 93,8 103,0 114,0 C 126,0 136,10 136,22 C 136,27 134,32 131,36 L 86,132 C 82,141 73,147 63,147 C 53,147 44,141 40,132 L 5,36 C 2,32 0,27 0,22 Z" fill="%23590089"/><g transform="translate(152, -2)"><circle cx="14" cy="-24" r="15" fill="%23590089"/><rect x="0" y="7" width="28" height="140" rx="14" fill="%23590089"/></g><g transform="translate(202, 0)"><path d="M 0,22 C 0,10 10,0 22,0 C 33,0 43,8 46,19 L 68,90 L 90,19 C 93,8 103,0 114,0 C 126,0 136,10 136,22 C 136,27 134,32 131,36 L 86,132 C 82,141 73,147 63,147 C 53,147 44,141 40,132 L 5,36 C 2,32 0,27 0,22 Z" fill="%23590089"/></g><g transform="translate(354, 3)"><path d="M 68,0 C 105,0 136,31 136,71 C 136,111 105,142 68,142 C 31,142 0,111 0,71 C 0,31 31,0 68,0 Z M 68,28 C 45,28 28,47 28,71 C 28,95 45,114 68,114 C 91,114 108,95 108,71 C 108,47 91,28 68,28 Z" fill="%23590089"/></g><g transform="translate(525, 3)"><rect x="0" y="0" width="90" height="26" rx="13" fill="%23590089"/><rect x="32" y="0" width="26" height="142" rx="13" fill="%23590089"/></g><g transform="translate(625, 0)"><path d="M 0,22 C 0,10 10,0 22,0 C 33,0 43,8 46,19 L 68,90 L 90,19 C 93,8 103,0 114,0 C 126,0 136,10 136,22 C 136,27 134,32 131,36 L 86,132 C 82,141 73,147 63,147 C 53,147 44,141 40,132 L 5,36 C 2,32 0,27 0,22 Z" fill="%23590089"/></g></g></svg>`;
+
+export const ICI_INFO_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23d32f2f"/><g transform="translate(250, 190)" fill="%23ffffff"><circle cx="0" cy="0" r="45"/><path d="M -45,-70 A 75 75 0 0 1 45,-70 L 45,-45 A 45 45 0 0 0 -45,-45 Z"/><path d="M -45,70 A 75 75 0 0 0 45,70 L 45,45 A 45 45 0 0 1 -45,45 Z"/><path d="M -70,-45 A 75 75 0 0 0 -70,45 L -45,45 A 45 45 0 0 1 -45,-45 Z"/><path d="M 70,-45 A 75 75 0 0 1 70,45 L 45,45 A 45 45 0 0 0 45,-45 Z"/></g><text x="250" y="420" font-family="'Arial Black', sans-serif" font-weight="900" font-size="95" fill="%23ffffff" text-anchor="middle" letter-spacing="4">INFO</text></svg>`;
+
+export const TROMPETTE_MEDIA_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23000000" rx="20"/><g transform="translate(15, 65)"><g transform="translate(20, 40)"><path d="M 15,220 C 35,295 100,325 155,295 C 100,310 55,275 35,210 Z" fill="%23dc2626"/><path d="M 30,215 C 50,280 105,305 145,290 C 120,298 85,280 60,240 C 48,220 40,210 30,215 Z" fill="%232563eb"/><path d="M 70,50 C 95,45 130,45 155,58 C 175,68 195,85 210,102 C 218,110 214,122 202,130 C 194,138 190,146 198,162 C 202,170 190,190 182,218 C 174,246 162,274 142,294 C 130,306 122,298 122,282 C 118,266 106,246 102,222 C 94,214 82,218 74,206 C 66,194 62,166 54,146 C 46,126 30,118 26,102 C 22,86 30,70 46,62 Z" fill="%23ffffff"/><path d="M 114,162 C 122,158 138,162 146,170 C 154,178 154,194 146,206 C 138,218 126,222 114,218 C 106,214 102,198 106,182 C 108,170 110,166 114,162 Z" fill="%23f59e0b"/><path d="M 160,50 C 185,55 202,75 210,100" fill="none" stroke="%232563eb" stroke-width="5" stroke-linecap="round"/><polygon points="172,42 174,47 179,48 175,51 176,56 172,53 167,56 168,51 164,48 170,47" fill="%23fbbf24"/><polygon points="192,55 194,60 199,61 195,64 196,69 192,66 187,69 188,64 184,61 190,60" fill="%23fbbf24"/><polygon points="208,76 210,81 215,82 211,85 212,90 208,87 203,90 204,85 200,82 206,81" fill="%23fbbf24"/></g><g transform="translate(205, 175)"><text x="0" y="0" font-family="'Montserrat', 'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="%231d4ed8" letter-spacing="-1">Trompette</text><text x="-2" y="-2" font-family="'Montserrat', 'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="%23ffffff" letter-spacing="-1">Trompette</text><g transform="translate(68, 62)"><text x="0" y="0" font-family="'Montserrat', 'Arial Black', Impact, sans-serif" font-weight="900" font-size="64" fill="%231d4ed8" letter-spacing="-1">Media</text><text x="-2" y="-2" font-family="'Montserrat', 'Arial Black', Impact, sans-serif" font-weight="900" font-size="64" fill="%23ffffff" letter-spacing="-1">Media</text><polygon points="62,-26 77,-17 62,-8" fill="%23dc2626"/></g></g></g></svg>`;
+
+export const GRACE_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="100%" height="100%"><rect width="600" height="360" fill="%23ffffff" rx="16"/><g transform="translate(15, 10)"><path d="M 444,72 L 380,12" stroke="%23540052" stroke-width="12" stroke-linecap="round"/><path d="M 466,72 L 530,12" stroke="%23540052" stroke-width="12" stroke-linecap="round"/><path d="M 436,75 Q 455,62 474,75 Z" fill="%23540052"/><path d="M 330,120 C 370,80 415,62 460,65 C 530,68 580,120 580,195 C 580,270 528,322 455,322 C 390,322 342,285 320,245 C 336,260 380,296 448,296 C 508,296 552,250 552,195 C 552,140 510,92 452,92 C 410,92 368,108 330,120 Z" fill="%23540052"/><path d="M 355,145 C 385,115 422,102 455,102 C 505,102 542,140 542,195 C 542,250 505,286 455,286 C 420,286 385,270 358,245 C 376,256 410,270 446,270 C 488,270 522,236 522,195 C 522,154 488,118 446,118 C 414,118 382,130 355,145 Z" fill="%23ff7f00"/><text x="15" y="222" font-family="'Arial Black', 'Montserrat', Impact, sans-serif" font-style="italic" font-weight="900" font-size="112" fill="%23540052" letter-spacing="-3">GRACE</text><text x="396" y="222" font-family="'Arial Black', 'Montserrat', Impact, sans-serif" font-style="italic" font-weight="900" font-size="112" fill="%23ff7f00" letter-spacing="-2">TV</text></g></svg>`;
+
+export const MALAIKA_ACTU_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1150 460" width="100%" height="100%"><rect width="1150" height="460" fill="%23ffffff"/><g transform="translate(0, 0)"><rect x="50" y="50" width="1050" height="220" rx="36" fill="%23ffffff" stroke="%23000000" stroke-width="15"/><g id="malaika-word"><polygon points="95,90 128,90 160,172 192,90 225,90 225,230 195,230 195,140 169,208 151,208 125,140 125,230 95,230" fill="%23000000"/><polygon points="277,90 317,230 287,230 277,140 267,230 237,230" fill="%23000000"/><polygon points="330,90 360,90 360,198 402,198 402,230 330,230" fill="%23000000"/><polygon points="447,90 487,230 457,230 447,140 437,230 407,230" fill="%23000000"/><rect x="500" y="90" width="28" height="140" fill="%23000000"/><polygon points="542,90 572,90 572,148 610,90 648,90 598,158 650,230 612,230 572,170 572,230 542,230" fill="%23000000"/><polygon points="667,90 707,230 677,230 667,140 657,230 627,230" fill="%23000000"/></g><rect x="718" y="84" width="250" height="152" rx="24" fill="%23d80000"/><text x="843" y="196" font-family="'Montserrat', 'Arial Black', Impact, sans-serif" font-weight="900" font-size="104" fill="%23ffffff" text-anchor="middle" letter-spacing="2">ACTU</text><rect x="978" y="84" width="105" height="152" rx="20" fill="none" stroke="%23000000" stroke-width="12"/><text x="1030.5" y="196" font-family="'Montserrat', 'Arial Black', Impact, sans-serif" font-weight="900" font-size="94" fill="%23000000" text-anchor="middle" letter-spacing="-3">TV</text><line x1="120" y1="340" x2="250" y2="340" stroke="%23000000" stroke-width="6" stroke-linecap="round"/><text x="575" y="352" font-family="'Montserrat', 'Arial Black', Impact, sans-serif" font-weight="900" font-size="38" fill="%23000000" text-anchor="middle" letter-spacing="10">AU CŒUR DE L'ACTUALITÉ</text><line x1="900" y1="340" x2="1030" y2="340" stroke="%23000000" stroke-width="6" stroke-linecap="round"/><line x1="505" y1="390" x2="645" y2="390" stroke="%23d80000" stroke-width="10" stroke-linecap="round"/></g></svg>`;
+
+export const CEM_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 350" width="100%" height="100%"><rect width="700" height="350" fill="%23ffffff"/><g transform="translate(15, 60)"><rect x="0" y="0" width="410" height="200" fill="%23e50914"/><text x="205" y="145" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="160" fill="%23ffffff" text-anchor="middle" letter-spacing="-6">CEM</text><text x="205" y="185" font-family="'Arial Black', sans-serif" font-weight="900" font-size="17" fill="%23000000" text-anchor="middle" letter-spacing="1">CENTRE EVANGELIQUE MAHANAIM</text><rect x="410" y="0" width="260" height="200" fill="%23080066"/><text x="540" y="145" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="160" fill="%23ffffff" text-anchor="middle" letter-spacing="-4">tv</text></g></svg>`;
+
+export const PRODIGE_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" width="100%" height="100%"><defs><linearGradient id="pbgGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2305101e"/><stop offset="50%" stop-color="%230c223a"/><stop offset="100%" stop-color="%23040c17"/></linearGradient><radialGradient id="pStarGlow" cx="20%" cy="50%" r="50%"><stop offset="0%" stop-color="%2300e5ff" stop-opacity="0.35"/><stop offset="100%" stop-color="%2300e5ff" stop-opacity="0"/></radialGradient><linearGradient id="pOrangeStar" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23fbbf24"/><stop offset="50%" stop-color="%23f59e0b"/><stop offset="100%" stop-color="%23ea580c"/></linearGradient><linearGradient id="pTextGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%23ffffff"/><stop offset="60%" stop-color="%23e0f2fe"/><stop offset="100%" stop-color="%2393c5fd"/></linearGradient></defs><rect width="800" height="320" fill="url(%23pbgGrad)"/><rect width="800" height="320" fill="url(%23pStarGlow)"/><g transform="translate(140, 160)"><polygon points="0,-130 18,-45 -40,-25" fill="%2300f2fe"/><polygon points="0,-130 18,-45 0,-20" fill="%2338bdf8"/><polygon points="0,-130 -40,-25 0,-20" fill="%230284c7"/><polygon points="-125,-25 -35,-15 -65,35" fill="%2300d2ff"/><polygon points="-125,-25 -65,35 -20,20" fill="%230052d4"/><polygon points="-75,120 -40,35 15,45" fill="%2300a8ff"/><polygon points="-75,120 15,45 -10,80" fill="%230284c7"/><polygon points="75,115 15,40 55,20" fill="%2300f2fe"/><polygon points="75,115 -10,80 15,40" fill="%230052d4"/><polygon points="125,-20 35,-15 55,25" fill="url(%23pOrangeStar)"/><polygon points="125,-20 55,25 25,-40" fill="%23f97316"/><polygon points="125,-20 25,-40 0,-130" fill="%23fbbf24"/><path d="M -85,95 L 45,-90 L 15,-40 L -25,-10 L -45,30 Z" fill="%2300f2fe"/><path d="M -60,65 Q 10,25 35,45 Q 15,75 -35,70 Z" fill="%2338bdf8" opacity="0.9"/></g><g transform="translate(320, 165)"><text x="0" y="20" font-family="'Arial Black', 'Montserrat', sans-serif" font-weight="900" font-size="105" fill="url(%23pTextGrad)" letter-spacing="4">PRODIGE</text><line x1="5" y1="85" x2="190" y2="85" stroke="%2338bdf8" stroke-width="4" stroke-linecap="round"/><text x="250" y="105" font-family="'Arial Black', sans-serif" font-weight="900" font-size="64" fill="url(%23pTextGrad)" text-anchor="middle" letter-spacing="4">TV</text><line x1="310" y1="85" x2="495" y2="85" stroke="%2338bdf8" stroke-width="4" stroke-linecap="round"/></g></svg>`;
+export const PROVIDENCE_TV_LOGO = PRODIGE_TV_LOGO;
+
+export const ALLIANCE_MABANZA_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%"><rect width="600" height="600" fill="%23ffffff"/><g transform="translate(150, 40)"><g transform="translate(150, 40)"><circle cx="-90" cy="15" r="14" fill="%23002b66"/><circle cx="-45" cy="0" r="14" fill="%23002b66"/><circle cx="0" cy="-10" r="15" fill="%23002b66"/><circle cx="45" cy="0" r="14" fill="%23002b66"/><circle cx="90" cy="15" r="14" fill="%23002b66"/><path d="M -110,40 Q -90,20 -70,40 Q -45,15 -20,40 Q 0,10 20,40 Q 45,15 70,40 Q 90,20 110,40" stroke="%23002b66" stroke-width="8" fill="none"/></g><path d="M 50,70 L 250,70 Q 260,180 150,260 Q 40,180 50,70 Z" fill="%23002b66"/><path d="M 65,85 L 235,85 Q 245,175 150,245 Q 55,175 65,85 Z" fill="%23f0f9ff"/><circle cx="150" cy="165" r="60" fill="%23f97316"/><circle cx="150" cy="165" r="50" fill="%23fbbf24"/><path d="M 120,135 Q 150,115 180,135 M 130,150 Q 150,135 170,150 M 140,165 Q 150,155 160,165" stroke="%23ffffff" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M 150,160 Q 120,130 90,140 Q 120,170 145,195 Q 150,175 155,195 Q 180,170 210,140 Q 180,130 150,160 Z" fill="%23002b66"/></g><text x="300" y="390" font-family="'Arial Black', sans-serif" font-weight="900" font-size="62" fill="%23002b66" text-anchor="middle" letter-spacing="4">ALLIANCE</text><text x="250" y="465" font-family="'Arial Black', sans-serif" font-weight="900" font-size="60" fill="%23002b66" text-anchor="middle" letter-spacing="3">MABANZA</text><g transform="translate(420, 415)"><rect x="0" y="0" width="85" height="55" rx="10" fill="%23f97316"/><text x="42" y="42" font-family="'Georgia', serif" font-style="italic" font-weight="900" font-size="42" fill="%23ffffff" text-anchor="middle">tv</text></g><text x="300" y="525" font-family="'Arial Black', sans-serif" font-weight="900" font-size="24" fill="%23002b66" text-anchor="middle" letter-spacing="6">UNI POUR L'AVENIR</text></svg>`;
+
+export const COP_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><circle cx="250" cy="250" r="230" fill="%230288d1"/><circle cx="250" cy="250" r="215" fill="%23013a7b"/><defs><radialGradient id="copGlobeGlow" cx="50%" cy="30%" r="60%"><stop offset="0%" stop-color="%23d4b106" stop-opacity="0.8"/><stop offset="50%" stop-color="%23094c96" stop-opacity="0.5"/><stop offset="100%" stop-color="%2301214d" stop-opacity="1"/></radialGradient></defs><circle cx="250" cy="250" r="215" fill="url(%23copGlobeGlow)"/><ellipse cx="250" cy="250" rx="215" ry="70" fill="none" stroke="%233a7bbd" stroke-width="4"/><ellipse cx="250" cy="250" rx="215" ry="140" fill="none" stroke="%233a7bbd" stroke-width="4"/><ellipse cx="250" cy="250" rx="90" ry="215" fill="none" stroke="%233a7bbd" stroke-width="4"/><ellipse cx="250" cy="250" rx="160" ry="215" fill="none" stroke="%233a7bbd" stroke-width="4"/><line x1="35" y1="250" x2="465" y2="250" stroke="%233a7bbd" stroke-width="5"/><line x1="250" y1="35" x2="250" y2="465" stroke="%233a7bbd" stroke-width="5"/><text x="250" y="275" font-family="'Arial Black', sans-serif" font-weight="900" font-size="140" fill="%23ffcc00" stroke="%23d97706" stroke-width="8" paint-order="stroke fill" text-anchor="middle" letter-spacing="-2">COP</text><text x="250" y="325" font-family="'Arial Black', sans-serif" font-weight="900" font-size="34" fill="%23fef08a" text-anchor="middle" letter-spacing="8">TELEVISION</text></svg>`;
+
+export const SACRE_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%"><rect width="600" height="300" fill="%23000000"/><g transform="translate(60, 60)"><rect x="0" y="0" width="480" height="150" fill="%235b9bd5" stroke="%2385bbf0" stroke-width="6" rx="4"/><text x="180" y="105" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="95" fill="%23ffffff" stroke="%23333333" stroke-width="6" paint-order="stroke fill" letter-spacing="2">SACRE</text><text x="390" y="105" font-family="'Arial Black', sans-serif" font-weight="900" font-size="95" fill="%23ffffff" stroke="%23333333" stroke-width="6" paint-order="stroke fill">tv</text><rect x="0" y="145" width="160" height="25" fill="%230033a0"/><rect x="160" y="145" width="160" height="25" fill="%23fdef42"/><rect x="320" y="145" width="160" height="25" fill="%23ce1126"/></g></svg>`;
+
+export const RETROVISEUR_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" width="100%" height="100%"><rect width="600" height="500" fill="%23e2e8f0"/><g transform="translate(170, 30)"><path d="M 20,40 L 240,40 Q 260,140 130,220 Q 0,140 20,40 Z" fill="%230284c7" stroke="%230369a1" stroke-width="8"/><path d="M 35,55 L 225,55 Q 240,135 130,200 Q 20,135 35,55 Z" fill="%23f8fafc"/><path d="M 80,100 Q 130,60 180,100 M 95,115 Q 130,85 165,115 M 110,130 Q 130,110 150,130" stroke="%230284c7" stroke-width="8" fill="none" stroke-linecap="round"/><rect x="100" y="145" width="60" height="40" rx="6" fill="%230284c7"/><line x1="115" y1="145" x2="95" y2="125" stroke="%230284c7" stroke-width="6"/><line x1="145" y1="145" x2="165" y2="125" stroke="%230284c7" stroke-width="6"/></g><text x="300" y="340" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="56" fill="%23002b66" text-anchor="middle" letter-spacing="4">RÉTROVISEUR</text><text x="300" y="420" font-family="'Arial Black', sans-serif" font-weight="900" font-size="64" fill="%23002b66" text-anchor="middle" letter-spacing="4">CCM TV</text></svg>`;
+
+export const IGBCB_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%"><rect width="600" height="450" fill="%23ffffff"/><ellipse cx="300" cy="200" rx="280" ry="180" fill="%23ffffff" stroke="%23003399" stroke-width="12"/><text x="300" y="75" font-family="'Impact', 'Arial Black', serif" font-weight="900" font-size="68" fill="%23cc0000" text-anchor="middle" letter-spacing="8">I. G. B. C. B</text><circle cx="300" cy="210" r="120" fill="%232b6cb0"/><ellipse cx="300" cy="210" rx="120" ry="40" fill="none" stroke="%234299e1" stroke-width="3"/><path d="M 230,150 Q 300,130 370,160 Q 360,220 300,240 Q 240,220 230,150 Z" fill="%2348bb78"/><path d="M 120,200 Q 180,120 300,120 Q 420,120 480,200" stroke="%23f6e05e" stroke-width="14" fill="none" stroke-linecap="round"/><polygon points="480,200 470,170 450,195" fill="%23f6e05e"/><text x="300" y="225" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="70" fill="%23ffffff" stroke="%23000000" stroke-width="8" paint-order="stroke fill" text-anchor="middle">IGBCB TV</text><g transform="translate(230, 240)"><ellipse cx="70" cy="30" rx="55" ry="25" fill="%23ffffff" stroke="%23003399" stroke-width="4"/><path d="M 35,30 L 70,15 L 105,30" stroke="%23003399" stroke-width="4" fill="none"/></g><rect x="0" y="380" width="600" height="70" fill="%23e53e3e"/><text x="300" y="430" font-family="'Arial Black', sans-serif" font-weight="900" font-size="44" fill="%23ffffff" text-anchor="middle" letter-spacing="2">I.G.B. Consulting</text></svg>`;
+
+export const SN_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><circle cx="250" cy="250" r="230" fill="%23ffffff" stroke="%23e5e7eb" stroke-width="8"/><g transform="translate(25, 25)"><text x="140" y="360" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="420" fill="%23e51b24" stroke="%23000000" stroke-width="12" paint-order="stroke fill" letter-spacing="-20">S</text><path d="M 150,110 L 220,110 L 290,340 L 290,110 L 330,110 L 330,370 L 260,370 L 190,140 L 190,370 L 150,370 Z" fill="%2322c55e" stroke="%23facc15" stroke-width="10"/><path d="M 330,190 L 375,190 L 375,340 L 440,340 L 440,370 L 330,370 Z" fill="%23facc15" stroke="%23eab308" stroke-width="4"/></g></svg>`;
+export const SNL_KONGO_TV_LOGO = SN_TV_LOGO;
+
+export const EGLISE_PRIMITIVE_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23f8fafc"/><g transform="translate(250, 165)"><path d="M -115,30 A 115,115 0 1,1 115,30" fill="none" stroke="%231d4474" stroke-width="14" stroke-linecap="round"/><path d="M 0,-15 C -8,-25 -18,-30 -30,-30 C -45,-30 -50,-15 -42,5 C -35,20 -15,40 5,50 C 3,45 0,35 -2,25 C -5,15 -3,8 2,4 C 6,0 12,2 18,6 C 25,12 30,22 32,35 C 35,20 42,5 50,-10 C 56,-22 55,-35 48,-45 C 40,-58 28,-65 20,-80 C 15,-90 15,-105 18,-115 C 10,-105 0,-85 -2,-70 C -4,-55 -2,-45 0,-35 C -15,-50 -25,-75 -22,-95 C -30,-80 -32,-60 -25,-42 C -20,-28 -12,-18 -5,-10 Z" fill="%231d4474"/><path d="M 18,-115 C 28,-100 35,-80 32,-60 C 40,-75 48,-55 45,-35 C 55,-50 62,-35 58,-15 C 68,-30 72,-15 65,5 C 60,18 50,30 38,40 C 20,25 15,0 10,-20 Z" fill="%231d4474"/><circle cx="-25" cy="-22" r="10" fill="%231d4474"/><path d="M -32,-24 L -42,-20 L -32,-16 Z" fill="%231d4474"/><path d="M -130,40 C -80,25 -20,25 -5,48 L -8,90 C -25,70 -80,70 -130,85 Z" fill="%23ffffff" stroke="%231d4474" stroke-width="10" stroke-linejoin="round"/><path d="M 130,40 C 80,25 20,25 5,48 L 8,90 C 25,70 80,70 130,85 Z" fill="%23ffffff" stroke="%231d4474" stroke-width="10" stroke-linejoin="round"/><path d="M -130,85 C -80,70 -25,70 -8,90 L -12,110 C -30,95 -80,95 -125,108 Z" fill="%239ca3af"/><path d="M 130,85 C 80,70 25,70 8,90 L 12,110 C 30,95 80,95 125,108 Z" fill="%239ca3af"/><path d="M -125,108 C -80,95 -30,95 -12,110 L -15,120 C -35,108 -80,108 -120,118 Z" fill="%23d1d5db"/><path d="M 125,108 C 80,95 30,95 12,110 L 15,120 C 35,108 80,108 120,118 Z" fill="%23d1d5db"/></g><text x="250" y="380" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="34" fill="%23000000" text-anchor="middle" letter-spacing="1">EGLISE PRIMITIVE</text><text x="250" y="420" font-family="'Arial', sans-serif" font-weight="bold" font-size="21" fill="%2352525b" text-anchor="middle" letter-spacing="3">DU SEIGNEUR YESHOUA</text></svg>`;
+export const VEP_TV_LOGO = EGLISE_PRIMITIVE_LOGO;
+
+export const NG_FEDERAL_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ff6000"/><g fill="%23ffffff"><text x="250" y="305" font-family="'Arial Black', 'Montserrat', 'Inter', sans-serif" font-weight="900" font-size="215" text-anchor="middle" letter-spacing="-10">NG</text><text x="250" y="375" font-family="'Arial Black', 'Montserrat', 'Inter', sans-serif" font-weight="900" font-size="52" text-anchor="middle" letter-spacing="5">FEDERAL</text></g></svg>`;
+
+export const X_TREMA_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" width="100%" height="100%"><defs><filter id="xt-glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><linearGradient id="xt-mag" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23f030ff"/><stop offset="50%" stop-color="%23b800ff"/><stop offset="100%" stop-color="%236800cc"/></linearGradient><linearGradient id="xt-cyan" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2338ffff"/><stop offset="50%" stop-color="%2300e5ff"/><stop offset="100%" stop-color="%230088cc"/></linearGradient></defs><rect width="600" height="500" fill="%230a0316"/><g transform="translate(40, 100)"><g filter="url(%23xt-glow)"><path d="M 20,50 C 45,75 60,95 75,135 L 45,140 L 68,165 L 25,255 C 45,235 70,230 90,255 L 125,185 L 160,240 C 170,255 160,265 180,260 C 170,230 145,210 135,195 L 170,150 C 185,140 195,150 205,140 C 190,120 175,110 165,95 L 140,135 L 110,95 C 100,75 90,55 65,40 C 70,55 60,70 45,65 Z" fill="none" stroke="%2300f5ff" stroke-width="8"/></g><path d="M 25,55 Q 55,80 80,135 L 48,142 L 72,168 L 30,250 Q 55,230 90,250 L 128,180 L 98,130 Q 75,70 40,55 Z" fill="url(%23xt-mag)" stroke="%23f030ff" stroke-width="3"/><path d="M 120,95 Q 160,110 185,95 Q 175,120 150,140 L 120,95 Z" fill="url(%23xt-cyan)" stroke="%2300f5ff" stroke-width="3"/><path d="M 132,180 L 168,238 Q 178,252 192,248 Q 178,225 158,202 Z" fill="url(%23xt-cyan)" stroke="%2300f5ff" stroke-width="3"/><path d="M 72,168 L 132,182 L 95,255 Q 70,238 35,250 Z" fill="%237b00cc"/><g transform="translate(325, 45)"><polygon points="0,0 120,0 60,62" fill="%23aa00e6" stroke="%2300f5ff" stroke-width="6" stroke-linejoin="round"/><text x="60" y="44" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="36" fill="%2300f5ff" stroke="%230a0316" stroke-width="3" paint-order="stroke fill" text-anchor="middle">TV</text></g><text x="355" y="195" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="78" fill="%2300f5ff" stroke="%23000000" stroke-width="8" paint-order="stroke fill" letter-spacing="3" text-anchor="middle" filter="url(%23xt-glow)">TREMA</text><text x="355" y="195" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="78" fill="%2300f5ff" letter-spacing="3" text-anchor="middle">TREMA</text></g></svg>`;
+export const XTREMA_TV_LOGO = X_TREMA_TV_LOGO;
+
+export const DESSIN_JUNIOR_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340" width="100%" height="100%"><defs><filter id="jr-shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="%23992600" flood-opacity="0.7"/></filter><filter id="inner-letter-shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="3" flood-color="%23a02b00" flood-opacity="0.4"/></filter><linearGradient id="jr-bg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%23ff6200"/><stop offset="100%" stop-color="%23e63900"/></linearGradient><linearGradient id="jr-white" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%23ffffff"/><stop offset="100%" stop-color="%23e2e8f0"/></linearGradient><linearGradient id="jr-lime" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%23eaff00"/><stop offset="100%" stop-color="%23b8e600"/></linearGradient></defs><g filter="url(%23jr-shadow)"><path d="M 65,110 C 65,85 85,70 120,70 C 135,70 145,78 155,85 C 170,72 195,70 230,70 C 245,70 260,78 275,85 C 290,72 320,70 370,70 C 390,70 405,40 425,25 C 445,10 465,10 480,25 C 500,40 510,70 530,70 C 560,70 600,70 635,90 C 665,110 675,145 675,185 C 675,230 655,260 625,280 C 585,300 520,300 480,285 C 450,300 370,300 330,285 C 290,300 210,300 170,285 C 130,300 65,290 40,265 C 20,240 20,185 20,150 C 20,120 40,110 65,110 Z" fill="url(%23jr-bg)" stroke="%23c23000" stroke-width="4"/></g><g filter="url(%23inner-letter-shadow)"><g transform="translate(415, 30)"><circle cx="35" cy="35" r="30" fill="url(%23jr-lime)" stroke="%2396be00" stroke-width="2"/><circle cx="28" cy="26" r="10" fill="%23ffffff" opacity="0.6"/></g><g transform="translate(50, 105)"><path d="M 50,0 C 60,0 68,8 68,18 L 68,90 C 68,125 45,145 15,145 C -10,145 -30,130 -30,105 C -30,95 -20,88 -10,88 C 0,88 8,95 12,102 C 16,110 24,115 35,115 C 42,115 48,108 48,95 L 48,18 C 48,8 55,0 50,0 Z" fill="url(%23jr-white)" transform="translate(45, 0)"/></g><g transform="translate(130, 105)"><path d="M 18,0 C 28,0 35,8 35,18 L 35,75 C 35,95 48,110 65,110 C 82,110 95,95 95,75 L 95,18 C 95,8 102,0 112,0 C 122,0 130,8 130,18 L 130,75 C 130,115 102,145 65,145 C 28,145 0,115 0,75 L 0,18 C 0,8 8,0 18,0 Z" fill="url(%23jr-white)"/></g><g transform="translate(280, 105)"><path d="M 18,0 C 28,0 35,8 35,18 L 35,35 C 45,15 65,0 90,0 C 120,0 140,20 140,55 L 140,127 C 140,137 132,145 122,145 C 112,145 105,137 105,127 L 105,60 C 105,42 95,30 78,30 C 60,30 45,45 35,65 L 35,127 C 35,137 28,145 18,145 C 8,145 0,137 0,127 L 0,18 C 0,8 8,0 18,0 Z" fill="url(%23jr-white)"/></g><g transform="translate(440, 105)"><rect x="0" y="0" width="35" height="145" rx="17" fill="url(%23jr-white)"/></g><g transform="translate(495, 100)"><circle cx="68" cy="72" r="62" fill="url(%23jr-lime)" stroke="%2396be00" stroke-width="2"/><circle cx="68" cy="72" r="26" fill="%23e63900"/><circle cx="55" cy="55" r="16" fill="%23ffffff" opacity="0.4"/></g><g transform="translate(620, 105)"><path d="M 18,0 C 28,0 35,8 35,18 L 35,40 C 45,15 65,5 85,5 C 95,5 102,12 102,22 C 102,32 95,40 85,40 C 65,40 45,55 35,75 L 35,127 C 35,137 28,145 18,145 C 8,145 0,137 0,127 L 0,18 C 0,8 8,0 18,0 Z" fill="url(%23jr-white)"/></g></g></svg>`;
+
+export const LAS_ESTRELLAS_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff"/><g transform="translate(250, 175)"><g transform="rotate(0)"><path d="M 0,-18 L -14,-75 L 0,-155 L 14,-75 Z" fill="%23703299"/><path d="M 0,-18 L 0,-155 L 14,-75 Z" fill="%23843bb3"/></g><g transform="rotate(45)"><path d="M 0,-18 L -13,-65 L 0,-135 L 13,-65 Z" fill="%2322c55e"/><path d="M 0,-18 L 0,-135 L 13,-65 Z" fill="%2316a34a"/></g><g transform="rotate(90)"><path d="M 0,-18 L -13,-70 L 0,-145 L 13,-70 Z" fill="%23ff7a00"/><path d="M 0,-18 L 0,-145 L 13,-70 Z" fill="%23ea580c"/></g><g transform="rotate(135)"><path d="M 0,-18 L -13,-65 L 0,-135 L 13,-65 Z" fill="%23e11d48"/><path d="M 0,-18 L 0,-135 L 13,-65 Z" fill="%23be123c"/></g><g transform="rotate(180)"><path d="M 0,-18 L -14,-75 L 0,-155 L 14,-75 Z" fill="%23e6007e"/><path d="M 0,-18 L 0,-155 L 14,-75 Z" fill="%23c2006a"/></g><g transform="rotate(225)"><path d="M 0,-18 L -13,-65 L 0,-135 L 13,-65 Z" fill="%232563eb"/><path d="M 0,-18 L 0,-135 L 13,-65 Z" fill="%231d4ed8"/></g><g transform="rotate(270)"><path d="M 0,-18 L -13,-70 L 0,-145 L 13,-70 Z" fill="%2300b0d8"/><path d="M 0,-18 L 0,-145 L 13,-70 Z" fill="%230284c7"/></g><g transform="rotate(315)"><path d="M 0,-18 L -13,-65 L 0,-135 L 13,-65 Z" fill="%23ffc800"/><path d="M 0,-18 L 0,-135 L 13,-65 Z" fill="%23eab308"/></g></g><text x="250" y="415" font-family="'Outfit', 'Montserrat', 'Inter', sans-serif" font-weight="800" font-size="64" fill="%2318181b" text-anchor="middle" letter-spacing="-2">las estrellas</text></svg>`;
+
+export const ONCE_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23000000"/><g transform="translate(250, 185)"><circle cx="0" cy="0" r="145" fill="%23ffffff"/><circle cx="0" cy="0" r="68" fill="%23000000"/></g><g transform="translate(60, 375)"><rect x="0" y="0" width="380" height="85" fill="%23000000" stroke="%23ffffff" stroke-width="5"/><text x="130" y="62" font-family="'Arial Black', 'Montserrat', 'Inter', sans-serif" font-weight="900" font-size="62" fill="%23ffffff" text-anchor="middle" letter-spacing="-2">once</text><rect x="250" y="0" width="130" height="85" fill="%23ffffff" stroke="%23ffffff" stroke-width="5"/><text x="315" y="62" font-family="'Arial Black', 'Montserrat', 'Inter', sans-serif" font-weight="900" font-size="62" fill="%23000000" text-anchor="middle" letter-spacing="-2">tv</text></g></svg>`;
+export const O_ONCE_TV_LOGO = ONCE_TV_LOGO;
+
+export const TUDN_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="100%" height="100%"><defs><radialGradient id="tudn-bg" cx="50%" cy="50%" r="65%"><stop offset="0%" stop-color="%23137d4e"/><stop offset="60%" stop-color="%230a5232"/><stop offset="100%" stop-color="%2304311d"/></radialGradient></defs><rect width="600" height="360" fill="url(%23tudn-bg)"/><g transform="translate(70, 115)" stroke="%23ffffff" fill="none" stroke-linecap="square"><path d="M 0,0 L 88,0 M 0,16 L 88,16" stroke-width="9"/><path d="M 28,16 L 28,120 M 44,32 L 44,120 M 28,16 L 44,32" stroke-width="9"/><path d="M 112,0 L 112,78 C 112,106 130,122 156,122 C 182,122 200,106 200,78 L 200,0" stroke-width="9"/><path d="M 128,0 L 128,78 C 128,95 140,106 156,106 C 172,106 184,95 184,78 L 184,0" stroke-width="9"/><path d="M 226,0 L 226,120 M 242,0 L 242,120" stroke-width="9"/><path d="M 226,0 L 275,0 C 304,0 322,25 322,60 C 322,95 304,120 275,120 L 226,120" stroke-width="9"/><path d="M 242,16 L 273,16 C 293,16 306,35 306,60 C 306,85 293,104 273,104 L 242,104" stroke-width="9"/><path d="M 350,0 L 350,120 M 366,0 L 366,120" stroke-width="9"/><path d="M 350,0 L 416,110 M 366,0 L 432,110" stroke-width="9"/><path d="M 416,0 L 416,120 M 432,0 L 432,120" stroke-width="9"/><circle cx="448" cy="8" r="6" stroke-width="2"/><text x="448" y="11" font-family="sans-serif" font-size="8" font-weight="bold" fill="%23ffffff" stroke="none" text-anchor="middle">R</text></g><text x="300" y="315" font-family="'Arial Black', sans-serif" font-weight="900" font-size="28" fill="%23ffffff" opacity="0.9" text-anchor="middle" letter-spacing="10">SPORTS TV</text></svg>`;
+export const TUDN_SPORT_LOGO = TUDN_TV_LOGO;
+
+export const L1_MAX_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" width="100%" height="100%"><rect width="600" height="340" fill="%23dc1e35"/><g transform="translate(40, 75)"><g transform="translate(65, 75)"><path d="M 0,-70 L -18,-70 L -12,-35 L 0,-15 L 12,-35 L 18,-70 Z" fill="%23ffffff"/><path d="M 22,-66 L 65,-22 L 52,-8 L 18,-18 L 16,-34 Z" fill="%23ffffff"/><path d="M 62,-14 L 38,58 L 22,50 L 22,22 L 48,-4 Z" fill="%23ffffff"/><path d="M -38,58 L -62,-14 L -48,-4 L -22,22 L -22,50 Z" fill="%23ffffff"/><path d="M -65,-22 L -22,-66 L -16,-34 L -18,-18 L -52,-8 Z" fill="%23ffffff"/><polygon points="0,-18 11,-5 26,-7 14,5 18,20 0,10 -18,20 -14,5 -26,-7 -11,-5" fill="%23ffffff"/></g><g transform="translate(155, 25)"><path d="M 0,0 L 18,0 L 18,75 L 50,75 L 50,95 L 0,95 Z" fill="%23ffffff"/><path d="M 62,0 L 80,0 L 80,95 L 62,95 Z" fill="%23ffffff"/><path d="M 98,0 L 118,0 L 132,60 L 146,0 L 166,0 L 166,95 L 150,95 L 150,30 L 138,80 L 126,80 L 114,30 L 114,95 L 98,95 Z" fill="%23ffffff"/><path d="M 180,0 L 202,0 L 225,95 L 206,95 L 202,78 L 186,78 L 182,95 L 164,95 Z M 190,62 L 198,62 L 194,36 Z" fill="%23ffffff"/><path d="M 230,0 L 248,0 L 264,44 L 280,0 L 298,0 L 274,50 L 300,95 L 282,95 L 264,56 L 246,95 L 228,95 L 254,50 Z" fill="%23ffffff"/><text x="180" y="132" font-family="'Montserrat', 'Inter', sans-serif" font-weight="700" font-size="18" fill="%23ffffff" letter-spacing="1">Powered by <tspan font-weight="900" font-style="italic">Fanatiz</tspan></text></g></g></svg>`;
+export const LIMAX_TV_LOGO = L1_MAX_LOGO;
+
+export const MBC_FM_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><rect width="500" height="280" fill="%23ffffff"/><g transform="translate(250, 140)"><path d="M -220,-65 C -240,-25 -240,25 -220,65 C -230,40 -235,15 -235,0 C -235,-15 -230,-40 -220,-65 Z" fill="%23ed1c24"/><path d="M 220,-65 C 240,-25 240,25 220,65 C 230,40 235,15 235,0 C 235,-15 230,-40 220,-65 Z" fill="%23ed1c24"/><path d="M -165,-105 C -205,-45 -205,45 -165,105 C -185,60 -195,20 -195,0 C -195,-20 -185,-60 -165,-105 Z" fill="%23ed1c24"/><path d="M 165,-105 C 205,-45 205,45 165,105 C 185,60 195,20 195,0 C 195,-20 185,-60 165,-105 Z" fill="%23ed1c24"/><circle cx="0" cy="0" r="115" fill="%23ed1c24"/><g transform="translate(0, -18)" fill="%23ffffff"><path d="M -78,10 C -78,14 -73,15 -68,15 L -68,10 C -72,10 -73,8 -73,2 L -73,-28 C -73,-34 -68,-36 -62,-36 C -56,-36 -51,-32 -51,-24 L -51,15 L -45,15 L -45,-24 C -45,-32 -40,-36 -34,-36 C -28,-36 -23,-32 -23,-24 L -23,15 L -17,15 L -17,-26 C -17,-36 -25,-42 -35,-42 C -42,-42 -47,-38 -50,-33 C -53,-38 -58,-42 -65,-42 C -74,-42 -78,-35 -78,-25 Z"/><path d="M -8,-52 L -2,-52 L -2,-32 C 3,-38 10,-42 19,-42 C 32,-42 42,-31 42,-14 C 42,3 32,15 18,15 C 10,15 3,11 -2,5 L -2,15 L -8,15 Z M 17,9 C 27,9 35,0 35,-14 C 35,-27 27,-36 17,-36 C 7,-36 -2,-27 -2,-14 C -2,0 7,9 17,9 Z"/><path d="M 72,-48 C 65,-48 57,-44 52,-38 L 52,-48 L 46,-48 L 46,15 L 52,15 L 52,-5 C 57,7 66,15 78,15 C 79,15 81,15 82,14 L 82,8 C 80,8 78,8 76,8 C 64,8 55,-2 53,-15 C 60,-15 67,-18 72,-24 C 77,-29 78,-36 78,-40 C 78,-46 76,-48 72,-48 Z M 67,-28 C 63,-24 58,-21 52,-21 C 52,-32 59,-42 70,-42 C 72,-42 73,-41 73,-39 C 73,-36 71,-31 67,-28 Z"/></g><text x="0" y="65" font-family="'Arial Black', 'Montserrat', 'Inter', sans-serif" font-weight="900" font-size="64" fill="%23ffffff" text-anchor="middle" letter-spacing="3">FM</text></g></svg>`;
+export const MBC_RADIO_LOGO = MBC_FM_LOGO;
+
+export const LUNE_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><defs><filter id="lune-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="eclipse-corona" cx="62%" cy="32%" r="60%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.95"/><stop offset="25%" stop-color="%23e2e8f0" stop-opacity="0.6"/><stop offset="50%" stop-color="%2394a3b8" stop-opacity="0.25"/><stop offset="100%" stop-color="%23000000" stop-opacity="0"/></radialGradient><radialGradient id="flare-burst" cx="66%" cy="30%" r="35%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="1"/><stop offset="30%" stop-color="%23f8fafc" stop-opacity="0.75"/><stop offset="70%" stop-color="%23cbd5e1" stop-opacity="0.2"/><stop offset="100%" stop-color="%23000000" stop-opacity="0"/></radialGradient></defs><rect width="500" height="500" fill="%23000000"/><circle cx="250" cy="250" r="145" fill="url(%23eclipse-corona)" filter="url(%23lune-glow)"/><path d="M 290 130 Q 380 150 420 180 Q 340 180 300 170 Z" fill="url(%23flare-burst)" filter="url(%23lune-glow)" opacity="0.85"/><path d="M 280 120 Q 350 110 400 80 Q 330 130 290 140 Z" fill="url(%23flare-burst)" filter="url(%23lune-glow)" opacity="0.7"/><circle cx="310" cy="180" r="45" fill="url(%23flare-burst)" filter="url(%23lune-glow)"/><circle cx="250" cy="250" r="115" fill="%23000000" stroke="%23ffffff" stroke-width="2" opacity="0.9"/><circle cx="250" cy="250" r="114" fill="%23000000"/><g transform="translate(180, 215)"><path d="M 0,0 L 0,55 Q 0,65 15,65 L 20,65" fill="none" stroke="%23ffffff" stroke-width="7.5" stroke-linecap="round"/><path d="M 38,20 L 38,50 Q 38,65 52,65 Q 66,65 66,50 L 66,20" fill="none" stroke="%23ffffff" stroke-width="7.5" stroke-linecap="round"/><path d="M 84,65 L 84,35 Q 84,20 98,20 Q 112,20 112,35 L 112,65" fill="none" stroke="%23ffffff" stroke-width="7.5" stroke-linecap="round"/><path d="M 128,42.5 L 160,42.5 C 160,25 145,20 130,28 C 118,36 120,65 138,65 C 152,65 158,55 158,52" fill="none" stroke="%23ffffff" stroke-width="7.5" stroke-linecap="round"/></g><text x="250" y="420" font-family="'Arial Black', 'Montserrat', 'Inter', sans-serif" font-weight="900" font-size="24" fill="%23ffffff" opacity="0.8" text-anchor="middle" letter-spacing="8">ENFANT</text></svg>`;
+export const LUNE_ENFANT_TV_LOGO = LUNE_TV_LOGO;
+
+export const ESPN_AMERICA_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 250" width="100%" height="100%"><rect width="500" height="250" fill="%23000000"/><path d="M 42,12 L 458,12 C 476,12 486,22 489,38 L 498,185 C 501,198 490,208 478,212 L 250,244 L 22,212 C 10,208 -1,198 2,185 L 11,38 C 14,22 24,12 42,12 Z" fill="%23000000" stroke="%23ffffff" stroke-width="4"/><path d="M 28,198 L 250,230 L 472,198" fill="none" stroke="%23ffffff" stroke-width="6" stroke-linecap="round"/><g transform="translate(50, 125) skewX(-14)"><text x="0" y="0" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="112" fill="%23ff001e" letter-spacing="-3">ESPN</text><rect x="-10" y="-84" width="460" height="10" fill="%23000000"/></g><text x="250" y="194" font-family="'Arial Black', 'Impact', 'Montserrat', sans-serif" font-weight="900" font-size="52" fill="%23ffffff" text-anchor="middle" letter-spacing="4">AMERICA</text></svg>`;
+export const ESPN_LOGO = ESPN_AMERICA_LOGO;
+
+export const HISTORY_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 500" width="100%" height="100%"><defs><linearGradient id="gold-front" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23fff275"/><stop offset="35%" stop-color="%23fbb034"/><stop offset="70%" stop-color="%23ea8a04"/><stop offset="100%" stop-color="%23c66900"/></linearGradient><linearGradient id="gold-bevel-top" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%23fffde6"/><stop offset="100%" stop-color="%23fbb034"/></linearGradient><linearGradient id="gold-bevel-bot" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="%238a4500"/><stop offset="100%" stop-color="%23d97b00"/></linearGradient><linearGradient id="gold-inner" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="%23ffd54f"/><stop offset="50%" stop-color="%23ffa000"/><stop offset="100%" stop-color="%23ff6f00"/></linearGradient></defs><rect width="450" height="500" fill="%23ffffff"/><g transform="translate(45, 18)"><g id="H-gold-3d"><polygon points="20,50 85,50 85,320 20,320 50,345 5,370 180,370 135,345 165,320 100,320 100,50 165,50 135,25 180,0 5,0 50,25" fill="url(%23gold-front)"/><polygon points="5,0 180,0 135,25 50,25" fill="url(%23gold-bevel-top)"/><polygon points="5,370 180,370 135,345 50,345" fill="url(%23gold-bevel-bot)"/><g transform="translate(180, 0)"><polygon points="20,50 85,50 85,320 20,320 50,345 5,370 180,370 135,345 165,320 100,320 100,50 165,50 135,25 180,0 5,0 50,25" fill="url(%23gold-front)"/><polygon points="5,0 180,0 135,25 50,25" fill="url(%23gold-bevel-top)"/><polygon points="5,370 180,370 135,345 50,345" fill="url(%23gold-bevel-bot)"/></g><polygon points="85,155 275,155 225,185 275,215 85,215 135,185" fill="url(%23gold-inner)"/><polygon points="85,155 275,155 225,185 135,185" fill="url(%23gold-bevel-top)"/><polygon points="85,215 275,215 225,185 135,185" fill="url(%23gold-bevel-bot)"/></g><rect x="0" y="388" width="360" height="20" fill="%23e31b23"/><text x="180" y="482" font-family="'Arial Black', 'Montserrat', 'Impact', sans-serif" font-weight="900" font-size="64" fill="%23000000" text-anchor="middle" letter-spacing="-1">HISTORY</text></g></svg>`;
+export const HISTORY_LOGO = HISTORY_TV_LOGO;
+
+export const NICKELODEON_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 250" width="100%" height="100%"><rect width="550" height="250" fill="%23ffffff"/><g transform="translate(25, 30)" fill="%23f76b1c"><path d="M 0,185 L 0,105 C 0,55 35,30 70,30 C 105,30 140,55 140,105 L 140,185 L 85,185 L 85,115 C 85,92 78,80 70,80 C 62,80 55,92 55,115 L 55,185 Z"/><circle cx="185" cy="36" r="26"/><path d="M 185,68 C 172,74 160,94 160,118 L 160,185 L 210,185 L 210,118 C 210,94 198,74 185,68 Z"/><path d="M 315,30 C 265,30 230,68 230,118 C 230,168 265,185 315,185 C 342,185 365,176 378,162 L 348,132 C 340,140 328,145 315,145 C 292,145 285,128 285,118 C 285,108 292,90 315,90 C 328,90 340,95 348,103 L 378,73 C 365,59 342,30 315,30 Z"/><path d="M 385,32 L 435,32 L 435,92 L 472,42 C 480,32 492,30 502,38 C 514,46 512,60 502,72 L 468,110 L 515,172 C 525,182 520,198 506,198 C 496,198 488,192 480,180 L 435,120 L 435,185 L 385,185 Z"/><text x="515" y="42" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="%23f76b1c">TM</text></g></svg>`;
+export const NICK_TV_LOGO = NICKELODEON_LOGO;
+
+export const NICK_JUNIOR_2_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 300" width="100%" height="100%"><defs><filter id="nj-shadow" x="-10%" y="-10%" width="130%" height="130%"><feDropShadow dx="3" dy="8" stdDeviation="6" flood-color="%23000000" flood-opacity="0.45"/></filter><filter id="nj-letter-shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="2" dy="5" stdDeviation="4" flood-color="%23000000" flood-opacity="0.35"/></filter><linearGradient id="nj-orange" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%23ff6a00"/><stop offset="100%" stop-color="%23d64000"/></linearGradient><linearGradient id="nj-white" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%23ffffff"/><stop offset="85%" stop-color="%23f0f3f6"/><stop offset="100%" stop-color="%23d1d5db"/></linearGradient><linearGradient id="nj-lime" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%23eeff00"/><stop offset="70%" stop-color="%23ccf500"/><stop offset="100%" stop-color="%23a4d600"/></linearGradient></defs><rect width="650" height="300" fill="%23ffffff"/><g transform="translate(25, 20)" filter="url(%23nj-shadow)"><path d="M 70,80 C 70,70 85,60 100,60 C 130,60 140,75 160,75 C 180,75 190,65 210,65 C 240,65 250,75 270,75 C 290,75 300,50 340,15 C 380,-15 430,20 430,75 C 450,75 470,65 500,65 C 540,65 580,95 580,140 C 600,160 600,195 570,225 C 540,255 500,240 480,240 C 450,255 420,250 390,240 C 360,255 320,250 290,240 C 260,255 220,250 190,240 C 160,255 120,250 90,240 C 60,255 20,245 10,210 C 0,175 10,140 40,120 C 40,95 50,80 70,80 Z" fill="url(%23nj-orange)"/><g filter="url(%23nj-letter-shadow)"><path d="M 65,95 L 98,95 L 98,180 C 98,205 75,220 50,220 C 35,220 25,212 25,200 C 25,188 35,182 45,182 C 55,182 65,175 65,160 Z" fill="url(%23nj-white)"/><path d="M 110,95 L 140,95 L 140,165 C 140,185 152,192 165,192 C 178,192 190,185 190,165 L 190,95 L 220,95 L 220,165 C 220,205 192,222 165,222 C 138,222 110,205 110,165 Z" fill="url(%23nj-white)"/><path d="M 235,95 L 265,95 L 265,120 C 275,102 295,92 315,92 C 345,92 360,110 360,140 L 360,220 L 330,220 L 330,148 C 330,130 322,122 308,122 C 292,122 265,135 265,155 L 265,220 L 235,220 Z" fill="url(%23nj-white)"/><rect x="375" y="95" width="30" height="125" rx="15" fill="url(%23nj-white)"/><circle cx="390" cy="50" r="24" fill="url(%23nj-lime)"/><path d="M 475,90 C 512,90 540,118 540,158 C 540,198 512,225 475,225 C 438,225 410,198 410,158 C 410,118 438,90 475,90 Z M 475,128 C 458,128 448,140 448,158 C 448,175 458,188 475,188 C 492,188 502,175 502,158 C 502,140 492,128 475,128 Z" fill="url(%23nj-lime)"/><path d="M 550,95 L 580,95 L 580,122 C 590,102 610,95 625,98 L 615,128 C 600,125 580,132 580,152 L 580,220 L 550,220 Z" fill="url(%23nj-white)"/></g></g></svg>`;
+export const NICK_JR_2_LOGO = NICK_JUNIOR_2_LOGO;
+
+export const AMC_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><rect width="500" height="280" fill="%23ffffff"/><rect x="12" y="12" width="476" height="256" fill="none" stroke="%23000000" stroke-width="16"/><g fill="%23000000"><text x="250" y="195" font-family="'Helvetica Neue', 'Arial Black', Impact, sans-serif" font-weight="900" font-size="168" letter-spacing="-6" text-anchor="middle">amc</text></g></svg>`;
+export const AMC_TV_LOGO = AMC_LOGO;
+
+export const CMC_MISSIONNAIRE_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23000000"/><g transform="translate(240, 185)"><path d="M -140,40 C -140,-50 -70,-130 30,-140 C 20,-110 -10,-60 -10,10 C -10,80 30,130 60,150 C -40,160 -140,110 -140,40 Z" fill="none" stroke="%230088e8" stroke-width="8"/><ellipse cx="-40" cy="15" rx="90" ry="115" fill="none" stroke="%230088e8" stroke-width="6"/><ellipse cx="-40" cy="15" rx="55" ry="115" fill="none" stroke="%230088e8" stroke-width="6"/><ellipse cx="-40" cy="15" rx="20" ry="115" fill="none" stroke="%230088e8" stroke-width="6"/><path d="M -130,15 Q -40,-35 50,15" fill="none" stroke="%230088e8" stroke-width="6"/><path d="M -125,-40 Q -40,-85 45,-40" fill="none" stroke="%230088e8" stroke-width="6"/><path d="M -120,70 Q -40,25 45,70" fill="none" stroke="%230088e8" stroke-width="6"/><path d="M -90,115 Q -40,80 20,115" fill="none" stroke="%230088e8" stroke-width="6"/><path d="M -5,-140 C 15,-155 45,-165 65,-155 C 50,-150 40,-140 45,-130 C 55,-132 65,-125 70,-115 C 55,-120 40,-115 35,-105 C 30,-118 15,-125 -5,-140 Z" fill="%230088e8"/><rect x="50" y="-115" width="22" height="240" fill="%230088e8"/><rect x="-5" y="-55" width="132" height="22" fill="%230088e8"/></g><text x="250" y="405" font-family="'Arial Black', sans-serif" font-weight="900" font-size="44" fill="%2300aaff" text-anchor="middle" letter-spacing="4">C.M.C</text><text x="250" y="445" font-family="'Arial Black', sans-serif" font-weight="900" font-size="19" fill="%230088e8" text-anchor="middle" letter-spacing="1">CENTRE MISSIONNAIRE CHRETIEN</text></svg>`;
+
+export const OASIS_MEDIA_FM_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><defs><linearGradient id="oasis-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23064e3b"/><stop offset="50%" stop-color="%23047857"/><stop offset="100%" stop-color="%23059669"/></linearGradient><linearGradient id="oasis-gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23fef08a"/><stop offset="50%" stop-color="%23facc15"/><stop offset="100%" stop-color="%23ca8a04"/></linearGradient></defs><rect width="500" height="500" fill="url(%23oasis-bg)" rx="40"/><circle cx="250" cy="200" r="140" fill="%23ffffff" opacity="0.1"/><g transform="translate(250, 180)"><circle cx="0" cy="0" r="85" fill="none" stroke="url(%23oasis-gold)" stroke-width="10"/><path d="M -45,15 C -45,-30 0,-60 0,-60 C 0,-60 45,-30 45,15 C 45,45 25,65 0,65 C -25,65 -45,45 -45,15 Z" fill="url(%23oasis-gold)"/><circle cx="0" cy="18" r="14" fill="%23064e3b"/><path d="M -80,-20 A 110,110 0 0,1 -80,40" fill="none" stroke="%23ffffff" stroke-width="6" stroke-linecap="round"/><path d="M 80,-20 A 110,110 0 0,0 80,40" fill="none" stroke="%23ffffff" stroke-width="6" stroke-linecap="round"/><path d="M -105,-40 A 145,145 0 0,1 -105,60" fill="none" stroke="%23ffffff" stroke-width="6" stroke-linecap="round" opacity="0.7"/><path d="M 105,-40 A 145,145 0 0,0 105,60" fill="none" stroke="%23ffffff" stroke-width="6" stroke-linecap="round" opacity="0.7"/></g><text x="250" y="360" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="%23ffffff" text-anchor="middle" letter-spacing="3">OASIS MEDIA</text><rect x="175" y="385" width="150" height="42" rx="21" fill="url(%23oasis-gold)"/><text x="250" y="415" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="28" fill="%23064e3b" text-anchor="middle" letter-spacing="4">FM RADIO</text></svg>`;
+
+export const RADIO_NOVA_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><defs><linearGradient id="nova-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2318181b"/><stop offset="100%" stop-color="%2309090b"/></linearGradient></defs><rect width="500" height="500" fill="url(%23nova-bg)" rx="40"/><circle cx="250" cy="200" r="130" fill="%2322c55e"/><g fill="%2309090b"><text x="250" y="240" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="110" text-anchor="middle" letter-spacing="-3">nova</text></g><rect x="130" y="355" width="240" height="50" rx="10" fill="%2322c55e"/><text x="250" y="390" font-family="'Arial Black', sans-serif" font-weight="900" font-size="26" fill="%2309090b" text-anchor="middle" letter-spacing="4">LE GRAND MIX</text><text x="250" y="445" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="%23ffffff" text-anchor="middle" letter-spacing="6">RADIO FM</text></svg>`;
+
+export const RADIO_CAPITAL_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23dc2626" rx="40"/><circle cx="250" cy="210" r="140" fill="%23ffffff"/><text x="250" y="245" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="82" fill="%23dc2626" text-anchor="middle" letter-spacing="-2">CAPITAL</text><rect x="140" y="370" width="220" height="48" rx="8" fill="%23ffffff"/><text x="250" y="404" font-family="'Arial Black', sans-serif" font-weight="900" font-size="26" fill="%23dc2626" text-anchor="middle" letter-spacing="4">FM STEREO</text></svg>`;
+
+export const NOSTALGIE_RADIO_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><defs><linearGradient id="nost-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%231e3a8a"/><stop offset="100%" stop-color="%230f172a"/></linearGradient></defs><rect width="500" height="500" fill="url(%23nost-grad)" rx="40"/><circle cx="250" cy="200" r="130" fill="%23f59e0b"/><text x="250" y="235" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="%231e3a8a" text-anchor="middle" letter-spacing="-1">NOSTALGIE</text><rect x="120" y="360" width="260" height="48" rx="24" fill="%23f59e0b"/><text x="250" y="394" font-family="'Arial Black', sans-serif" font-weight="900" font-size="22" fill="%231e3a8a" text-anchor="middle" letter-spacing="3">LES PLUS GRANDS HITS</text></svg>`;
+
+export const CANAL_12_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><defs><linearGradient id="c12-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230f172a"/><stop offset="100%" stop-color="%231e293b"/></linearGradient><linearGradient id="c12-red" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ef4444"/><stop offset="100%" stop-color="%23b91c1c"/></linearGradient></defs><rect width="500" height="500" fill="url(%23c12-bg)" rx="40"/><rect x="25" y="25" width="450" height="450" fill="none" stroke="%2338bdf8" stroke-width="6" rx="30"/><rect x="50" y="70" width="400" height="70" rx="16" fill="%23000000"/><text x="250" y="120" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="44" fill="%23ffffff" text-anchor="middle" letter-spacing="8">CANAL</text><circle cx="250" cy="275" r="115" fill="url(%23c12-red)"/><text x="250" y="325" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="150" fill="%23ffffff" text-anchor="middle" letter-spacing="-4">12</text><rect x="180" y="410" width="140" height="38" rx="8" fill="%2338bdf8"/><text x="250" y="437" font-family="'Arial Black', sans-serif" font-weight="900" font-size="22" fill="%230f172a" text-anchor="middle" letter-spacing="4">HD LIVE</text></svg>`;
+
+export const CTV_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 300" width="100%" height="100%"><rect width="550" height="300" fill="%230b0f19" rx="30"/><g transform="translate(45, 60)"><circle cx="80" cy="90" r="70" fill="%23e11d48"/><text x="80" y="122" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="95" fill="%23ffffff" text-anchor="middle">C</text><rect x="165" y="20" width="140" height="140" rx="14" fill="%2316a34a"/><text x="235" y="122" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="95" fill="%23ffffff" text-anchor="middle">T</text><polygon points="380,160 450,20 310,20" fill="%232563eb"/><text x="380" y="122" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="95" fill="%23ffffff" text-anchor="middle">V</text></g><text x="275" y="270" font-family="'Arial Black', sans-serif" font-weight="900" font-size="22" fill="%2394a3b8" text-anchor="middle" letter-spacing="8">TELEVISION NETWORK</text></svg>`;
+
+export const TV8_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><defs><linearGradient id="tv8-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230284c7"/><stop offset="50%" stop-color="%230369a1"/><stop offset="100%" stop-color="%23082f49"/></linearGradient><linearGradient id="tv8-orange" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23f97316"/><stop offset="100%" stop-color="%23ea580c"/></linearGradient></defs><rect width="500" height="500" fill="url(%23tv8-grad)" rx="40"/><circle cx="250" cy="210" r="145" fill="url(%23tv8-orange)" stroke="%23ffffff" stroke-width="8"/><text x="250" y="278" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="210" fill="%23ffffff" text-anchor="middle" letter-spacing="-8">8</text><rect x="140" y="380" width="220" height="55" rx="14" fill="%23ffffff"/><text x="250" y="420" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="40" fill="%230284c7" text-anchor="middle" letter-spacing="6">TV HD</text></svg>`;
+
+export const E_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23000000" rx="40"/><circle cx="250" cy="200" r="140" fill="none" stroke="%23ffffff" stroke-width="18"/><g transform="translate(250, 200)" fill="%23ffffff"><text x="0" y="55" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="190" text-anchor="middle" letter-spacing="-6">E!</text></g><rect x="90" y="370" width="320" height="48" rx="8" fill="%23ffffff"/><text x="250" y="404" font-family="'Arial Black', sans-serif" font-weight="900" font-size="22" fill="%23000000" text-anchor="middle" letter-spacing="4">ENTERTAINMENT TV</text></svg>`;
+
+export const GNM_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><defs><linearGradient id="gnm-gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23fef08a"/><stop offset="50%" stop-color="%23eab308"/><stop offset="100%" stop-color="%23a16207"/></linearGradient><linearGradient id="gnm-blue" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%231e3a8a"/><stop offset="100%" stop-color="%230f172a"/></linearGradient></defs><rect width="500" height="500" fill="url(%23gnm-blue)" rx="40"/><circle cx="250" cy="180" r="115" fill="none" stroke="url(%23gnm-gold)" stroke-width="8"/><g transform="translate(250, 180)"><path d="M 0,-70 L 0,70 M -45,-25 L 45,-25" stroke="url(%23gnm-gold)" stroke-width="12" stroke-linecap="round"/><polygon points="0,-85 22,-50 0,-60 -22,-50" fill="url(%23gnm-gold)"/></g><text x="250" y="340" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="58" fill="url(%23gnm-gold)" text-anchor="middle" letter-spacing="4">GNM TV</text><text x="250" y="380" font-family="'Arial Black', sans-serif" font-weight="900" font-size="18" fill="%23ffffff" text-anchor="middle" letter-spacing="2">GOOD NEWS MEDIA</text><rect x="160" y="410" width="180" height="34" rx="17" fill="url(%23gnm-gold)"/><text x="250" y="433" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="%231e3a8a" text-anchor="middle" letter-spacing="3">TELEVISION</text></svg>`;
+
+export const M6_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><defs><linearGradient id="m6-silver" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23f8fafc"/><stop offset="50%" stop-color="%2394a3b8"/><stop offset="100%" stop-color="%23475569"/></linearGradient><linearGradient id="m6-red" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ef4444"/><stop offset="100%" stop-color="%23991b1b"/></linearGradient></defs><rect width="500" height="500" fill="%23090d16" rx="40"/><g transform="translate(85, 120)"><path d="M 0,160 L 0,0 L 75,100 L 150,0 L 150,160 L 110,160 L 110,65 L 75,115 L 40,65 L 40,160 Z" fill="url(%23m6-silver)"/><g transform="translate(195, -15)"><polygon points="45,0 95,0 95,190 45,190" fill="url(%23m6-red)"/><polygon points="0,50 140,50 140,95 0,95" fill="url(%23m6-red)" transform="rotate(-30 70 70)"/><circle cx="70" cy="130" r="45" fill="none" stroke="url(%23m6-red)" stroke-width="32"/></g></g><rect x="150" y="380" width="200" height="42" rx="10" fill="url(%23m6-silver)"/><text x="250" y="410" font-family="'Arial Black', sans-serif" font-weight="900" font-size="24" fill="%23090d16" text-anchor="middle" letter-spacing="6">DIRECT HD</text></svg>`;
+
+export const NEWS_BY_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><defs><linearGradient id="nb-red" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23dc2626"/><stop offset="100%" stop-color="%23991b1b"/></linearGradient></defs><rect width="500" height="500" fill="%230b0f19" rx="40"/><rect x="50" y="100" width="400" height="120" rx="14" fill="url(%23nb-red)"/><text x="250" y="185" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="78" fill="%23ffffff" text-anchor="middle" letter-spacing="2">NEWS</text><rect x="180" y="240" width="140" height="55" rx="10" fill="%23ffffff"/><text x="250" y="280" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="38" fill="%23dc2626" text-anchor="middle" letter-spacing="4">BY</text><text x="250" y="360" font-family="'Arial Black', sans-serif" font-weight="900" font-size="28" fill="%23ffffff" text-anchor="middle" letter-spacing="4">WORLD 24/7</text><rect x="120" y="395" width="260" height="38" rx="8" fill="none" stroke="%23ef4444" stroke-width="4"/><text x="250" y="421" font-family="'Arial Black', sans-serif" font-weight="900" font-size="18" fill="%23ef4444" text-anchor="middle" letter-spacing="6">BREAKING NEWS</text></svg>`;
+
+export const AE_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><defs><linearGradient id="ae-red" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ef4444"/><stop offset="100%" stop-color="%23dc2626"/></linearGradient></defs><rect width="500" height="500" fill="%23000000" rx="40"/><rect x="30" y="30" width="440" height="440" fill="none" stroke="url(%23ae-red)" stroke-width="8" rx="30"/><g transform="translate(60, 130)" fill="%23ffffff"><path d="M 0,160 L 60,0 L 105,0 L 165,160 L 118,160 L 102,115 L 62,115 L 48,160 Z M 72,82 L 92,82 L 82,48 Z"/><path d="M 180,140 C 180,105 210,95 230,120 C 240,100 250,90 265,105 C 275,115 270,130 255,138 L 275,160 L 250,160 L 235,142 C 228,155 215,165 200,160 C 185,155 180,148 180,140 Z M 205,135 C 205,142 215,145 225,138 C 225,128 215,125 208,128 C 205,130 205,132 205,135 Z" fill="url(%23ae-red)"/><path d="M 285,0 L 375,0 L 375,38 L 328,38 L 328,62 L 370,62 L 370,98 L 328,98 L 328,122 L 378,122 L 378,160 L 285,160 Z"/></g><text x="250" y="380" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="44" fill="%23ffffff" text-anchor="middle" letter-spacing="8">NETWORK</text><rect x="170" y="405" width="160" height="34" rx="8" fill="url(%23ae-red)"/><text x="250" y="429" font-family="'Arial Black', sans-serif" font-weight="900" font-size="18" fill="%23ffffff" text-anchor="middle" letter-spacing="4">TELEVISION</text></svg>`;
+
+export const ACC_NETWORK_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="acc-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23011e41"/><stop offset="100%" stop-color="%23003066"/></linearGradient><linearGradient id="acc-blue" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230099ff"/><stop offset="100%" stop-color="%230066cc"/></linearGradient></defs><rect width="500" height="280" fill="url(%23acc-bg)" rx="30"/><g transform="translate(45, 45)"><path d="M 30,130 L 95,10 L 135,10 L 70,130 Z" fill="url(%23acc-blue)"/><text x="210" y="115" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="115" fill="%23ffffff" letter-spacing="-5">ACC</text><rect x="0" y="145" width="410" height="42" rx="10" fill="url(%23acc-blue)"/><text x="205" y="176" font-family="'Arial Black', sans-serif" font-weight="900" font-size="24" fill="%23ffffff" text-anchor="middle" letter-spacing="8">NETWORK</text></g></svg>`;
+
+export const ACC_DIGITAL_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="accd-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23031733"/><stop offset="100%" stop-color="%230a2a5c"/></linearGradient><linearGradient id="accd-orange" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ff7a00"/><stop offset="100%" stop-color="%23ea580c"/></linearGradient></defs><rect width="500" height="280" fill="url(%23accd-bg)" rx="30"/><g transform="translate(40, 40)"><text x="210" y="105" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="105" fill="%2300aaff" letter-spacing="-4">ACC</text><rect x="10" y="130" width="400" height="46" rx="10" fill="url(%23accd-orange)"/><text x="210" y="163" font-family="'Arial Black', sans-serif" font-weight="900" font-size="22" fill="%23ffffff" text-anchor="middle" letter-spacing="6">DIGITAL NETWORK</text><text x="210" y="195" font-family="'Arial', sans-serif" font-weight="700" font-size="13" fill="%2393c5fd" text-anchor="middle" letter-spacing="3">RAYCOM SPORTS</text></g></svg>`;
+
+export const MULTISTREAM_SPORT_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="ms-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230f172a"/><stop offset="100%" stop-color="%231e293b"/></linearGradient></defs><rect width="500" height="280" fill="url(%23ms-bg)" rx="30"/><g transform="translate(50, 45)"><g transform="translate(0, 0)"><rect x="0" y="0" width="130" height="10" fill="%23009246"/><rect x="135" y="0" width="130" height="10" fill="%23ffffff"/><rect x="270" y="0" width="130" height="10" fill="%23ce2b37"/></g><text x="200" y="70" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="44" fill="%2338bdf8" text-anchor="middle" letter-spacing="2">MULTISTREAM</text><rect x="40" y="95" width="320" height="50" rx="12" fill="%230284c7"/><text x="200" y="132" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="34" fill="%23ffffff" text-anchor="middle" letter-spacing="6">SPORT IT</text><text x="200" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="%2394a3b8" text-anchor="middle" letter-spacing="6">LIVE HD STREAM</text></g></svg>`;
+
+export const AFRICA24_SPORT_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="a24-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2306281e"/><stop offset="100%" stop-color="%23041913"/></linearGradient><linearGradient id="a24-gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23fbbf24"/><stop offset="100%" stop-color="%23d97706"/></linearGradient></defs><rect width="500" height="280" fill="url(%23a24-bg)" rx="30"/><g transform="translate(40, 40)"><text x="210" y="65" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="48" fill="%23ffffff" text-anchor="middle" letter-spacing="4">AFRICA <tspan fill="url(%23a24-gold)">24</tspan></text><rect x="25" y="95" width="370" height="52" rx="14" fill="%2316a34a"/><text x="210" y="134" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="38" fill="%23ffffff" text-anchor="middle" letter-spacing="6">SPORT</text><text x="210" y="180" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="url(%23a24-gold)" text-anchor="middle" letter-spacing="5">PANAFRICAIN DIRECT</text></g></svg>`;
+
+export const AL_IRAQIYA_SPORTS_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="irq-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23081a2e"/><stop offset="100%" stop-color="%230f2b48"/></linearGradient></defs><rect width="500" height="280" fill="url(%23irq-bg)" rx="30"/><g transform="translate(40, 35)"><circle cx="210" cy="50" r="38" fill="%23ce1126"/><path d="M 185,50 L 235,50 M 210,25 L 210,75" stroke="%23ffffff" stroke-width="6" stroke-linecap="round"/><text x="210" y="125" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="38" fill="%23ffffff" text-anchor="middle" letter-spacing="2">AL IRAQIYA</text><rect x="40" y="145" width="340" height="42" rx="10" fill="%23007a3d"/><text x="210" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="24" fill="%23ffffff" text-anchor="middle" letter-spacing="6">SPORTS HD</text></g></svg>`;
+
+export const AL_KASS_1_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="kass-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%235c0628"/><stop offset="100%" stop-color="%238a0b3d"/></linearGradient></defs><rect width="500" height="280" fill="url(%23kass-bg)" rx="30"/><g transform="translate(50, 40)"><circle cx="110" cy="70" r="50" fill="%23ffffff"/><polygon points="80,50 140,50 110,95" fill="%238a0b3d"/><text x="260" y="65" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="%23ffffff" letter-spacing="2">ALKASS</text><rect x="235" y="80" width="95" height="45" rx="8" fill="%23ffffff"/><text x="282" y="115" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="40" fill="%238a0b3d" text-anchor="middle">one</text><text x="200" y="170" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="%23fecdd3" text-anchor="middle" letter-spacing="6">SPORTS CHANNELS</text></g></svg>`;
+
+export const AL_KASS_2_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="kass2-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%235c0628"/><stop offset="100%" stop-color="%238a0b3d"/></linearGradient></defs><rect width="500" height="280" fill="url(%23kass2-bg)" rx="30"/><g transform="translate(50, 40)"><circle cx="110" cy="70" r="50" fill="%23ffffff"/><polygon points="80,50 140,50 110,95" fill="%238a0b3d"/><text x="260" y="65" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="%23ffffff" letter-spacing="2">ALKASS</text><rect x="235" y="80" width="95" height="45" rx="8" fill="%23ffffff"/><text x="282" y="115" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="40" fill="%238a0b3d" text-anchor="middle">two</text><text x="200" y="170" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="%23fecdd3" text-anchor="middle" letter-spacing="6">SPORTS CHANNELS</text></g></svg>`;
+
+export const AL_KASS_SHOOF_1_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="shoof-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%234a0420"/><stop offset="100%" stop-color="%23730833"/></linearGradient><linearGradient id="shoof-cyan" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2306b6d4"/><stop offset="100%" stop-color="%230284c7"/></linearGradient></defs><rect width="500" height="280" fill="url(%23shoof-bg)" rx="30"/><g transform="translate(45, 45)"><text x="205" y="60" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="48" fill="%23ffffff" text-anchor="middle" letter-spacing="3">AL KASS</text><rect x="25" y="85" width="360" height="52" rx="14" fill="url(%23shoof-cyan)"/><text x="205" y="123" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="34" fill="%23ffffff" text-anchor="middle" letter-spacing="6">SHOOF 1 LIVE</text><text x="205" y="170" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="%2367e8f9" text-anchor="middle" letter-spacing="5">DIGITAL STREAM</text></g></svg>`;
+
+export const AL_KASS_SHOOF_2_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="shoof2-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%234a0420"/><stop offset="100%" stop-color="%23730833"/></linearGradient><linearGradient id="shoof2-orange" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23f97316"/><stop offset="100%" stop-color="%23ea580c"/></linearGradient></defs><rect width="500" height="280" fill="url(%23shoof2-bg)" rx="30"/><g transform="translate(45, 45)"><text x="205" y="60" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="48" fill="%23ffffff" text-anchor="middle" letter-spacing="3">AL KASS</text><rect x="25" y="85" width="360" height="52" rx="14" fill="url(%23shoof2-orange)"/><text x="205" y="123" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="34" fill="%23ffffff" text-anchor="middle" letter-spacing="6">SHOOF 2 LIVE</text><text x="205" y="170" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="%23fdba74" text-anchor="middle" letter-spacing="5">DIGITAL STREAM</text></g></svg>`;
+
+export const ARENA_FIGHT_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="fight-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230d0d0d"/><stop offset="100%" stop-color="%231a0505"/></linearGradient><linearGradient id="fight-red" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ef4444"/><stop offset="100%" stop-color="%23b91c1c"/></linearGradient></defs><rect width="500" height="280" fill="url(%23fight-bg)" rx="30"/><rect x="15" y="15" width="470" height="250" rx="20" fill="none" stroke="%23dc2626" stroke-width="4"/><g transform="translate(40, 45)"><text x="210" y="55" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="44" fill="%23f3f4f6" text-anchor="middle" letter-spacing="8">ARENA</text><rect x="30" y="75" width="360" height="56" rx="12" fill="url(%23fight-red)"/><text x="210" y="118" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="48" fill="%23ffffff" text-anchor="middle" letter-spacing="8">FIGHT</text><text x="210" y="165" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="%23ef4444" text-anchor="middle" letter-spacing="6">MMA • BOXE • COMBAT 24/7</text></g></svg>`;
+
+export const AL_KASS_4_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="kass4-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%235c0628"/><stop offset="100%" stop-color="%238a0b3d"/></linearGradient></defs><rect width="500" height="280" fill="url(%23kass4-bg)" rx="30"/><g transform="translate(50, 40)"><circle cx="110" cy="70" r="50" fill="%23ffffff"/><polygon points="80,50 140,50 110,95" fill="%238a0b3d"/><text x="260" y="65" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="%23ffffff" letter-spacing="2">ALKASS</text><rect x="235" y="80" width="95" height="45" rx="8" fill="%23ffffff"/><text x="282" y="115" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="40" fill="%238a0b3d" text-anchor="middle">four</text><text x="200" y="170" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="%23fecdd3" text-anchor="middle" letter-spacing="6">SPORTS CHANNELS</text></g></svg>`;
+
+export const EXTREMA_KIDS_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="ek-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%237c3aed"/><stop offset="100%" stop-color="%23ec4899"/></linearGradient><linearGradient id="ek-yellow" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23fde047"/><stop offset="100%" stop-color="%23eab308"/></linearGradient></defs><rect width="500" height="280" fill="url(%23ek-bg)" rx="30"/><g transform="translate(40, 40)"><text x="210" y="65" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="52" fill="%23ffffff" text-anchor="middle" letter-spacing="4">EXTREMA</text><rect x="40" y="90" width="340" height="60" rx="18" fill="url(%23ek-yellow)"/><text x="210" y="136" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="%237c3aed" text-anchor="middle" letter-spacing="8">KIDS</text><text x="210" y="180" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="%23ffffff" text-anchor="middle" letter-spacing="4">DESSINS ANIMÉS 24/7</text></g></svg>`;
+
+export const MCQUACK_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="mcq-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230284c7"/><stop offset="100%" stop-color="%230369a1"/></linearGradient><linearGradient id="mcq-orange" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23fb923c"/><stop offset="100%" stop-color="%23ea580c"/></linearGradient></defs><rect width="500" height="280" fill="url(%23mcq-bg)" rx="30"/><g transform="translate(45, 45)"><ellipse cx="205" cy="55" rx="140" ry="40" fill="url(%23mcq-orange)"/><text x="205" y="68" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="46" fill="%23ffffff" text-anchor="middle" letter-spacing="2">McQUACK</text><rect x="80" y="110" width="250" height="46" rx="12" fill="%23ffffff"/><text x="205" y="143" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="36" fill="%230284c7" text-anchor="middle" letter-spacing="6">TELEVISION</text><text x="205" y="182" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%23bae6fd" text-anchor="middle" letter-spacing="4">CARTOONS &amp; ADVENTURES</text></g></svg>`;
+
+export const THVL4_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="thvl-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%231e1b4b"/><stop offset="100%" stop-color="%23312e81"/></linearGradient><linearGradient id="thvl-gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23f59e0b"/><stop offset="100%" stop-color="%23d97706"/></linearGradient></defs><rect width="500" height="280" fill="url(%23thvl-bg)" rx="30"/><g transform="translate(40, 45)"><text x="170" y="90" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="78" fill="%2338bdf8" letter-spacing="-2">THVL</text><circle cx="345" cy="65" r="45" fill="url(%23thvl-gold)"/><text x="345" y="86" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="64" fill="%23ffffff" text-anchor="middle">4</text><rect x="20" y="130" width="380" height="38" rx="8" fill="%234338ca"/><text x="210" y="157" font-family="'Arial Black', sans-serif" font-weight="900" font-size="18" fill="%23ffffff" text-anchor="middle" letter-spacing="4">TRUYỀN HÌNH VĨNH LONG</text></g></svg>`;
+
+export const PISHOW_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="pi-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2318181b"/><stop offset="100%" stop-color="%2327272a"/></linearGradient><linearGradient id="pi-purple" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23a855f7"/><stop offset="100%" stop-color="%237e22ce"/></linearGradient></defs><rect width="500" height="280" fill="url(%23pi-bg)" rx="30"/><g transform="translate(45, 45)"><circle cx="100" cy="70" r="48" fill="url(%23pi-purple)"/><text x="100" y="88" font-family="'Times New Roman', serif" font-weight="900" font-size="62" fill="%23ffffff" text-anchor="middle">π</text><text x="270" y="80" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="58" fill="%23ffffff" letter-spacing="2">SHOW</text><rect x="40" y="130" width="330" height="42" rx="10" fill="url(%23pi-purple)"/><text x="205" y="159" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="%23ffffff" text-anchor="middle" letter-spacing="6">TELEVISION HD</text></g></svg>`;
+
+export const TV360_TURK_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="t360-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23111827"/><stop offset="100%" stop-color="%231f2937"/></linearGradient><linearGradient id="t360-red" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23e11d48"/><stop offset="100%" stop-color="%23be123c"/></linearGradient></defs><rect width="500" height="280" fill="url(%23t360-bg)" rx="30"/><g transform="translate(45, 40)"><circle cx="205" cy="70" r="60" fill="none" stroke="url(%23t360-red)" stroke-width="10"/><text x="145" y="85" font-family="'Arial Black', sans-serif" font-weight="900" font-size="44" fill="%23e11d48">tv</text><text x="245" y="88" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="%23ffffff">360</text><rect x="30" y="145" width="350" height="36" rx="8" fill="url(%23t360-red)"/><text x="205" y="170" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="%23ffffff" text-anchor="middle" letter-spacing="6">TÜRKMEDYA CANLI</text></g></svg>`;
+
+export const ABC_NEWS_LIVE_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="abc-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23000000"/><stop offset="100%" stop-color="%23111827"/></linearGradient></defs><rect width="500" height="280" fill="url(%23abc-bg)" rx="30"/><g transform="translate(40, 40)"><circle cx="95" cy="70" r="50" fill="%23000000" stroke="%23ffffff" stroke-width="6"/><text x="95" y="82" font-family="'Century Gothic', 'Arial', sans-serif" font-weight="900" font-size="34" fill="%23ffffff" text-anchor="middle" letter-spacing="-2">abc</text><text x="260" y="70" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="48" fill="%23ffffff" letter-spacing="2">NEWS</text><rect x="175" y="85" width="170" height="36" rx="8" fill="%23dc2626"/><text x="260" y="110" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="%23ffffff" text-anchor="middle" letter-spacing="4">LIVE</text><text x="210" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="%239ca3af" text-anchor="middle" letter-spacing="4">24/7 BREAKING NEWS</text></g></svg>`;
+
+export const AFRICA24_NEWS_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="a24n-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230f172a"/><stop offset="100%" stop-color="%23020617"/></linearGradient><linearGradient id="a24n-orange" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23f97316"/><stop offset="100%" stop-color="%23c2410c"/></linearGradient></defs><rect width="500" height="280" fill="url(%23a24n-bg)" rx="30"/><g transform="translate(40, 40)"><text x="210" y="65" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="48" fill="%23ffffff" text-anchor="middle" letter-spacing="4">AFRICA <tspan fill="url(%23a24n-orange)">24</tspan></text><rect x="25" y="95" width="370" height="48" rx="12" fill="url(%23a24n-orange)"/><text x="210" y="130" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="32" fill="%23ffffff" text-anchor="middle" letter-spacing="8">LE DIRECT</text><text x="210" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="%23fb923c" text-anchor="middle" letter-spacing="4">L'INFO PANAFRICAINE 24/7</text></g></svg>`;
+
+export const AFRICANEWS_FR_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="afrn-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23064e3b"/><stop offset="100%" stop-color="%23022c22"/></linearGradient><linearGradient id="afrn-yellow" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23facc15"/><stop offset="100%" stop-color="%23ca8a04"/></linearGradient></defs><rect width="500" height="280" fill="url(%23afrn-bg)" rx="30"/><g transform="translate(35, 45)"><text x="215" y="60" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="44" fill="%23ffffff" text-anchor="middle" letter-spacing="2">africa<tspan fill="url(%23afrn-yellow)">news</tspan>.</text><rect x="110" y="85" width="210" height="46" rx="10" fill="url(%23afrn-yellow)"/><text x="215" y="120" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="30" fill="%23064e3b" text-anchor="middle" letter-spacing="6">FRANÇAIS</text><text x="215" y="165" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%2386efac" text-anchor="middle" letter-spacing="4">EURONEWS GROUP</text></g></svg>`;
+
+export const CHANNEL_24_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="ch24-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%237f1d1d"/><stop offset="100%" stop-color="%23450a0a"/></linearGradient><linearGradient id="ch24-red" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ef4444"/><stop offset="100%" stop-color="%23b91c1c"/></linearGradient></defs><rect width="500" height="280" fill="url(%23ch24-bg)" rx="30"/><g transform="translate(45, 40)"><text x="140" y="80" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="42" fill="%23ffffff">CHANNEL</text><rect x="290" y="25" width="90" height="75" rx="14" fill="%23ffffff"/><text x="335" y="85" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="65" fill="%23ef4444" text-anchor="middle">24</text><rect x="20" y="125" width="370" height="42" rx="10" fill="url(%23ch24-red)"/><text x="205" y="154" font-family="'Arial Black', sans-serif" font-weight="900" font-size="18" fill="%23ffffff" text-anchor="middle" letter-spacing="6">NEWS LIVE STREAM</text></g></svg>`;
+
+export const BTB_IPTV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="btb-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230f172a"/><stop offset="100%" stop-color="%231e293b"/></linearGradient><linearGradient id="btb-blue" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2338bdf8"/><stop offset="100%" stop-color="%230284c7"/></linearGradient></defs><rect width="500" height="280" fill="url(%23btb-bg)" rx="30"/><g transform="translate(45, 45)"><text x="205" y="75" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="80" fill="url(%23btb-blue)" text-anchor="middle" letter-spacing="6">BTB</text><rect x="35" y="110" width="340" height="44" rx="10" fill="%230284c7"/><text x="205" y="141" font-family="'Arial Black', sans-serif" font-weight="900" font-size="24" fill="%23ffffff" text-anchor="middle" letter-spacing="8">IPTV STREAM</text><text x="205" y="180" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%2394a3b8" text-anchor="middle" letter-spacing="5">LIVE BROADCAST</text></g></svg>`;
+
+export const OTTRAST_LIVE_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="ottr-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2318181b"/><stop offset="100%" stop-color="%2327272a"/></linearGradient><linearGradient id="ottr-purple" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%238b5cf6"/><stop offset="100%" stop-color="%236d28d9"/></linearGradient></defs><rect width="500" height="280" fill="url(%23ottr-bg)" rx="30"/><g transform="translate(40, 40)"><circle cx="100" cy="70" r="48" fill="url(%23ottr-purple)"/><polygon points="90,50 120,70 90,90" fill="%23ffffff"/><text x="260" y="65" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="44" fill="%23ffffff" letter-spacing="2">OTTRAST</text><rect x="175" y="80" width="170" height="38" rx="8" fill="url(%23ottr-purple)"/><text x="260" y="106" font-family="'Arial Black', sans-serif" font-weight="900" font-size="22" fill="%23ffffff" text-anchor="middle" letter-spacing="4">LIVE</text><text x="210" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="%23a1a1aa" text-anchor="middle" letter-spacing="5">HD MEDIA NETWORK</text></g></svg>`;
+
+export const INDYWOOD_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="indy-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%231a0b2e"/><stop offset="100%" stop-color="%232e1065"/></linearGradient><linearGradient id="indy-gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23fbbf24"/><stop offset="100%" stop-color="%23d97706"/></linearGradient></defs><rect width="500" height="280" fill="url(%23indy-bg)" rx="30"/><g transform="translate(40, 45)"><text x="210" y="60" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="46" fill="url(%23indy-gold)" text-anchor="middle" letter-spacing="4">INDYWOOD</text><rect x="60" y="85" width="300" height="50" rx="12" fill="%239333ea"/><text x="210" y="122" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="36" fill="%23ffffff" text-anchor="middle" letter-spacing="8">TELEVISION</text><text x="210" y="170" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="%23e9d5ff" text-anchor="middle" letter-spacing="4">CINEMA &amp; ENTERTAINMENT</text></g></svg>`;
+
+export const AL_JAZEERA_ARABIC_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="aja-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23854d0e"/><stop offset="100%" stop-color="%23451a03"/></linearGradient><linearGradient id="aja-gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23fde047"/><stop offset="100%" stop-color="%23eab308"/></linearGradient></defs><rect width="500" height="280" fill="url(%23aja-bg)" rx="30"/><g transform="translate(45, 35)"><circle cx="105" cy="75" r="52" fill="none" stroke="url(%23aja-gold)" stroke-width="8"/><path d="M 85,90 C 85,60 125,50 120,95 C 105,100 95,95 85,90 Z" fill="url(%23aja-gold)"/><text x="260" y="65" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="38" fill="%23ffffff" letter-spacing="1">AL JAZEERA</text><rect x="180" y="80" width="160" height="38" rx="8" fill="url(%23aja-gold)"/><text x="260" y="107" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="%23451a03" text-anchor="middle" letter-spacing="4">ARABIC</text><text x="205" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="%23fef08a" text-anchor="middle" letter-spacing="4">قناة الجزيرة الإخبارية</text></g></svg>`;
+
+export const MCQUACK_TOONS_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="mcqt-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230284c7"/><stop offset="100%" stop-color="%230369a1"/></linearGradient><linearGradient id="mcqt-yellow" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23fde047"/><stop offset="100%" stop-color="%23eab308"/></linearGradient></defs><rect width="500" height="280" fill="url(%23mcqt-bg)" rx="30"/><g transform="translate(45, 45)"><text x="205" y="60" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="46" fill="%23ffffff" text-anchor="middle" letter-spacing="2">McQUACK</text><rect x="60" y="85" width="290" height="52" rx="14" fill="url(%23mcqt-yellow)"/><text x="205" y="125" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="40" fill="%230284c7" text-anchor="middle" letter-spacing="6">TOONS</text><text x="205" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%23bae6fd" text-anchor="middle" letter-spacing="4">ANIMATED CLASSICS 24/7</text></g></svg>`;
+
+export const ALEERT_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="alrt-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23111827"/><stop offset="100%" stop-color="%23000000"/></linearGradient><linearGradient id="alrt-red" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ef4444"/><stop offset="100%" stop-color="%23b91c1c"/></linearGradient></defs><rect width="500" height="280" fill="url(%23alrt-bg)" rx="30"/><g transform="translate(40, 45)"><text x="210" y="65" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="%23ffffff" text-anchor="middle" letter-spacing="6">ALEERT</text><rect x="50" y="95" width="320" height="46" rx="10" fill="url(%23alrt-red)"/><text x="210" y="128" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="32" fill="%23ffffff" text-anchor="middle" letter-spacing="6">TELEVISION</text><text x="210" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="%23f87171" text-anchor="middle" letter-spacing="4">STREAM DIRECT</text></g></svg>`;
+
+export const EMS_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="ems-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23000000"/><stop offset="100%" stop-color="%23080b14"/></linearGradient><linearGradient id="ems-red" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ff1e27"/><stop offset="100%" stop-color="%23c81018"/></linearGradient><linearGradient id="ems-gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ffd000"/><stop offset="100%" stop-color="%23f59e0b"/></linearGradient><linearGradient id="ems-cyan" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2300b4d8"/><stop offset="100%" stop-color="%230077b6"/></linearGradient></defs><rect width="500" height="280" fill="url(%23ems-bg)" rx="30"/><g transform="translate(25, 20)"><circle cx="85" cy="120" r="28" fill="%231a1829"/><path d="M 85,60 C 130,85 130,165 85,185 C 105,165 110,105 85,60 Z" fill="url(%23ems-red)"/><path d="M 98,35 C 160,65 160,195 98,215 C 132,190 138,95 98,35 Z" fill="url(%23ems-gold)"/><path d="M 125,12 C 205,45 205,225 125,238 C 172,210 180,85 125,12 Z" fill="url(%23ems-cyan)"/><path d="M 175,30 C 235,65 235,215 175,228 C 210,200 215,95 175,30 Z" fill="%231e293b" opacity="0.45"/><g transform="translate(190, 20)"><text x="140" y="80" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="76" fill="%23ffffff" letter-spacing="2">EMS</text><rect x="40" y="98" width="195" height="46" rx="12" fill="url(%23ems-cyan)"/><text x="137" y="133" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="34" fill="%23000000" text-anchor="middle" letter-spacing="4">TELEVISION</text><text x="137" y="180" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%23ffd000" text-anchor="middle" letter-spacing="3">ÉVANGILE &amp; RELIGION 24/7</text></g></g></svg>`;
+
+export const BUENISIMA_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="buen-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%231f082e"/><stop offset="100%" stop-color="%2309020f"/></linearGradient><linearGradient id="buen-pink" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ec4899"/><stop offset="100%" stop-color="%23be185d"/></linearGradient><linearGradient id="buen-gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23facc15"/><stop offset="100%" stop-color="%23ea580c"/></linearGradient></defs><rect width="500" height="280" fill="url(%23buen-bg)" rx="30"/><g transform="translate(30, 35)"><circle cx="85" cy="85" r="46" fill="url(%23buen-pink)"/><polygon points="73,65 107,85 73,105" fill="%23ffffff"/><circle cx="115" cy="55" r="10" fill="url(%23buen-gold)"/><g transform="translate(145, 30)"><text x="0" y="48" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="44" fill="%23ffffff" letter-spacing="2">BUENÍSIMA</text><rect x="0" y="62" width="115" height="42" rx="10" fill="url(%23buen-gold)"/><text x="57" y="93" font-family="'Arial Black', sans-serif" font-weight="900" font-size="28" fill="%23000000" text-anchor="middle" letter-spacing="4">TV</text></g><text x="220" y="185" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%23f472b6" text-anchor="middle" letter-spacing="4">MÚSICA &amp; ENTRETENIMIENTO HD</text></g></svg>`;
+
+export const CANAL_8_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="c8-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23041c32"/><stop offset="100%" stop-color="%23040d1a"/></linearGradient><linearGradient id="c8-blue" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230284c7"/><stop offset="100%" stop-color="%230369a1"/></linearGradient><linearGradient id="c8-amber" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23f59e0b"/><stop offset="100%" stop-color="%23d97706"/></linearGradient></defs><rect width="500" height="280" fill="url(%23c8-bg)" rx="30"/><g transform="translate(35, 30)"><circle cx="95" cy="88" r="54" fill="url(%23c8-blue)"/><circle cx="95" cy="88" r="48" fill="none" stroke="url(%23c8-amber)" stroke-width="4"/><text x="95" y="112" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="68" fill="%23ffffff" text-anchor="middle">8</text><g transform="translate(165, 35)"><text x="0" y="44" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="46" fill="%23ffffff" letter-spacing="3">CANAL 8</text><rect x="0" y="58" width="165" height="38" rx="8" fill="url(%23c8-amber)"/><text x="82" y="85" font-family="'Arial Black', sans-serif" font-weight="900" font-size="22" fill="%23040d1a" text-anchor="middle" letter-spacing="4">TELEVISIÓN</text></g><text x="215" y="188" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%2338bdf8" text-anchor="middle" letter-spacing="4">NOTICIAS &amp; CULTURA EN VIVO</text></g></svg>`;
+
+export const BCTV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%23ffffff" rx="36"/><defs><clipPath id="bctv-pill-clip"><rect x="18" y="195" width="464" height="110" rx="55"/></clipPath><clipPath id="bctv-top-clip"><rect x="0" y="0" width="500" height="195"/></clipPath></defs><rect x="18" y="195" width="464" height="110" rx="55" fill="%231aa8f6"/><g fill="%23ffffff"><path d="M 50,215 L 116,215 Q 146,215 146,237 Q 146,247 135,252 Q 150,257 150,271 Q 150,295 116,295 L 50,295 Z M 73,233 L 73,246 L 112,246 Q 125,246 125,239 Q 125,233 112,233 Z M 73,262 L 73,277 L 115,277 Q 128,277 128,270 Q 128,262 115,262 Z"/><path d="M 235,232 Q 225,215 198,215 Q 163,215 163,255 Q 163,295 198,295 Q 225,295 235,278 L 253,288 Q 235,313 196,313 Q 140,313 140,255 Q 140,197 196,197 Q 235,197 253,222 Z"/><path d="M 262,215 L 352,215 L 352,234 L 318,234 L 318,295 L 296,295 L 296,234 L 262,234 Z"/></g><g><path d="M 341,150 L 373,150 L 405,260 L 437,150 L 469,150 L 419,298 L 391,298 Z" fill="%231aa8f6" clip-path="url(%23bctv-top-clip)"/><path d="M 341,150 L 373,150 L 405,260 L 437,150 L 469,150 L 419,298 L 391,298 Z" fill="%23ffffff" clip-path="url(%23bctv-pill-clip)"/></g></svg>`;
+
+export const STV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><defs><linearGradient id="stv-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%233b52d9"/><stop offset="35%" stop-color="%236357d6"/><stop offset="70%" stop-color="%239b51a8"/><stop offset="100%" stop-color="%23d65076"/></linearGradient><filter id="stv-shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="%23000000" flood-opacity="0.25"/></filter></defs><rect width="500" height="500" rx="110" fill="url(%23stv-grad)"/><g filter="url(%23stv-shadow)" transform="translate(68, 190)"><path d="M 10,65 C 10,95 32,118 72,118 C 108,118 126,98 126,76 C 126,46 98,38 68,30 C 44,24 34,18 34,8 C 34,-2 44,-8 60,-8 C 76,-8 88,-1 94,8 L 118,-12 C 106,-25 86,-30 60,-30 C 24,-30 4,-10 4,14 C 4,42 32,50 62,58 C 86,64 96,70 96,82 C 96,94 84,98 70,98 C 50,98 38,88 34,74 Z" fill="%23ffffff"/><path d="M 136,-26 L 254,-26 L 254,0 L 210,0 L 210,114 L 180,114 L 180,0 L 136,0 Z" fill="%23ffffff"/><path d="M 252,-26 L 284,-26 L 316,66 C 322,82 327,94 332,106 C 337,94 342,82 348,66 L 380,-26 L 412,-26 L 354,114 L 310,114 Z" fill="%23ffffff"/></g></svg>`;
+
+export const ORA_NEWS_24_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" rx="36" fill="%23b81414"/><g fill="none" stroke="%23ffffff"><circle cx="126" cy="192" r="54" stroke-width="26"/><circle cx="220" cy="155" r="30" stroke-width="16"/><circle cx="222" cy="226" r="30" stroke-width="16"/><circle cx="282" cy="155" r="28" stroke-width="15"/><circle cx="242" cy="190" r="10" stroke-width="6"/><circle cx="340" cy="148" r="14" stroke-width="8"/><circle cx="385" cy="148" r="14" stroke-width="8"/><circle cx="430" cy="148" r="14" stroke-width="8"/><circle cx="340" cy="192" r="14" stroke-width="8"/><circle cx="430" cy="192" r="14" stroke-width="8"/><circle cx="340" cy="236" r="14" stroke-width="8"/><circle cx="385" cy="236" r="14" stroke-width="8"/><circle cx="430" cy="236" r="14" stroke-width="8"/></g><g transform="translate(70, 360)"><text x="0" y="0" font-family="'Plus Jakarta Sans', 'Arial Black', Impact, sans-serif" font-weight="900" font-size="96" fill="%23ffffff" letter-spacing="-3">news<tspan font-family="'Plus Jakarta Sans', 'Arial', sans-serif" font-weight="700" font-size="52" letter-spacing="-1">.one</tspan></text></g></svg>`;
+
+export const WIN_SPORTS_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="win-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23111827"/><stop offset="100%" stop-color="%23030712"/></linearGradient><linearGradient id="win-orange" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ea580c"/><stop offset="100%" stop-color="%23c2410c"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23win-bg)"/><g transform="translate(40, 45)"><text x="210" y="65" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="62" fill="%23ffffff" text-anchor="middle" letter-spacing="4">WIN</text><rect x="30" y="90" width="360" height="52" rx="12" fill="url(%23win-orange)"/><text x="210" y="128" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="34" fill="%23ffffff" text-anchor="middle" letter-spacing="8">SPORTS</text><text x="210" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%23fb923c" text-anchor="middle" letter-spacing="4">FÚTBOL COLOMBIANO EN VIVO</text></g></svg>`;
+
+export const LATAM_VDO_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="latam-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%231e1b4b"/><stop offset="100%" stop-color="%230f172a"/></linearGradient><linearGradient id="latam-cyan" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2306b6d4"/><stop offset="100%" stop-color="%233b82f6"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23latam-bg)"/><g transform="translate(45, 45)"><text x="205" y="60" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="url(%23latam-cyan)" text-anchor="middle" letter-spacing="4">LATAM</text><rect x="50" y="85" width="310" height="50" rx="12" fill="url(%23latam-cyan)"/><text x="205" y="122" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="36" fill="%230f172a" text-anchor="middle" letter-spacing="6">VDO TV</text><text x="205" y="170" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%2393c5fd" text-anchor="middle" letter-spacing="4">CINE &amp; ENTRETENIMIENTO HD</text></g></svg>`;
+
+export const RUMBA_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="rumba-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%237f1d1d"/><stop offset="100%" stop-color="%23450a0a"/></linearGradient><linearGradient id="rumba-gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23facc15"/><stop offset="100%" stop-color="%23ea580c"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23rumba-bg)"/><g transform="translate(40, 40)"><circle cx="85" cy="85" r="48" fill="url(%23rumba-gold)"/><polygon points="73,65 107,85 73,105" fill="%23450a0a"/><g transform="translate(145, 30)"><text x="0" y="48" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="46" fill="%23ffffff" letter-spacing="2">RUMBA</text><rect x="0" y="62" width="120" height="42" rx="10" fill="url(%23rumba-gold)"/><text x="60" y="93" font-family="'Arial Black', sans-serif" font-weight="900" font-size="28" fill="%23450a0a" text-anchor="middle" letter-spacing="4">TV</text></g><text x="220" y="185" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%23fca5a5" text-anchor="middle" letter-spacing="4">100% MÚSICA &amp; FIESTA LATINA</text></g></svg>`;
+
+export const CGTN_FRANCAIS_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="cgtn-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23002b49"/><stop offset="100%" stop-color="%23001524"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23cgtn-bg)"/><g transform="translate(45, 45)"><text x="205" y="65" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="64" fill="%23ffffff" text-anchor="middle" letter-spacing="4">CGTN</text><rect x="40" y="92" width="330" height="48" rx="10" fill="%23e11d48"/><text x="205" y="127" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="30" fill="%23ffffff" text-anchor="middle" letter-spacing="6">FRANÇAIS</text><text x="205" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%2338bdf8" text-anchor="middle" letter-spacing="4">DOCUMENTAIRES &amp; ACTUALITÉS</text></g></svg>`;
+
+export const PM_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="pm-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230f172a"/><stop offset="100%" stop-color="%231e293b"/></linearGradient><linearGradient id="pm-red" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23dc2626"/><stop offset="100%" stop-color="%23991b1b"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23pm-bg)"/><g transform="translate(45, 45)"><text x="205" y="70" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="70" fill="%23ffffff" text-anchor="middle" letter-spacing="4">PM <tspan fill="%23dc2626">TV</tspan></text><rect x="50" y="100" width="310" height="42" rx="10" fill="url(%23pm-red)"/><text x="205" y="130" font-family="'Arial Black', sans-serif" font-weight="900" font-size="22" fill="%23ffffff" text-anchor="middle" letter-spacing="6">GIA TELEVISIÓN</text><text x="205" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%2394a3b8" text-anchor="middle" letter-spacing="4">VARIEDADES &amp; NOTICIAS HD</text></g></svg>`;
+
+export const ALTERNATIVA_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="alt-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23064e3b"/><stop offset="100%" stop-color="%23022c22"/></linearGradient><linearGradient id="alt-green" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2310b981"/><stop offset="100%" stop-color="%23059669"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23alt-bg)"/><g transform="translate(40, 45)"><text x="210" y="60" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="44" fill="%23ffffff" text-anchor="middle" letter-spacing="3">ALTERNATIVA</text><rect x="40" y="85" width="340" height="50" rx="12" fill="url(%23alt-green)"/><text x="210" y="122" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="34" fill="%23ffffff" text-anchor="middle" letter-spacing="8">TELEVISIÓN</text><text x="210" y="170" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%236ee7b7" text-anchor="middle" letter-spacing="4">INFORMACIÓN &amp; CULTURA VIVA</text></g></svg>`;
+
+export const TELEBILBAO_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="tb-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23991b1b"/><stop offset="100%" stop-color="%23581c87"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23tb-bg)"/><g transform="translate(45, 45)"><circle cx="100" cy="70" r="48" fill="%23ffffff"/><text x="100" y="88" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="48" fill="%23991b1b" text-anchor="middle">TB</text><text x="270" y="70" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="40" fill="%23ffffff" letter-spacing="1">TeleBilbao</text><rect x="40" y="130" width="330" height="42" rx="10" fill="%23ffffff"/><text x="205" y="159" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="%23991b1b" text-anchor="middle" letter-spacing="5">TELEVISIÓN DE BIZKAIA</text></g></svg>`;
+
+export const TVC_CANARIAS_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="tvc-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230284c7"/><stop offset="100%" stop-color="%230369a1"/></linearGradient><linearGradient id="tvc-gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23facc15"/><stop offset="100%" stop-color="%23eab308"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23tvc-bg)"/><g transform="translate(45, 45)"><text x="205" y="70" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="75" fill="%23ffffff" text-anchor="middle" letter-spacing="6">tv<tspan fill="url(%23tvc-gold)">c</tspan></text><rect x="35" y="105" width="340" height="42" rx="10" fill="url(%23tvc-gold)"/><text x="205" y="134" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="%230369a1" text-anchor="middle" letter-spacing="4">TELEVISIÓN CANARIA</text><text x="205" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="14" fill="%23bae6fd" text-anchor="middle" letter-spacing="4">DIRECTO DESDE CANARIAS</text></g></svg>`;
+
+export const ETB_1_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="etb-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%231e3a8a"/><stop offset="100%" stop-color="%23172554"/></linearGradient><linearGradient id="etb-red" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ef4444"/><stop offset="100%" stop-color="%23dc2626"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23etb-bg)"/><g transform="translate(45, 40)"><text x="140" y="80" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="64" fill="%23ffffff">etb</text><rect x="260" y="20" width="85" height="75" rx="16" fill="url(%23etb-red)"/><text x="302" y="78" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="60" fill="%23ffffff" text-anchor="middle">1</text><rect x="25" y="120" width="360" height="42" rx="10" fill="url(%23etb-red)"/><text x="205" y="149" font-family="'Arial Black', sans-serif" font-weight="900" font-size="18" fill="%23ffffff" text-anchor="middle" letter-spacing="4">EUSKAL TELEBISTA</text><text x="205" y="185" font-family="'Arial Black', sans-serif" font-weight="900" font-size="14" fill="%2393c5fd" text-anchor="middle" letter-spacing="3">EUSKADI ZUZENEAN</text></g></svg>`;
+
+export const CADENA_103_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="c103-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%234c0519"/><stop offset="100%" stop-color="%231e1b4b"/></linearGradient><linearGradient id="c103-gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23fbbf24"/><stop offset="100%" stop-color="%23f97316"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23c103-bg)"/><g transform="translate(45, 40)"><text x="205" y="55" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="44" fill="%23ffffff" text-anchor="middle" letter-spacing="4">CADENA</text><rect x="60" y="70" width="290" height="65" rx="16" fill="url(%23c103-gold)"/><text x="205" y="120" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="56" fill="%231e1b4b" text-anchor="middle" letter-spacing="6">103</text><text x="205" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%23fca5a5" text-anchor="middle" letter-spacing="4">RADIO &amp; TELEVISIÓN EN VIVO</text></g></svg>`;
+
+export const CANAL_9_LINK_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="c9-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230c4a6e"/><stop offset="100%" stop-color="%230284c7"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23c9-bg)"/><g transform="translate(45, 40)"><circle cx="110" cy="70" r="50" fill="%23ffffff"/><text x="110" y="92" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="70" fill="%230284c7" text-anchor="middle">9</text><text x="260" y="65" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="%23ffffff">link</text><rect x="35" y="130" width="340" height="42" rx="10" fill="%23ffffff"/><text x="205" y="159" font-family="'Arial Black', sans-serif" font-weight="900" font-size="19" fill="%230284c7" text-anchor="middle" letter-spacing="4">CANAL 9 LITORAL</text></g></svg>`;
+
+export const AMERICA_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="am-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230f172a"/><stop offset="100%" stop-color="%23020617"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23am-bg)"/><g transform="translate(45, 35)"><g transform="translate(85, 10)"><path d="M 0,0 L 50,0 L 50,50 L 0,50 Z" fill="%233b82f6" rx="8"/><path d="M 60,0 L 110,0 L 110,50 L 60,50 Z" fill="%23ef4444" rx="8"/><path d="M 0,60 L 50,60 L 50,110 L 0,110 Z" fill="%2322c55e" rx="8"/><path d="M 60,60 L 110,60 L 110,110 L 60,110 Z" fill="%23eab308" rx="8"/></g><g transform="translate(225, 35)"><text x="0" y="45" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="44" fill="%23ffffff" letter-spacing="2">américa</text><rect x="0" y="58" width="70" height="32" rx="6" fill="%23ef4444"/><text x="35" y="81" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="%23ffffff" text-anchor="middle">TV</text></g><text x="205" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%23cbd5e1" text-anchor="middle" letter-spacing="4">ARGENTINA EN DIRECTO</text></g></svg>`;
+
+export const MWD_MOVIE_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="mwd-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%2318181b"/><stop offset="100%" stop-color="%2309090b"/></linearGradient><linearGradient id="mwd-gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23fbbf24"/><stop offset="100%" stop-color="%23d97706"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23mwd-bg)"/><g transform="translate(45, 40)"><text x="205" y="60" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="58" fill="url(%23mwd-gold)" text-anchor="middle" letter-spacing="4">MWD</text><rect x="40" y="85" width="330" height="48" rx="12" fill="url(%23mwd-gold)"/><text x="205" y="120" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="32" fill="%2318181b" text-anchor="middle" letter-spacing="8">MOVIE</text><text x="205" y="170" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%23fde68a" text-anchor="middle" letter-spacing="4">CINEMA &amp; BLOCKBUSTERS 24/7</text></g></svg>`;
+
+export const K100_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="k100-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230284c7"/><stop offset="100%" stop-color="%230369a1"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23k100-bg)"/><g transform="translate(45, 45)"><text x="205" y="70" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="76" fill="%23ffffff" text-anchor="middle" letter-spacing="4">K100</text><rect x="45" y="100" width="320" height="42" rx="10" fill="%23ffffff"/><text x="205" y="130" font-family="'Arial Black', sans-serif" font-weight="900" font-size="22" fill="%230284c7" text-anchor="middle" letter-spacing="6">SJÓNVARP TV</text><text x="205" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="14" fill="%23e0f2fe" text-anchor="middle" letter-spacing="4">ICELAND HIT MUSIC &amp; SHOWS</text></g></svg>`;
+
+export const FTV_SECRETS_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="ftv-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23000000"/><stop offset="100%" stop-color="%231a0814"/></linearGradient><linearGradient id="ftv-magenta" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23e11d48"/><stop offset="100%" stop-color="%23db2777"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23ftv-bg)"/><g transform="translate(45, 40)"><circle cx="85" cy="75" r="48" fill="url(%23ftv-magenta)"/><text x="85" y="96" font-family="'Times New Roman', serif" font-weight="bold" font-size="60" fill="%23ffffff" text-anchor="middle">f</text><g transform="translate(145, 30)"><text x="0" y="45" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="44" fill="%23ffffff" letter-spacing="3">FASHION<tspan fill="url(%23ftv-magenta)">TV</tspan></text><rect x="0" y="58" width="180" height="34" rx="8" fill="url(%23ftv-magenta)"/><text x="90" y="82" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="%23ffffff" text-anchor="middle" letter-spacing="4">SECRETS</text></g><text x="205" y="180" font-family="'Arial Black', sans-serif" font-weight="900" font-size="14" fill="%23fda4af" text-anchor="middle" letter-spacing="4">FASHION &amp; LIFESTYLE HD</text></g></svg>`;
+
+export const FRANCE_24_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280" width="100%" height="100%"><defs><linearGradient id="f24-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230284c7"/><stop offset="100%" stop-color="%230369a1"/></linearGradient></defs><rect width="500" height="280" rx="30" fill="url(%23f24-bg)"/><g transform="translate(45, 40)"><circle cx="95" cy="70" r="48" fill="%23ffffff"/><text x="95" y="90" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="48" fill="%230284c7" text-anchor="middle">24</text><g transform="translate(155, 30)"><text x="0" y="42" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="42" fill="%23ffffff" letter-spacing="2">FRANCE</text><rect x="0" y="56" width="170" height="34" rx="8" fill="%23ffffff"/><text x="85" y="80" font-family="'Arial Black', sans-serif" font-weight="900" font-size="18" fill="%230284c7" text-anchor="middle" letter-spacing="4">FRANÇAIS</text></g><text x="205" y="175" font-family="'Arial Black', sans-serif" font-weight="900" font-size="14" fill="%23bae6fd" text-anchor="middle" letter-spacing="4">L'ACTUALITÉ INTERNATIONALE 24/7</text></g></svg>`;
+
+export const RTP_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320" width="100%" height="100%"><defs><radialGradient id="rtp-red-sphere" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="%23ff7b7b"/><stop offset="25%" stop-color="%23ff1a1a"/><stop offset="65%" stop-color="%23cc0000"/><stop offset="100%" stop-color="%234d0000"/></radialGradient><linearGradient id="rtp-blue-plate" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%234361ee"/><stop offset="35%" stop-color="%231d39c4"/><stop offset="70%" stop-color="%23091a7a"/><stop offset="100%" stop-color="%23030852"/></linearGradient><linearGradient id="rtp-outer-chrome" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ffffff"/><stop offset="20%" stop-color="%23d1d5db"/><stop offset="40%" stop-color="%239ca3af"/><stop offset="60%" stop-color="%23ffffff"/><stop offset="80%" stop-color="%236b7280"/><stop offset="100%" stop-color="%231f2937"/></linearGradient><linearGradient id="rtp-letters-chrome" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%23ffffff"/><stop offset="42%" stop-color="%23f8fafc"/><stop offset="48%" stop-color="%2394a3b8"/><stop offset="52%" stop-color="%2364748b"/><stop offset="58%" stop-color="%23e2e8f0"/><stop offset="100%" stop-color="%23ffffff"/></linearGradient><filter id="rtp-drop-shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="%23000000" flood-opacity="0.9"/></filter><filter id="rtp-emboss" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="%23000000" flood-opacity="0.8"/></filter></defs><rect width="500" height="320" rx="16" fill="%23000000"/><g filter="url(%23rtp-drop-shadow)" transform="translate(25, 20)"><path d="M 210 50 L 415 50 C 438 50 455 68 455 92 L 455 168 C 455 192 438 210 415 210 L 210 210 Z" fill="url(%23rtp-outer-chrome)" stroke="%23374151" stroke-width="2"/><path d="M 210 58 L 410 58 C 428 58 442 72 442 92 L 442 168 C 442 188 428 202 410 202 L 210 202 Z" fill="%230f172a"/><path d="M 210 64 L 406 64 C 422 64 434 76 434 94 L 434 166 C 434 184 422 196 406 196 L 210 196 Z" fill="url(%23rtp-blue-plate)"/><ellipse cx="320" cy="85" rx="85" ry="16" fill="%23ffffff" opacity="0.3"/><circle cx="130" cy="130" r="108" fill="url(%23rtp-outer-chrome)" stroke="%23374151" stroke-width="2"/><circle cx="130" cy="130" r="100" fill="%231e293b"/><circle cx="130" cy="130" r="94" fill="url(%23rtp-red-sphere)"/><ellipse cx="106" cy="82" rx="55" ry="30" fill="%23ffffff" opacity="0.45" transform="rotate(-20 106 82)"/><g filter="url(%23rtp-emboss)"><text x="80" y="168" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="114" fill="%23090d16" letter-spacing="-2">R</text><text x="180" y="168" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="114" fill="%23090d16" letter-spacing="-2">T</text><text x="280" y="168" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="114" fill="%23090d16" letter-spacing="-2">P</text><text x="80" y="164" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="114" fill="url(%23rtp-letters-chrome)" stroke="%23ffffff" stroke-width="1.5" letter-spacing="-2">R</text><text x="180" y="164" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="114" fill="url(%23rtp-letters-chrome)" stroke="%23ffffff" stroke-width="1.5" letter-spacing="-2">T</text><text x="280" y="164" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="114" fill="url(%23rtp-letters-chrome)" stroke="%23ffffff" stroke-width="1.5" letter-spacing="-2">P</text></g></g><text x="250" y="295" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="%239ca3af" text-anchor="middle" letter-spacing="4">RADIO TÉLÉVISION PUISSANCE • CANAL 4</text></svg>`;
+
+export const CONGO_FLASH_NEWS_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 860" width="100%" height="100%"><defs><linearGradient id="cfn-sky" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%23d6eaff"/><stop offset="50%" stop-color="%23b8dcff"/><stop offset="100%" stop-color="%239bc7f5"/></linearGradient><linearGradient id="cfn-gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ffe57f"/><stop offset="40%" stop-color="%23f59e0b"/><stop offset="80%" stop-color="%23d97706"/><stop offset="100%" stop-color="%23b45309"/></linearGradient><linearGradient id="cfn-ivory" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ffffff"/><stop offset="50%" stop-color="%23fef3c7"/><stop offset="100%" stop-color="%23fde68a"/></linearGradient><filter id="cfn-shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="%23000000" flood-opacity="0.3"/></filter></defs><rect width="500" height="860" fill="%23ffffff"/><g id="oval-badge"><ellipse cx="250" cy="350" rx="210" ry="325" fill="url(%23cfn-sky)"/><path d="M 250,25 A 210,325 0 0,0 40,350" fill="none" stroke="%230055c8" stroke-width="18" stroke-linecap="round"/><path d="M 40,350 A 210,325 0 0,0 120,620" fill="none" stroke="%23ffcc00" stroke-width="18"/><path d="M 120,620 A 210,325 0 0,0 250,675" fill="none" stroke="%23ffcc00" stroke-width="18"/><path d="M 250,25 A 210,325 0 0,1 460,350" fill="none" stroke="%23ffcc00" stroke-width="18"/><path d="M 460,350 A 210,325 0 0,1 250,675" fill="none" stroke="%23e11d48" stroke-width="18"/><path d="M 85,630 A 200,310 0 0,0 250,665" fill="none" stroke="%23e11d48" stroke-width="16"/></g><g id="drc-map-contour" opacity="0.85"><path d="M 140,110 Q 220,105 280,120 Q 380,125 400,165 Q 425,210 395,260 Q 420,330 380,410 Q 395,490 340,510 Q 300,530 290,570 Q 250,620 200,600 Q 160,560 160,490 Q 110,470 65,400 Q 60,350 110,310 Q 95,250 115,190 Q 110,135 140,110 Z" fill="none" stroke="%23d97706" stroke-width="3" stroke-dasharray="8 4"/></g><g id="emblem-group" filter="url(%23cfn-shadow)"><g id="spear" transform="translate(250, 360)"><line x1="20" y1="120" x2="110" y2="-175" stroke="%23d97706" stroke-width="8" stroke-linecap="round"/><polygon points="110,-175 125,-220 95,-185" fill="url(%23cfn-gold)" stroke="%23b45309" stroke-width="2"/><polygon points="110,-175 125,-220 120,-170" fill="%23fef08a"/></g><g id="tusk" transform="translate(250, 360)"><path d="M -20,120 C -60,60 -130,-40 -105,-180 C -85,-120 -40,-20 0,110 Z" fill="url(%23cfn-ivory)" stroke="%23d97706" stroke-width="4"/><path d="M -15,110 C -45,50 -100,-20 -90,-160" fill="none" stroke="%23ffffff" stroke-width="6" opacity="0.8"/></g><g id="leopard-head" transform="translate(250, 280)"><circle cx="0" cy="0" r="62" fill="url(%23cfn-gold)" stroke="%230f172a" stroke-width="3"/><path d="M -45,-38 L -60,-65 L -30,-50 Z" fill="%23d97706" stroke="%230f172a" stroke-width="2.5"/><path d="M 45,-38 L 60,-65 L 30,-50 Z" fill="%23d97706" stroke="%230f172a" stroke-width="2.5"/><path d="M -38,-45 L -50,-60 L -32,-48 Z" fill="%23ffffff"/><path d="M 38,-45 L 50,-60 L 32,-48 Z" fill="%23ffffff"/><circle cx="-25" cy="-25" r="4" fill="%230f172a"/><circle cx="-15" cy="-35" r="3" fill="%230f172a"/><circle cx="0" cy="-45" r="4" fill="%230f172a"/><circle cx="15" cy="-35" r="3" fill="%230f172a"/><circle cx="25" cy="-25" r="4" fill="%230f172a"/><circle cx="-38" cy="-5" r="4" fill="%230f172a"/><circle cx="38" cy="-5" r="4" fill="%230f172a"/><circle cx="-32" cy="15" r="3.5" fill="%230f172a"/><circle cx="32" cy="15" r="3.5" fill="%230f172a"/><circle cx="-42" cy="-20" r="3" fill="%230f172a"/><circle cx="42" cy="-20" r="3" fill="%230f172a"/><ellipse cx="-20" cy="-10" rx="10" ry="7" fill="%23ffffff" stroke="%230f172a" stroke-width="2"/><ellipse cx="20" cy="-10" rx="10" ry="7" fill="%23ffffff" stroke="%230f172a" stroke-width="2"/><circle cx="-18" cy="-10" r="4" fill="%230055c8"/><circle cx="22" cy="-10" r="4" fill="%230055c8"/><polygon points="0,5 -10,-5 10,-5" fill="%230f172a"/><path d="M -24,20 C -12,12 0,16 0,22 C 0,16 12,12 24,20 C 18,36 -18,36 -24,20 Z" fill="%230f172a"/><path d="M -18,22 L -14,28 L -10,22" fill="%23ffffff"/><path d="M 18,22 L 14,28 L 10,22" fill="%23ffffff"/><line x1="-15" y1="12" x2="-55" y2="5" stroke="%23ffffff" stroke-width="2.5"/><line x1="-15" y1="16" x2="-52" y2="20" stroke="%23ffffff" stroke-width="2.5"/><line x1="15" y1="12" x2="55" y2="5" stroke="%23ffffff" stroke-width="2.5"/><line x1="15" y1="16" x2="52" y2="20" stroke="%23ffffff" stroke-width="2.5"/></g><g id="banner-pedestal" transform="translate(250, 410)"><path d="M -105,10 C -150,-10 -170,-50 -185,-75 C -170,-85 -145,-55 -125,-40 L -80,5 Z" fill="url(%23cfn-gold)" stroke="%23003366" stroke-width="3"/><text transform="rotate(-48 -145 -45)" x="-155" y="-38" font-family="'Arial Black', sans-serif" font-weight="900" font-size="22" fill="%23003388" letter-spacing="2">JUSTICE</text><path d="M 105,10 C 150,-10 170,-50 185,-75 C 170,-85 145,-55 125,-40 L 80,5 Z" fill="url(%23cfn-gold)" stroke="%23003366" stroke-width="3"/><text transform="rotate(48 145 -45)" x="110" y="-38" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="%23003388" letter-spacing="2">TRAVAIL</text><path d="M -85,0 L 85,0 C 92,10 88,25 78,35 L -78,35 C -88,25 -92,10 -85,0 Z" fill="url(%23cfn-gold)" stroke="%23003366" stroke-width="3"/><path d="M -95,35 L 95,35 L 90,85 L -90,85 Z" fill="url(%23cfn-gold)" stroke="%23003366" stroke-width="3"/><path d="M -105,85 L 105,85 L 100,105 L -100,105 Z" fill="url(%23cfn-gold)" stroke="%23003366" stroke-width="3"/><text x="0" y="70" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="38" fill="%23003388" text-anchor="middle" letter-spacing="4">PAIX</text></g></g><g id="laurel-wreath" transform="translate(250, 680)"><path d="M -160,-20 Q -60,45 0,35 Q 60,45 160,-20" fill="none" stroke="%23d97706" stroke-width="3"/><path d="M -140,-10 Q -110,15 -80,15 Q -110,-5 -140,-10 Z" fill="url(%23cfn-gold)"/><path d="M -90,10 Q -60,30 -30,25 Q -60,10 -90,10 Z" fill="url(%23cfn-gold)"/><path d="M -40,25 Q -10,40 15,30 Q -15,20 -40,25 Z" fill="url(%23cfn-gold)"/><path d="M 140,-10 Q 110,15 80,15 Q 110,-5 140,-10 Z" fill="url(%23cfn-gold)"/><path d="M 90,10 Q 60,30 30,25 Q 60,10 90,10 Z" fill="url(%23cfn-gold)"/><path d="M 40,25 Q 10,40 -15,30 Q 15,20 40,25 Z" fill="url(%23cfn-gold)"/></g><g id="channel-title" transform="translate(250, 775)"><text x="0" y="0" font-family="'Montserrat', 'Arial Black', Impact, sans-serif" font-weight="900" font-size="34" fill="%23b87914" text-anchor="middle" letter-spacing="1">CONGO FLASH NEWS</text><g transform="translate(0, 32)"><line x1="-150" y1="-8" x2="-45" y2="-8" stroke="%230055c8" stroke-width="3" stroke-linecap="round"/><text x="0" y="0" font-family="'Montserrat', 'Arial Black', Impact, sans-serif" font-weight="900" font-size="34" fill="%230055c8" text-anchor="middle" letter-spacing="3">T.V.</text><line x1="45" y1="-8" x2="150" y2="-8" stroke="%230055c8" stroke-width="3" stroke-linecap="round"/></g></g></svg>`;
+
+export const CONGO_FLASH_NEWS_TV_LOGO = CONGO_FLASH_NEWS_LOGO;
+export const CONGO_TV_LOGO = CONGO_FLASH_NEWS_LOGO;
+
+export const RTP_RADIO_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320" width="100%" height="100%"><defs><radialGradient id="rtp-rad-red" cx="38%" cy="32%" r="62%"><stop offset="0%" stop-color="%23ff7b7b"/><stop offset="25%" stop-color="%23ff1a1a"/><stop offset="65%" stop-color="%23cc0000"/><stop offset="100%" stop-color="%234d0000"/></radialGradient><linearGradient id="rtp-rad-blue" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%234361ee"/><stop offset="35%" stop-color="%231d39c4"/><stop offset="70%" stop-color="%23091a7a"/><stop offset="100%" stop-color="%23030852"/></linearGradient><linearGradient id="rtp-rad-chrome" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23ffffff"/><stop offset="20%" stop-color="%23d1d5db"/><stop offset="40%" stop-color="%239ca3af"/><stop offset="60%" stop-color="%23ffffff"/><stop offset="80%" stop-color="%236b7280"/><stop offset="100%" stop-color="%231f2937"/></linearGradient><linearGradient id="rtp-rad-letters" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%23ffffff"/><stop offset="42%" stop-color="%23f8fafc"/><stop offset="48%" stop-color="%2394a3b8"/><stop offset="52%" stop-color="%2364748b"/><stop offset="58%" stop-color="%23e2e8f0"/><stop offset="100%" stop-color="%23ffffff"/></linearGradient><filter id="rtp-rad-shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="%23000000" flood-opacity="0.9"/></filter><filter id="rtp-rad-emboss" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="%23000000" flood-opacity="0.8"/></filter></defs><rect width="500" height="320" rx="16" fill="%23000000"/><g filter="url(%23rtp-rad-shadow)" transform="translate(25, 16)"><path d="M 210 50 L 415 50 C 438 50 455 68 455 92 L 455 168 C 455 192 438 210 415 210 L 210 210 Z" fill="url(%23rtp-rad-chrome)" stroke="%23374151" stroke-width="2"/><path d="M 210 58 L 410 58 C 428 58 442 72 442 92 L 442 168 C 442 188 428 202 410 202 L 210 202 Z" fill="%230f172a"/><path d="M 210 64 L 406 64 C 422 64 434 76 434 94 L 434 166 C 434 184 422 196 406 196 L 210 196 Z" fill="url(%23rtp-rad-blue)"/><ellipse cx="320" cy="85" rx="85" ry="16" fill="%23ffffff" opacity="0.3"/><circle cx="130" cy="130" r="108" fill="url(%23rtp-rad-chrome)" stroke="%23374151" stroke-width="2"/><circle cx="130" cy="130" r="100" fill="%231e293b"/><circle cx="130" cy="130" r="94" fill="url(%23rtp-rad-red)"/><ellipse cx="106" cy="82" rx="55" ry="30" fill="%23ffffff" opacity="0.45" transform="rotate(-20 106 82)"/><g filter="url(%23rtp-rad-emboss)"><text x="80" y="168" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="114" fill="%23090d16" letter-spacing="-2">R</text><text x="180" y="168" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="114" fill="%23090d16" letter-spacing="-2">T</text><text x="280" y="168" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="114" fill="%23090d16" letter-spacing="-2">P</text><text x="80" y="164" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="114" fill="url(%23rtp-rad-letters)" stroke="%23ffffff" stroke-width="1.5" letter-spacing="-2">R</text><text x="180" y="164" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="114" fill="url(%23rtp-rad-letters)" stroke="%23ffffff" stroke-width="1.5" letter-spacing="-2">T</text><text x="280" y="164" font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="114" fill="url(%23rtp-rad-letters)" stroke="%23ffffff" stroke-width="1.5" letter-spacing="-2">P</text></g></g><g transform="translate(130, 268)"><rect x="0" y="0" width="240" height="34" rx="8" fill="%23dc2626" stroke="%23ffffff" stroke-width="2"/><text x="120" y="22" font-family="'Arial Black', sans-serif" font-weight="900" font-size="15" fill="%23ffffff" text-anchor="middle" letter-spacing="3">RTP RADIO • CANAL 6</text></g></svg>`;
+
+export const RTV_RADIO_LOGO = RTP_RADIO_LOGO;
+
+export const NEWS_243_RDC_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><defs><linearGradient id="n243-rainbow-ring" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230ea5e9"/><stop offset="25%" stop-color="%2338bdf8"/><stop offset="50%" stop-color="%23fef08a"/><stop offset="75%" stop-color="%23ef4444"/><stop offset="100%" stop-color="%23dc2626"/></linearGradient><linearGradient id="n243-gold-badge" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23fde047"/><stop offset="50%" stop-color="%23eab308"/><stop offset="100%" stop-color="%23ca8a04"/></linearGradient><filter id="n243-star-glow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="%23ca8a04" flood-opacity="0.5"/></filter></defs><rect width="500" height="500" fill="%23ffffff"/><g filter="url(%23n243-star-glow)" transform="translate(250, 48)"><polygon points="0,-22 6,-7 22,-7 9,3 14,18 0,9 -14,18 -9,3 -22,-7 -6,-7" fill="%23eab308"/></g><circle cx="250" cy="245" r="195" fill="none" stroke="%230a2569" stroke-width="6"/><circle cx="250" cy="245" r="185" fill="none" stroke="url(%23n243-rainbow-ring)" stroke-width="18"/><circle cx="250" cy="245" r="172" fill="none" stroke="%23e02424" stroke-width="4"/><path id="n243-arch-path" d="M 105 245 A 145 145 0 0 1 395 245" fill="none"/><text fill="%23081c5a" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="30" letter-spacing="4"><textPath href="%23n243-arch-path" startOffset="50%" text-anchor="middle">NEWS +243 RDC TV</textPath></text><g transform="translate(136, 128) scale(0.74)"><path d="M 90 40 L 160 30 L 230 45 L 255 95 L 305 115 L 285 175 L 305 225 L 275 270 L 245 330 L 195 355 L 175 305 L 135 295 L 115 325 L 85 275 L 45 245 L 55 185 L 20 150 L 45 110 L 35 70 Z" fill="%237c3aed" stroke="%23ffffff" stroke-width="3.5"/><path d="M 90 40 L 160 30 L 170 95 L 105 115 Z" fill="%23facc15" stroke="%23ffffff" stroke-width="2.5"/><path d="M 160 30 L 230 45 L 255 95 L 170 95 Z" fill="%23cbd5e1" stroke="%23ffffff" stroke-width="2.5"/><path d="M 105 115 L 185 105 L 205 165 L 115 175 Z" fill="%23991b1b" stroke="%23ffffff" stroke-width="2.5"/><path d="M 185 105 L 280 115 L 260 175 L 205 165 Z" fill="%23ea580c" stroke="%23ffffff" stroke-width="2.5"/><path d="M 45 110 L 105 115 L 115 175 L 55 185 Z" fill="%2322c55e" stroke="%23ffffff" stroke-width="2.5"/><path d="M 55 185 L 125 185 L 115 245 L 45 245 Z" fill="%23c084fc" stroke="%23ffffff" stroke-width="2.5"/><path d="M 125 185 L 205 175 L 195 245 L 125 245 Z" fill="%2394a3b8" stroke="%23ffffff" stroke-width="2.5"/><path d="M 205 175 L 285 185 L 275 245 L 195 245 Z" fill="%23831843" stroke="%23ffffff" stroke-width="2.5"/><path d="M 45 245 L 115 245 L 105 295 L 85 275 Z" fill="%2310b981" stroke="%23ffffff" stroke-width="2.5"/><path d="M 115 245 L 165 245 L 155 295 L 105 295 Z" fill="%23f97316" stroke="%23ffffff" stroke-width="2.5"/><path d="M 165 245 L 225 245 L 215 305 L 155 295 Z" fill="%230284c7" stroke="%23ffffff" stroke-width="2.5"/><path d="M 225 245 L 275 270 L 245 330 L 215 305 Z" fill="%23eab308" stroke="%23ffffff" stroke-width="2.5"/><path d="M 105 295 L 175 305 L 155 345 L 115 325 Z" fill="%23f472b6" stroke="%23ffffff" stroke-width="2.5"/></g><path d="M 125 365 Q 250 435 375 365 L 360 405 Q 250 470 140 405 Z" fill="url(%23n243-gold-badge)" stroke="%23ca8a04" stroke-width="3"/><text x="250" y="416" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="46" fill="%23081c5a" text-anchor="middle" letter-spacing="3">+243</text><g transform="translate(208, 442)"><rect x="12" y="4" width="16" height="25" rx="8" fill="%23081c5a"/><path d="M 5 16 C 5 28 35 28 35 16" fill="none" stroke="%23081c5a" stroke-width="4" stroke-linecap="round"/><line x1="20" y1="28" x2="20" y2="40" stroke="%23081c5a" stroke-width="4"/><line x1="9" y1="40" x2="31" y2="40" stroke="%23081c5a" stroke-width="4" stroke-linecap="round"/></g><g transform="translate(258, 442)"><rect x="8" y="10" width="38" height="28" rx="6" fill="none" stroke="%23081c5a" stroke-width="4"/><line x1="17" y1="2" x2="25" y2="10" stroke="%23081c5a" stroke-width="3.5" stroke-linecap="round"/><line x1="37" y1="2" x2="29" y2="10" stroke="%23081c5a" stroke-width="3.5" stroke-linecap="round"/><line x1="21" y1="41" x2="33" y2="41" stroke="%23081c5a" stroke-width="4" stroke-linecap="round"/></g></svg>`;
+
+export const NEWS_234_LOGO = NEWS_243_RDC_LOGO;
+
+export const MC_PROD_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 220" width="100%" height="100%"><defs><filter id="mc-shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="%23000000" flood-opacity="0.8"/></filter></defs><rect width="500" height="220" fill="%23000000" rx="14"/><g filter="url(%23mc-shadow)"><line x1="396" y1="60" x2="354" y2="14" stroke="%23e50914" stroke-width="7" stroke-linecap="round"/><line x1="410" y1="60" x2="466" y2="8" stroke="%23e50914" stroke-width="7" stroke-linecap="round"/><polygon points="392,60 414,60 408,50 398,50" fill="%23e50914"/><path d="M 285 60 L 436 60 C 452 60 464 72 464 88 L 464 140 C 464 156 452 168 436 168 L 388 168 L 400 178 L 452 178" fill="none" stroke="%23e50914" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><polygon points="62,60 285,60 285,168 18,168" fill="%23e50914"/><polygon points="285,60 426,60 382,168 285,168" fill="%2308183a"/><text x="152" y="145" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="94" fill="%23ffffff" text-anchor="middle" letter-spacing="-3">MC</text><text x="344" y="104" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="36" fill="%23ffffff" text-anchor="middle" letter-spacing="1">PROD</text><text x="344" y="150" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="38" fill="%23ffffff" text-anchor="middle" letter-spacing="3">TV</text></g></svg>`;
+
+export function restoreOriginalChannelM3u8(ch: Channel): Channel {
+  const def = RAW_DEFAULT_CHANNELS.find(
+    d => d.id === ch.id || (d.nom && ch.nom && d.nom.trim().toUpperCase() === ch.nom.trim().toUpperCase())
+  );
+  const ownLien = (ch.m3u8Source && !ch.m3u8Source.includes('tvpromedia.ai.studio/live/')) 
+    ? ch.m3u8Source 
+    : (def ? def.lien : ch.lien);
+
+  return {
+    ...ch,
+    lien: ownLien,
+    m3u8Source: ownLien
+  };
+}
+
+export function formatChannelWithTvProLive(ch: Channel): Channel {
+  const cleanKey = ch.rtmpKey || ('cle_' + (ch.nom.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '') || ch.id));
+  const ipLien = `http://191.215.38.95:8080/live/${cleanKey}.m3u8`;
+  const originalSource = ch.m3u8Source || (ch.lien && !ch.lien.includes('tvpromedia.ai.studio/live') ? ch.lien : ipLien);
+  const primaryLien = ch.lien && ch.lien.startsWith('http://191.215.38.95') ? ch.lien : (originalSource || ipLien);
+  return {
+    ...ch,
+    rtmpUrl: ch.rtmpUrl || 'rtmp://191.215.38.95/live',
+    rtmpKey: cleanKey,
+    m3u8Source: primaryLien,
+    lien: primaryLien,
+  };
+}
+
+const RAW_DEFAULT_CHANNELS: Channel[] = [
+  {
+    id: 'ch_rtp',
+    nom: "RTP",
+    lien: "http://191.215.38.95:8080/live/cle_rtp_1m_ju9k_aac.m3u8",
+    logo: RTP_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "4",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Audio AAC 44.1kHz Optimisé Mobile/PC)",
+    m3u8Source: "http://191.215.38.95:8080/live/cle_rtp_1m_ju9k_aac.m3u8",
+    rtmpUrl: "rtmp://191.215.38.95/live",
+    rtmpKey: "cle_rtp_1m_ju9k"
+  },
+  {
+    id: 'ch_congo',
+    nom: "CONGO FLASH NEWS",
+    lien: "https://www.youtube.com/watch?v=YUCkBgK-qac",
+    logo: CONGO_FLASH_NEWS_LOGO,
+    cat: "NEWS",
+    ch: "5",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "CONGO FLASH NEWS - Actualités, Débats & Informations 24/7 • Vidéo Principale YouTube",
+    youtubeBackup: "https://www.youtube.com/watch?v=YUCkBgK-qac",
+    m3u8Source: "https://www.youtube.com/watch?v=YUCkBgK-qac",
+    rtmpUrl: "rtmp://191.215.38.95/live",
+    rtmpKey: "cle_congo_1m_cl0b"
+  },
+  {
+    id: 'ch_rtvradio',
+    nom: "RTP RADIO",
+    lien: "http://191.215.38.95:8080/live/cle_rtvradio_1m_xxmm.m3u8",
+    logo: RTP_RADIO_LOGO,
+    cat: "RADIO",
+    ch: "6",
+    qualite: "HD",
+    pays: "RDC",
+    desc: "RTP RADIO - Radio & Télévision Puissance en direct continu • Direct HLS VPS 191.215.38.95",
+    m3u8Source: "http://191.215.38.95:8080/live/cle_rtvradio_1m_xxmm.m3u8",
+    rtmpUrl: "rtmp://191.215.38.95/live",
+    rtmpKey: "cle_rtvradio_1m_xxmm"
+  },
+  {
+    id: 'ch_news234',
+    nom: "NEWS +243 RDC TV",
+    lien: "http://191.215.38.95:8080/live/cle_news234_1m_jgx9.m3u8",
+    logo: NEWS_243_RDC_LOGO,
+    cat: "NEWS",
+    ch: "7",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "NEWS +243 RDC TV - Actualités, Débats & Informations 24/7 • Direct HLS VPS 191.215.38.95",
+    m3u8Source: "http://191.215.38.95:8080/live/cle_news234_1m_jgx9.m3u8",
+    rtmpUrl: "rtmp://191.215.38.95/live",
+    rtmpKey: "cle_news234_1m_jgx9"
+  },
+  {
+    id: 'ch_mcprod',
+    nom: "MC PROD TV",
+    lien: "https://eggproiptv.duckdns.org:3561/hybrid/play.m3u8",
+    logo: MC_PROD_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "8",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "MC PROD TV - Émissions, Musique, Séries & Divertissement en direct HD",
+    m3u8Source: "https://eggproiptv.duckdns.org:3561/hybrid/play.m3u8",
+    rtmpUrl: "rtmp://191.215.38.95/live",
+    rtmpKey: "cle_mcprod_1m_live"
+  },
+  {
+    id: 'ch_1',
+    nom: "ESPOIR  TV HD",
+    lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
+    logo: ESPOIR_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "1",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "ESPOIR TV HD - Télévision d'information, culture et divertissement",
+    m3u8Source: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8"
+  },
+  {
+    id: 'ch_2',
+    nom: "AFRI TV",
+    lien: "http://191.215.38.95:8080/live/cle_afritv_1m_5jma.m3u8",
+    logo: AFRI_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "2",
+    qualite: "4K",
+    pays: "BRAZZAVILLE",
+    desc: "AFRI TV - L'Afrique en direct, informations, culture et divertissement en continu • Direct HLS & Secours YouTube",
+    youtubeBackup: "https://www.youtube.com/watch?v=Tvh6RL0WnWI",
+    m3u8Source: "http://191.215.38.95:8080/live/cle_afritv_1m_5jma.m3u8"
+  },
+  {
+    id: 'ch_3',
+    nom: "ESPEC TV",
+    lien: "https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8",
+    logo: EGLISE_ESPEC_LOGO,
+    cat: "RELIGIEUX",
+    ch: "3",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "ESPEC TV - Église ESPEC International (Culte, enseignements et diffusion continue) • Direct HLS & Secours YouTube",
+    youtubeBackup: "https://www.youtube.com/watch?v=Z4gy-GRZHr4",
+    m3u8Source: "https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8"
+  },
+  {
+    id: 'ch_9',
+    nom: "NEWS 24",
+    lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
+    logo: "",
+    cat: "NEWS",
+    ch: "9",
+    qualite: "4K",
+    pays: "ALBANIE",
+    desc: ""
+  },
+  {
+    id: 'ch_10',
+    nom: "ORA NEWS 24",
+    lien: "https://live1.mediadesk.al/oranews.m3u8",
+    logo: ORA_NEWS_24_LOGO,
+    cat: "NEWS",
+    ch: "10",
+    qualite: "HD",
+    pays: "ALBANIE",
+    desc: "Ora News 24 - Chaîne d'information en continu, actualités, reportages et direct 24/7",
+    m3u8Source: "https://live1.mediadesk.al/oranews.m3u8"
+  },
+  {
+    id: 'ch_11',
+    nom: "TROPOJA TV",
+    lien: "https://live.prostream.al/al/smil:tropojatv.smil/playlist.m3u8",
+    logo: "",
+    cat: "FILMS",
+    ch: "11",
+    qualite: "4K",
+    pays: "RDC",
+    desc: ""
+  },
+  {
+    id: 'ch_trompette',
+    nom: "TROMPETTE MEDIA",
+    lien: "https://www.youtube.com/watch?v=XgL8Q4VxRHk",
+    logo: TROMPETTE_MEDIA_LOGO,
+    cat: "GENERALISTE",
+    ch: "12",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "TROMPETTE MEDIA - Télévision Généraliste, Actualités, Culture & Émissions en continu • Vidéo Principale YouTube",
+    youtubeBackup: "https://www.youtube.com/watch?v=XgL8Q4VxRHk",
+    m3u8Source: "https://www.youtube.com/watch?v=XgL8Q4VxRHk",
+    rtmpUrl: "rtmp://191.215.38.95/live",
+    rtmpKey: "cle_trompette_1m"
+  },
+  {
+    id: 'ch_13',
+    nom: "BALARUSIE 5",
+    lien: "https://ngtrk.dc.beltelecom.by/ngtrk/smil:belarus5.smil/playlist.m3u8",
+    logo: BELARUS_5_LOGO,
+    cat: "SPORTS",
+    ch: "13",
+    qualite: "4K",
+    pays: "BELARUSIE",
+    desc: ""
+  },
+  {
+    id: 'ch_14',
+    nom: "C TV",
+    lien: "https://ctv.dc.beltelecom.by/ctv/ctv.stream/playlist.m3u8",
+    logo: "",
+    cat: "DOCUMENTAIRE",
+    ch: "14",
+    qualite: "4K",
+    pays: "BELARUSIE",
+    desc: ""
+  },
+  {
+    id: 'ch_15',
+    nom: "24 BELARUSIE",
+    lien: "https://ngtrk.dc.beltelecom.by/ngtrk/smil:belarus24.smil/playlist.m3u8",
+    logo: BELARUS_24_LOGO,
+    cat: "NEWS",
+    ch: "15",
+    qualite: "4K",
+    pays: "BELERUSIE",
+    desc: ""
+  },
+  {
+    id: 'ch_16',
+    nom: "IMUS TV",
+    lien: "http://hz1.teleport.cc/HLS/HD.m3u8",
+    logo: "",
+    cat: "MUSIQUE",
+    ch: "16",
+    qualite: "4K",
+    pays: "RUSSIE",
+    desc: ""
+  },
+  {
+    id: 'ch_17',
+    nom: "BX 1",
+    lien: "https://i.mjh.nz/PlutoTV/62cbfcd8c2db990007861e43-alt.m3u8",
+    logo: BX1_LOGO,
+    cat: "GENERALISTE",
+    ch: "17",
+    qualite: "4K",
+    pays: "CANADA",
+    desc: ""
+  },
+  {
+    id: 'ch_18',
+    nom: "ICI IRD",
+    lien: "https://mdstrm.com/live-stream-playlist/57d1a22064f5d85712b20dab.m3u8",
+    logo: "",
+    cat: "NEWS",
+    ch: "18",
+    qualite: "4K",
+    pays: "CANADA",
+    desc: ""
+  },
+  {
+    id: 'ch_19',
+    nom: "CITY NEWS 24/7",
+    lien: "https://amdici.akamaized.net/hls/live/873426/ICI-Live-Stream/master.m3u8",
+    logo: CITY_NEWS_LOGO,
+    cat: "NEWS",
+    ch: "19",
+    qualite: "4K",
+    pays: "CANADA",
+    desc: ""
+  },
+  {
+    id: 'ch_20',
+    nom: "TOROTO 360 TV",
+    lien: "http://cdn3.toronto360.tv:8081/toronto360/hd/playlist.m3u8",
+    logo: "",
+    cat: "GENERALISTE",
+    ch: "20",
+    qualite: "4K",
+    pays: "CANADA",
+    desc: ""
+  },
+  {
+    id: 'ch_21',
+    nom: "VIVO TV",
+    lien: "http://www.coninfo.net:1935/tvlink/live/playlist.m3u8",
+    logo: VIVO_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "21",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "VIVO TV - Chaîne de télévision en direct",
+    m3u8Source: "http://www.coninfo.net:1935/tvlink/live/playlist.m3u8"
+  },
+  {
+    id: 'ch_22',
+    nom: "LA BORNE MPASA",
+    lien: "https://www.youtube.com/watch?v=-b9U6nKDZR0",
+    logo: LA_BORNE_MPASA_LOGO,
+    cat: "RELIGIEUX",
+    ch: "22",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "LA BORNE MPASA TV - Culte, enseignements et diffusion continue",
+    youtubeBackup: "https://www.youtube.com/watch?v=-b9U6nKDZR0",
+    m3u8Source: "https://www.youtube.com/watch?v=-b9U6nKDZR0"
+  },
+  {
+    id: 'ch_23',
+    nom: "CCPV TV MONTRÉAL",
+    lien: "http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxg9.m3u8",
+    logo: CCPV_TV_LOGO,
+    cat: "RELIGIEUX",
+    ch: "23",
+    qualite: "4K",
+    pays: "CANADA",
+    desc: "Centre Chrétien Parole de Vie - Montréal, Canada • Direct HLS & Secours YouTube",
+    m3u8Source: "http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxg9.m3u8",
+    youtubeBackup: "https://www.youtube.com/watch?v=jK6kwNwe_1o"
+  },
+  {
+    id: 'ch_24',
+    nom: "13 CULTURA",
+    lien: "https://origin.dpsgo.com/ssai/event/GI-9cp_bT8KcerLpZwkuhw/master.m3u8",
+    logo: THIRTEEN_CULTURA_LOGO,
+    cat: "GENERALISTE",
+    ch: "24",
+    qualite: "4K",
+    pays: "CHILIE",
+    desc: ""
+  },
+  {
+    id: 'ch_25',
+    nom: "13 TELE SERIE",
+    lien: "https://origin.dpsgo.com/ssai/event/f4TrySe8SoiGF8Lu3EIq1g/master.m3u8",
+    logo: THIRTEEN_TELE_SERIE_LOGO,
+    cat: "FILMS",
+    ch: "25",
+    qualite: "HD",
+    pays: "CHILIE",
+    desc: ""
+  },
+  {
+    id: 'ch_26',
+    nom: "EP TV",
+    lien: "https://redirector.rudo.video/hls-video/339f69c6122f6d8f4574732c235f09b7683e31a5/pinguinotv/pinguinotv.smil/playlist.m3u8",
+    logo: "",
+    cat: "MUSIQUE",
+    ch: "26",
+    qualite: "4K",
+    pays: "CHILIE",
+    desc: ""
+  },
+  {
+    id: 'ch_27',
+    nom: "METEO TV",
+    lien: "https://stream.media.live:19360/meteotv.m3u8",
+    logo: METEO_TV_LOGO,
+    cat: "METEO",
+    ch: "27",
+    qualite: "4K",
+    pays: "RDC",
+    desc: ""
+  },
+  {
+    id: 'ch_28',
+    nom: "BALADE MONDE TV",
+    lien: "http://191.215.38.95:8080/live/cle_baladetv_inf_gx5l.m3u8",
+    logo: BALADE_MONDE_LOGO,
+    cat: "GENERALISTE",
+    ch: "28",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "Chaîne généraliste d'évasion, voyages et découvertes du monde. • Direct HLS & Secours",
+    cloudRemix: "https://stream.berosat.live:19360/live-tv/live-tv.m3u8",
+    m3u8Source: "http://191.215.38.95:8080/live/cle_baladetv_inf_gx5l.m3u8"
+  },
+  {
+    id: 'ch_gracetv',
+    nom: "GRACE TV",
+    lien: "https://www.youtube.com/watch?v=rqGXeasRR_M",
+    logo: GRACE_TV_LOGO,
+    cat: "RELIGIEUX",
+    ch: "29",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "GRACE TV - Chaîne Chrétienne & Religieuse, Évangélisation, Prière, Culte & Louange 24/7 • Vidéo Principale YouTube",
+    youtubeBackup: "https://www.youtube.com/watch?v=rqGXeasRR_M",
+    m3u8Source: "https://www.youtube.com/watch?v=rqGXeasRR_M",
+    rtmpUrl: "rtmp://191.215.38.95/live",
+    rtmpKey: "cle_gracetv_1m"
+  },
+  {
+    id: 'ch_30',
+    nom: "PAROLE D'ESPERANCE TV",
+    lien: "https://www.youtube.com/watch?v=EO8_2KJdpZk",
+    logo: PAROLE_DESPERANCE_LOGO,
+    cat: "RELIGIEUX",
+    ch: "30",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "PAROLE D'ESPERANCE TV - Culte, enseignements chrétiens, évangélisation & louange 24/7 • Vidéo Principale YouTube",
+    youtubeBackup: "https://www.youtube.com/watch?v=EO8_2KJdpZk",
+    m3u8Source: "https://www.youtube.com/watch?v=EO8_2KJdpZk",
+    rtmpUrl: "rtmp://191.215.38.95/live",
+    rtmpKey: "cle_paroleesperance_1m"
+  },
+  {
+    id: 'ch_31',
+    nom: "MSTV",
+    lien: "http://191.215.38.95:8080/live/cle_mstv_1m_vvlq.m3u8",
+    logo: MSTV_LOGO,
+    cat: "GENERALISTE",
+    ch: "31",
+    qualite: "HD",
+    pays: "BRAZZAVILLE",
+    desc: "MSTV - Télévision Généraliste (Brazzaville) • Direct HLS & Secours YouTube",
+    m3u8Source: "http://191.215.38.95:8080/live/cle_mstv_1m_vvlq.m3u8",
+    youtubeBackup: "https://www.youtube.com/watch?v=24lwg3gML4g"
+  },
+  {
+    id: 'ch_32',
+    nom: "UCL TV",
+    lien: "https://redirector.rudo.video/hls-video/c54ac2799874375c81c1672abb700870537c5223/ucl/ucl.smil/playlist.m3u8",
+    logo: "",
+    cat: "DOCUMENTAIRE",
+    ch: "32",
+    qualite: "4K",
+    pays: "CHILIE",
+    desc: ""
+  },
+  {
+    id: 'ch_mabanza',
+    nom: "ALLIANCE MABANZA TV",
+    lien: "https://www.youtube.com/watch?v=ClVJxz83peE",
+    logo: ALLIANCE_MABANZA_LOGO,
+    cat: "GENERALISTE",
+    ch: "33",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "ALLIANCE MABANZA TV - Uni pour l'avenir • Chaîne Généraliste & Actualités • Vidéo Principale YouTube",
+    youtubeBackup: "https://www.youtube.com/watch?v=ClVJxz83peE",
+    m3u8Source: "https://www.youtube.com/watch?v=ClVJxz83peE",
+    rtmpUrl: "rtmp://191.215.38.95/live",
+    rtmpKey: "cle_alliancemabanza_1m"
+  },
+  {
+    id: 'ch_34',
+    nom: "TVN3",
+    lien: "https://mdstrm.com/live-stream-playlist/5653641561b4eba30a7e4929.m3u8",
+    logo: TVN3_LOGO,
+    cat: "DOCUMENTAIRE",
+    ch: "34",
+    qualite: "HD",
+    pays: "CHILIE",
+    desc: ""
+  },
+  {
+    id: 'ch_35',
+    nom: "CAMARA DOS",
+    lien: "https://stream3.camara.gov.br/tv1/manifest.m3u8",
+    logo: CAMARA_DOS_LOGO,
+    cat: "NEWS",
+    ch: "35",
+    qualite: "4K",
+    pays: "CANADA",
+    desc: ""
+  },
+  {
+    id: 'ch_36',
+    nom: "ISTV",
+    lien: "https://video08.logicahost.com.br/istvnacional/srt.stream/istvnacional.m3u8",
+    logo: "",
+    cat: "GENERALISTE",
+    ch: "36",
+    qualite: "HD",
+    pays: "BRAZIL",
+    desc: ""
+  },
+  {
+    id: 'ch_38',
+    nom: "88 STEREO",
+    lien: "http://k3.usastreams.com/CableLatino/88stereo/playlist.m3u8",
+    logo: EIGHTYEIGHT_STEREO_LOGO,
+    cat: "GENERALISTE",
+    ch: "38",
+    qualite: "4K",
+    pays: "USA",
+    desc: ""
+  },
+  {
+    id: 'ch_39',
+    nom: "CMC TV",
+    lien: "https://stream.cmctv.hr:49998/cmc/live.m3u8",
+    logo: CMC_TV_LOGO,
+    cat: "NEWS",
+    ch: "39",
+    qualite: "4K",
+    pays: "CROATIE",
+    desc: ""
+  },
+  {
+    id: 'ch_40',
+    nom: "STV",
+    lien: "http://89.201.163.244:8080/hls/hdmi.m3u8",
+    logo: STV_LOGO,
+    cat: "GENERALISTE",
+    ch: "40",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "STV - Télévision régionale et généraliste en direct, actualités, divertissement et culture",
+    m3u8Source: "http://89.201.163.244:8080/hls/hdmi.m3u8"
+  },
+  {
+    id: 'ch_41',
+    nom: "DESSIN JUNIOR TV",
+    lien: "https://streamer.metronethn.com/DisneyChannel/index.m3u8",
+    logo: DESSIN_JUNIOR_TV_LOGO,
+    cat: "ENFANTS",
+    ch: "41",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Dessin Junior TV - Disney Channel & dessins animés en direct pour enfants",
+    m3u8Source: "https://streamer.metronethn.com/DisneyChannel/index.m3u8"
+  },
+  {
+    id: 'ch_42',
+    nom: "OCKO TV",
+    lien: "https://ocko-live.ssl.cdn.cra.cz/channels/ocko/playlist.m3u8",
+    logo: "",
+    cat: "MUSIQUE",
+    ch: "42",
+    qualite: "4K",
+    pays: "RUSSIE",
+    desc: ""
+  },
+  {
+    id: 'ch_43',
+    nom: "O LIVE TV",
+    lien: "https://ocko-live.ssl.cdn.cra.cz/channels/ocko_gold/playlist.m3u8",
+    logo: "",
+    cat: "MUSIQUE",
+    ch: "43",
+    qualite: "HD",
+    pays: "RUSSIE",
+    desc: ""
+  },
+  {
+    id: 'ch_44',
+    nom: "OCKO SLOW",
+    lien: "https://ocko-live.ssl.cdn.cra.cz/channels/ocko_expres/playlist.m3u8",
+    logo: "",
+    cat: "MUSIQUE",
+    ch: "44",
+    qualite: "4K",
+    pays: "RUSSIE",
+    desc: ""
+  },
+  {
+    id: 'ch_45',
+    nom: "VI RADIO",
+    lien: "https://stream.polar.cz/vctv/vctvlive-1/playlist.m3u8",
+    logo: "",
+    cat: "RADIO",
+    ch: "45",
+    qualite: "4K",
+    pays: "RUSSIE",
+    desc: ""
+  },
+  {
+    id: 'ch_46',
+    nom: "UTV ",
+    lien: "https://vysilani.zaktv.cz/broadcast/hls/utv/index.m3u8",
+    logo: "",
+    cat: "GENERALISTE",
+    ch: "46",
+    qualite: "HD",
+    pays: "RUSSIE",
+    desc: ""
+  },
+  {
+    id: 'ch_47',
+    nom: "Kanal Hovedstaden TV",
+    lien: "http://khkbh.dk:8080/hls/livestream/index.m3u8",
+    logo: "",
+    cat: "GENERALISTE",
+    ch: "47",
+    qualite: "HD",
+    pays: "DANEMARK",
+    desc: ""
+  },
+  {
+    id: 'ch_48',
+    nom: "RTVD CANAL TV",
+    lien: "https://protvradiostream.com:1936/canal4rd-1/ngrp:canal4rd-1_all/playlist.m3u8",
+    logo: "",
+    cat: "GENERALISTE",
+    ch: "48",
+    qualite: "4K",
+    pays: "DOMINICA REP",
+    desc: ""
+  },
+  {
+    id: 'ch_49',
+    nom: "UTV NEWS",
+    lien: "https://5b622f07944df.streamlock.net/aghapy.tv/aghapy.smil/playlist.m3u8",
+    logo: UTV_NEWS_LOGO,
+    cat: "NEWS",
+    ch: "49",
+    qualite: "4K",
+    pays: "EGYPTE",
+    desc: ""
+  },
+  {
+    id: 'ch_50',
+    nom: "Koogi TV",
+    lien: "https://5d658d7e9f562.streamlock.net/koogi.tv/koogi.smil/playlist.m3u8",
+    logo: KOOGI_TV_LOGO,
+    cat: "SPORTS",
+    ch: "50",
+    qualite: "HD",
+    pays: "EGYPTE",
+    desc: ""
+  },
+  {
+    id: 'ch_51',
+    nom: "MBC Masr 1",
+    lien: "https://mbc1-enc.edgenextcdn.net/out/v1/d5036cabf11e45bf9d0db410ca135c18/index.m3u8",
+    logo: "",
+    cat: "GENERALISTE",
+    ch: "51",
+    qualite: "HD",
+    pays: "EGYPTE",
+    desc: ""
+  },
+  {
+    id: 'ch_52',
+    nom: "Watan TV",
+    lien: "https://rp.tactivemedia.com/watantv_source/live/playlist.m3u8",
+    logo: WATAN_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "52",
+    qualite: "HD",
+    pays: "EGYPTE",
+    desc: ""
+  },
+  {
+    id: 'ch_53',
+    nom: "2 ETV ",
+    lien: "http://sb.err.ee/live/etv2.m3u8",
+    logo: TWO_ETV_LOGO,
+    cat: "GENERALISTE",
+    ch: "53",
+    qualite: "HD",
+    pays: "ESTONIE",
+    desc: ""
+  },
+  {
+    id: 'ch_54',
+    nom: "ETV+",
+    lien: "http://sb.err.ee/live/etvpluss.m3u8",
+    logo: ETV_LOGO,
+    cat: "GENERALISTE",
+    ch: "54",
+    qualite: "HD",
+    pays: "ESTONIE",
+    desc: ""
+  },
+  {
+    id: 'ch_55',
+    nom: "Taevas TV7",
+    lien: "https://vod.tv7.fi/tv7-ee/_definst_/smil:tv7-ee.smil/playlist.m3u8",
+    logo: TAEVAS_TV7_LOGO,
+    cat: "GENERALISTE",
+    ch: "55",
+    qualite: "4K",
+    pays: "ESTONIE",
+    desc: ""
+  },
+  {
+    id: 'ch_56',
+    nom: "LIFE TV",
+    lien: "https://lifetv.bitflip.ee/live/stream2.m3u8",
+    logo: OLIVE_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "56",
+    qualite: "4K",
+    pays: "ESTONIE",
+    desc: ""
+  },
+  {
+    id: 'ch_57',
+    nom: "TBN BALTIA",
+    lien: "http://dc.tbnbaltia.eu:8088/dvr/rewind-21600.m3u8",
+    logo: TBN_BALTIA_LOGO,
+    cat: "GENERALISTE",
+    ch: "57",
+    qualite: "4K",
+    pays: "ESTONIE",
+    desc: ""
+  },
+  {
+    id: 'ch_58',
+    nom: "Alfa",
+    lien: "https://irrtv2.digitacdn.net/live/ott/irrtv/playlist.m3u8?organizationId=229401409&suiteItemId=230439940",
+    logo: ALFA_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "58",
+    qualite: "HD",
+    pays: "Finlande",
+    desc: ""
+  },
+  {
+    id: 'ch_59',
+    nom: "CENTRAL OF VOICE TV",
+    lien: "https://stream.berosat.live:19360/central-voice/central-voice.m3u8",
+    logo: CENTRAL_VOICE_LOGO,
+    cat: "GENERALISTE",
+    ch: "59",
+    qualite: "4K",
+    pays: "RDC",
+    desc: ""
+  },
+  {
+    id: 'ch_60',
+    nom: "NURU TV",
+    lien: "https://stream.berosat.live:19360/nuru-tv/nuru-tv.m3u8",
+    logo: NURU_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "60",
+    qualite: "HD",
+    pays: "RDC",
+    desc: ""
+  },
+  {
+    id: 'ch_61',
+    nom: "LIBERTY TV",
+    lien: "https://stream.berosat.live:19360/liberty-tv/liberty-tv.m3u8",
+    logo: TVLB_LOGO,
+    cat: "GENERALISTE",
+    ch: "61",
+    qualite: "HD",
+    pays: "RDC",
+    desc: ""
+  },
+  {
+    id: 'ch_62',
+    nom: "TV Cultura",
+    lien: "https://player-tvcultura.stream.uol.com.br/live/tvcultura.m3u8",
+    logo: TV_CULTURA_LOGO,
+    cat: "SPORTS",
+    ch: "62",
+    qualite: "4K",
+    pays: "BRESIL",
+    desc: ""
+  },
+  {
+    id: 'ch_63',
+    nom: "TVE RS",
+    lien: "http://selpro1348.procergs.com.br:1935/tve/stve/playlist.m3u8",
+    logo: TV_CULTURA_LOGO,
+    cat: "GENERALISTE",
+    ch: "63",
+    qualite: "HD",
+    pays: "BRESIL",
+    desc: ""
+  },
+  {
+    id: 'ch_64',
+    nom: "CTV Toronto",
+    lien: "https://bozztv.com/teleyupp1/teleup-zxsJFt6VvY/playlist.m3u8",
+    logo: CTV_LOGO,
+    cat: "GENERALISTE",
+    ch: "64",
+    qualite: "HD",
+    pays: "CANADA",
+    desc: ""
+  },
+  {
+    id: 'ch_65',
+    nom: "SM VIDEO TV",
+    lien: "https://www.youtube.com/watch?v=G0BaYZbQAgg",
+    logo: SM_VIDEO_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "65",
+    qualite: "HD",
+    pays: "RDC",
+    desc: "SM Video TV - Diffusion vidéo officielle YouTube de secours en direct 24/7 au premier plan",
+    m3u8Source: "https://www.youtube.com/watch?v=G0BaYZbQAgg",
+    youtubeBackup: "https://www.youtube.com/watch?v=G0BaYZbQAgg"
+  },
+  {
+    id: 'ch_66',
+    nom: "HORIZON 2000 TV",
+    lien: "http://191.215.38.95:8080/live/cle_horizontv_12m_c0wv.m3u8",
+    logo: HORIZON_2000_LOGO,
+    cat: "GENERALISTE",
+    ch: "66",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "Horizon 2000 TV HD - Chaîne généraliste, actualités, informations, culture et direct • Direct HLS & Secours",
+    youtubeBackup: "https://youtu.be/RyttaeEFYHc",
+    m3u8Source: "http://191.215.38.95:8080/live/cle_horizontv_12m_c0wv.m3u8"
+  },
+  {
+    id: 'ch_67',
+    nom: "TVO",
+    lien: "https://bozztv.com/teleyupp1/teleup-OMZsmYVUMp/playlist.m3u8",
+    logo: "",
+    cat: "ENFANTS",
+    ch: "67",
+    qualite: "4K",
+    pays: "BRESIL",
+    desc: ""
+  },
+  {
+    id: 'ch_68',
+    nom: "A LA UNE TELEVISION",
+    lien: "https://www.youtube.com/watch?v=_MXsxbTVXP0",
+    logo: A_LA_UNE_TELEVISION_LOGO,
+    cat: "GENERALISTE",
+    ch: "68",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "A LA UNE TELEVISION - Actualités, informations et divertissement en continu",
+    youtubeBackup: "https://www.youtube.com/watch?v=_MXsxbTVXP0",
+    m3u8Source: "https://www.youtube.com/watch?v=_MXsxbTVXP0"
+  },
+  {
+    id: 'ch_69',
+    nom: "INFO CANADA",
+    lien: "https://rcavlive.akamaized.net/hls/live/704025/xcanrdi/master.m3u8",
+    logo: ICI_RDI_LOGO,
+    cat: "NEWS",
+    ch: "69",
+    qualite: "4K",
+    pays: "CANADA",
+    desc: "ICI RDI Canada Live"
+  },
+  {
+    id: 'ch_71',
+    nom: "SAVOIR MEDIA TV",
+    lien: "https://mdstrm.com/live-stream-playlist/533adcc949386ce765657d7c.m3u8",
+    logo: "",
+    cat: "GENERALISTE",
+    ch: "71",
+    qualite: "HD",
+    pays: "CANADA",
+    desc: ""
+  },
+  {
+    id: 'ch_72',
+    nom: "ACK TV",
+    lien: "https://stream.berosat.live:19360/ack-tv/ack-tv.m3u8",
+    logo: ACK_TV_LOGO,
+    cat: "RELIGIEUX",
+    ch: "72",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "Association Confessionnelle Kintuadi Kia Bangunza TV"
+  },
+  {
+    id: 'ch_75',
+    nom: "OCEAN TV",
+    lien: "https://stream.berosat.live:19360/ocean-tv/stream.m3u8",
+    logo: OCEAN_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "75",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "Toujours prêt à vous servir"
+  },
+  {
+    id: 'ch_77',
+    nom: "RTVD 4 LIVE",
+    lien: "https://rtvd.stream.m3u8",
+    logo: RTVD_4_LOGO,
+    cat: "GENERALISTE",
+    ch: "77",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "RTVD 4 Live Direct"
+  },
+  {
+    id: 'ch_78',
+    nom: "ÓČKO TV",
+    lien: "https://ockotv-live.infomaniak.ch/live/ockotv.smil/playlist.m3u8",
+    logo: OCKO_TV_LOGO,
+    cat: "MUSIQUE",
+    ch: "78",
+    qualite: "HD",
+    pays: "TCHEQUIE",
+    desc: "ÓČKO Music Channel"
+  },
+  {
+    id: 'ch_79',
+    nom: "080 NEWS",
+    lien: "https://080news.live/stream.m3u8",
+    logo: O80_NEWS_LOGO,
+    cat: "NEWS",
+    ch: "79",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "080 News Channel"
+  },
+  {
+    id: 'ch_80',
+    nom: "OLIVE TV",
+    lien: "https://olivetv.stream.m3u8",
+    logo: OLIVE_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "80",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "Olive Live TV"
+  },
+  {
+    id: 'ch_81',
+    nom: "NEWS 24",
+    lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
+    logo: NEWS_24_LOGO,
+    cat: "NEWS",
+    ch: "81",
+    qualite: "4K",
+    pays: "INTERNATIONAL",
+    desc: "News 24 Live Stream"
+  },
+  {
+    id: 'ch_82',
+    nom: "MBC MASR",
+    lien: "https://mbcmasr.live.m3u8",
+    logo: MBC_MASR_LOGO,
+    cat: "GENERALISTE",
+    ch: "82",
+    qualite: "4K",
+    pays: "EGYPTE",
+    desc: "MBC Masr Egypt Live"
+  },
+  {
+    id: 'ch_83',
+    nom: "ISTV HD",
+    lien: "https://istv.live.m3u8",
+    logo: ISTV_HD_LOGO,
+    cat: "GENERALISTE",
+    ch: "83",
+    qualite: "4K",
+    pays: "BRESIL",
+    desc: "ISTV HD Digital"
+  },
+  {
+    id: 'ch_84',
+    nom: "KANAL HOVEDSTADEN",
+    lien: "https://kanalhovedstaden.live.m3u8",
+    logo: KANAL_HOVEDSTADEN_LOGO,
+    cat: "GENERALISTE",
+    ch: "84",
+    qualite: "HD",
+    pays: "DANEMARK",
+    desc: "Kanal Hovedstaden Denmark"
+  },
+  {
+    id: 'ch_86',
+    nom: "TORONTO 360 TV",
+    lien: "https://toronto360.live.m3u8",
+    logo: TORONTO_360_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "86",
+    qualite: "4K",
+    pays: "CANADA",
+    desc: "Toronto 360 Live Television"
+  },
+  {
+    id: 'ch_87',
+    nom: "TROPOJA TV",
+    lien: "https://tropoja.live.m3u8",
+    logo: TROPOJA_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "87",
+    qualite: "4K",
+    pays: "ALBANIE",
+    desc: "Tropoja TV Broadcast"
+  },
+  {
+    id: 'ch_88',
+    nom: "VIVO TV",
+    lien: "http://www.coninfo.net:1935/tvlink/live/playlist.m3u8",
+    logo: VIVO_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "88",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "VIVO TV - Chaîne de télévision en direct",
+    m3u8Source: "http://www.coninfo.net:1935/tvlink/live/playlist.m3u8"
+  },
+  {
+    id: 'ch_89',
+    nom: "ICI INFO",
+    lien: "https://rcavlive.akamaized.net/hls/live/704025/xcanrdi/master.m3u8",
+    logo: ICI_INFO_LOGO,
+    cat: "NEWS",
+    ch: "89",
+    qualite: "4K",
+    pays: "CANADA",
+    desc: "ICI Radio-Canada Info en direct"
+  },
+  {
+    id: 'ch_90',
+    nom: "SAVOIR MEDIA",
+    lien: "https://savoir.media.live.m3u8",
+    logo: SAVOIR_MEDIA_LOGO,
+    cat: "DOCUMENTAIRE",
+    ch: "90",
+    qualite: "4K",
+    pays: "CANADA",
+    desc: "Savoir média - Éducation, culture et savoirs"
+  },
+  {
+    id: 'ch_92',
+    nom: "MALAÏKA ACTU",
+    lien: "http://191.215.38.95:8080/live/cle_malaika_1m_vllq.m3u8",
+    logo: MALAIKA_ACTU_LOGO,
+    cat: "NEWS",
+    ch: "92",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société (D.G Alpha Michel BOMOLO) • Direct HLS & RTMP",
+    youtubeBackup: "https://youtu.be/P6LUQn6uygI",
+    m3u8Source: "http://191.215.38.95:8080/live/cle_malaika_1m_vllq.m3u8"
+  },
+  {
+    id: 'ch_93',
+    nom: "CEM TV",
+    lien: "https://www.youtube.com/watch?v=OwkjaS75qvA",
+    logo: CEM_TV_LOGO,
+    cat: "RELIGIEUX",
+    ch: "93",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "CEM TV - Centre Évangélique Mahanaïm (Culte, enseignements et diffusion continue)",
+    youtubeBackup: "https://www.youtube.com/watch?v=OwkjaS75qvA",
+    m3u8Source: "https://www.youtube.com/watch?v=OwkjaS75qvA"
+  },
+  {
+    id: 'ch_94',
+    nom: "PRODIGE TV",
+    lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
+    logo: PRODIGE_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "94",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "Prodige Télévision en direct"
+  },
+  {
+    id: 'ch_96',
+    nom: "COP TELEVISION",
+    lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
+    logo: COP_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "96",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "COP Télévision - Actualités, culture et information"
+  },
+  {
+    id: 'ch_99',
+    nom: "SNL KONGO TV",
+    lien: "https://www.youtube.com/watch?v=_V573y2j2To",
+    logo: SN_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "99",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "SNL Kongo TV - Télévision d'information, culture et divertissement",
+    youtubeBackup: "https://www.youtube.com/watch?v=_V573y2j2To",
+    m3u8Source: "https://www.youtube.com/watch?v=_V573y2j2To"
+  },
+  {
+    id: 'ch_100',
+    nom: "IGBCB TV",
+    lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
+    logo: IGBCB_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "100",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "IGBCB TV - I.G.B. Consulting Télévision"
+  },
+  {
+    id: 'ch_102',
+    nom: "CMC TV",
+    lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
+    logo: CMC_MISSIONNAIRE_LOGO,
+    cat: "RELIGIEUX",
+    ch: "102",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "Centre Missionnaire Chrétien - CMC Télévision"
+  },
+  {
+    id: 'ch_103',
+    nom: "NG FEDERAL",
+    lien: "http://www.coninfo.net:1935/tvlink/live/playlist.m3u8",
+    logo: NG_FEDERAL_LOGO,
+    cat: "GENERALISTE",
+    ch: "103",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "NG FEDERAL TV - Nouvelle Génération Fédérale Télévision en direct",
+    m3u8Source: "http://www.coninfo.net:1935/tvlink/live/playlist.m3u8"
+  },
+  {
+    id: 'ch_104',
+    nom: "X TREMA TV",
+    lien: "https://stmv6.voxtvhd.com.br/cineclasico/cineclasico/playlist.m3u8",
+    logo: X_TREMA_TV_LOGO,
+    cat: "FILMS",
+    ch: "104",
+    qualite: "4K",
+    pays: "BRESIL",
+    desc: "X Trema TV - Cinéma, films classiques et divertissement en direct",
+    m3u8Source: "https://stmv6.voxtvhd.com.br/cineclasico/cineclasico/playlist.m3u8"
+  },
+  {
+    id: 'ch_105',
+    nom: "LAS ESTRELLAS",
+    lien: "https://channel01-onlymex.akamaized.net/hls/live/2022749/event01/index.m3u8",
+    logo: LAS_ESTRELLAS_LOGO,
+    cat: "GENERALISTE",
+    ch: "105",
+    qualite: "4K",
+    pays: "MEXIQUE",
+    desc: "Las Estrellas - Télévision mexicaine, telenovelas, divertissement et séries en direct (Televisa)",
+    m3u8Source: "https://channel01-onlymex.akamaized.net/hls/live/2022749/event01/index.m3u8"
+  },
+  {
+    id: 'ch_106',
+    nom: "O ONCE TV",
+    lien: "https://5ca9af4645e15.streamlock.net/teleradio/smil:teleradio.smil/playlist.m3u8",
+    logo: ONCE_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "106",
+    qualite: "4K",
+    pays: "MEXIQUE",
+    desc: "Canal Once - Télévision publique mexicaine (IPN), culture, documentaires et information en direct",
+    m3u8Source: "https://5ca9af4645e15.streamlock.net/teleradio/smil:teleradio.smil/playlist.m3u8"
+  },
+  {
+    id: 'ch_107',
+    nom: "TUDN TV SPORT",
+    lien: "https://streamer.metronethn.com/TUDN/index.m3u8",
+    logo: TUDN_TV_LOGO,
+    cat: "SPORTS",
+    ch: "107",
+    qualite: "4K",
+    pays: "MEXIQUE",
+    desc: "TUDN TV Sport - Chaîne sportive en direct (Univision Deportes / Televisa), football, ligues majeures et événements sportifs",
+    m3u8Source: "https://streamer.metronethn.com/TUDN/index.m3u8"
+  },
+  {
+    id: 'ch_109',
+    nom: "MBC RADIO",
+    lien: "https://radio-loud-fm.mbc.net/radio-loud-fm_1.m3u8",
+    logo: MBC_FM_LOGO,
+    cat: "RADIO",
+    ch: "109",
+    qualite: "HD",
+    pays: "ARABIE SAOUDITE",
+    desc: "MBC Radio / MBC FM - Première station de radio musicale et divertissement du groupe MBC en direct",
+    m3u8Source: "https://radio-loud-fm.mbc.net/radio-loud-fm_1.m3u8"
+  },
+  {
+    id: 'ch_110',
+    nom: "LUNE TV ENFANT",
+    lien: "http://138.121.15.230:9002/DREAMWORKS/index.m3u8",
+    logo: LUNE_TV_LOGO,
+    cat: "ENFANTS",
+    ch: "110",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Lune TV Enfant (DreamWorks) - Dessins animés, séries jeunesse et films d'animation pour enfants en direct",
+    m3u8Source: "http://138.121.15.230:9002/DREAMWORKS/index.m3u8"
+  },
+  {
+    id: 'ch_111',
+    nom: "ESPN AMERICA",
+    lien: "http://23.237.104.106:8080/USA_ESPNU/index.m3u8",
+    logo: ESPN_AMERICA_LOGO,
+    cat: "SPORTS",
+    ch: "111",
+    qualite: "4K",
+    pays: "USA",
+    desc: "ESPN America / ESPNU - Chaîne sportive américaine de premier plan, événements sportifs, football américain, basketball et analyses en direct",
+    m3u8Source: "http://23.237.104.106:8080/USA_ESPNU/index.m3u8"
+  },
+  {
+    id: 'ch_112',
+    nom: "HISTORY TV",
+    lien: "http://190.93.224.42/HISTORY/index.m3u8",
+    logo: HISTORY_TV_LOGO,
+    cat: "DOCUMENTAIRE",
+    ch: "112",
+    qualite: "4K",
+    pays: "USA",
+    desc: "History Channel - Documentaires historiques, sciences, civilisations, mystères et découvertes en direct",
+    m3u8Source: "http://190.93.224.42/HISTORY/index.m3u8"
+  },
+  {
+    id: 'ch_113',
+    nom: "NICKELODEON ENFANT",
+    lien: "http://190.93.224.42/NICK/index.m3u8",
+    logo: NICKELODEON_LOGO,
+    cat: "ENFANTS",
+    ch: "113",
+    qualite: "4K",
+    pays: "USA",
+    desc: "Nickelodeon (Nick) - Dessins animés cultes, séries jeunesse et divertissement pour enfants et adolescents en direct",
+    m3u8Source: "http://190.93.224.42/NICK/index.m3u8"
+  },
+  {
+    id: 'ch_114',
+    nom: "NICK JUNIOR 2",
+    lien: "https://streamer.metronethn.com/NickJr/index.m3u8",
+    logo: NICK_JUNIOR_2_LOGO,
+    cat: "ENFANTS",
+    ch: "114",
+    qualite: "4K",
+    pays: "USA",
+    desc: "Nick Jr. / Nickelodeon Junior - Chaîne jeunesse préscolaire et dessins animés d'animation (Paw Patrol, Peppa Pig, Dora)",
+    m3u8Source: "https://streamer.metronethn.com/NickJr/index.m3u8"
+  },
+  {
+    id: 'ch_115',
+    nom: "AMC",
+    lien: "https://streamer.metronethn.com/AMC/index.m3u8",
+    logo: AMC_LOGO,
+    cat: "FILMS",
+    ch: "115",
+    qualite: "4K",
+    pays: "USA",
+    desc: "AMC (American Movie Classics) - Séries cultes mondiales, films primés et cinéma en direct",
+    m3u8Source: "https://streamer.metronethn.com/AMC/index.m3u8"
+  },
+  {
+    id: 'ch_116',
+    nom: "OASIS MEDIA FM",
+    lien: "https://radiodiffusion.ncdap.com/listen/radio_oasis_m%C3%A9dia_/radio.mp3",
+    logo: OASIS_MEDIA_FM_LOGO,
+    cat: "RADIO",
+    ch: "116",
+    qualite: "HD",
+    pays: "RDC",
+    desc: "Oasis Média FM - Station de radio chrétienne, émissions, louanges et enseignements bibliques en direct",
+    m3u8Source: "https://radiodiffusion.ncdap.com/public/radio_oasis_m%C3%A9dia_"
+  },
+  {
+    id: 'ch_117',
+    nom: "RADIO NOVA",
+    lien: "https://radionova.ice.infomaniak.ch/radionova-high.mp3",
+    logo: RADIO_NOVA_LOGO,
+    cat: "RADIO",
+    ch: "117",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Radio Nova - Le grand mix musical, musiques du monde, hip-hop, funk, afrobeat et découvertes sonores en direct",
+    m3u8Source: "https://radionova.ice.infomaniak.ch/radionova-high.mp3"
+  },
+  {
+    id: 'ch_118',
+    nom: "RADIO CAPITAL FM",
+    lien: "https://stream.capitalradio.cd/live/capital-fm.m3u8",
+    logo: RADIO_CAPITAL_LOGO,
+    cat: "RADIO",
+    ch: "118",
+    qualite: "HD",
+    pays: "RDC",
+    desc: "Radio Capital FM - Information continue, société, débats et musique urbaine",
+    m3u8Source: "https://stream.capitalradio.cd/live/capital-fm.m3u8"
+  },
+  {
+    id: 'ch_119',
+    nom: "RADIO NOSTALGIE",
+    lien: "https://stream.nostalgie.live/nostalgie.mp3",
+    logo: NOSTALGIE_RADIO_LOGO,
+    cat: "RADIO",
+    ch: "119",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "Radio Nostalgie - Les plus grands hits des années 70, 80 et 90 en continu",
+    m3u8Source: "https://stream.nostalgie.live/nostalgie.mp3"
+  },
+  {
+    id: 'ch_120',
+    nom: "CANAL 12",
+    lien: "https://sv-canal12-canal12-live.ned.media/canal12/smil:canal12.smil/playlist.m3u8",
+    logo: CANAL_12_LOGO,
+    cat: "GENERALISTE",
+    ch: "120",
+    qualite: "4K",
+    pays: "INTERNATIONAL",
+    desc: "Canal 12 - Télévision généraliste, actualités en continu, magazines de société, divertissement et séries en direct",
+    m3u8Source: "https://sv-canal12-canal12-live.ned.media/canal12/smil:canal12.smil/playlist.m3u8"
+  },
+  {
+    id: 'ch_121',
+    nom: "CTV",
+    lien: "https://ctv.dc.beltelecom.by/ctv/ctv.stream/playlist.m3u8",
+    logo: CTV_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "121",
+    qualite: "4K",
+    pays: "CANADA",
+    desc: "CTV Television Network - Grande chaîne de divertissement, grands journaux d'actualité, shows et séries cultes",
+    m3u8Source: "https://ctv.dc.beltelecom.by/ctv/ctv.stream/playlist.m3u8"
+  },
+  {
+    id: 'ch_123',
+    nom: "E TV",
+    lien: "https://streamer.metronethn.com/EEntertainment/index.m3u8",
+    logo: E_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "123",
+    qualite: "4K",
+    pays: "USA",
+    desc: "E! TV (Entertainment Television) - Télé-réalité, actualités des célébrités, tapis rouges d'Hollywood et mode en direct",
+    m3u8Source: "https://streamer.metronethn.com/EEntertainment/index.m3u8"
+  },
+  {
+    id: 'ch_125',
+    nom: "M6",
+    lien: "https://origin-m6web.live.6cloud.fr/out/v1/6play/6play-m6/cmaf_q2hyb21h/index-hd720.m3u8",
+    logo: M6_LOGO,
+    cat: "GENERALISTE",
+    ch: "125",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "M6 (Métropole Télévision) - Grande chaîne française généraliste, grands reportages, divertissement, Top Chef, Capital et séries",
+    m3u8Source: "https://origin-m6web.live.6cloud.fr/out/v1/6play/6play-m6/cmaf_q2hyb21h/index-hd720.m3u8"
+  },
+  {
+    id: 'ch_126',
+    nom: "NEWS BY",
+    lien: "https://amg02703-leadstory-leadstory-samsungau-rr75f.amagi.tv/playlist/amg02703-leadstory-leadstory-samsungau/playlist.m3u8",
+    logo: NEWS_BY_LOGO,
+    cat: "NEWS",
+    ch: "126",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "NEWS BY (LeadStory & World News) - Chaîne d'information internationale continue 24/7, alertes info et analyses politiques",
+    m3u8Source: "https://amg02703-leadstory-leadstory-samsungau-rr75f.amagi.tv/playlist/amg02703-leadstory-leadstory-samsungau/playlist.m3u8"
+  },
+  {
+    id: 'ch_127',
+    nom: "AE TV",
+    lien: "http://198.58.104.90:8989/aande/index.m3u8",
+    logo: AE_TV_LOGO,
+    cat: "DOCUMENTAIRE",
+    ch: "127",
+    qualite: "4K",
+    pays: "USA",
+    desc: "A&E TV (Arts & Entertainment Network) - Documentaires captivants, enquêtes criminelles, séries documentaires et émissions cultes",
+    m3u8Source: "http://198.58.104.90:8989/aande/index.m3u8"
+  },
+  {
+    id: 'ch_128',
+    nom: "TF1",
+    lien: "https://alive-tf1-hls.cdn-0.diff.tf1.fr/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXAiOiIxNTkuMjYuMTEyLjgiLCJjbWNkIjoiIiwiZXhwIjoxNzg0MDQyMzU4LCJnaWQiOiJlNzIwMzhjMzU5NDg0MDc1YjgzOGUwNjY5NWI3ZDQ5NiIsImlhdCI6MTc4NDAyNzk1OCwiaXNzIjoiZGVsaXZlcnkiLCJtYXhiIjowLCJzdGVtIjoiL3Byb2QvVEYxL2NtYWYvb3V0Iiwic3ViIjoiZTcyMDM4YzM1OTQ4NDA3NWI4MzhlMDY2OTViN2Q0OTYifQ.guXEzaByDrfGQzirSrm7N3ONiaiz-evEgnKQHsTSVW4/prod/TF1/cmaf/out/TF1.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/tf1-fr.png",
+    cat: "GENERALISTE",
+    ch: "128",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "TF1 - La première chaîne de télévision française : information, grands événements, fictions et divertissement",
+    m3u8Source: "https://alive-tf1-hls.cdn-0.diff.tf1.fr/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXAiOiIxNTkuMjYuMTEyLjgiLCJjbWNkIjoiIiwiZXhwIjoxNzg0MDQyMzU4LCJnaWQiOiJlNzIwMzhjMzU5NDg0MDc1YjgzOGUwNjY5NWI3ZDQ5NiIsImlhdCI6MTc4NDAyNzk1OCwiaXNzIjoiZGVsaXZlcnkiLCJtYXhiIjowLCJzdGVtIjoiL3Byb2QvVEYxL2NtYWYvb3V0Iiwic3ViIjoiZTcyMDM4YzM1OTQ4NDA3NWI4MzhlMDY2OTViN2Q0OTYifQ.guXEzaByDrfGQzirSrm7N3ONiaiz-evEgnKQHsTSVW4/prod/TF1/cmaf/out/TF1.m3u8"
+  },
+  {
+    id: 'ch_129',
+    nom: "FRANCE 2",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/france2.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/france-2-fr.png",
+    cat: "GENERALISTE",
+    ch: "129",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "France 2 - Chaîne publique généraliste, actualités, talk-shows, téléfilms et culture",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/france2.m3u8"
+  },
+  {
+    id: 'ch_130',
+    nom: "FRANCE 3",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/france3.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/france-3-fr.png",
+    cat: "GENERALISTE",
+    ch: "130",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "France 3 - La chaîne des régions, journaux régionaux et nationaux, documentaires et fictions",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/france3.m3u8"
+  },
+  {
+    id: 'ch_131',
+    nom: "FRANCE 4",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/france4.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/france-4-fr.png",
+    cat: "ENFANTS",
+    ch: "131",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "France 4 / Okoo - Programmes jeunesse, spectacles vivants, culture et découvertes",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/france4.m3u8"
+  },
+  {
+    id: 'ch_132',
+    nom: "FRANCE 5",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/france5.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/france-5-fr.png",
+    cat: "DOCUMENTAIRE",
+    ch: "132",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "France 5 - La chaîne de la connaissance, documentaires scientifiques, histoire, nature et débats",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/france5.m3u8"
+  },
+  {
+    id: 'ch_133',
+    nom: "ARTE",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/arte.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/arte-fr.png",
+    cat: "DOCUMENTAIRE",
+    ch: "133",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "ARTE - Chaîne culturelle européenne : grands documentaires, cinéma d'auteur, concerts et investigations",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/arte.m3u8"
+  },
+  {
+    id: 'ch_134',
+    nom: "LCP",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/lcpps.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/lcp-fr.png",
+    cat: "NEWS",
+    ch: "134",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "LCP (La Chaîne Parlementaire / Assemblée Nationale) - Débats politiques, retransmissions et actualité citoyenne",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/lcpps.m3u8"
+  },
+  {
+    id: 'ch_135',
+    nom: "TMC",
+    lien: "https://live-tmc-hls.cdn-0.diff.tf1.fr/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXAiOiIxNTkuMjYuMTA1LjM2IiwiY21jZCI6IiIsImV4cCI6MTc4MDc0ODI5OCwiZ2lkIjoiZTcyMDM4YzM1OTQ4NDA3NWI4MzhlMDY2OTViN2Q0OTYiLCJpYXQiOjE3ODA3MzM4OTgsImlzcyI6ImRlbGl2ZXJ5IiwibWF4YiI6MCwic3RlbSI6Ii9vdXQvdjEvNDRmY2IxYzc3NjI4NGYyZGE3YzExZWY5NDhkN2VmMzQvdG1jLWNtYWYiLCJzdWIiOiJlNzIwMzhjMzU5NDg0MDc1YjgzOGUwNjY5NWI3ZDQ5NiJ9.Vjef493kGPqYaBy-6_874seveaOl-RwXDoZc9aJeR0E/out/v1/44fcb1c776284f2da7c11ef948d7ef34/tmc-cmaf/index.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/tmc-fr.png",
+    cat: "GENERALISTE",
+    ch: "135",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "TMC (Télé Monte-Carlo) - Quotidien, talk-shows, cinéma, séries et documentaires premium",
+    m3u8Source: "https://live-tmc-hls.cdn-0.diff.tf1.fr/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXAiOiIxNTkuMjYuMTA1LjM2IiwiY21jZCI6IiIsImV4cCI6MTc4MDc0ODI5OCwiZ2lkIjoiZTcyMDM4YzM1OTQ4NDA3NWI4MzhlMDY2OTViN2Q0OTYiLCJpYXQiOjE3ODA3MzM4OTgsImlzcyI6ImRlbGl2ZXJ5IiwibWF4YiI6MCwic3RlbSI6Ii9vdXQvdjEvNDRmY2IxYzc3NjI4NGYyZGE3YzExZWY5NDhkN2VmMzQvdG1jLWNtYWYiLCJzdWIiOiJlNzIwMzhjMzU5NDg0MDc1YjgzOGUwNjY5NWI3ZDQ5NiJ9.Vjef493kGPqYaBy-6_874seveaOl-RwXDoZc9aJeR0E/out/v1/44fcb1c776284f2da7c11ef948d7ef34/tmc-cmaf/index.m3u8"
+  },
+  {
+    id: 'ch_136',
+    nom: "GULLI",
+    lien: "https://lbcdn.6cloud.fr/resource/m6web/l/gulli_hls_sd_short_q2hyb21h.m3u8?groups[]=m6web-live-gulli_ext",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/gulli-fr.png",
+    cat: "ENFANTS",
+    ch: "136",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Gulli - La première chaîne jeunesse et famille en France : dessins animés, comédies et jeux",
+    m3u8Source: "https://lbcdn.6cloud.fr/resource/m6web/l/gulli_hls_sd_short_q2hyb21h.m3u8?groups[]=m6web-live-gulli_ext"
+  },
+  {
+    id: 'ch_137',
+    nom: "BFM TV",
+    lien: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_TV/index.m3u8?start=LIVE&end=END",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/bfm-tv-fr.png",
+    cat: "NEWS",
+    ch: "137",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "BFM TV - Première chaîne d'information en continu de France : direct non-stop, débats et alertes info",
+    m3u8Source: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_TV/index.m3u8?start=LIVE&end=END"
+  },
+  {
+    id: 'ch_140',
+    nom: "FRANCE INFO",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/franceinfo.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/franceinfo-fr.png",
+    cat: "NEWS",
+    ch: "140",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "franceinfo: - L'information en continu du service public, décryptages, vérifications et reportages de terrain",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/franceinfo.m3u8"
+  },
+  {
+    id: 'ch_141',
+    nom: "CSTAR",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/canalplus/cstar.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/c-star-fr.png",
+    cat: "MUSIQUE",
+    ch: "141",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "CSTAR - La chaîne musicale et divertissement du groupe Canal+ : clips, concerts, documentaires pop et séries",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/canalplus/cstar.m3u8"
+  },
+  {
+    id: 'ch_142',
+    nom: "T18",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/dailymotion/t18.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/t18-fr.png",
+    cat: "GENERALISTE",
+    ch: "142",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "T18 - Chaîne généraliste, divertissement, émissions thématiques et culture",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/dailymotion/t18.m3u8"
+  },
+  {
+    id: 'ch_143',
+    nom: "L'ÉQUIPE TV",
+    lien: "https://dq37unyetkpcz.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-m04j89j7k5gtp/LEquipe_FR.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/lequipe-fr.png",
+    cat: "SPORTS",
+    ch: "143",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "La chaîne L'Équipe - 100% sport en clair, compétitions en direct, L'Équipe du Soir et grands rendez-vous sportifs",
+    m3u8Source: "https://dq37unyetkpcz.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-m04j89j7k5gtp/LEquipe_FR.m3u8"
+  },
+  {
+    id: 'ch_144',
+    nom: "RMC STORY",
+    lien: "https://d15aro46bnpfm8.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-fqkqiax1078up/RMC_Story_FR.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/rmc-story-fr.png",
+    cat: "DOCUMENTAIRE",
+    ch: "144",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "RMC Story - La chaîne de la diversité et des histoires vraies, documentaires d'investigation et société",
+    m3u8Source: "https://d15aro46bnpfm8.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-fqkqiax1078up/RMC_Story_FR.m3u8"
+  },
+  {
+    id: 'ch_145',
+    nom: "RMC DÉCOUVERTE",
+    lien: "https://d16zzycxcd0m0r.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-hixvx5kymecr9/RMC_Decouverte_FR.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/rmc-decouverte-fr.png",
+    cat: "DOCUMENTAIRE",
+    ch: "145",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "RMC Découverte - Documentaires XXL, moteurs, mécanique, constructions de l'extrême et aventures",
+    m3u8Source: "https://d16zzycxcd0m0r.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-hixvx5kymecr9/RMC_Decouverte_FR.m3u8"
+  },
+  {
+    id: 'ch_146',
+    nom: "RMC LIFE",
+    lien: "https://d3dcdjv6dx07iz.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-eaaww2dyp3iih/RMC_Life_FR.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/rmc-life-fr.png",
+    cat: "GENERALISTE",
+    ch: "146",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "RMC Life - Lifestyle, rénovations de maisons, bien-être et séries passionnantes",
+    m3u8Source: "https://d3dcdjv6dx07iz.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-eaaww2dyp3iih/RMC_Life_FR.m3u8"
+  },
+  {
+    id: 'ch_147',
+    nom: "LE MEILLEUR D'ARTHUR",
+    lien: "https://amg02393-awpg-amg02393c2-rakuten-uk-2464.playouts.now.amagi.tv/playlist/amg02393-awpg-lemeilleurdarthur-rakutenuk/playlist.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/large_Logo_Le_Meilleurd_Arthur_colored_3f4b333562.png",
+    cat: "GENERALISTE",
+    ch: "147",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Le Meilleur d'Arthur - Vendredi tout est permis, Les Enfants de la Télé, bêtisiers et fous rires garantis",
+    m3u8Source: "https://amg02393-awpg-amg02393c2-rakuten-uk-2464.playouts.now.amagi.tv/playlist/amg02393-awpg-lemeilleurdarthur-rakutenuk/playlist.m3u8"
+  },
+  {
+    id: 'ch_148',
+    nom: "ENQUÊTES DE CHOC",
+    lien: "https://fastmedia-enquetesdechoc-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-fastmedia-enquetesdechoc-rakuten/CDN/playlist.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/medium_E02656638_HHSEUK_007310_Flag_A_Overlay_Home_Screen_1_1_Sq_1000x1000px_Template_v02_copie_8aaa923ce1.jpg",
+    cat: "DOCUMENTAIRE",
+    ch: "148",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Enquêtes de Choc - Reportages exclusifs en immersion auprès des forces de l'ordre, urgences et douanes",
+    m3u8Source: "https://fastmedia-enquetesdechoc-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-fastmedia-enquetesdechoc-rakuten/CDN/playlist.m3u8"
+  },
+  {
+    id: 'ch_149',
+    nom: "TV5MONDE FBSM",
+    lien: "https://ott.tv5monde.com/Content/HLS/Live/channel(fbs)/index.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/tv5-monde-fr.png",
+    cat: "GENERALISTE",
+    ch: "149",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "TV5MONDE (France Belgique Suisse Monaco) - La chaîne culturelle internationale francophone",
+    m3u8Source: "https://ott.tv5monde.com/Content/HLS/Live/channel(fbs)/index.m3u8"
+  },
+  {
+    id: 'ch_150',
+    nom: "FRANCE TV SÉRIES",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/series.m3u8",
+    logo: "https://i.ibb.co/9rmSGqP/frsr.png",
+    cat: "FILMS",
+    ch: "150",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "France TV Séries - Le meilleur des fictions françaises, séries policières, dramatiques et sagas cultes",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/series.m3u8"
+  },
+  {
+    id: 'ch_151',
+    nom: "SONY ONE THE BLACKLIST",
+    lien: "https://06cb85ad6ccb4a6b97f561e62d16ad3f.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-822-FR-SONYONETHEBLACKLIST-LG_FR/playlist.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/sony-one-fr.png",
+    cat: "FILMS",
+    ch: "151",
+    qualite: "4K",
+    pays: "USA",
+    desc: "Sony One : The Blacklist - La chaîne 24/7 dédiée à Raymond Reddington et aux affaires criminelles du FBI",
+    m3u8Source: "https://06cb85ad6ccb4a6b97f561e62d16ad3f.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-822-FR-SONYONETHEBLACKLIST-LG_FR/playlist.m3u8"
+  },
+  {
+    id: 'ch_152',
+    nom: "MGG E-SPORT",
+    lien: "https://d1mdvi698umja9.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-kuib43fy5umqi-ssai-prd/mgg.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/mgg-tv-fr.png",
+    cat: "SPORTS",
+    ch: "152",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "MGG TV - La première chaîne eSport & gaming : compétitions de jeux vidéo, analyses et actualité geek",
+    m3u8Source: "https://d1mdvi698umja9.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-kuib43fy5umqi-ssai-prd/mgg.m3u8"
+  },
+  {
+    id: 'ch_153',
+    nom: "GONG",
+    lien: "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01596-gongnetworks-gong-samsungfr/playlist.m3u8",
+    logo: "https://i.ibb.co/MMpFXQL/gong.jpg",
+    cat: "ENFANTS",
+    ch: "153",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "GONG - Anime japonais, séries d'animation, culture pop et dramas asiatiques en continu",
+    m3u8Source: "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01596-gongnetworks-gong-samsungfr/playlist.m3u8"
+  },
+  {
+    id: 'ch_154',
+    nom: "NOVELA CHANNEL",
+    lien: "https://video1.getstreamhosting.com:1936/8494/8494/playlist.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/novelas-tv-fr.png",
+    cat: "FILMS",
+    ch: "154",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Novela Channel - Les plus passionnantes telenovelas d'Amérique Latine et séries romantiques doublées en français",
+    m3u8Source: "https://video1.getstreamhosting.com:1936/8494/8494/playlist.m3u8"
+  },
+  {
+    id: 'ch_155',
+    nom: "POPCORN",
+    lien: "https://dyc8bdiow0oz1.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-qique82ecf5q8/pcorn.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/large_POPCORN_emission_Logo_Reproduction_8ad41ad83b.png",
+    cat: "GENERALISTE",
+    ch: "155",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Popcorn - Le talk-show incontournable de Domingo avec les créateurs du web, jeux et débats",
+    m3u8Source: "https://dyc8bdiow0oz1.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-qique82ecf5q8/pcorn.m3u8"
+  },
+  {
+    id: 'ch_156',
+    nom: "LG 1",
+    lien: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=12782",
+    logo: "https://lge-static.ottera.tv/prod/lge/linear_channel/logo/1600x400/lg1_800x200_white_5.png",
+    cat: "FILMS",
+    ch: "156",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "LG 1 - Chaîne de films et séries exclusives, blockbusters internationaux et divertissement cinéma",
+    m3u8Source: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=12782"
+  },
+  {
+    id: 'ch_157',
+    nom: "LG 1:FILM",
+    lien: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=13954",
+    logo: "https://lge-static.ottera.tv/prod/lge/linear_channel/logo/1600x400/lg1film_epg_white_2.png",
+    cat: "FILMS",
+    ch: "157",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "LG 1 Film - 100% grand cinéma, films d'action, comédies, polars et drames en streaming 24/7",
+    m3u8Source: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=13954"
+  },
+  {
+    id: 'ch_158',
+    nom: "LG 1:SPOTLIGHT",
+    lien: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=13956",
+    logo: "https://lge-static.ottera.tv/prod/lge/linear_channel/logo/1600x400/lg1spt_epg_white_3.png",
+    cat: "FILMS",
+    ch: "158",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "LG 1 Spotlight - Focus sur les grands acteurs, réalisateurs légendaires et chefs-d'œuvre du cinéma",
+    m3u8Source: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=13956"
+  },
+  {
+    id: 'ch_159',
+    nom: "CINE NANAR",
+    lien: "https://zylo-cinenanar-rakuten.amagi.tv/playlist.m3u8",
+    logo: "https://static.wixstatic.com/media/6ba705_4a8e930e0e1e4231b059e29e951d15ad~mv2.png",
+    cat: "FILMS",
+    ch: "159",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Ciné Nanar - Le meilleur des films cultes, science-fiction kitsch, monstres géants et arts martiaux délirants",
+    m3u8Source: "https://zylo-cinenanar-rakuten.amagi.tv/playlist.m3u8"
+  },
+  {
+    id: 'ch_160',
+    nom: "CINE WESTERN",
+    lien: "https://amg00711-zylo-amg00711c8-rakuten-uk-2686.playouts.now.amagi.tv/playlist/amg00711-zylofast-cinewestern-rakutenuk/playlist.m3u8",
+    logo: "https://static.wixstatic.com/media/6ba705_157c0663b69041e0a7c5b543e83f53e0~mv2.png",
+    cat: "FILMS",
+    ch: "160",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Ciné Western - Les grands classiques du western, western spaghetti, duels au soleil et légendes du Far West",
+    m3u8Source: "https://amg00711-zylo-amg00711c8-rakuten-uk-2686.playouts.now.amagi.tv/playlist/amg00711-zylofast-cinewestern-rakutenuk/playlist.m3u8"
+  },
+  {
+    id: 'ch_161',
+    nom: "EMOTION'L",
+    lien: "https://amg00711-zylo-france-zylo-emotional-rakuten-frukp.amagi.tv/hls/amagi_hls_data_rakutenAA-zylo-emotional-rakuten/CDN/master.m3u8",
+    logo: "https://static.wixstatic.com/media/6ba705_5193d9a37da44d3898aed28bb9177835~mv2.png",
+    cat: "FILMS",
+    ch: "161",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Emotion'L - Comédies romantiques, téléfilms feel-good, histoires passionnelles et drames émouvants",
+    m3u8Source: "https://amg00711-zylo-france-zylo-emotional-rakuten-frukp.amagi.tv/hls/amagi_hls_data_rakutenAA-zylo-emotional-rakuten/CDN/master.m3u8"
+  },
+  {
+    id: 'ch_162',
+    nom: "FREQUENCE NOVELAS",
+    lien: "https://amg00711-zylo-amg00711c4-rakuten-us-769.playouts.now.amagi.tv/playlist/amg00711-zylofast-frequencenovelas-rakutenus/playlist.m3u8",
+    logo: "https://static.wixstatic.com/media/6ba705_5bd15f9ba6f440e0a0ff97a2fba1cd97~mv2.png",
+    cat: "FILMS",
+    ch: "162",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Fréquence Novelas - Diffusion continue des sagas et séries novelas incontournables",
+    m3u8Source: "https://amg00711-zylo-amg00711c4-rakuten-us-769.playouts.now.amagi.tv/playlist/amg00711-zylofast-frequencenovelas-rakutenus/playlist.m3u8"
+  },
+  {
+    id: 'ch_163',
+    nom: "SCREAM'IN",
+    lien: "https://zylo-screamin-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-zylo-screamin-rakuten/CDN/master.m3u8",
+    logo: "https://static.wixstatic.com/media/6ba705_7aaafdef307149ee8290018a1a80aa96~mv2.png",
+    cat: "FILMS",
+    ch: "163",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Scream'In - Cinéma d'horreur, thrillers angoissants, slashers et maisons hantées non-stop",
+    m3u8Source: "https://zylo-screamin-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-zylo-screamin-rakuten/CDN/master.m3u8"
+  },
+  {
+    id: 'ch_164',
+    nom: "SONY ONE HITS ACTION",
+    lien: "https://5098a8b860504a3690fd2e7c0a18d68f.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-817-FR-SONYONEHITSACTION-LG_FR/playlist.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/sony-one-fr.png",
+    cat: "FILMS",
+    ch: "164",
+    qualite: "4K",
+    pays: "USA",
+    desc: "Sony One Hits Action - Blockbusters à sensations fortes, courses-poursuites et superproductions Sony Pictures",
+    m3u8Source: "https://5098a8b860504a3690fd2e7c0a18d68f.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-817-FR-SONYONEHITSACTION-LG_FR/playlist.m3u8"
+  },
+  {
+    id: 'ch_165',
+    nom: "SONY ONE HITS COMEDIE",
+    lien: "https://7aa9671895264ec9a384dfed1b992171.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-818-FR-SONYONEHITSCOMDIE-LG_FR/playlist.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/sony-one-fr.png",
+    cat: "FILMS",
+    ch: "165",
+    qualite: "4K",
+    pays: "USA",
+    desc: "Sony One Hits Comédie - Comédies cultes du catalogue Sony Pictures, rires et moments inoubliables",
+    m3u8Source: "https://7aa9671895264ec9a384dfed1b992171.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-818-FR-SONYONEHITSCOMDIE-LG_FR/playlist.m3u8"
+  },
+  {
+    id: 'ch_166',
+    nom: "SONY ONE FAVORIS",
+    lien: "https://49d735318d6b4c30a24a7997ea594e1b.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-820-FR-SONYONEFAVORIS-LG_FR/playlist.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/sony-one-fr.png",
+    cat: "FILMS",
+    ch: "166",
+    qualite: "4K",
+    pays: "USA",
+    desc: "Sony One Favoris - Les films les plus plébiscités par le public, cinéma familial et chefs-d'œuvre",
+    m3u8Source: "https://49d735318d6b4c30a24a7997ea594e1b.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-820-FR-SONYONEFAVORIS-LG_FR/playlist.m3u8"
+  },
+  {
+    id: 'ch_167',
+    nom: "SONY ONE SERIES COMEDIES",
+    lien: "https://4f2a3e1ff5274297b115cf0f7da1c2cd.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-819-FR-SONYONESRIESCOMDIE-LG_FR/playlist.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/sony-one-fr.png",
+    cat: "FILMS",
+    ch: "167",
+    qualite: "4K",
+    pays: "USA",
+    desc: "Sony One Séries Comédies - Sitcoms et séries humoristiques légendaires en version française",
+    m3u8Source: "https://4f2a3e1ff5274297b115cf0f7da1c2cd.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-819-FR-SONYONESRIESCOMDIE-LG_FR/playlist.m3u8"
+  },
+  {
+    id: 'ch_168',
+    nom: "SONY ONE SERIES THRILLER",
+    lien: "https://483a1e90c18641c9a6d27becd41ad892.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-821-FR-SONYONESRIESTHRILLER-LG_FR/playlist.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/sony-one-fr.png",
+    cat: "FILMS",
+    ch: "168",
+    qualite: "4K",
+    pays: "USA",
+    desc: "Sony One Séries Thriller - Séries d'espionnage, enquêtes policières et suspense psychologique",
+    m3u8Source: "https://483a1e90c18641c9a6d27becd41ad892.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-821-FR-SONYONESRIESTHRILLER-LG_FR/playlist.m3u8"
+  },
+  {
+    id: 'ch_169',
+    nom: "CNEWS PRIME",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/canalplus/cnews_prime.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/CNEWSPRIME_500_500_71081787c7.png",
+    cat: "NEWS",
+    ch: "169",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "CNEWS Prime - Les grandes soirées d'actualité et débats en direct",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/canalplus/cnews_prime.m3u8"
+  },
+  {
+    id: 'ch_170',
+    nom: "BFM TV 2",
+    lien: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM2/index.m3u8?start=LIVE&end=END",
+    logo: "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300BFM2coul.png",
+    cat: "NEWS",
+    ch: "170",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "BFM TV 2 - Canal secondaire événementiel d'information en continu",
+    m3u8Source: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM2/index.m3u8?start=LIVE&end=END"
+  },
+  {
+    id: 'ch_171',
+    nom: "BFM BUSINESS",
+    lien: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_BUSINESS/index.m3u8?start=LIVE&end=END",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/bfm-business-fr.png",
+    cat: "NEWS",
+    ch: "171",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "BFM Business - Première chaîne d'information économique et financière de France",
+    m3u8Source: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_BUSINESS/index.m3u8?start=LIVE&end=END"
+  },
+  {
+    id: 'ch_172',
+    nom: "BFM TV GRANDS REPORTAGES",
+    lien: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_GRANDSREPORTAGES/index.m3u8?start=LIVE&end=END",
+    logo: "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300BFMGRANDSREPORTAGEScoul.png",
+    cat: "NEWS",
+    ch: "172",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "BFM TV Grands Reportages - Documentaires d'investigation, dossiers spéciaux et longs formats",
+    m3u8Source: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_GRANDSREPORTAGES/index.m3u8?start=LIVE&end=END"
+  },
+  {
+    id: 'ch_173',
+    nom: "B SMART",
+    lien: "https://raw.githubusercontent.com/Sibprod/streams/main/ressources/dm/py/hls/bsmart.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/b-smart-fr.png",
+    cat: "NEWS",
+    ch: "173",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "B SMART - La chaîne des audacieux, chefs d'entreprises, innovations et nouvelles technologies",
+    m3u8Source: "https://raw.githubusercontent.com/Sibprod/streams/main/ressources/dm/py/hls/bsmart.m3u8"
+  },
+  {
+    id: 'ch_174',
+    nom: "EURONEWS FR",
+    lien: "https://euronews-live-fre-fr.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6564/bitok/e/26032/euronews-fr.m3u8",
+    logo: "https://i.ibb.co/VxLFYSj/euronews.png",
+    cat: "NEWS",
+    ch: "174",
+    qualite: "4K",
+    pays: "INTERNATIONAL",
+    desc: "Euronews Français - L'actualité européenne et mondiale sous une perspective internationale 24/7",
+    m3u8Source: "https://euronews-live-fre-fr.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6564/bitok/e/26032/euronews-fr.m3u8"
+  },
+  {
+    id: 'ch_178',
+    nom: "ÉQUIDIA",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/equidia/equidia-live2.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/equidia-fr.png",
+    cat: "SPORTS",
+    ch: "178",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Équidia - La chaîne des courses hippiques en direct, analyses d'experts et pronostics",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/equidia/equidia-live2.m3u8"
+  },
+  {
+    id: 'ch_179',
+    nom: "TRACE SPORTS STARS",
+    lien: "https://lightning-tracesport-samsungau.amagi.tv/playlist.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/trace-sport-stars-fr.png",
+    cat: "SPORTS",
+    ch: "179",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Trace Sports Stars - La vie des champions hors du terrain, interviews exclusives et lifestyle",
+    m3u8Source: "https://lightning-tracesport-samsungau.amagi.tv/playlist.m3u8"
+  },
+  {
+    id: 'ch_180',
+    nom: "AFTER FOOT TV",
+    lien: "https://d278gam2ft6q08.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-0ic4hqa502el6/AfterfootTV_FR.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/large_logo_afterfoot_TV_fondblanc_83130699dd.png",
+    cat: "SPORTS",
+    ch: "180",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "After Foot TV - L'émission référence du football avec Gilbert Brisbois et Daniel Riolo",
+    m3u8Source: "https://d278gam2ft6q08.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-0ic4hqa502el6/AfterfootTV_FR.m3u8"
+  },
+  {
+    id: 'ch_186',
+    nom: "L'ÉQUIPE LIVE 1",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/lequipe/lequipelive1.m3u8",
+    logo: "https://i.ibb.co/KXhYwm0/lequipe.png",
+    cat: "SPORTS",
+    ch: "186",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "L'Équipe Live 1 - Multiplex et compétitions sportives en direct",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/lequipe/lequipelive1.m3u8"
+  },
+  {
+    id: 'ch_191',
+    nom: "MUSEUM TV",
+    lien: "https://amg01492-secomsasmediart-museumtv-fr-rakuten-5ofja.amagi.tv/hls/amagi_hls_data_rakutenAA-museumtv-fr-rakuten/CDN/master.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/213_2a0a085d44.png",
+    cat: "DOCUMENTAIRE",
+    ch: "191",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Museum TV - La première chaîne dédiée entièrement aux arts visuels, peinture, design et photographie",
+    m3u8Source: "https://amg01492-secomsasmediart-museumtv-fr-rakuten-5ofja.amagi.tv/hls/amagi_hls_data_rakutenAA-museumtv-fr-rakuten/CDN/master.m3u8"
+  },
+  {
+    id: 'ch_192',
+    nom: "L'ÉSPRIT SORCIER TV",
+    lien: "https://edge17.vedge.infomaniak.com/livecast/ik:bazikafrica/manifest.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/medium_220_Esprit_sorcier_alpha_orange_800x400_8e6009c26d.png",
+    cat: "DOCUMENTAIRE",
+    ch: "192",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "L'Esprit Sorcier TV - La science pour tous avec Fred Courant et l'équipe de C'est pas sorcier",
+    m3u8Source: "https://edge17.vedge.infomaniak.com/livecast/ik:bazikafrica/manifest.m3u8"
+  },
+  {
+    id: 'ch_193',
+    nom: "FRANCE TV DOCS",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/docs.m3u8",
+    logo: "https://i.ibb.co/kJjHW61/frdocs.png",
+    cat: "DOCUMENTAIRE",
+    ch: "193",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "France TV Docs - Documentaires animaliers, expéditions scientifiques et découvertes",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/docs.m3u8"
+  },
+  {
+    id: 'ch_194',
+    nom: "TECH & CO",
+    lien: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_TECHANDCO/index.m3u8?start=LIVE&end=END",
+    logo: "https://freebox.cdn.scw.iliad.fr/medium_logo_TECH_and_Co_fondblanc_freebox_1000x1000_dbcd77195a.png",
+    cat: "NEWS",
+    ch: "194",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Tech & Co - L'actualité des nouvelles technologies, IA, smartphones et startups",
+    m3u8Source: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_TECHANDCO/index.m3u8?start=LIVE&end=END"
+  },
+  {
+    id: 'ch_195',
+    nom: "RMC MECANIC",
+    lien: "https://d31lyfwi8gzfyr.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-ebepfdmg74kzh/RMC_MECANIC_FR.m3u8",
+    logo: "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300RMCMECANICcoul.png",
+    cat: "DOCUMENTAIRE",
+    ch: "195",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "RMC Mecanic - Restauration de véhicules cultes, garages d'exception et mécanique de précision",
+    m3u8Source: "https://d31lyfwi8gzfyr.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-ebepfdmg74kzh/RMC_MECANIC_FR.m3u8"
+  },
+  {
+    id: 'ch_196',
+    nom: "FASHION TV",
+    lien: "https://edge-fast3.evrideo.tv/bfdbb576-83f7-11f0-9f89-0200170e3e04_1000028043_HLS/manifest.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/241_21651551ee.png",
+    cat: "GENERALISTE",
+    ch: "196",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Fashion TV - Les défilés de haute couture mondiale, mannequins et designers internationaux",
+    m3u8Source: "https://edge-fast3.evrideo.tv/bfdbb576-83f7-11f0-9f89-0200170e3e04_1000028043_HLS/manifest.m3u8"
+  },
+  {
+    id: 'ch_197',
+    nom: "MY ZEN TV",
+    lien: "https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01255-secomcofites-my-myzen-en-plex/playlist.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/243_4125a164b3.png",
+    cat: "GENERALISTE",
+    ch: "197",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "My Zen TV - Bien-être, yoga, méditation, paysages relaxants et nutrition saine",
+    m3u8Source: "https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01255-secomcofites-my-myzen-en-plex/playlist.m3u8"
+  },
+  {
+    id: 'ch_199',
+    nom: "MIEUX TV",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/mieux.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/large_thumbnail_COULEUR_edd99e7eee.png",
+    cat: "GENERALISTE",
+    ch: "199",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Mieux TV - Écologie, santé naturelle et consommation responsable",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/mieux.m3u8"
+  },
+  {
+    id: 'ch_200',
+    nom: "INA",
+    lien: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/ina.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/ina-fr.png",
+    cat: "DOCUMENTAIRE",
+    ch: "200",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "INA - Les plus grands trésors de l'histoire de la télévision et de la radio française",
+    m3u8Source: "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/ina.m3u8"
+  },
+  {
+    id: 'ch_201',
+    nom: "MÉLODY",
+    lien: "https://live.creacast.com/telemelody/smil:telemelody-yjvCxE7x.smil/playlist.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/melody-fr.png",
+    cat: "MUSIQUE",
+    ch: "201",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Télé Melody - La chaîne vintage des années 60, 70, 80 et 90 en chansons cultes",
+    m3u8Source: "https://live.creacast.com/telemelody/smil:telemelody-yjvCxE7x.smil/playlist.m3u8"
+  },
+  {
+    id: 'ch_202',
+    nom: "CLUBBING TV",
+    lien: "https://d1j2csarxnwazk.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-uze1m6xh4fiyr-ssai-prd/master.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/274_8e77a87554.png",
+    cat: "MUSIQUE",
+    ch: "202",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Clubbing TV - Musique électro, DJ sets en direct des plus grands festivals et clubs mondiaux",
+    m3u8Source: "https://d1j2csarxnwazk.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-uze1m6xh4fiyr-ssai-prd/master.m3u8"
+  },
+  {
+    id: 'ch_203',
+    nom: "GÉNÉRATIONS TV",
+    lien: "https://edge11.vedge.infomaniak.com/livecast/ik:generation-tv/manifest.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/282_540a739064.png",
+    cat: "MUSIQUE",
+    ch: "203",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Générations TV - 100% Hip-Hop, Rap français et US, R&B et interviews d'artistes",
+    m3u8Source: "https://edge11.vedge.infomaniak.com/livecast/ik:generation-tv/manifest.m3u8"
+  },
+  {
+    id: 'ch_204',
+    nom: "TRACE URBAN",
+    lien: "https://lightning-traceurban-samsungau.amagi.tv/playlist.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/trace-urban-fr.png",
+    cat: "MUSIQUE",
+    ch: "204",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Trace Urban - N°1 de la musique urbaine, Afrobeats, Rap, Pop et charts internationaux",
+    m3u8Source: "https://lightning-traceurban-samsungau.amagi.tv/playlist.m3u8"
+  },
+  {
+    id: 'ch_205',
+    nom: "TRACE BRASIL",
+    lien: "https://trace-brazuca-lg-fr.amagi.tv/hls/amagi_hls_data_tracetvAA-trace-brazuca-lg-fr/CDN/master.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/trace-urban-fr.png",
+    cat: "MUSIQUE",
+    ch: "205",
+    qualite: "HD",
+    pays: "BRESIL",
+    desc: "Trace Brasil (Brazuca) - Samba, Funk brésilien, Pagode et culture musicale brésilienne",
+    m3u8Source: "https://trace-brazuca-lg-fr.amagi.tv/hls/amagi_hls_data_tracetvAA-trace-brazuca-lg-fr/CDN/master.m3u8"
+  },
+  {
+    id: 'ch_206',
+    nom: "TRACE LATINA",
+    lien: "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01131-tracetv-tracelatinaes-samsungspain/playlist.m3u8",
+    logo: "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/trace-latina-fr.png",
+    cat: "MUSIQUE",
+    ch: "206",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "Trace Latina - Reggaeton, Salsa, Bachata et hits latino les plus chauds",
+    m3u8Source: "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01131-tracetv-tracelatinaes-samsungspain/playlist.m3u8"
+  },
+  {
+    id: 'ch_207',
+    nom: "BBLACK! AFRICA",
+    lien: "https://livevideo.vedge.infomaniak.com/livecast/ik:bblackafrica/manifest.m3u8",
+    logo: "https://i.ibb.co/JB18vMW/bblack.png",
+    cat: "MUSIQUE",
+    ch: "207",
+    qualite: "HD",
+    pays: "AFRIQUE",
+    desc: "BBlack! Africa - Musique africaine contemporaine, Afropop, Coupé-Décalé, Ndombolo et Amapiano",
+    m3u8Source: "https://livevideo.vedge.infomaniak.com/livecast/ik:bblackafrica/manifest.m3u8"
+  },
+  {
+    id: 'ch_208',
+    nom: "BBLACK! CARIBBEAN",
+    lien: "https://livevideo.vedge.infomaniak.com/livecast/ik:bblackcaribbean/manifest.m3u8",
+    logo: "https://i.ibb.co/JB18vMW/bblack.png",
+    cat: "MUSIQUE",
+    ch: "208",
+    qualite: "HD",
+    pays: "CARAIBES",
+    desc: "BBlack! Caribbean - Dancehall, Zouk, Bouyon, Soca et vibes des Antilles",
+    m3u8Source: "https://livevideo.vedge.infomaniak.com/livecast/ik:bblackcaribbean/manifest.m3u8"
+  },
+  {
+    id: 'ch_209',
+    nom: "MADRAS FM TV",
+    lien: "https://edge17.vedge.infomaniak.com/livecast/ik:madrasfmtv/manifest.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/medium_Logo_Madras_02_f8b735e803.png",
+    cat: "RADIO",
+    ch: "209",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Madras FM TV - Radio visuelle caribéenne et tropicale 24/7",
+    m3u8Source: "https://edge17.vedge.infomaniak.com/livecast/ik:madrasfmtv/manifest.m3u8"
+  },
+  {
+    id: 'ch_210',
+    nom: "FRANCE 3 PARIS IDF",
+    lien: "https://raw.githubusercontent.com/ipstreet312/freeiptv/master/ressources/ftv/py/fidf.m3u8",
+    logo: "https://i.ibb.co/C0KCQtV/fr3region.png",
+    cat: "GENERALISTE",
+    ch: "210",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "France 3 Paris Île-de-France - Journaux régionaux et actualités franciliennes",
+    m3u8Source: "https://raw.githubusercontent.com/ipstreet312/freeiptv/master/ressources/ftv/py/fidf.m3u8"
+  },
+  {
+    id: 'ch_211',
+    nom: "FRANCE 3 PROVENCE ALPES",
+    lien: "https://raw.githubusercontent.com/ipstreet312/freeiptv/master/ressources/ftv/py/fpra.m3u8",
+    logo: "https://i.ibb.co/C0KCQtV/fr3region.png",
+    cat: "GENERALISTE",
+    ch: "211",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "France 3 Provence-Alpes - L'information régionale du Sud-Est",
+    m3u8Source: "https://raw.githubusercontent.com/ipstreet312/freeiptv/master/ressources/ftv/py/fpra.m3u8"
+  },
+  {
+    id: 'ch_212',
+    nom: "FRANCE 3 RHÔNE ALPES",
+    lien: "https://raw.githubusercontent.com/ipstreet312/freeiptv/master/ressources/ftv/py/frha.m3u8",
+    logo: "https://i.ibb.co/C0KCQtV/fr3region.png",
+    cat: "GENERALISTE",
+    ch: "212",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "France 3 Rhône-Alpes - Direct et infos régionales Lyon et Alpes",
+    m3u8Source: "https://raw.githubusercontent.com/ipstreet312/freeiptv/master/ressources/ftv/py/frha.m3u8"
+  },
+  {
+    id: 'ch_213',
+    nom: "BFM LYON",
+    lien: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_LYON/index.m3u8?start=LIVE&end=END",
+    logo: "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300BFMlyoncoul.png",
+    cat: "NEWS",
+    ch: "213",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "BFM Lyon - Toute l'info locale, trafic et météo de la métropole lyonnaise",
+    m3u8Source: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_LYON/index.m3u8?start=LIVE&end=END"
+  },
+  {
+    id: 'ch_214',
+    nom: "BFM MARSEILLE PROVENCE",
+    lien: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_MARSEILLEPROV/index.m3u8?start=LIVE&end=END",
+    logo: "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300BFMmarseillecoul.png",
+    cat: "NEWS",
+    ch: "214",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "BFM Marseille Provence - Première chaîne info locale marseillaise",
+    m3u8Source: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_MARSEILLEPROV/index.m3u8?start=LIVE&end=END"
+  },
+  {
+    id: 'ch_215',
+    nom: "BFM NICE COTE D'AZUR",
+    lien: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_NICECOTEDAZUR/index.m3u8?start=LIVE&end=END",
+    logo: "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300BFMnicecoul.png",
+    cat: "NEWS",
+    ch: "215",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "BFM Nice Côte d'Azur - Info locale continue azuréenne",
+    m3u8Source: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_NICECOTEDAZUR/index.m3u8?start=LIVE&end=END"
+  },
+  {
+    id: 'ch_216',
+    nom: "BFM GRAND LILLE",
+    lien: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFMGRANDLILLE/index.m3u8?start=LIVE&end=END",
+    logo: "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300BFMlillecoul.png",
+    cat: "NEWS",
+    ch: "216",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "BFM Grand Lille - Actualités métropole lilloise et Nord",
+    m3u8Source: "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFMGRANDLILLE/index.m3u8?start=LIVE&end=END"
+  },
+  {
+    id: 'ch_217',
+    nom: "RTL TVI",
+    lien: "https://tvi-live-hls.akamaized.net/hls/live/2038650/TVI-Live-HLS/master.m3u8",
+    logo: "https://i.ibb.co/kKMpCzz/rtltvi.png",
+    cat: "GENERALISTE",
+    ch: "217",
+    qualite: "4K",
+    pays: "BELGIQUE",
+    desc: "RTL TVI - La première chaîne privée belge francophone d'information et de divertissement",
+    m3u8Source: "https://tvi-live-hls.akamaized.net/hls/live/2038650/TVI-Live-HLS/master.m3u8"
+  },
+  {
+    id: 'ch_218',
+    nom: "BEL RTL",
+    lien: "https://raw.githubusercontent.com/Paradise-91/ParaTV/main/streams/rtl/be/belrtl.m3u8",
+    logo: "https://i.ibb.co/NyHqX5R/belrtl.png",
+    cat: "RADIO",
+    ch: "218",
+    qualite: "HD",
+    pays: "BELGIQUE",
+    desc: "Bel RTL - Radio généraliste belge francophone d'information et musique",
+    m3u8Source: "https://raw.githubusercontent.com/Paradise-91/ParaTV/main/streams/rtl/be/belrtl.m3u8"
+  },
+  {
+    id: 'ch_219',
+    nom: "LE FIGARO IDF",
+    lien: "https://static.lefigaro.fr/secom/tnt.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/large_Le_Figaro_TV_Id_F_RVB_1b0ecffb64.png",
+    cat: "NEWS",
+    ch: "219",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Le Figaro TV IDF - Débats d'actualité, culture et politique en Île-de-France",
+    m3u8Source: "https://static.lefigaro.fr/secom/tnt.m3u8"
+  },
+  {
+    id: 'ch_220',
+    nom: "20 MINUTES TV IDF",
+    lien: "https://live-20minutestv.digiteka.com/1961167769/index.m3u8",
+    logo: "https://freebox.cdn.scw.iliad.fr/large_20_minutes_tv_idf_2025_svg_102a63bdb4.png",
+    cat: "NEWS",
+    ch: "220",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "20 Minutes TV Île-de-France - Magazine urbain, sorties et direct francilien",
+    m3u8Source: "https://live-20minutestv.digiteka.com/1961167769/index.m3u8"
+  },
+  {
+    id: 'ch_221',
+    nom: "UN SI GRAND SOLEIL",
+    lien: "https://jmp2.uk/stvp-FR3600001R1",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR3600001R1_20260127T040243SQUARE.png",
+    cat: "FILMS",
+    ch: "221",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Un si grand soleil - La chaîne 24/7 dédiée à la série culte de Montpellier",
+    m3u8Source: "https://jmp2.uk/stvp-FR3600001R1"
+  },
+  {
+    id: 'ch_223',
+    nom: "TOP FILMS RAKUTEN",
+    lien: "https://jmp2.uk/stvp-FR2600007CB",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR2600007CB_20250415T020909SQUARE.png",
+    cat: "FILMS",
+    ch: "223",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Top Films Rakuten TV - Blockbusters et cinéma grand public en continu",
+    m3u8Source: "https://jmp2.uk/stvp-FR2600007CB"
+  },
+  {
+    id: 'ch_224',
+    nom: "ÇA CHAUFFE EN CUISINE",
+    lien: "https://jmp2.uk/stvp-FR34000032F",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR34000032F_20260127T040246SQUARE.png",
+    cat: "GENERALISTE",
+    ch: "224",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Ça Chauffe en Cuisine - Concours culinaires, chefs renommés et recettes gourmandes",
+    m3u8Source: "https://jmp2.uk/stvp-FR34000032F"
+  },
+  {
+    id: 'ch_225',
+    nom: "PLUS BELLE LA VIE",
+    lien: "https://jmp2.uk/stvp-FRBD37000020Y",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD37000020Y_20260113T032405SQUARE.png",
+    cat: "FILMS",
+    ch: "225",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Plus Belle La Vie - Les épisodes emblématiques du quartier du Mistral 24/7",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD37000020Y"
+  },
+  {
+    id: 'ch_226',
+    nom: "RMC WOW",
+    lien: "https://jmp2.uk/stvp-FR300001M1",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR300001M1_20241015T042812SQUARE.png",
+    cat: "DOCUMENTAIRE",
+    ch: "226",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "RMC Wow - Les phénomènes spectaculaires, exploits humains et merveilles de la planète",
+    m3u8Source: "https://jmp2.uk/stvp-FR300001M1"
+  },
+  {
+    id: 'ch_227',
+    nom: "RMC MYSTÈRE",
+    lien: "https://jmp2.uk/stvp-FR300006GF",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR300006GF_20241106T142644SQUARE.png",
+    cat: "DOCUMENTAIRE",
+    ch: "227",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "RMC Mystère - Enquêtes paranormales, énigmes non résolues et secrets de l'histoire",
+    m3u8Source: "https://jmp2.uk/stvp-FR300006GF"
+  },
+  {
+    id: 'ch_228',
+    nom: "LES ANGES",
+    lien: "https://jmp2.uk/stvp-FRBD4100001DF",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD4100001DF_20260113T032403SQUARE.png",
+    cat: "GENERALISTE",
+    ch: "228",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Les Anges de la Télé-Réalité - Toutes les saisons cultes à Miami, Los Angeles et Hawaï",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD4100001DF"
+  },
+  {
+    id: 'ch_229',
+    nom: "MTV CATFISH",
+    lien: "https://jmp2.uk/stvp-FRAJ38000050Z",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRAJ38000050Z_20241015T042517SQUARE.png",
+    cat: "GENERALISTE",
+    ch: "229",
+    qualite: "HD",
+    pays: "USA",
+    desc: "Catfish : Fausse Identité - Enquêtes sur les faux profils et romances en ligne",
+    m3u8Source: "https://jmp2.uk/stvp-FRAJ38000050Z"
+  },
+  {
+    id: 'ch_230',
+    nom: "LE MEILLEUR DES JEUX TV",
+    lien: "https://jmp2.uk/stvp-FR3600004UH",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR3600004UH_20251125T101544SQUARE.png",
+    cat: "GENERALISTE",
+    ch: "230",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Le Meilleur des Jeux TV - Les jeux cultes de la télévision française",
+    m3u8Source: "https://jmp2.uk/stvp-FR3600004UH"
+  },
+  {
+    id: 'ch_231',
+    nom: "QUI VEUT GAGNER DES MILLIONS",
+    lien: "https://jmp2.uk/stvp-FRBD1900007PQ",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD1900007PQ_20260127T040241SQUARE.png",
+    cat: "GENERALISTE",
+    ch: "231",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Qui veut gagner des millions ? - Le jeu mythique présenté par Jean-Pierre Foucault et Camille Combal",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD1900007PQ"
+  },
+  {
+    id: 'ch_232',
+    nom: "LES Z'AMOURS",
+    lien: "https://jmp2.uk/stvp-FRBD1900005BA",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD1900005BA_20251013T054034SQUARE.png",
+    cat: "GENERALISTE",
+    ch: "232",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Les Z'amours - Émissions cultes testant la complicité des couples",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD1900005BA"
+  },
+  {
+    id: 'ch_233',
+    nom: "MOTUS",
+    lien: "https://jmp2.uk/stvp-FRBB490000412",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBB490000412_20241015T042740SQUARE.png",
+    cat: "GENERALISTE",
+    ch: "233",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Motus - Le jeu de lettres culte avec Thierry Beccaro en continu",
+    m3u8Source: "https://jmp2.uk/stvp-FRBB490000412"
+  },
+  {
+    id: 'ch_234',
+    nom: "JUSTE POUR RIRE",
+    lien: "https://jmp2.uk/stvp-FRBA3300035UK",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBA3300035UK_20250923T010337SQUARE.png",
+    cat: "GENERALISTE",
+    ch: "234",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Juste Pour Rire Les Gags - Les meilleures caméras cachées et fous rires du monde",
+    m3u8Source: "https://jmp2.uk/stvp-FRBA3300035UK"
+  },
+  {
+    id: 'ch_235',
+    nom: "FAILARMY",
+    lien: "https://jmp2.uk/stvp-FRBA33000234L",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBA33000234L_20241015T035938SQUARE.png",
+    cat: "GENERALISTE",
+    ch: "235",
+    qualite: "HD",
+    pays: "USA",
+    desc: "FailArmy - Les vidéos virales de chutes, gaffes et situations hilarantes",
+    m3u8Source: "https://jmp2.uk/stvp-FRBA33000234L"
+  },
+  {
+    id: 'ch_236',
+    nom: "ADN ANIME",
+    lien: "https://jmp2.uk/stvp-FRBD5100001ZA",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD5100001ZA_20250610T011318SQUARE.png",
+    cat: "ENFANTS",
+    ch: "236",
+    qualite: "4K",
+    pays: "JAPON",
+    desc: "Animation Digital Network (ADN) - Les meilleurs anime japonais en VF",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD5100001ZA"
+  },
+  {
+    id: 'ch_237',
+    nom: "YU-GI-OH!",
+    lien: "https://jmp2.uk/stvp-FR7000045E",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR7000045E_20250408T021644SQUARE.png",
+    cat: "ENFANTS",
+    ch: "237",
+    qualite: "HD",
+    pays: "JAPON",
+    desc: "Yu-Gi-Oh! - Tous les duels de cartes légendaires de Yugi Muto et Seto Kaiba",
+    m3u8Source: "https://jmp2.uk/stvp-FR7000045E"
+  },
+  {
+    id: 'ch_238',
+    nom: "BEYBLADE",
+    lien: "https://jmp2.uk/stvp-FR1400001VU",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR1400001VU_20241015T040223SQUARE.png",
+    cat: "ENFANTS",
+    ch: "238",
+    qualite: "HD",
+    pays: "JAPON",
+    desc: "Beyblade - Les tournois de toupies et aventures animées",
+    m3u8Source: "https://jmp2.uk/stvp-FR1400001VU"
+  },
+  {
+    id: 'ch_239',
+    nom: "EPICURIEUX JAMY",
+    lien: "https://jmp2.uk/stvp-FRBD5100003TP",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD5100003TP_20251202T002632SQUARE.png",
+    cat: "DOCUMENTAIRE",
+    ch: "239",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Epicurieux avec Jamy Gourmaud - Vulgarisation scientifique, nature et culture générale",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD5100003TP"
+  },
+  {
+    id: 'ch_240',
+    nom: "MTV CLASSICS",
+    lien: "https://jmp2.uk/stvp-FRAJ3800004CC",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRAJ3800004CC_20241015T042519SQUARE.png",
+    cat: "MUSIQUE",
+    ch: "240",
+    qualite: "HD",
+    pays: "USA",
+    desc: "MTV Classics - Les plus grands clips musicaux des années 80, 90 et 2000",
+    m3u8Source: "https://jmp2.uk/stvp-FRAJ3800004CC"
+  },
+  {
+    id: 'ch_242',
+    nom: "ALERTE À MALIBU",
+    lien: "https://jmp2.uk/stvp-FRBC4700002RF",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBC4700002RF_20251028T011415SQUARE.png",
+    cat: "FILMS",
+    ch: "242",
+    qualite: "HD",
+    pays: "USA",
+    desc: "Alerte à Malibu (Baywatch) - Mitch Buchannon et les sauveteurs de Los Angeles en continu",
+    m3u8Source: "https://jmp2.uk/stvp-FRBC4700002RF"
+  },
+  {
+    id: 'ch_243',
+    nom: "FAITES ENTRER L'ACCUSÉ",
+    lien: "https://jmp2.uk/stvp-FR1400002XF",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR1400002XF_20251111T012047SQUARE.png",
+    cat: "DOCUMENTAIRE",
+    ch: "243",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Faites entrer l'accusé - Les grandes affaires criminelles de l'histoire judiciaire française",
+    m3u8Source: "https://jmp2.uk/stvp-FR1400002XF"
+  },
+  {
+    id: 'ch_244',
+    nom: "J'IRAI DORMIR CHEZ VOUS",
+    lien: "https://jmp2.uk/stvp-FRBD4800001P4",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD4800001P4_20241106T142647SQUARE.png",
+    cat: "DOCUMENTAIRE",
+    ch: "244",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "J'irai dormir chez vous - Les voyages et aventures authentiques d'Antoine de Maximy",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD4800001P4"
+  },
+  {
+    id: 'ch_245',
+    nom: "BBC EARTH",
+    lien: "https://jmp2.uk/stvp-FR3200001NQ",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR3200001NQ_20250923T010333SQUARE.png",
+    cat: "DOCUMENTAIRE",
+    ch: "245",
+    qualite: "4K",
+    pays: "UK",
+    desc: "BBC Earth - Les chefs-d'œuvre documentaires de la nature et de la faune sauvage",
+    m3u8Source: "https://jmp2.uk/stvp-FR3200001NQ"
+  },
+  {
+    id: 'ch_246',
+    nom: "MAYDAY CATASTROPHE AÉRIENNE",
+    lien: "https://jmp2.uk/stvp-FR40000413",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR40000413_20251209T004503SQUARE.png",
+    cat: "DOCUMENTAIRE",
+    ch: "246",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Mayday : Dangers dans le Ciel - Les enquêtes minutieuses sur les crashs d'avions",
+    m3u8Source: "https://jmp2.uk/stvp-FR40000413"
+  },
+  {
+    id: 'ch_247',
+    nom: "CHEFCLUB TV",
+    lien: "https://jmp2.uk/stvp-FRBB3900001PZ",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBB3900001PZ_20241015T040912SQUARE.png",
+    cat: "GENERALISTE",
+    ch: "247",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Chefclub TV - Recettes créatives, astuces gourmandes et cuisine en vidéo",
+    m3u8Source: "https://jmp2.uk/stvp-FRBB3900001PZ"
+  },
+  {
+    id: 'ch_248',
+    nom: "PLUTO TV CUISINE",
+    lien: "https://jmp2.uk/stvp-FRBA3300044VR",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBA3300044VR_20241015T042753SQUARE.png",
+    cat: "GENERALISTE",
+    ch: "248",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Pluto TV Cuisine - Émissions gastronomiques, compétitions et découvertes culinaires",
+    m3u8Source: "https://jmp2.uk/stvp-FRBA3300044VR"
+  },
+  {
+    id: 'ch_249',
+    nom: "VOYAGES & SAVEURS",
+    lien: "https://jmp2.uk/stvp-FR3600005C7",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR3600005C7_20251125T101554SQUARE.png",
+    cat: "DOCUMENTAIRE",
+    ch: "249",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Voyages & Saveurs - Évasions dépaysantes et dégustations des spécialités du monde",
+    m3u8Source: "https://jmp2.uk/stvp-FR3600005C7"
+  },
+  {
+    id: 'ch_250',
+    nom: "INVITATION AU VOYAGE",
+    lien: "https://jmp2.uk/stvp-FR3700004HZ",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR3700004HZ_20251230T031040SQUARE.png",
+    cat: "DOCUMENTAIRE",
+    ch: "250",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Invitation au voyage - Échappées culturelles et patrimoniales",
+    m3u8Source: "https://jmp2.uk/stvp-FR3700004HZ"
+  },
+  {
+    id: 'ch_251',
+    nom: "TV5MONDE+ CHEFS",
+    lien: "https://jmp2.uk/stvp-FR1300003HM",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR1300003HM_20251013T054012SQUARE.png",
+    cat: "GENERALISTE",
+    ch: "251",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "TV5MONDE+ Chefs - Les toqués de la gastronomie francophone et internationale",
+    m3u8Source: "https://jmp2.uk/stvp-FR1300003HM"
+  },
+  {
+    id: 'ch_252',
+    nom: "TV5 MONDE VOYAGE",
+    lien: "https://jmp2.uk/stvp-FR1800004EP",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR1800004EP_20251013T054046SQUARE.png",
+    cat: "DOCUMENTAIRE",
+    ch: "252",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "TV5 Monde Voyage - Les plus beaux horizons de la planète",
+    m3u8Source: "https://jmp2.uk/stvp-FR1800004EP"
+  },
+  {
+    id: 'ch_253',
+    nom: "ECHAPPÉES BELLES & CO",
+    lien: "https://jmp2.uk/stvp-FRBC3500002E4",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBC3500002E4_20241015T040301SQUARE.png",
+    cat: "DOCUMENTAIRE",
+    ch: "253",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Échappées Belles & Co - Découverte des régions et pays du globe",
+    m3u8Source: "https://jmp2.uk/stvp-FRBC3500002E4"
+  },
+  {
+    id: 'ch_254',
+    nom: "BFM 2",
+    lien: "https://jmp2.uk/stvp-FR1400003Y0",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR1400003Y0_20241015T040216SQUARE.png",
+    cat: "NEWS",
+    ch: "254",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "BFM 2 - Le direct événementiel et les grandes éditions spéciales de BFM TV",
+    m3u8Source: "https://jmp2.uk/stvp-FR1400003Y0"
+  },
+  {
+    id: 'ch_259',
+    nom: "CNN HEADLINES",
+    lien: "https://jmp2.uk/stvp-FRBD190001055",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD190001055_20251209T004428SQUARE.png",
+    cat: "NEWS",
+    ch: "259",
+    qualite: "HD",
+    pays: "USA",
+    desc: "CNN Headlines - Breaking news and top global news stories",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD190001055"
+  },
+  {
+    id: 'ch_260',
+    nom: "SKY NEWS INTERNATIONAL",
+    lien: "https://jmp2.uk/stvp-FR3400002VW",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR3400002VW_20250624T020534SQUARE.png",
+    cat: "NEWS",
+    ch: "260",
+    qualite: "HD",
+    pays: "UK",
+    desc: "Sky News International - First for breaking news from the UK and worldwide",
+    m3u8Source: "https://jmp2.uk/stvp-FR3400002VW"
+  },
+  {
+    id: 'ch_261',
+    nom: "REUTERS",
+    lien: "https://jmp2.uk/stvp-FRBD490000195",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD490000195_20241015T042818SQUARE.png",
+    cat: "NEWS",
+    ch: "261",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "Reuters TV - Unbiased, trusted business and world news",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD490000195"
+  },
+  {
+    id: 'ch_268',
+    nom: "VEVO POP",
+    lien: "https://jmp2.uk/stvp-FRBC2100001YY",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBC2100001YY_20241015T040412SQUARE.png",
+    cat: "MUSIQUE",
+    ch: "268",
+    qualite: "HD",
+    pays: "USA",
+    desc: "Vevo Pop - Les hits pop internationaux et vidéoclips les plus streamés",
+    m3u8Source: "https://jmp2.uk/stvp-FRBC2100001YY"
+  },
+  {
+    id: 'ch_269',
+    nom: "VEVO HIP-HOP & R&B",
+    lien: "https://jmp2.uk/stvp-FRBC2100002JA",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBC2100002JA_20241015T040410SQUARE.png",
+    cat: "MUSIQUE",
+    ch: "269",
+    qualite: "HD",
+    pays: "USA",
+    desc: "Vevo Hip-Hop & R&B - Le son urbain américain et mondial non-stop",
+    m3u8Source: "https://jmp2.uk/stvp-FRBC2100002JA"
+  },
+  {
+    id: 'ch_270',
+    nom: "VEVO RÉTRO",
+    lien: "https://jmp2.uk/stvp-FRBD1900013CB",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD1900013CB_20250513T005804SQUARE.png",
+    cat: "MUSIQUE",
+    ch: "270",
+    qualite: "HD",
+    pays: "USA",
+    desc: "Vevo Rétro - Les plus grands clips des légendes de la musique",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD1900013CB"
+  },
+  {
+    id: 'ch_271',
+    nom: "K-POP CJ ENM",
+    lien: "https://jmp2.uk/stvp-FR3900001AC",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR3900001AC_20241105T032704SQUARE.png",
+    cat: "MUSIQUE",
+    ch: "271",
+    qualite: "HD",
+    pays: "COREE DU SUD",
+    desc: "K-POP by CJ ENM - Les groupes coréens phares, chorégraphies et performances lives",
+    m3u8Source: "https://jmp2.uk/stvp-FR3900001AC"
+  },
+  {
+    id: 'ch_272',
+    nom: "NEW KPOP",
+    lien: "https://jmp2.uk/stvp-FR1700002OZ",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR1700002OZ_20251013T054040SQUARE.png",
+    cat: "MUSIQUE",
+    ch: "272",
+    qualite: "HD",
+    pays: "COREE DU SUD",
+    desc: "NEW KPOP - Les nouvelles sorties et idoles de la pop sud-coréenne",
+    m3u8Source: "https://jmp2.uk/stvp-FR1700002OZ"
+  },
+  {
+    id: 'ch_273',
+    nom: "COOL SUMMER CHANNEL",
+    lien: "https://jmp2.uk/stvp-FR2500001BS",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR2500001BS_20241015T040238SQUARE.png",
+    cat: "MUSIQUE",
+    ch: "273",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Cool Summer Channel - Hits estivaux et sons lounge ensoleillés",
+    m3u8Source: "https://jmp2.uk/stvp-FR2500001BS"
+  },
+  {
+    id: 'ch_274',
+    nom: "EMOTION MUSIQUE",
+    lien: "https://jmp2.uk/stvp-FRBC900001LB",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBC900001LB_20241015T040425SQUARE.png",
+    cat: "MUSIQUE",
+    ch: "274",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Emotion Musique - Ballades et mélodies intemporelles",
+    m3u8Source: "https://jmp2.uk/stvp-FRBC900001LB"
+  },
+  {
+    id: 'ch_275',
+    nom: "CAILLOU",
+    lien: "https://jmp2.uk/stvp-FR4800002NE",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR4800002NE_20250121T012923SQUARE.png",
+    cat: "ENFANTS",
+    ch: "275",
+    qualite: "HD",
+    pays: "CANADA",
+    desc: "Caillou - Les découvertes du quotidien pour les tout-petits",
+    m3u8Source: "https://jmp2.uk/stvp-FR4800002NE"
+  },
+  {
+    id: 'ch_276',
+    nom: "LOOLOO KIDS",
+    lien: "https://jmp2.uk/stvp-FR5000001UH",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR5000001UH_20250326T013223SQUARE.png",
+    cat: "ENFANTS",
+    ch: "276",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "LooLoo Kids - Comptines animées et chansons d'éveil pour enfants",
+    m3u8Source: "https://jmp2.uk/stvp-FR5000001UH"
+  },
+  {
+    id: 'ch_277',
+    nom: "POCOYO",
+    lien: "https://jmp2.uk/stvp-FR700001VJ",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR700001VJ_20251111T012101SQUARE.png",
+    cat: "ENFANTS",
+    ch: "277",
+    qualite: "HD",
+    pays: "ESPAGNE",
+    desc: "Pocoyo - Aventures ludiques et colorées de Pocoyo et ses amis",
+    m3u8Source: "https://jmp2.uk/stvp-FR700001VJ"
+  },
+  {
+    id: 'ch_278',
+    nom: "WONDERLAND KIDS TV",
+    lien: "https://jmp2.uk/stvp-FR1800002C4",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR1800002C4_20260127T040229SQUARE.png",
+    cat: "ENFANTS",
+    ch: "278",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Wonderland Kids TV - Programmes d'animation féériques",
+    m3u8Source: "https://jmp2.uk/stvp-FR1800002C4"
+  },
+  {
+    id: 'ch_279',
+    nom: "LES LAPINS CRÉTINS",
+    lien: "https://jmp2.uk/stvp-FRBD2300002CM",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD2300002CM_20251209T004459SQUARE.png",
+    cat: "ENFANTS",
+    ch: "279",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Les Lapins Crétins (Rabbids Invasion) - Bêtises et folie pure non-stop",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD2300002CM"
+  },
+  {
+    id: 'ch_281',
+    nom: "MASHA ET MICHKA",
+    lien: "https://jmp2.uk/stvp-FR38000024W",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR38000024W_20260120T031404SQUARE.png",
+    cat: "ENFANTS",
+    ch: "281",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "Masha et Michka - La petite fille espiègle et son ami l'ours dans la forêt",
+    m3u8Source: "https://jmp2.uk/stvp-FR38000024W"
+  },
+  {
+    id: 'ch_282',
+    nom: "CHARLOTTE AUX FRAISES",
+    lien: "https://jmp2.uk/stvp-FRBD1900012T7",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD1900012T7_20241015T040231SQUARE.png",
+    cat: "ENFANTS",
+    ch: "282",
+    qualite: "HD",
+    pays: "USA",
+    desc: "Charlotte aux Fraises - Les aventures douces et parfumées de Fraisi-Paradis",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD1900012T7"
+  },
+  {
+    id: 'ch_283',
+    nom: "SUPERTOONS TV",
+    lien: "https://jmp2.uk/stvp-FRBD5100002NL",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD5100002NL_20250729T045525SQUARE.png",
+    cat: "ENFANTS",
+    ch: "283",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "SuperToons TV - Dessins animés jeunesse classiques et contemporains",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD5100002NL"
+  },
+  {
+    id: 'ch_284',
+    nom: "BOB L'ÉPONGE",
+    lien: "https://jmp2.uk/stvp-FRAJ3800010QO",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRAJ3800010QO_20241106T142544SQUARE.png",
+    cat: "ENFANTS",
+    ch: "284",
+    qualite: "HD",
+    pays: "USA",
+    desc: "Bob l'Éponge - Les aventures hilarantes de Bikini Bottom avec Patrick et Carlo",
+    m3u8Source: "https://jmp2.uk/stvp-FRAJ3800010QO"
+  },
+  {
+    id: 'ch_285',
+    nom: "PLUTO TV TOONS",
+    lien: "https://jmp2.uk/stvp-FRAJ38000035M",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRAJ38000035M_20250603T004908SQUARE.png",
+    cat: "ENFANTS",
+    ch: "285",
+    qualite: "HD",
+    pays: "USA",
+    desc: "Pluto TV Toons - Les cartoons cultes et séries d'animation",
+    m3u8Source: "https://jmp2.uk/stvp-FRAJ38000035M"
+  },
+  {
+    id: 'ch_286',
+    nom: "100% KIDZ",
+    lien: "https://jmp2.uk/stvp-FR3400004L5",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR3400004L5_20251230T031031SQUARE.png",
+    cat: "ENFANTS",
+    ch: "286",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "100% Kidz - Dessins animés et divertissement pour toute la famille",
+    m3u8Source: "https://jmp2.uk/stvp-FR3400004L5"
+  },
+  {
+    id: 'ch_287',
+    nom: "ICARLY",
+    lien: "https://jmp2.uk/stvp-FRAJ38000061J",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRAJ38000061J_20241106T142552SQUARE.png",
+    cat: "ENFANTS",
+    ch: "287",
+    qualite: "HD",
+    pays: "USA",
+    desc: "iCarly - La série comique ado Nickelodeon culte",
+    m3u8Source: "https://jmp2.uk/stvp-FRAJ38000061J"
+  },
+  {
+    id: 'ch_288',
+    nom: "FAMILLE RAKUTEN",
+    lien: "https://jmp2.uk/stvp-FR2600001PI",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR2600001PI_20251230T031018SQUARE.png",
+    cat: "FILMS",
+    ch: "288",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Famille Rakuten TV - Films grand public pour petits et grands",
+    m3u8Source: "https://jmp2.uk/stvp-FR2600001PI"
+  },
+  {
+    id: 'ch_289',
+    nom: "FAMILY CLUB",
+    lien: "https://jmp2.uk/stvp-FRBD2300001UQ",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD2300001UQ_20250121T012933SQUARE.png",
+    cat: "FILMS",
+    ch: "289",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Family Club - Cinéma familial, aventures et contes",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD2300001UQ"
+  },
+  {
+    id: 'ch_293',
+    nom: "WILD SIDE TV",
+    lien: "https://jmp2.uk/stvp-FRBA3300021ME",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBA3300021ME_20250527T014703SQUARE.png",
+    cat: "FILMS",
+    ch: "293",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Wild Side TV - Cinéma de genre, films d'auteur et thrillers cultes",
+    m3u8Source: "https://jmp2.uk/stvp-FRBA3300021ME"
+  },
+  {
+    id: 'ch_294',
+    nom: "MYTIME MOVIE NETWORK",
+    lien: "https://jmp2.uk/stvp-FRBA2200010VN",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBA2200010VN_20260127T040227SQUARE.png",
+    cat: "FILMS",
+    ch: "294",
+    qualite: "HD",
+    pays: "USA",
+    desc: "MyTime Movie Network - Téléfilms dramatiques, thrillers et romances",
+    m3u8Source: "https://jmp2.uk/stvp-FRBA2200010VN"
+  },
+  {
+    id: 'ch_295',
+    nom: "MOVIESPHERE",
+    lien: "https://jmp2.uk/stvp-FR42000023H",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR42000023H_20251209T004507SQUARE.png",
+    cat: "FILMS",
+    ch: "295",
+    qualite: "HD",
+    pays: "USA",
+    desc: "Moviesphere - Le cinéma Lionsgate en streaming gratuit 24/7",
+    m3u8Source: "https://jmp2.uk/stvp-FR42000023H"
+  },
+  {
+    id: 'ch_296',
+    nom: "PLUTO TV CINÉ",
+    lien: "https://jmp2.uk/stvp-FRAJ3800002W5",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRAJ3800002W5_20241015T042543SQUARE.png",
+    cat: "FILMS",
+    ch: "296",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Pluto TV Ciné - Sélection de films cultes, comédies et polars",
+    m3u8Source: "https://jmp2.uk/stvp-FRAJ3800002W5"
+  },
+  {
+    id: 'ch_297',
+    nom: "ALLOCINÉ",
+    lien: "https://jmp2.uk/stvp-FRBD3900001QP",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD3900001QP_20241015T040203SQUARE.png",
+    cat: "FILMS",
+    ch: "297",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "AlloCiné - Émissions cinéma, secrets de tournage et bandes-annonces",
+    m3u8Source: "https://jmp2.uk/stvp-FRBD3900001QP"
+  },
+  {
+    id: 'ch_298',
+    nom: "TRAILERS",
+    lien: "https://jmp2.uk/stvp-FRBC9000041F",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBC9000041F_20250715T004338SQUARE.png",
+    cat: "FILMS",
+    ch: "298",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Trailers - Toutes les bandes-annonces des sorties cinéma et séries à venir",
+    m3u8Source: "https://jmp2.uk/stvp-FRBC9000041F"
+  },
+  {
+    id: 'ch_300',
+    nom: "RUNTIME",
+    lien: "https://jmp2.uk/stvp-FRBB50000016B",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBB50000016B_20241030T154324SQUARE.png",
+    cat: "FILMS",
+    ch: "300",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Runtime - Films à grand spectacle, policiers et aventures",
+    m3u8Source: "https://jmp2.uk/stvp-FRBB50000016B"
+  },
+  {
+    id: 'ch_302',
+    nom: "SCI-FI RAKUTEN",
+    lien: "https://jmp2.uk/stvp-FR4100001D0",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR4100001D0_20251125T101552SQUARE.png",
+    cat: "FILMS",
+    ch: "302",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Sci-Fi Rakuten TV - Science-fiction, fantasy, futurs dystopiques et voyages dans l'espace",
+    m3u8Source: "https://jmp2.uk/stvp-FR4100001D0"
+  },
+  {
+    id: 'ch_303',
+    nom: "TOP SCI-FI",
+    lien: "https://jmp2.uk/stvp-FR4600001FK",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR4600001FK_20251216T040617SQUARE.png",
+    cat: "FILMS",
+    ch: "303",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Top Sci-Fi - Les films et séries de science-fiction incontournables",
+    m3u8Source: "https://jmp2.uk/stvp-FR4600001FK"
+  },
+  {
+    id: 'ch_304',
+    nom: "BOX OFFICE DRAMA",
+    lien: "https://jmp2.uk/stvp-FR3700003N4",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR3700003N4_20250610T011321SQUARE.png",
+    cat: "FILMS",
+    ch: "304",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Box Office Drama - Récits poignants et chefs-d'œuvre dramatiques",
+    m3u8Source: "https://jmp2.uk/stvp-FR3700003N4"
+  },
+  {
+    id: 'ch_305',
+    nom: "BOX OFFICE THRILLER",
+    lien: "https://jmp2.uk/stvp-FR3700001AG",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR3700001AG_20251028T011454SQUARE.png",
+    cat: "FILMS",
+    ch: "305",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Box Office Thriller - Suspense, complots et tension psychologique",
+    m3u8Source: "https://jmp2.uk/stvp-FR3700001AG"
+  },
+  {
+    id: 'ch_306',
+    nom: "SHADOWZ",
+    lien: "https://jmp2.uk/stvp-FR1800003VF",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR1800003VF_20241210T052746SQUARE.png",
+    cat: "FILMS",
+    ch: "306",
+    qualite: "4K",
+    pays: "FRANCE",
+    desc: "Shadowz - La référence du cinéma de genre, horreur et fantastique",
+    m3u8Source: "https://jmp2.uk/stvp-FR1800003VF"
+  },
+  {
+    id: 'ch_307',
+    nom: "SHARK TV",
+    lien: "https://jmp2.uk/stvp-FR400002JN",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR400002JN_20251230T031021SQUARE.png",
+    cat: "FILMS",
+    ch: "307",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Shark TV - Films de créatures marines, requins prédateurs et frissons aquatiques",
+    m3u8Source: "https://jmp2.uk/stvp-FR400002JN"
+  },
+  {
+    id: 'ch_309',
+    nom: "DRAMES RAKUTEN",
+    lien: "https://jmp2.uk/stvp-FR2600005LH",
+    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR2600005LH_20241015T040143SQUARE.png",
+    cat: "FILMS",
+    ch: "309",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Drames Rakuten TV - Émotions intenses et histoires humaines captivantes",
+    m3u8Source: "https://jmp2.uk/stvp-FR2600005LH"
+  },
+  {
+    id: 'ch_311',
+    nom: "ACC NETWORK",
+    lien: "http://23.239.31.26:8989/accnetwork/index.m3u8",
+    logo: ACC_NETWORK_LOGO,
+    cat: "SPORTS",
+    ch: "311",
+    qualite: "HD",
+    pays: "USA",
+    desc: "ACC Network - Direct des sports universitaires américains, basket, football américain et tournois NCAA ACC",
+    m3u8Source: "http://23.239.31.26:8989/accnetwork/index.m3u8"
+  },
+  {
+    id: 'ch_312',
+    nom: "ACC DIGITAL NETWORK",
+    lien: "https://raycom-accdn-firetv.amagi.tv/playlist.m3u8",
+    logo: ACC_DIGITAL_LOGO,
+    cat: "SPORTS",
+    ch: "312",
+    qualite: "HD",
+    pays: "USA",
+    desc: "ACC Digital Network (Raycom Sports) - Matchs, temps forts et reportages exclusifs de la conférence ACC",
+    m3u8Source: "https://raycom-accdn-firetv.amagi.tv/playlist.m3u8"
+  },
+  {
+    id: 'ch_313',
+    nom: "MULTISTREAM SPORT IT",
+    lien: "https://webstream.multistream.it/memfs/e2cb3629-c1a2-495b-b43a-9eb386f04ed8.m3u8",
+    logo: MULTISTREAM_SPORT_LOGO,
+    cat: "SPORTS",
+    ch: "313",
+    qualite: "HD",
+    pays: "ITALIE",
+    desc: "Multistream Sport IT - Diffusion sportive italienne et internationale en direct",
+    m3u8Source: "https://webstream.multistream.it/memfs/e2cb3629-c1a2-495b-b43a-9eb386f04ed8.m3u8"
+  },
+  {
+    id: 'ch_314',
+    nom: "AFRICA 24 SPORT",
+    lien: "https://africa24.vedge.infomaniak.com/livecast/ik:africa24sport/manifest.m3u8",
+    logo: AFRICA24_SPORT_LOGO,
+    cat: "SPORTS",
+    ch: "314",
+    qualite: "HD",
+    pays: "AFRIQUE",
+    desc: "Africa 24 Sport - Toute l'actualité sportive panafricaine, championnats continentaux et directs",
+    m3u8Source: "https://africa24.vedge.infomaniak.com/livecast/ik:africa24sport/manifest.m3u8"
+  },
+  {
+    id: 'ch_315',
+    nom: "AL IRAQIYA SPORTS",
+    lien: "https://imn-live.esite-lab.com/hls/iraqia-sports-1.m3u8",
+    logo: AL_IRAQIYA_SPORTS_LOGO,
+    cat: "SPORTS",
+    ch: "315",
+    qualite: "HD",
+    pays: "IRAK",
+    desc: "Al Iraqiya Sports TV - Chaîne officielle des sports d'Irak, football, coupes et championnats",
+    m3u8Source: "https://imn-live.esite-lab.com/hls/iraqia-sports-1.m3u8"
+  },
+  {
+    id: 'ch_317',
+    nom: "AL KASS 2 HD",
+    lien: "https://liveeu-gcp.alkassdigital.net/alkass2-p/main.m3u8",
+    logo: AL_KASS_2_LOGO,
+    cat: "SPORTS",
+    ch: "317",
+    qualite: "4K",
+    pays: "QATAR",
+    desc: "Al Kass 2 HD - Matchs en direct, omnisports et grands tournois du Moyen-Orient",
+    m3u8Source: "https://liveeu-gcp.alkassdigital.net/alkass2-p/main.m3u8"
+  },
+  {
+    id: 'ch_318',
+    nom: "AL KASS SHOOF 1",
+    lien: "https://liveeu-gcp.alkassdigital.net/shooflive/main.m3u8",
+    logo: AL_KASS_SHOOF_1_LOGO,
+    cat: "SPORTS",
+    ch: "318",
+    qualite: "HD",
+    pays: "QATAR",
+    desc: "Al Kass Shoof 1 - Canal digital interactif pour les retransmissions en direct",
+    m3u8Source: "https://liveeu-gcp.alkassdigital.net/shooflive/main.m3u8"
+  },
+  {
+    id: 'ch_319',
+    nom: "AL KASS SHOOF 2",
+    lien: "https://liveeu-gcp.alkassdigital.net/shooflive2/main.m3u8",
+    logo: AL_KASS_SHOOF_2_LOGO,
+    cat: "SPORTS",
+    ch: "319",
+    qualite: "HD",
+    pays: "QATAR",
+    desc: "Al Kass Shoof 2 - Deuxième canal digital de retransmission sportive Al Kass",
+    m3u8Source: "https://liveeu-gcp.alkassdigital.net/shooflive2/main.m3u8"
+  },
+  {
+    id: 'ch_321',
+    nom: "AL KASS 4 HD",
+    lien: "https://liveeu-gcp.alkassdigital.net/alkass4-p/main.m3u8",
+    logo: AL_KASS_4_LOGO,
+    cat: "SPORTS",
+    ch: "321",
+    qualite: "4K",
+    pays: "QATAR",
+    desc: "Al Kass 4 HD - Grand direct multisport, tournois asiatiques, football et compétitions internationales",
+    m3u8Source: "https://liveeu-gcp.alkassdigital.net/alkass4-p/main.m3u8"
+  },
+  {
+    id: 'ch_322',
+    nom: "EXTREMA KIDS",
+    lien: "https://627bb251f23c7.streamlock.net:444/ExtremaKids/ExtremaKids/playlist.m3u8",
+    logo: EXTREMA_KIDS_LOGO,
+    cat: "ENFANTS",
+    ch: "322",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "Extrema Kids - Dessins animés, séries jeunesse ludiques et programmation pour toute la famille",
+    m3u8Source: "https://627bb251f23c7.streamlock.net:444/ExtremaKids/ExtremaKids/playlist.m3u8"
+  },
+  {
+    id: 'ch_323',
+    nom: "MCQUACK TV",
+    lien: "http://stream.mcquack.net/353/index.m3u8",
+    logo: MCQUACK_TV_LOGO,
+    cat: "ENFANTS",
+    ch: "323",
+    qualite: "HD",
+    pays: "USA",
+    desc: "McQuack TV - Chaîne jeunesse animée non-stop, aventures et classiques animés",
+    m3u8Source: "http://stream.mcquack.net/353/index.m3u8"
+  },
+  {
+    id: 'ch_324',
+    nom: "THVL4",
+    lien: "https://dethich.pw/thvl4/index.m3u8",
+    logo: THVL4_LOGO,
+    cat: "GENERALISTE",
+    ch: "324",
+    qualite: "HD",
+    pays: "VIETNAM",
+    desc: "THVL4 - Télévision vietnamienne généraliste, séries, divertissement et culture",
+    m3u8Source: "https://dethich.pw/thvl4/index.m3u8"
+  },
+  {
+    id: 'ch_325',
+    nom: "PISHOW TV",
+    lien: "https://cdn-1.pishow.tv/live/1211/master.m3u8",
+    logo: PISHOW_TV_LOGO,
+    cat: "FILMS",
+    ch: "325",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "PiShow TV - Diffusion continue de programmes, séries, divertissements et cinéma",
+    m3u8Source: "https://cdn-1.pishow.tv/live/1211/master.m3u8"
+  },
+  {
+    id: 'ch_326',
+    nom: "TV 360",
+    lien: "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8",
+    logo: TV360_TURK_LOGO,
+    cat: "GENERALISTE",
+    ch: "326",
+    qualite: "HD",
+    pays: "TURQUIE",
+    desc: "TV360 - Chaîne nationale turque de divertissement, magazines, séries et art de vivre",
+    m3u8Source: "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8"
+  },
+  {
+    id: 'ch_327',
+    nom: "ABC NEWS LIVE",
+    lien: "https://abc-news-dmd-streams-1.akamaized.net/out/v1/701126012d044971b3fa89406a440133/index.m3u8",
+    logo: ABC_NEWS_LIVE_LOGO,
+    cat: "NEWS",
+    ch: "327",
+    qualite: "4K",
+    pays: "USA",
+    desc: "ABC News Live - L'information américaine et mondiale 24h/24 en direct et décryptages",
+    m3u8Source: "https://abc-news-dmd-streams-1.akamaized.net/out/v1/701126012d044971b3fa89406a440133/index.m3u8"
+  },
+  {
+    id: 'ch_328',
+    nom: "AFRICA 24",
+    lien: "https://africa24.vedge.infomaniak.com/livecast/ik:africa24/manifest.m3u8",
+    logo: AFRICA24_NEWS_LOGO,
+    cat: "NEWS",
+    ch: "328",
+    qualite: "HD",
+    pays: "AFRIQUE",
+    desc: "Africa 24 - Première chaîne d'information panafricaine continue, économie et société",
+    m3u8Source: "https://africa24.vedge.infomaniak.com/livecast/ik:africa24/manifest.m3u8"
+  },
+  {
+    id: 'ch_329',
+    nom: "AFRICANEWS FR",
+    lien: "https://cdn-euronews.akamaized.net/live/eds/africanews-fr/25050/index.m3u8",
+    logo: AFRICANEWS_FR_LOGO,
+    cat: "NEWS",
+    ch: "329",
+    qualite: "HD",
+    pays: "AFRIQUE",
+    desc: "Africanews Français - Toute l'actualité africaine et internationale par le groupe Euronews",
+    m3u8Source: "https://cdn-euronews.akamaized.net/live/eds/africanews-fr/25050/index.m3u8"
+  },
+  {
+    id: 'ch_330',
+    nom: "CHANNEL 24",
+    lien: "https://segment.yuppcdn.net/110322/channel24/playlist.m3u8",
+    logo: CHANNEL_24_LOGO,
+    cat: "NEWS",
+    ch: "330",
+    qualite: "HD",
+    pays: "BANGLADESH",
+    desc: "Channel 24 - Chaîne d'information en continu, talk-shows, analyses et direct",
+    m3u8Source: "https://segment.yuppcdn.net/110322/channel24/playlist.m3u8"
+  },
+  {
+    id: 'ch_331',
+    nom: "BTB IPTV",
+    lien: "https://emisja2.btb.j00r.us/iptv/session/4/hls.m3u8",
+    logo: BTB_IPTV_LOGO,
+    cat: "GENERALISTE",
+    ch: "331",
+    qualite: "HD",
+    pays: "POLOGNE",
+    desc: "BTB Live IPTV - Télévision numérique généraliste, divertissements et émissions",
+    m3u8Source: "https://emisja2.btb.j00r.us/iptv/session/4/hls.m3u8"
+  },
+  {
+    id: 'ch_332',
+    nom: "OTTRAST LIVE",
+    lien: "http://315e5a5d.ottrast.com/iptv/8KSD5KFDXA6H88/2454/index.m3u8",
+    logo: OTTRAST_LIVE_LOGO,
+    cat: "GENERALISTE",
+    ch: "332",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "OTTRast Live - Chaîne média numérique, divertissement et émissions en continu",
+    m3u8Source: "http://315e5a5d.ottrast.com/iptv/8KSD5KFDXA6H88/2454/index.m3u8"
+  },
+  {
+    id: 'ch_333',
+    nom: "INDYWOOD TV",
+    lien: "https://43wrzjnpqoxe-hls-live.wmncdn.net/indywood/indywoodtv/index.m3u8",
+    logo: INDYWOOD_TV_LOGO,
+    cat: "FILMS",
+    ch: "333",
+    qualite: "HD",
+    pays: "INDE",
+    desc: "Indywood TV - Cinéma indien, films, divertissement, musique et reportages cinéma",
+    m3u8Source: "https://43wrzjnpqoxe-hls-live.wmncdn.net/indywood/indywoodtv/index.m3u8"
+  },
+  {
+    id: 'ch_334',
+    nom: "AL JAZEERA ARABIC",
+    lien: "https://live-hls-apps-aja-fa.getaj.net/AJA/01.m3u8",
+    logo: AL_JAZEERA_ARABIC_LOGO,
+    cat: "NEWS",
+    ch: "334",
+    qualite: "4K",
+    pays: "QATAR",
+    desc: "Al Jazeera Arabic (AJA) - Chaîne d'information internationale de référence en langue arabe 24/7",
+    m3u8Source: "https://live-hls-apps-aja-fa.getaj.net/AJA/01.m3u8"
+  },
+  {
+    id: 'ch_335',
+    nom: "MCQUACK TOONS",
+    lien: "http://stream.mcquack.net/131/index.m3u8",
+    logo: MCQUACK_TOONS_LOGO,
+    cat: "ENFANTS",
+    ch: "335",
+    qualite: "HD",
+    pays: "USA",
+    desc: "McQuack Toons - Dessins animés d'aventure, humour et séries jeunesse non-stop",
+    m3u8Source: "http://stream.mcquack.net/131/index.m3u8"
+  },
+  {
+    id: 'ch_336',
+    nom: "ALEERT TV",
+    lien: "https://itv.streams.ovh/ALEERT/ALEERT/playlist.m3u8",
+    logo: ALEERT_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "336",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "Aleert TV - Émissions télévisées, actualités, reportages et flux direct continu",
+    m3u8Source: "https://itv.streams.ovh/ALEERT/ALEERT/playlist.m3u8"
+  },
+  {
+    id: 'ch_337',
+    nom: "EMS TV",
+    lien: "https://www.youtube.com/watch?v=memNv4dPDE0",
+    logo: EMS_TV_LOGO,
+    cat: "RELIGIEUX",
+    ch: "337",
+    qualite: "4K",
+    pays: "RDC",
+    desc: "EMS TV - Télévision chrétienne d'évangélisation, culte, louange et enseignements en continu",
+    youtubeBackup: "https://www.youtube.com/watch?v=memNv4dPDE0",
+    m3u8Source: "https://www.youtube.com/watch?v=memNv4dPDE0"
+  },
+  {
+    id: 'ch_338',
+    nom: "BUENÍSIMA TV",
+    lien: "https://canal.mediaserver.com.co/live/buenisimatv.m3u8",
+    logo: BUENISIMA_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "338",
+    qualite: "HD",
+    pays: "COLOMBIE",
+    desc: "Buenísima TV - Entretenimiento, música, programas variados y cultura en vivo 24/7",
+    m3u8Source: "https://canal.mediaserver.com.co/live/buenisimatv.m3u8"
+  },
+  {
+    id: 'ch_340',
+    nom: "BCTV",
+    lien: "https://canal.mediaserver.com.co/live/buenisimatv.m3u8",
+    logo: BCTV_LOGO,
+    cat: "GENERALISTE",
+    ch: "340",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "BCTV - Télévision d'actualités, culture, divertissement et émissions en continu",
+    m3u8Source: "https://canal.mediaserver.com.co/live/buenisimatv.m3u8"
+  },
+  {
+    id: 'ch_341',
+    nom: "WIN SPORTS",
+    lien: "http://138.121.15.230:9002/WIN-SPORT/index.m3u8",
+    logo: WIN_SPORTS_LOGO,
+    cat: "SPORTS",
+    ch: "341",
+    qualite: "HD",
+    pays: "COLOMBIE",
+    desc: "Win Sports - Chaîne sportive colombienne en direct, football professionnel (Liga BetPlay), coupes et émissions de débat sportif",
+    m3u8Source: "http://138.121.15.230:9002/WIN-SPORT/index.m3u8"
+  },
+  {
+    id: 'ch_342',
+    nom: "LATAM VDO",
+    lien: "https://latamvdo.com:3870/hybrid/play.m3u8",
+    logo: LATAM_VDO_LOGO,
+    cat: "FILMS",
+    ch: "342",
+    qualite: "HD",
+    pays: "AMERIQUE LATINE",
+    desc: "Latam VDO - Télévision de films, séries, vidéos et divertissement en continu d'Amérique Latine",
+    m3u8Source: "https://latamvdo.com:3870/hybrid/play.m3u8"
+  },
+  {
+    id: 'ch_343',
+    nom: "RUMBA TV",
+    lien: "http://45.162.193.35/RUMBATV/index.m3u8",
+    logo: RUMBA_TV_LOGO,
+    cat: "MUSIQUE",
+    ch: "343",
+    qualite: "HD",
+    pays: "COLOMBIE",
+    desc: "Rumba TV - 100% musique festive, salsa, reggaeton, vallenato et clips vidéo non-stop",
+    m3u8Source: "http://45.162.193.35/RUMBATV/index.m3u8"
+  },
+  {
+    id: 'ch_344',
+    nom: "CGTN FRANÇAIS",
+    lien: "https://amg00405-rakutentv-cgtn-rakuten-i9tar.amagi.tv/master.m3u8",
+    logo: CGTN_FRANCAIS_LOGO,
+    cat: "DOCUMENTAIRE",
+    ch: "344",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "CGTN Français - Chaîne internationale d'information, reportages culturels, documentaires et découvertes en français (Rakuten TV)",
+    m3u8Source: "https://amg00405-rakutentv-cgtn-rakuten-i9tar.amagi.tv/master.m3u8"
+  },
+  {
+    id: 'ch_345',
+    nom: "PM TV",
+    lien: "https://live20.bozztv.com/giatv/giatv-pmtv/pmtv/playlist.m3u8",
+    logo: PM_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "345",
+    qualite: "HD",
+    pays: "PEROU",
+    desc: "PM TV - Télévision régionale et généraliste Gia TV, programmes d'actualités et divertissement",
+    m3u8Source: "https://live20.bozztv.com/giatv/giatv-pmtv/pmtv/playlist.m3u8"
+  },
+  {
+    id: 'ch_346',
+    nom: "ALTERNATIVA TV",
+    lien: "https://live20.bozztv.com/giatv/giatv-alternativatv/alternativatv/playlist.m3u8",
+    logo: ALTERNATIVA_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "346",
+    qualite: "HD",
+    pays: "PEROU",
+    desc: "Alternativa TV - Chaîne de libre expression, culture, débats et informations indépendantes",
+    m3u8Source: "https://live20.bozztv.com/giatv/giatv-alternativatv/alternativatv/playlist.m3u8"
+  },
+  {
+    id: 'ch_347',
+    nom: "TELEBILBAO",
+    lien: "https://play.cdn.enetres.net/091DB7AFBD77442B9BA2F141DCC182F5021/live.smil/playlist.m3u8",
+    logo: TELEBILBAO_LOGO,
+    cat: "GENERALISTE",
+    ch: "347",
+    qualite: "HD",
+    pays: "ESPAGNE",
+    desc: "TeleBilbao - La télévision locale de Bilbao et de la Biscaye, actualités basques, culture et sports",
+    m3u8Source: "https://play.cdn.enetres.net/091DB7AFBD77442B9BA2F141DCC182F5021/live.smil/playlist.m3u8"
+  },
+  {
+    id: 'ch_348',
+    nom: "TVC CANARIAS",
+    lien: "https://cdn318.fractalmedia.es/318/live/hls/tvc/master.m3u8",
+    logo: TVC_CANARIAS_LOGO,
+    cat: "GENERALISTE",
+    ch: "348",
+    qualite: "HD",
+    pays: "ESPAGNE",
+    desc: "Televisión Canaria (TVC) - Chaîne publique des îles Canaries, information en direct, culture et société",
+    m3u8Source: "https://cdn318.fractalmedia.es/318/live/hls/tvc/master.m3u8"
+  },
+  {
+    id: 'ch_349',
+    nom: "ETB 1",
+    lien: "https://cdn1.etbon.eus/oc1/index.m3u8",
+    logo: ETB_1_LOGO,
+    cat: "GENERALISTE",
+    ch: "349",
+    qualite: "HD",
+    pays: "ESPAGNE",
+    desc: "ETB 1 - Euskal Telebista, chaîne généraliste et sportive du Pays Basque (Euskadi) en direct",
+    m3u8Source: "https://cdn1.etbon.eus/oc1/index.m3u8"
+  },
+  {
+    id: 'ch_350',
+    nom: "CADENA 103",
+    lien: "https://streamlov.alsolnet.com/cadena103/live/playlist.m3u8",
+    logo: CADENA_103_LOGO,
+    cat: "MUSIQUE",
+    ch: "350",
+    qualite: "HD",
+    pays: "ARGENTINE",
+    desc: "Cadena 103 - Radio & Télévision musicale, divertissement et actualités en direct d'Argentine",
+    m3u8Source: "https://streamlov.alsolnet.com/cadena103/live/playlist.m3u8"
+  },
+  {
+    id: 'ch_351',
+    nom: "9 LINK",
+    lien: "http://coninfo.net:1935/9linklivert/smil:9linkmultibr.smil/playlist.m3u8",
+    logo: CANAL_9_LINK_LOGO,
+    cat: "GENERALISTE",
+    ch: "351",
+    qualite: "HD",
+    pays: "ARGENTINE",
+    desc: "Canal 9 Litoral (9 Link) - Télévision régionale argentine, informations locales, direct et émissions",
+    m3u8Source: "http://coninfo.net:1935/9linklivert/smil:9linkmultibr.smil/playlist.m3u8"
+  },
+  {
+    id: 'ch_352',
+    nom: "AMÉRICA TV",
+    lien: "http://playcom.trapemn.tv:1935/transcoderip/america.stream/playlist.m3u8",
+    logo: AMERICA_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "352",
+    qualite: "HD",
+    pays: "ARGENTINE",
+    desc: "América TV - Chaîne de télévision généraliste argentine, talk-shows, débats et divertissement en continu",
+    m3u8Source: "http://playcom.trapemn.tv:1935/transcoderip/america.stream/playlist.m3u8"
+  },
+  {
+    id: 'ch_353',
+    nom: "MWD MOVIE",
+    lien: "http://203.81.84.130/hls/mwd_movie/index.m3u8",
+    logo: MWD_MOVIE_LOGO,
+    cat: "FILMS",
+    ch: "353",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "MWD Movie Channel - Chaîne cinéma continue, longs métrages, séries d'action et divertissement",
+    m3u8Source: "http://203.81.84.130/hls/mwd_movie/index.m3u8"
+  },
+  {
+    id: 'ch_354',
+    nom: "K100 TV",
+    lien: "https://k100streymi.mbl.is/beint/k100/index.m3u8",
+    logo: K100_TV_LOGO,
+    cat: "MUSIQUE",
+    ch: "354",
+    qualite: "HD",
+    pays: "ISLANDE",
+    desc: "K100 Sjónvarp - Télévision et radio islandaise, hits musicaux, interviews et divertissement",
+    m3u8Source: "https://k100streymi.mbl.is/beint/k100/index.m3u8"
+  },
+  {
+    id: 'ch_355',
+    nom: "FTV SECRETS",
+    lien: "https://ssai.aniview.com/api/v1/hls/stream.m3u8?AVS_SSAIID=67c0c39764ad6f7dab07aa0b&AV_APPNAME=[ADS.APP_NAME]&AV_APPPKGNAME=[ADS.APP_BUNDLE]&AV_APPSTOREURL=[ADS.APP_STORE_URL]&AV_CCPA=[ADS.US_PRIVACY]&AV_CLIENT_SECTION=ftv_secrets&AV_CONSENT=[ADS.GDPR_CONSENT]&AV_CONTENT_CAT=IAB7&AV_CONTENT_CHANNEL=&AV_CONTENT_CONTEXT=&AV_CONTENT_EPISODE=&AV_CONTENT_GENRE=fashion+and+lifestyle&AV_CONTENT_ID=[ADS.VIDAA_ADS_CONTENTID]&AV_CONTENT_KEYWORDS=&AV_CONTENT_LANGUAGE=en&AV_CONTENT_LENGTH=&AV_CONTENT_NETWORK=&AV_CONTENT_PROVIDER=FTV&AV_CONTENT_RATING=R&AV_CONTENT_SEASON=&AV_CONTENT_SERIES=&AV_CONTENT_TITLE=&AV_CONTENT_URL=&AV_DNT=[ADS.DNT]&AV_GDPR=[ADS.GDPR]&AV_HEIGHT=[ADS.H]&AV_IDFA=[ADS.IFA]&AV_IFA_TYPE=[ADS.IFA_TYPE]&AV_LANGUAGE=[ADS.DEVICE_LANGUAGE]&AV_OSVERS=[ADS.DEVICE_OSV]&AV_RTB_DEVICE_TYPE=[ADS.DEVICE_TYPE]&AV_VAUTH=[ADS.VAUTH]&AV_WIDTH=[ADS.W]&Content_Id=[ADS.ADS_CONTENTID]&ads.vidaa_ads_param=1191723366&cb=[CACHEBUSTER]&content_channel_name=ftv+-fashiontv+Secrets&content_livestream=1",
+    logo: FTV_SECRETS_LOGO,
+    cat: "GENERALISTE",
+    ch: "355",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "FashionTV Secrets (FTV) - Mode internationale, défilés, haute couture, coulisses et lifestyle 24/7",
+    m3u8Source: "https://ssai.aniview.com/api/v1/hls/stream.m3u8?AVS_SSAIID=67c0c39764ad6f7dab07aa0b&AV_APPNAME=[ADS.APP_NAME]&AV_APPPKGNAME=[ADS.APP_BUNDLE]&AV_APPSTOREURL=[ADS.APP_STORE_URL]&AV_CCPA=[ADS.US_PRIVACY]&AV_CLIENT_SECTION=ftv_secrets&AV_CONSENT=[ADS.GDPR_CONSENT]&AV_CONTENT_CAT=IAB7&AV_CONTENT_CHANNEL=&AV_CONTENT_CONTEXT=&AV_CONTENT_EPISODE=&AV_CONTENT_GENRE=fashion+and+lifestyle&AV_CONTENT_ID=[ADS.VIDAA_ADS_CONTENTID]&AV_CONTENT_KEYWORDS=&AV_CONTENT_LANGUAGE=en&AV_CONTENT_LENGTH=&AV_CONTENT_NETWORK=&AV_CONTENT_PROVIDER=FTV&AV_CONTENT_RATING=R&AV_CONTENT_SEASON=&AV_CONTENT_SERIES=&AV_CONTENT_TITLE=&AV_CONTENT_URL=&AV_DNT=[ADS.DNT]&AV_GDPR=[ADS.GDPR]&AV_HEIGHT=[ADS.H]&AV_IDFA=[ADS.IFA]&AV_IFA_TYPE=[ADS.IFA_TYPE]&AV_LANGUAGE=[ADS.DEVICE_LANGUAGE]&AV_OSVERS=[ADS.DEVICE_OSV]&AV_RTB_DEVICE_TYPE=[ADS.DEVICE_TYPE]&AV_VAUTH=[ADS.VAUTH]&AV_WIDTH=[ADS.W]&Content_Id=[ADS.ADS_CONTENTID]&ads.vidaa_ads_param=1191723366&cb=[CACHEBUSTER]&content_channel_name=ftv+-fashiontv+Secrets&content_livestream=1"
+  },
+  {
+    id: 'ch_356',
+    nom: "FRANCE 24 (FR)",
+    lien: "https://live.france24.com/hls/live/2037179-b/F24_FR_HI_HLS/master_5000.m3u8",
+    logo: FRANCE_24_LOGO,
+    cat: "NEWS",
+    ch: "356",
+    qualite: "HD",
+    pays: "FRANCE",
+    desc: "France 24 en Français - Chaîne d'information internationale 24/7 en direct, journaux télévisés, débats et reportages mondiaux",
+    m3u8Source: "https://live.france24.com/hls/live/2037179-b/F24_FR_HI_HLS/master_5000.m3u8"
+  },
+  {
+    id: 'ch_358',
+    nom: "BWAKAI TV",
+    lien: "https://admin.digitz-tv.online/hls/bwakai-tv/index.m3u8",
+    logo: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=200&auto=format&fit=crop&q=80",
+    cat: "GENERALISTE",
+    ch: "358",
+    qualite: "HD",
+    pays: "AFRIQUE",
+    desc: "BWAKAI TV - Télévision culturelle, talk-shows, divertissement et actualités en direct • Direct HLS Digitz",
+    m3u8Source: "https://admin.digitz-tv.online/hls/bwakai-tv/index.m3u8"
+  },
+  {
+    id: 'ch_359',
+    nom: "MBC 5",
+    lien: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-5/ee6b000cee0629411b666ab26cb13e9b/index.m3u8",
+    logo: "https://images.unsplash.com/photo-1578022761797-b8636ac1773c?w=200&auto=format&fit=crop&q=80",
+    cat: "FILMS",
+    ch: "359",
+    qualite: "HD",
+    pays: "MAGHREB",
+    desc: "MBC 5 - Chaîne de divertissement et séries pour le Maghreb • Direct HLS",
+    m3u8Source: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-5/ee6b000cee0629411b666ab26cb13e9b/index.m3u8"
+  },
+  {
+    id: 'ch_360',
+    nom: "MEDI 1 TV AFRIQUE",
+    lien: "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-afrique_tm7tu45/playlist.m3u8",
+    logo: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=200&auto=format&fit=crop&q=80",
+    cat: "NEWS",
+    ch: "360",
+    qualite: "HD",
+    pays: "MAROC",
+    desc: "Medi 1 TV Afrique - Chaîne d'information panafricaine et internationale • Direct HLS",
+    m3u8Source: "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-afrique_tm7tu45/playlist.m3u8"
+  },
+  {
+    id: 'ch_361',
+    nom: "MEDI 1 TV ARABIC",
+    lien: "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-arabic_g90v4ec/playlist.m3u8",
+    logo: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=200&auto=format&fit=crop&q=80",
+    cat: "NEWS",
+    ch: "361",
+    qualite: "HD",
+    pays: "MAROC",
+    desc: "Medi 1 TV Arabic - Information continue et reportages en arabe • Direct HLS",
+    m3u8Source: "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-arabic_g90v4ec/playlist.m3u8"
+  },
+  {
+    id: 'ch_362',
+    nom: "MEDI 1 TV MAGHREB",
+    lien: "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-maghreb_jnbspmg/playlist.m3u8",
+    logo: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=200&auto=format&fit=crop&q=80",
+    cat: "NEWS",
+    ch: "362",
+    qualite: "HD",
+    pays: "MAGHREB",
+    desc: "Medi 1 TV Maghreb - Actualités et débats maghrébins • Direct HLS",
+    m3u8Source: "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-maghreb_jnbspmg/playlist.m3u8"
+  },
+  {
+    id: 'ch_363',
+    nom: "STORY CHANNEL",
+    lien: "https://136044159.r.cdnsun.net/storychannel.m3u8",
+    logo: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=200&auto=format&fit=crop&q=80",
+    cat: "RELIGIEUX",
+    ch: "363",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "Story Channel - Récits bibliques, histoires et spiritualité • Direct HLS",
+    m3u8Source: "https://136044159.r.cdnsun.net/storychannel.m3u8"
+  },
+  {
+    id: 'ch_364',
+    nom: "SAVOIR MEDIA",
+    lien: "https://hls.savoir.media/live/stream.m3u8",
+    logo: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=200&auto=format&fit=crop&q=80",
+    cat: "DOCUMENTAIRE",
+    ch: "364",
+    qualite: "HD",
+    pays: "CANADA",
+    desc: "Savoir média - Sciences, culture, savoirs et documentaires éducatifs • Direct HLS",
+    m3u8Source: "https://hls.savoir.media/live/stream.m3u8"
+  },
+  {
+    id: 'ch_365',
+    nom: "DLTV 1",
+    lien: "https://cdn-live.dltv.ac.th/dltv01.m3u8",
+    logo: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=200&auto=format&fit=crop&q=80",
+    cat: "DOCUMENTAIRE",
+    ch: "365",
+    qualite: "HD",
+    pays: "THAILANDE",
+    desc: "DLTV 1 - Télévision éducative et cours à distance en continu • Direct HLS",
+    m3u8Source: "https://cdn-live.dltv.ac.th/dltv01.m3u8"
+  },
+  {
+    id: 'ch_366',
+    nom: "PERFIL TV",
+    lien: "https://unlimited1-us.dps.live/perfiltv/perfiltv.smil/perfiltv/livestream2/chunks.m3u8",
+    logo: "https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?w=200&auto=format&fit=crop&q=80",
+    cat: "NEWS",
+    ch: "366",
+    qualite: "HD",
+    pays: "ARGENTINE",
+    desc: "Perfil TV - Chaîne d'information, société, économie et politique argentine • Direct HLS",
+    m3u8Source: "https://unlimited1-us.dps.live/perfiltv/perfiltv.smil/perfiltv/livestream2/chunks.m3u8"
+  },
+  {
+    id: 'ch_367',
+    nom: "STREAMLOCK 6052",
+    lien: "https://5e85d90130e77.streamlock.net/6052/6052/playlist.m3u8",
+    logo: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=200&auto=format&fit=crop&q=80",
+    cat: "GENERALISTE",
+    ch: "367",
+    qualite: "HD",
+    pays: "INTERNATIONAL",
+    desc: "Streamlock 6052 - Chaîne de diffusion continue en direct HLS",
+    m3u8Source: "https://5e85d90130e77.streamlock.net/6052/6052/playlist.m3u8"
+  }
+];
+
+export const DEFAULT_CHANNELS: Channel[] = RAW_DEFAULT_CHANNELS;
+
+export const CATEGORIES = [
+  'RELIGIEUX',
+  'SPORTS',
+  'NEWS',
+  'FILMS',
+  'MUSIQUE',
+  'GENERALISTE',
+  'DOCUMENTAIRE',
+  'ENFANTS',
+  'RADIO',
+  'METEO'
+] as const;
