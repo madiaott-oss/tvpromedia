@@ -8,7 +8,7 @@
     "ch": "4",
     "qualite": "4K",
     "pays": "RDC",
-    "desc": "RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Flux Principal & Secours cle_rtptv_1m_u4tx)",
+    "desc": "RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Flux Principal cle_rtptv_1m_u4tx)",
     "m3u8Source": "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8",
     "cloudRemix": "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -804,17 +804,6 @@
     "desc": "ICI RDI Canada Live"
   },
   {
-    "id": "ch_71",
-    "nom": "SAVOIR MEDIA TV",
-    "lien": "https://mdstrm.com/live-stream-playlist/533adcc949386ce765657d7c.m3u8",
-    "logo": "",
-    "cat": "GENERALISTE",
-    "ch": "71",
-    "qualite": "HD",
-    "pays": "CANADA",
-    "desc": ""
-  },
-  {
     "id": "ch_72",
     "nom": "ACK TV",
     "lien": "https://stream.berosat.live:19360/ack-tv/ack-tv.m3u8",
@@ -848,17 +837,6 @@
     "desc": "RTVD 4 Live Direct"
   },
   {
-    "id": "ch_78",
-    "nom": "ÓČKO TV",
-    "lien": "https://ockotv-live.infomaniak.ch/live/ockotv.smil/playlist.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 500\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"500\" fill=\"%23e50914\"/><text x=\"250\" y=\"290\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"120\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"-2\">ÓČKO</text></svg>",
-    "cat": "MUSIQUE",
-    "ch": "78",
-    "qualite": "HD",
-    "pays": "TCHEQUIE",
-    "desc": "ÓČKO Music Channel"
-  },
-  {
     "id": "ch_79",
     "nom": "080 NEWS",
     "lien": "https://080news.live/stream.m3u8",
@@ -868,28 +846,6 @@
     "qualite": "4K",
     "pays": "FRANCE",
     "desc": "080 News Channel"
-  },
-  {
-    "id": "ch_80",
-    "nom": "OLIVE TV",
-    "lien": "https://olivetv.stream.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 500\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"500\" fill=\"%23ffffff\"/><g transform=\"translate(40, 60)\"><path d=\"M 120 70 C 80 10 130 0 130 0 C 130 0 170 30 130 70 Z\" fill=\"%23689f38\"/><path d=\"M 130 70 C 160 20 200 30 200 30 C 200 30 190 75 130 70 Z\" fill=\"%23558b2f\"/><rect x=\"50\" y=\"70\" width=\"160\" height=\"130\" rx=\"25\" fill=\"none\" stroke=\"%23558b2f\" stroke-width=\"16\"/><circle cx=\"130\" cy=\"180\" r=\"10\" fill=\"%23558b2f\"/><text x=\"220\" y=\"150\" font-family=\"'Segoe UI', sans-serif\" font-weight=\"300\" font-size=\"95\" fill=\"%23111111\">live</text><text x=\"140\" y=\"270\" font-family=\"'Segoe UI', sans-serif\" font-weight=\"300\" font-size=\"110\" fill=\"%23111111\">TV</text></g></svg>",
-    "cat": "GENERALISTE",
-    "ch": "80",
-    "qualite": "4K",
-    "pays": "RDC",
-    "desc": "Olive Live TV"
-  },
-  {
-    "id": "ch_82",
-    "nom": "MBC MASR",
-    "lien": "https://mbcmasr.live.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 500\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"500\" fill=\"%23ffffff\"/><rect x=\"60\" y=\"40\" width=\"380\" height=\"320\" fill=\"%23d32f2f\"/><path d=\"M 120 300 C 140 120 280 60 380 230 C 260 210 240 280 220 300 Z\" fill=\"%23ffffff\"/><text x=\"250\" y=\"440\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"90\" fill=\"%23d32f2f\" text-anchor=\"middle\" letter-spacing=\"-2\">mbc</text></svg>",
-    "cat": "GENERALISTE",
-    "ch": "82",
-    "qualite": "4K",
-    "pays": "EGYPTE",
-    "desc": "MBC Masr Egypt Live"
   },
   {
     "id": "ch_83",
@@ -903,17 +859,6 @@
     "desc": "ISTV HD Digital"
   },
   {
-    "id": "ch_84",
-    "nom": "KANAL HOVEDSTADEN",
-    "lien": "https://kanalhovedstaden.live.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 500\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"500\" fill=\"%23ffffff\"/><circle cx=\"250\" cy=\"180\" r=\"140\" fill=\"%230277bd\"/><text x=\"180\" y=\"230\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"170\" fill=\"%23ffffff\" opacity=\"0.9\">k</text><text x=\"250\" y=\"230\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"170\" fill=\"%23ffffff\">h</text><text x=\"250\" y=\"390\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"62\" fill=\"%230277bd\" text-anchor=\"middle\">kanal</text><text x=\"250\" y=\"450\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"38\" fill=\"%230277bd\" text-anchor=\"middle\">HOVEDSTADEN</text></svg>",
-    "cat": "GENERALISTE",
-    "ch": "84",
-    "qualite": "HD",
-    "pays": "DANEMARK",
-    "desc": "Kanal Hovedstaden Denmark"
-  },
-  {
     "id": "ch_86",
     "nom": "TORONTO 360 TV",
     "lien": "https://toronto360.live.m3u8",
@@ -923,17 +868,6 @@
     "qualite": "4K",
     "pays": "CANADA",
     "desc": "Toronto 360 Live Television"
-  },
-  {
-    "id": "ch_89",
-    "nom": "ICI INFO",
-    "lien": "https://rcavlive.akamaized.net/hls/live/704025/xcanrdi/master.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 500\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"500\" fill=\"%23d32f2f\"/><g transform=\"translate(250, 190)\" fill=\"%23ffffff\"><circle cx=\"0\" cy=\"0\" r=\"45\"/><path d=\"M -45,-70 A 75 75 0 0 1 45,-70 L 45,-45 A 45 45 0 0 0 -45,-45 Z\"/><path d=\"M -45,70 A 75 75 0 0 0 45,70 L 45,45 A 45 45 0 0 1 -45,45 Z\"/><path d=\"M -70,-45 A 75 75 0 0 0 -70,45 L -45,45 A 45 45 0 0 1 -45,-45 Z\"/><path d=\"M 70,-45 A 75 75 0 0 1 70,45 L 45,45 A 45 45 0 0 0 45,-45 Z\"/></g><text x=\"250\" y=\"420\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"95\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"4\">INFO</text></svg>",
-    "cat": "NEWS",
-    "ch": "89",
-    "qualite": "4K",
-    "pays": "CANADA",
-    "desc": "ICI Radio-Canada Info en direct"
   },
   {
     "id": "ch_92",
@@ -1210,30 +1144,6 @@
     "pays": "INTERNATIONAL",
     "desc": "Canal 12 - Télévision généraliste, actualités en continu, magazines de société, divertissement et séries en direct",
     "m3u8Source": "https://sv-canal12-canal12-live.ned.media/canal12/smil:canal12.smil/playlist.m3u8"
-  },
-  {
-    "id": "ch_121",
-    "nom": "CTV",
-    "lien": "https://ctv.dc.beltelecom.by/ctv/ctv.stream/playlist.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 550 300\" width=\"100%\" height=\"100%\"><rect width=\"550\" height=\"300\" fill=\"%230b0f19\" rx=\"30\"/><g transform=\"translate(45, 60)\"><circle cx=\"80\" cy=\"90\" r=\"70\" fill=\"%23e11d48\"/><text x=\"80\" y=\"122\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"95\" fill=\"%23ffffff\" text-anchor=\"middle\">C</text><rect x=\"165\" y=\"20\" width=\"140\" height=\"140\" rx=\"14\" fill=\"%2316a34a\"/><text x=\"235\" y=\"122\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"95\" fill=\"%23ffffff\" text-anchor=\"middle\">T</text><polygon points=\"380,160 450,20 310,20\" fill=\"%232563eb\"/><text x=\"380\" y=\"122\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"95\" fill=\"%23ffffff\" text-anchor=\"middle\">V</text></g><text x=\"275\" y=\"270\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"22\" fill=\"%2394a3b8\" text-anchor=\"middle\" letter-spacing=\"8\">TELEVISION NETWORK</text></svg>",
-    "cat": "GENERALISTE",
-    "ch": "121",
-    "qualite": "4K",
-    "pays": "CANADA",
-    "desc": "CTV Television Network - Grande chaîne de divertissement, grands journaux d'actualité, shows et séries cultes",
-    "m3u8Source": "https://ctv.dc.beltelecom.by/ctv/ctv.stream/playlist.m3u8"
-  },
-  {
-    "id": "ch_123",
-    "nom": "E TV",
-    "lien": "https://streamer.metronethn.com/EEntertainment/index.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 500\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"500\" fill=\"%23000000\" rx=\"40\"/><circle cx=\"250\" cy=\"200\" r=\"140\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"18\"/><g transform=\"translate(250, 200)\" fill=\"%23ffffff\"><text x=\"0\" y=\"55\" font-family=\"'Impact', 'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"190\" text-anchor=\"middle\" letter-spacing=\"-6\">E!</text></g><rect x=\"90\" y=\"370\" width=\"320\" height=\"48\" rx=\"8\" fill=\"%23ffffff\"/><text x=\"250\" y=\"404\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"22\" fill=\"%23000000\" text-anchor=\"middle\" letter-spacing=\"4\">ENTERTAINMENT TV</text></svg>",
-    "cat": "GENERALISTE",
-    "ch": "123",
-    "qualite": "4K",
-    "pays": "USA",
-    "desc": "E! TV (Entertainment Television) - Télé-réalité, actualités des célébrités, tapis rouges d'Hollywood et mode en direct",
-    "m3u8Source": "https://streamer.metronethn.com/EEntertainment/index.m3u8"
   },
   {
     "id": "ch_125",
@@ -3358,18 +3268,6 @@
     "qualite": "HD",
     "pays": "COLOMBIE",
     "desc": "Buenísima TV - Entretenimiento, música, programas variados y cultura en vivo 24/7",
-    "m3u8Source": "https://canal.mediaserver.com.co/live/buenisimatv.m3u8"
-  },
-  {
-    "id": "ch_340",
-    "nom": "BCTV",
-    "lien": "https://canal.mediaserver.com.co/live/buenisimatv.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 500\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"500\" fill=\"%23ffffff\" rx=\"36\"/><defs><clipPath id=\"bctv-pill-clip\"><rect x=\"18\" y=\"195\" width=\"464\" height=\"110\" rx=\"55\"/></clipPath><clipPath id=\"bctv-top-clip\"><rect x=\"0\" y=\"0\" width=\"500\" height=\"195\"/></clipPath></defs><rect x=\"18\" y=\"195\" width=\"464\" height=\"110\" rx=\"55\" fill=\"%231aa8f6\"/><g fill=\"%23ffffff\"><path d=\"M 50,215 L 116,215 Q 146,215 146,237 Q 146,247 135,252 Q 150,257 150,271 Q 150,295 116,295 L 50,295 Z M 73,233 L 73,246 L 112,246 Q 125,246 125,239 Q 125,233 112,233 Z M 73,262 L 73,277 L 115,277 Q 128,277 128,270 Q 128,262 115,262 Z\"/><path d=\"M 235,232 Q 225,215 198,215 Q 163,215 163,255 Q 163,295 198,295 Q 225,295 235,278 L 253,288 Q 235,313 196,313 Q 140,313 140,255 Q 140,197 196,197 Q 235,197 253,222 Z\"/><path d=\"M 262,215 L 352,215 L 352,234 L 318,234 L 318,295 L 296,295 L 296,234 L 262,234 Z\"/></g><g><path d=\"M 341,150 L 373,150 L 405,260 L 437,150 L 469,150 L 419,298 L 391,298 Z\" fill=\"%231aa8f6\" clip-path=\"url(%23bctv-top-clip)\"/><path d=\"M 341,150 L 373,150 L 405,260 L 437,150 L 469,150 L 419,298 L 391,298 Z\" fill=\"%23ffffff\" clip-path=\"url(%23bctv-pill-clip)\"/></g></svg>",
-    "cat": "GENERALISTE",
-    "ch": "340",
-    "qualite": "HD",
-    "pays": "INTERNATIONAL",
-    "desc": "BCTV - Télévision d'actualités, culture, divertissement et émissions en continu",
     "m3u8Source": "https://canal.mediaserver.com.co/live/buenisimatv.m3u8"
   },
   {

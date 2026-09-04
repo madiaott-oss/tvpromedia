@@ -321,6 +321,8 @@ async function startServer() {
     if (!Array.isArray(list)) return [];
     const seenKeys = new Set<string>();
     const seenIds = new Set<string>();
+    const seenNames = new Set<string>();
+    const seenNums = new Set<string>();
 
     return list.filter(ch => {
       if (!ch) return false;
@@ -333,15 +335,28 @@ async function startServer() {
         seenKeys.add('CANAL_4_RTP');
         seenIds.add('ch_rtp');
         seenIds.add(ch.id);
+        if (chNum) seenNums.add('4');
+        seenNames.add('RTP');
+        ch.id = 'ch_rtp';
+        ch.nom = 'RTP';
+        ch.ch = '4';
+        ch.lien = 'http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8';
+        ch.m3u8Source = 'http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8';
+        ch.cloudRemix = 'http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8';
+        ch.rtmpKey = 'cle_rtptv_1m_u4tx';
+        ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+        ch.desc = 'RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Flux Principal cle_rtptv_1m_u4tx)';
         return true;
       }
 
       // 2. Strict single CONGO FLASH NEWS (Canal 5)
-      if (ch.id === 'ch_congo' || upperNom === 'CONGO FLASH NEWS' || upperNom === 'CONGO FLASH') {
+      if (ch.id === 'ch_congo' || upperNom === 'CONGO FLASH NEWS' || upperNom === 'CONGO FLASH' || (chNum === '5' && upperNom.includes('CONGO'))) {
         if (seenKeys.has('CANAL_5_CONGO') || seenIds.has('ch_congo')) return false;
         seenKeys.add('CANAL_5_CONGO');
         seenIds.add('ch_congo');
         seenIds.add(ch.id);
+        if (chNum) seenNums.add('5');
+        seenNames.add('CONGO FLASH NEWS');
         return true;
       }
 
@@ -351,6 +366,8 @@ async function startServer() {
         seenKeys.add('CANAL_6_RTPRADIO');
         seenIds.add('ch_rtvradio');
         seenIds.add(ch.id);
+        if (chNum) seenNums.add('6');
+        seenNames.add('RTP RADIO');
         return true;
       }
 
@@ -360,6 +377,8 @@ async function startServer() {
         seenKeys.add('CANAL_7_NEWS243');
         seenIds.add('ch_news234');
         seenIds.add(ch.id);
+        if (chNum) seenNums.add('7');
+        seenNames.add('NEWS +243 RDC TV');
         return true;
       }
 
@@ -369,13 +388,40 @@ async function startServer() {
         seenKeys.add('CANAL_8_MCPRO');
         seenIds.add('ch_mcprod');
         seenIds.add(ch.id);
+        if (chNum) seenNums.add('8');
+        seenNames.add('MC PRO TV');
+        ch.nom = 'MC PRO TV';
         return true;
       }
 
-      if (ch.id === 'ch_81' || ch.id === 'ch_87' || ch.id === 'ch_88' || ch.id === 'ch_90' || ch.id === 'ch_102') return false;
+      // Explicit duplicate channel IDs to eliminate
+      const bannedDuplicateIds = [
+        'ch_81', 'ch_87', 'ch_88', 'ch_90', 'ch_102', // Duplicates from www.tvpromedia.com
+        'ch_121', // Duplicate of ch_14 (C TV)
+        'ch_340', // Duplicate of ch_338 (BUENÍSIMA TV)
+        'ch_89',  // Duplicate of ch_69 (INFO CANADA)
+        'ch_84',  // Duplicate of ch_47 (Kanal Hovedstaden TV)
+        'ch_82',  // Duplicate of ch_51 (MBC Masr 1)
+        'ch_78',  // Duplicate of ch_42 (OCKO TV)
+        'ch_71',  // Duplicate of ch_364 (SAVOIR MEDIA)
+        'ch_80',  // Duplicate of ch_43 (O LIVE TV)
+        'ch_123', // Duplicate of ch_54 (ETV+)
+        'ch_357', 'ch_339', 'ch_70', 'ch_85'
+      ];
+      if (bannedDuplicateIds.includes(ch.id)) return false;
 
+      // Unique ID check
       if (seenIds.has(ch.id)) return false;
       seenIds.add(ch.id);
+
+      // Unique channel name check
+      if (upperNom && seenNames.has(upperNom)) return false;
+      if (upperNom) seenNames.add(upperNom);
+
+      // Unique channel number check
+      if (chNum && seenNums.has(chNum)) return false;
+      if (chNum) seenNums.add(chNum);
+
       return true;
     });
   };

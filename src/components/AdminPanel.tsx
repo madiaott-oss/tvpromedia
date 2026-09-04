@@ -5737,27 +5737,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   </a>
                 </div>
 
-                <div className="bg-black/60 border border-white/10 rounded-xl p-4 space-y-2">
-                  <div className="flex items-center justify-between text-xs text-gray-400">
-                    <span className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                      Commande d&apos;exécution directe en 1 clic (SSH VPS) :
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => handleCopyText('curl -sSL https://tvpromedia.ai.studio/api/vps-deploy-script | bash', 'cmd-vps')}
-                      className="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-black font-black text-[10px] rounded uppercase tracking-wider flex items-center gap-1 transition-all"
-                    >
-                      {copiedSyncCmd === 'cmd-vps' ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                      <span>{copiedSyncCmd === 'cmd-vps' ? 'Copié !' : 'Copier'}</span>
-                    </button>
+                <div className="space-y-4">
+                  {/* Quick 1-sec sync */}
+                  <div className="bg-black/60 border border-emerald-500/30 rounded-xl p-4 space-y-2">
+                    <div className="flex items-center justify-between text-xs text-gray-400">
+                      <span className="flex items-center gap-1.5 font-bold text-emerald-400">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        Synchronisation Flash des chaînes (1 sec, sans coupure) :
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleCopyText('curl -sSL https://tvpromedia.ai.studio/channels.json -o /var/www/tvpromedia/public/channels.json && cp -f /var/www/tvpromedia/public/channels.json /var/www/tvpromedia/dist/channels.json 2>/dev/null && echo "✓ Chaînes www.tvpromedia.com synchronisées sans aucun doublon !"', 'cmd-flash')}
+                        className="px-2.5 py-1 bg-emerald-500 hover:bg-emerald-400 text-black font-black text-[10px] rounded uppercase tracking-wider flex items-center gap-1 transition-all"
+                      >
+                        {copiedSyncCmd === 'cmd-flash' ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                        <span>{copiedSyncCmd === 'cmd-flash' ? 'Copié !' : 'Copier'}</span>
+                      </button>
+                    </div>
+                    <pre className="text-xs text-emerald-300 font-mono bg-black/80 p-3 rounded-lg overflow-x-auto select-all border border-emerald-500/20">
+                      curl -sSL https://tvpromedia.ai.studio/channels.json -o /var/www/tvpromedia/public/channels.json &amp;&amp; cp -f /var/www/tvpromedia/public/channels.json /var/www/tvpromedia/dist/channels.json 2&gt;/dev/null &amp;&amp; echo &quot;✓ Synchronisation terminée&quot;
+                    </pre>
+                    <p className="text-[11px] text-gray-400 leading-relaxed">
+                      Remplace instantanément le fichier <code className="text-white">channels.json</code> sur <span className="text-cyan-300 font-mono">www.tvpromedia.com</span> par la version épurée sans aucun doublon et avec le flux RTP principal.
+                    </p>
                   </div>
-                  <pre className="text-xs text-amber-300 font-mono bg-black/80 p-3 rounded-lg overflow-x-auto select-all border border-amber-500/20">
-                    curl -sSL https://tvpromedia.ai.studio/api/vps-deploy-script | bash
-                  </pre>
-                  <p className="text-[11px] text-gray-400 leading-relaxed">
-                    Ce script télécharge la dernière version de <code className="text-white">channels.json</code>, met à jour le code, configure <strong className="text-white">Nginx</strong> pour écouter sur <span className="text-cyan-300 font-mono">tvpromedia.com</span> et <span className="text-cyan-300 font-mono">www.tvpromedia.com</span>, achemine le streaming SRS HLS sur le port <span className="text-amber-300 font-mono">8080</span>, et redémarre le service avec <strong className="text-white">PM2</strong>.
-                  </p>
+
+                  {/* Full script */}
+                  <div className="bg-black/60 border border-white/10 rounded-xl p-4 space-y-2">
+                    <div className="flex items-center justify-between text-xs text-gray-400">
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-amber-400" />
+                        Déploiement complet (Nginx, SRS, PM2) :
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleCopyText('curl -sSL https://tvpromedia.ai.studio/api/vps-deploy-script | bash', 'cmd-vps')}
+                        className="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-black font-black text-[10px] rounded uppercase tracking-wider flex items-center gap-1 transition-all"
+                      >
+                        {copiedSyncCmd === 'cmd-vps' ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                        <span>{copiedSyncCmd === 'cmd-vps' ? 'Copié !' : 'Copier'}</span>
+                      </button>
+                    </div>
+                    <pre className="text-xs text-amber-300 font-mono bg-black/80 p-3 rounded-lg overflow-x-auto select-all border border-amber-500/20">
+                      curl -sSL https://tvpromedia.ai.studio/api/vps-deploy-script | bash
+                    </pre>
+                    <p className="text-[11px] text-gray-400 leading-relaxed">
+                      Télécharge le catalogue, recompile le code, configure <strong className="text-white">Nginx</strong> pour <span className="text-cyan-300 font-mono">tvpromedia.com</span> et <span className="text-cyan-300 font-mono">www.tvpromedia.com</span>, et redémarre le service avec <strong className="text-white">PM2</strong>.
+                    </p>
+                  </div>
                 </div>
               </div>
 

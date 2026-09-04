@@ -512,8 +512,12 @@ export default function VideoPlayer({ src, title, logoUrl, category, channelNum,
     // Resolve stream URL: if stream is an AzuraCast public station page, resolve the direct live stream endpoint
     const getStreamUrlToLoad = (rawUrl: string) => {
       let resolved = rawUrl;
-      // Auto-route RTP to the official new active stream (cle_rtptv_1m_u4tx)
-      if (resolved.includes('cle_rtp_1m_ju9k') && !resolved.includes('cle_rtptv_1m_u4tx')) {
+      // Auto-route RTP strictly to the official primary active stream (cle_rtptv_1m_u4tx)
+      if (
+        (resolved && (resolved.includes('cle_rtp') || resolved.includes('rtptv.m3u8') || resolved.includes('rtp.m3u8'))) ||
+        ((title && title.trim().toUpperCase() === 'RTP') && (!title.toUpperCase().includes('RADIO'))) ||
+        (channelNum === '4')
+      ) {
         resolved = 'http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8';
       }
 

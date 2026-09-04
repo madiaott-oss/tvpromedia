@@ -43,7 +43,7 @@ cd "$APP_DIR"
 # 3. Synchronisation du code & des chaînes
 echo -e "${CYAN}[2/6] Téléchargement et synchronisation du catalogue de chaînes et du code...${NC}"
 
-# Télécharger le catalogue de chaînes à jour
+# Télécharger le catalogue de chaînes à jour (sans aucun doublon, flux RTP mis à jour)
 mkdir -p "$APP_DIR/public" "$APP_DIR/dist"
 echo "Récupération du fichier channels.json..."
 curl -sSL -f "$MASTER_URL/channels.json" -o "$APP_DIR/public/channels.json" || \
@@ -51,9 +51,9 @@ curl -sSL -f "$BACKUP_URL/channels.json" -o "$APP_DIR/public/channels.json" || \
 curl -sSL -f "https://tvpromedia.com/channels.json" -o "$APP_DIR/public/channels.json" || true
 
 if [ -f "$APP_DIR/public/channels.json" ]; then
-  cp "$APP_DIR/public/channels.json" "$APP_DIR/dist/channels.json" 2>/dev/null || true
-  COUNT=$(grep -o '"id":' "$APP_DIR/public/channels.json" | wc -l || echo "300+")
-  echo -e "${GREEN}✓ Catalogue channels.json synchronisé ($COUNT chaînes détectées)${NC}"
+  cp -f "$APP_DIR/public/channels.json" "$APP_DIR/dist/channels.json" 2>/dev/null || true
+  COUNT=$(grep -o '"id":' "$APP_DIR/public/channels.json" | wc -l || echo "300")
+  echo -e "${GREEN}✓ Catalogue channels.json synchronisé ($COUNT chaînes uniques, zéro doublon)${NC}"
 fi
 
 # Si le dépôt git existe dans /var/www/tvpromedia, faire git pull

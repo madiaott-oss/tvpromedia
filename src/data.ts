@@ -374,7 +374,7 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     ch: "4",
     qualite: "4K",
     pays: "RDC",
-    desc: "RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Flux Principal & Secours cle_rtptv_1m_u4tx)",
+    desc: "RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Flux Principal cle_rtptv_1m_u4tx)",
     m3u8Source: "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8",
     cloudRemix: "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8",
     rtmpUrl: "rtmp://191.215.38.95/live",

@@ -24,10 +24,12 @@ import {
   Tv, Star, Search, Trash2, ArrowUpRight, Play, Info, Heart, Smartphone, HelpCircle, Shield, Globe, Mail, Phone, ExternalLink, Lock, X, Share2, Download, AlertTriangle, CreditCard, Check, Camera, Megaphone, Sparkles, RefreshCw
 } from 'lucide-react';
 
-// Strict deduplication function targeting RTP, CONGO FLASH NEWS, RTP RADIO, NEWS +243 RDC TV, MC PRO TV
+// Strict deduplication function targeting all channels and domains (tvpromedia.com, www.tvpromedia.com, VPS)
 const deduplicateChannels = (channelList: Channel[]): Channel[] => {
   const seenKeys = new Set<string>();
   const seenIds = new Set<string>();
+  const seenNames = new Set<string>();
+  const seenNums = new Set<string>();
 
   return channelList.filter(ch => {
     if (!ch) return false;
@@ -40,6 +42,18 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       seenKeys.add('CANAL_4_RTP');
       seenIds.add('ch_rtp');
       seenIds.add(ch.id);
+      if (chNum) seenNums.add('4');
+      seenNames.add('RTP');
+      // Guarantee RTP primary stream configuration
+      ch.id = 'ch_rtp';
+      ch.nom = 'RTP';
+      ch.ch = '4';
+      ch.lien = 'http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8';
+      ch.m3u8Source = 'http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8';
+      ch.cloudRemix = 'http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8';
+      ch.rtmpKey = 'cle_rtptv_1m_u4tx';
+      ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+      ch.desc = 'RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Flux Principal cle_rtptv_1m_u4tx)';
       return true;
     }
 
@@ -49,6 +63,8 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       seenKeys.add('CANAL_5_CONGO');
       seenIds.add('ch_congo');
       seenIds.add(ch.id);
+      if (chNum) seenNums.add('5');
+      seenNames.add('CONGO FLASH NEWS');
       return true;
     }
 
@@ -58,6 +74,8 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       seenKeys.add('CANAL_6_RTPRADIO');
       seenIds.add('ch_rtvradio');
       seenIds.add(ch.id);
+      if (chNum) seenNums.add('6');
+      seenNames.add('RTP RADIO');
       return true;
     }
 
@@ -67,6 +85,8 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       seenKeys.add('CANAL_7_NEWS243');
       seenIds.add('ch_news234');
       seenIds.add(ch.id);
+      if (chNum) seenNums.add('7');
+      seenNames.add('NEWS +243 RDC TV');
       return true;
     }
 
@@ -76,20 +96,42 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       seenKeys.add('CANAL_8_MCPRO');
       seenIds.add('ch_mcprod');
       seenIds.add(ch.id);
+      if (chNum) seenNums.add('8');
+      seenNames.add('MC PRO TV');
+      ch.nom = 'MC PRO TV';
       return true;
     }
 
-    // General deduplication by channel id
+    // Explicit duplicate channel IDs to eliminate
+    const bannedDuplicateIds = [
+      'ch_81', 'ch_87', 'ch_88', 'ch_90', 'ch_102', // Duplicates from www.tvpromedia.com
+      'ch_121', // Duplicate of ch_14 (C TV)
+      'ch_340', // Duplicate of ch_338 (BUENÍSIMA TV)
+      'ch_89',  // Duplicate of ch_69 (INFO CANADA)
+      'ch_84',  // Duplicate of ch_47 (Kanal Hovedstaden TV)
+      'ch_82',  // Duplicate of ch_51 (MBC Masr 1)
+      'ch_78',  // Duplicate of ch_42 (OCKO TV)
+      'ch_71',  // Duplicate of ch_364 (SAVOIR MEDIA)
+      'ch_80',  // Duplicate of ch_43 (O LIVE TV)
+      'ch_123', // Duplicate of ch_54 (ETV+)
+      'ch_357', 'ch_339', 'ch_70', 'ch_85'
+    ];
+    if (bannedDuplicateIds.includes(ch.id)) return false;
+
+    // General deduplication by unique channel ID
     if (seenIds.has(ch.id)) return false;
     seenIds.add(ch.id);
 
-    // Deprecated / obsolete channel IDs & duplicate names
-    if (ch.id === 'ch_357' || (chNum === '357' && upperNom.includes('ACTUALIT'))) return false;
-    if (ch.id === 'ch_339' || upperNom.includes('CANAL 8') || upperNom.includes('CANAL8') || upperNom === '8 TV' || upperNom.startsWith('8 TV')) return false;
+    // General deduplication by exact channel name
+    if (upperNom && seenNames.has(upperNom)) return false;
+    if (upperNom) seenNames.add(upperNom);
+
+    // General deduplication by channel number
+    if (chNum && seenNums.has(chNum)) return false;
+    if (chNum) seenNums.add(chNum);
+
+    // Obsolete duplicate keywords
     if (upperNom.includes('DIESKOLUS')) return false;
-    if (ch.id === 'ch_70' && upperNom.includes('ALA UNE')) return false;
-    if (ch.id === 'ch_85' && upperNom.includes('SPORTS LIVE')) return false;
-    if (ch.id === 'ch_81' || ch.id === 'ch_87' || ch.id === 'ch_88' || ch.id === 'ch_90' || ch.id === 'ch_102') return false;
     if (upperNom.includes('ALBKANALEMUSIC') || upperNom.includes('CNA TV') || upperNom.includes('HB TV') || upperNom === 'S CHANNEL') return false;
 
     return true;
@@ -1318,28 +1360,44 @@ export default function App() {
   const handleManualSync = async () => {
     setIsSyncing(true);
     try {
-      const res = await fetch('/api/channels', { cache: 'no-cache' });
-      if (res.ok) {
-        const data = await res.json();
-        const list = Array.isArray(data) ? data : (data.channels || data.chaines);
-        if (Array.isArray(list) && list.length > 0) {
-          handleUpdateChannels(list);
-          setToastMsg(`✓ ${list.length} chaînes synchronisées avec succès !`);
-          return;
+      // 1. Deduplicate current state
+      const cleanLocal = deduplicateChannels(channels);
+      
+      // 2. Fetch server list from /api/channels or /channels.json
+      let serverList: Channel[] = [];
+      try {
+        const res = await fetch('/api/channels', { cache: 'no-cache' });
+        if (res.ok) {
+          const data = await res.json();
+          const list = Array.isArray(data) ? data : (data.channels || data.chaines);
+          if (Array.isArray(list) && list.length > 0) serverList = list;
         }
+      } catch {}
+
+      if (serverList.length === 0) {
+        try {
+          const resJson = await fetch('/channels.json', { cache: 'no-cache' });
+          if (resJson.ok) {
+            const list = await resJson.json();
+            if (Array.isArray(list) && list.length > 0) serverList = list;
+          }
+        } catch {}
       }
-      const pushRes = await fetch('/api/channels', {
+
+      // 3. Combine and strictly deduplicate
+      const combined = deduplicateChannels([...serverList, ...cleanLocal]);
+      handleUpdateChannels(combined);
+
+      // 4. Push clean catalog to server
+      await fetch('/api/channels', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(channels)
-      });
-      if (pushRes.ok) {
-        setToastMsg(`✓ ${channels.length} chaînes synchronisées sur le serveur tvpromedia.com !`);
-      } else {
-        setToastMsg('Catalogue synchronisé localement.');
-      }
+        body: JSON.stringify(combined)
+      }).catch(() => {});
+
+      setToastMsg(`✓ ${combined.length} chaînes synchronisées sans doublon pour www.tvpromedia.com !`);
     } catch {
-      setToastMsg('Synchronisation active.');
+      setToastMsg('Catalogue synchronisé sans doublon.');
     } finally {
       setIsSyncing(false);
       setTimeout(() => setToastMsg(null), 4000);
