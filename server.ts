@@ -297,6 +297,12 @@ async function startServer() {
     res.redirect(`/api/proxy-stream?url=${encodeURIComponent(vpsTargetUrl)}`);
   });
 
+  // Dedicated CEM TV HLS endpoint
+  app.get(['/api/live/cem.m3u8', '/api/live/cemtv.m3u8'], (req, res) => {
+    const vpsTargetUrl = `http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8`;
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent(vpsTargetUrl)}`);
+  });
+
   // Hosted HLS Live Stream Playback URL (.m3u8) connected to VPS 191.215.38.95
   app.get('/api/live/stream.m3u8', (req, res) => {
     const vpsTargetUrl = `http://191.215.38.95:8080/live/cle_tvpro_hnxky2.m3u8`;
@@ -391,6 +397,27 @@ async function startServer() {
         if (chNum) seenNums.add('8');
         seenNames.add('MC PRO TV');
         ch.nom = 'MC PRO TV';
+        return true;
+      }
+
+      // 6. Strict single CEM TV (Canal 93) - Direct HLS VPS 191.215.38.95
+      if (ch.id === 'ch_93' || upperNom === 'CEM TV' || (chNum === '93' && upperNom.includes('CEM'))) {
+        if (seenKeys.has('CANAL_93_CEM') || seenIds.has('ch_93')) return false;
+        seenKeys.add('CANAL_93_CEM');
+        seenIds.add('ch_93');
+        seenIds.add(ch.id);
+        if (chNum) seenNums.add('93');
+        seenNames.add('CEM TV');
+        ch.id = 'ch_93';
+        ch.nom = 'CEM TV';
+        ch.ch = '93';
+        ch.lien = 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8';
+        ch.m3u8Source = 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8';
+        ch.cloudRemix = 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8';
+        ch.rtmpKey = 'cle_cem_1m_lvt6';
+        ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+        ch.youtubeBackup = 'https://www.youtube.com/watch?v=OwkjaS75qvA';
+        ch.desc = 'CEM TV - Centre Évangélique Mahanaïm • Direct HLS VPS 191.215.38.95 (Flux Principal cle_cem_1m_lvt6)';
         return true;
       }
 
@@ -622,6 +649,7 @@ async function startServer() {
         else if (item.id === 'ch_30' || name.toUpperCase().includes('ESPERANCE')) streamUrl = `${base}/api/live/paroledesperance.m3u8`;
         else if (item.id === 'ch_mabanza' || id === '33' || name.toUpperCase().includes('MABANZA')) streamUrl = `${base}/api/live/alliancemabanza.m3u8`;
         else if (item.id === 'ch_92' || name.toUpperCase().includes('MALAIKA')) streamUrl = `${base}/api/live/malaika.m3u8`;
+        else if (item.id === 'ch_93' || id === '93' || name.toUpperCase().includes('CEM TV') || name.toUpperCase() === 'CEM') streamUrl = `${base}/api/live/cem.m3u8`;
         else if (item.id === 'ch_3' || name.toUpperCase().includes('ESPEC')) streamUrl = `${base}/api/live/espec.m3u8`;
         else if (item.id === 'ch_1' || name.toUpperCase().includes('TV PRO MEDIA')) streamUrl = `${base}/api/live/stream.m3u8`;
 

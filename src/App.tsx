@@ -102,6 +102,27 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       return true;
     }
 
+    // 6. Strict single CEM TV (Canal 93) - Flux Principal VPS 191.215.38.95
+    if (ch.id === 'ch_93' || upperNom === 'CEM TV' || (chNum === '93' && upperNom.includes('CEM'))) {
+      if (seenKeys.has('CANAL_93_CEM') || seenIds.has('ch_93')) return false;
+      seenKeys.add('CANAL_93_CEM');
+      seenIds.add('ch_93');
+      seenIds.add(ch.id);
+      if (chNum) seenNums.add('93');
+      seenNames.add('CEM TV');
+      ch.id = 'ch_93';
+      ch.nom = 'CEM TV';
+      ch.ch = '93';
+      ch.lien = 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8';
+      ch.m3u8Source = 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8';
+      ch.cloudRemix = 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8';
+      ch.rtmpKey = 'cle_cem_1m_lvt6';
+      ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+      ch.youtubeBackup = 'https://www.youtube.com/watch?v=OwkjaS75qvA';
+      ch.desc = 'CEM TV - Centre Évangélique Mahanaïm • Direct HLS VPS 191.215.38.95 (Flux Principal cle_cem_1m_lvt6)';
+      return true;
+    }
+
     // Explicit duplicate channel IDs to eliminate
     const bannedDuplicateIds = [
       'ch_81', 'ch_87', 'ch_88', 'ch_90', 'ch_102', // Duplicates from www.tvpromedia.com
@@ -825,18 +846,26 @@ export default function App() {
               };
             }
           }
-          if (ch.id === 'ch_93' || (ch.nom && ch.nom.toUpperCase().includes('CEM TV'))) {
-            if (ch.logo !== CEM_TV_LOGO || ch.lien.includes('espoir-tv-stream') || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=OwkjaS75qvA' || ch.lien !== 'https://www.youtube.com/watch?v=OwkjaS75qvA') {
+          if (ch.id === 'ch_93' || (ch.nom && ch.nom.toUpperCase().includes('CEM TV')) || (ch.nom && ch.nom.toUpperCase().trim() === 'CEM TV')) {
+            const targetCemStream = 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8';
+            if (ch.lien !== targetCemStream || ch.m3u8Source !== targetCemStream || ch.logo !== CEM_TV_LOGO || ch.rtmpKey !== 'cle_cem_1m_lvt6') {
               migrated = true;
               ch = { 
                 ...ch, 
+                id: 'ch_93',
                 nom: "CEM TV",
                 logo: CEM_TV_LOGO,
-                lien: "https://www.youtube.com/watch?v=OwkjaS75qvA",
-                m3u8Source: "https://www.youtube.com/watch?v=OwkjaS75qvA",
+                lien: targetCemStream,
+                m3u8Source: targetCemStream,
+                cloudRemix: targetCemStream,
+                rtmpUrl: "rtmp://191.215.38.95/live",
+                rtmpKey: "cle_cem_1m_lvt6",
                 youtubeBackup: "https://www.youtube.com/watch?v=OwkjaS75qvA",
-                desc: "CEM TV - Centre Évangélique Mahanaïm (Culte, enseignements et diffusion continue)",
-                cat: "RELIGIEUX"
+                desc: "CEM TV - Centre Évangélique Mahanaïm • Direct HLS VPS 191.215.38.95 (Flux Principal cle_cem_1m_lvt6)",
+                cat: "RELIGIEUX",
+                ch: "93",
+                qualite: "4K",
+                pays: "RDC"
               };
             }
           }
