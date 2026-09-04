@@ -24,6 +24,78 @@ import {
   Tv, Star, Search, Trash2, ArrowUpRight, Play, Info, Heart, Smartphone, HelpCircle, Shield, Globe, Mail, Phone, ExternalLink, Lock, X, Share2, Download, AlertTriangle, CreditCard, Check, Camera, Megaphone, Sparkles, RefreshCw
 } from 'lucide-react';
 
+// Strict deduplication function targeting RTP, CONGO FLASH NEWS, RTP RADIO, NEWS +243 RDC TV, MC PRO TV
+const deduplicateChannels = (channelList: Channel[]): Channel[] => {
+  const seenKeys = new Set<string>();
+  const seenIds = new Set<string>();
+
+  return channelList.filter(ch => {
+    if (!ch) return false;
+    const upperNom = (ch.nom || '').trim().toUpperCase();
+    const chNum = (ch.ch || '').trim();
+
+    // 1. Strict single Canal 4: ONLY ONE ch_rtp (RTP)
+    if (ch.id === 'ch_rtp' || upperNom === 'RTP' || (chNum === '4' && ch.id !== 'ch_rtvradio')) {
+      if (seenKeys.has('CANAL_4_RTP') || seenIds.has('ch_rtp')) return false;
+      seenKeys.add('CANAL_4_RTP');
+      seenIds.add('ch_rtp');
+      seenIds.add(ch.id);
+      return true;
+    }
+
+    // 2. Strict single Canal 5: ONLY ONE ch_congo (CONGO FLASH NEWS)
+    if (ch.id === 'ch_congo' || upperNom === 'CONGO FLASH NEWS' || upperNom === 'CONGO FLASH' || (chNum === '5' && upperNom.includes('CONGO'))) {
+      if (seenKeys.has('CANAL_5_CONGO') || seenIds.has('ch_congo')) return false;
+      seenKeys.add('CANAL_5_CONGO');
+      seenIds.add('ch_congo');
+      seenIds.add(ch.id);
+      return true;
+    }
+
+    // 3. Strict single Canal 6: ONLY ONE ch_rtvradio (RTP RADIO)
+    if (ch.id === 'ch_rtvradio' || upperNom === 'RTP RADIO' || upperNom === 'RTV RADIO' || chNum === '6') {
+      if (seenKeys.has('CANAL_6_RTPRADIO') || seenIds.has('ch_rtvradio')) return false;
+      seenKeys.add('CANAL_6_RTPRADIO');
+      seenIds.add('ch_rtvradio');
+      seenIds.add(ch.id);
+      return true;
+    }
+
+    // 4. Strict single Canal 7: ONLY ONE ch_news234 (NEWS +243 RDC TV)
+    if (ch.id === 'ch_news234' || upperNom === 'NEWS +243 RDC TV' || upperNom === 'NEWS +243' || upperNom === 'NEWS 243 RDC TV' || upperNom === 'NEWS 243' || chNum === '7') {
+      if (seenKeys.has('CANAL_7_NEWS243') || seenIds.has('ch_news234')) return false;
+      seenKeys.add('CANAL_7_NEWS243');
+      seenIds.add('ch_news234');
+      seenIds.add(ch.id);
+      return true;
+    }
+
+    // 5. Strict single Canal 8: ONLY ONE ch_mcprod (MC PRO TV)
+    if (ch.id === 'ch_mcprod' || upperNom === 'MC PRO TV' || upperNom === 'MC PROD TV' || upperNom === 'MC PRO' || upperNom === 'MC PROD' || chNum === '8') {
+      if (seenKeys.has('CANAL_8_MCPRO') || seenIds.has('ch_mcprod')) return false;
+      seenKeys.add('CANAL_8_MCPRO');
+      seenIds.add('ch_mcprod');
+      seenIds.add(ch.id);
+      return true;
+    }
+
+    // General deduplication by channel id
+    if (seenIds.has(ch.id)) return false;
+    seenIds.add(ch.id);
+
+    // Deprecated / obsolete channel IDs & duplicate names
+    if (ch.id === 'ch_357' || (chNum === '357' && upperNom.includes('ACTUALIT'))) return false;
+    if (ch.id === 'ch_339' || upperNom.includes('CANAL 8') || upperNom.includes('CANAL8') || upperNom === '8 TV' || upperNom.startsWith('8 TV')) return false;
+    if (upperNom.includes('DIESKOLUS')) return false;
+    if (ch.id === 'ch_70' && upperNom.includes('ALA UNE')) return false;
+    if (ch.id === 'ch_85' && upperNom.includes('SPORTS LIVE')) return false;
+    if (ch.id === 'ch_81' || ch.id === 'ch_87' || ch.id === 'ch_88' || ch.id === 'ch_90' || ch.id === 'ch_102') return false;
+    if (upperNom.includes('ALBKANALEMUSIC') || upperNom.includes('CNA TV') || upperNom.includes('HB TV') || upperNom === 'S CHANNEL') return false;
+
+    return true;
+  });
+};
+
 export default function App() {
   // Channels and Favorites states (cached in localStorage)
   const [channels, setChannels] = useState<Channel[]>([]);
@@ -130,26 +202,27 @@ export default function App() {
             migrated = true;
             ch = { ...ch, cat: 'NEWS' };
           }
-          if (ch.id === 'ch_rtp' || (ch.nom && (ch.nom.toUpperCase().includes('RTP') || ch.ch === '4'))) {
-            if (ch.nom !== 'RTP' || ch.logo !== RTP_TV_LOGO || ch.lien !== 'http://191.215.38.95:8080/live/cle_rtp_1m_ju9k.m3u8') {
+          if (ch.id === 'ch_rtp' || (ch.nom && ch.nom.trim().toUpperCase() === 'RTP') || (ch.ch === '4' && ch.id !== 'ch_rtvradio')) {
+            if (ch.nom !== 'RTP' || ch.logo !== RTP_TV_LOGO || ch.lien !== 'http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8' || ch.ch !== '4') {
               migrated = true;
               ch = {
                 ...ch,
                 id: 'ch_rtp',
                 nom: "RTP",
                 logo: RTP_TV_LOGO,
-                lien: "http://191.215.38.95:8080/live/cle_rtp_1m_ju9k.m3u8",
-                m3u8Source: "http://191.215.38.95:8080/live/cle_rtp_1m_ju9k.m3u8",
+                lien: "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8",
+                m3u8Source: "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8",
+                cloudRemix: "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8",
                 rtmpUrl: "rtmp://191.215.38.95/live",
-                rtmpKey: "cle_rtp_1m_ju9k",
-                desc: "RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (clé cle_rtp_1m_ju9k)",
+                rtmpKey: "cle_rtptv_1m_u4tx",
+                desc: "RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Flux Principal & Secours cle_rtptv_1m_u4tx)",
                 cat: "GENERALISTE",
                 ch: "4"
               };
             }
           }
-          if (ch.id === 'ch_congo' || (ch.nom && (ch.nom.toUpperCase().includes('CONGO FLASH') || ch.nom.toUpperCase().includes('CONGO TV') || ch.nom.toUpperCase() === 'CONGO')) || ch.ch === '5') {
-            if (ch.nom !== 'CONGO FLASH NEWS' || ch.logo !== CONGO_FLASH_NEWS_LOGO || ch.lien !== 'https://www.youtube.com/watch?v=YUCkBgK-qac') {
+          if (ch.id === 'ch_congo' || (ch.nom && (ch.nom.trim().toUpperCase() === 'CONGO FLASH NEWS' || ch.nom.trim().toUpperCase() === 'CONGO FLASH'))) {
+            if (ch.nom !== 'CONGO FLASH NEWS' || ch.logo !== CONGO_FLASH_NEWS_LOGO || ch.lien !== 'https://www.youtube.com/watch?v=YUCkBgK-qac' || ch.ch !== '5') {
               migrated = true;
               ch = {
                 ...ch,
@@ -167,8 +240,8 @@ export default function App() {
               };
             }
           }
-          if (ch.id === 'ch_rtvradio' || (ch.nom && (ch.nom.toUpperCase().includes('RTP RADIO') || ch.nom.toUpperCase().includes('RTV RADIO') || ch.nom.toUpperCase() === 'RTV')) || ch.ch === '6') {
-            if (ch.nom !== 'RTP RADIO' || ch.logo !== RTP_RADIO_LOGO || ch.lien !== 'http://191.215.38.95:8080/live/cle_rtvradio_1m_xxmm.m3u8') {
+          if (ch.id === 'ch_rtvradio' || (ch.nom && (ch.nom.trim().toUpperCase() === 'RTP RADIO' || ch.nom.trim().toUpperCase() === 'RTV RADIO')) || ch.ch === '6') {
+            if (ch.nom !== 'RTP RADIO' || ch.logo !== RTP_RADIO_LOGO || ch.lien !== 'http://191.215.38.95:8080/live/cle_rtvradio_1m_xxmm.m3u8' || ch.ch !== '6') {
               migrated = true;
               ch = {
                 ...ch,
@@ -185,8 +258,8 @@ export default function App() {
               };
             }
           }
-          if (ch.id === 'ch_news234' || (ch.nom && (ch.nom.toUpperCase().includes('NEWS') && (ch.nom.includes('243') || ch.nom.includes('234') || ch.nom.toUpperCase().includes('RDC')))) || ch.ch === '7') {
-            if (ch.nom !== 'NEWS +243 RDC TV' || ch.logo !== NEWS_243_RDC_LOGO || ch.lien !== 'http://191.215.38.95:8080/live/cle_news234_1m_jgx9.m3u8') {
+          if (ch.id === 'ch_news234' || (ch.nom && (ch.nom.trim().toUpperCase() === 'NEWS +243 RDC TV' || ch.nom.trim().toUpperCase() === 'NEWS +243' || ch.nom.trim().toUpperCase() === 'NEWS 243 RDC TV' || ch.nom.trim().toUpperCase() === 'NEWS 243')) || ch.ch === '7') {
+            if (ch.nom !== 'NEWS +243 RDC TV' || ch.logo !== NEWS_243_RDC_LOGO || ch.lien !== 'http://191.215.38.95:8080/live/cle_news234_1m_jgx9.m3u8' || ch.ch !== '7') {
               migrated = true;
               ch = {
                 ...ch,
@@ -203,19 +276,19 @@ export default function App() {
               };
             }
           }
-          if (ch.id === 'ch_mcprod' || (ch.nom && (ch.nom.toUpperCase().includes('MC PROD') || ch.nom.toUpperCase() === 'MC PROD TV' || ch.ch === '8'))) {
-            if (ch.nom !== 'MC PROD TV' || ch.logo !== MC_PROD_TV_LOGO || ch.lien !== 'https://eggproiptv.duckdns.org:3561/hybrid/play.m3u8') {
+          if (ch.id === 'ch_mcprod' || (ch.nom && (ch.nom.trim().toUpperCase() === 'MC PRO TV' || ch.nom.trim().toUpperCase() === 'MC PROD TV' || ch.nom.trim().toUpperCase() === 'MC PRO')) || ch.ch === '8') {
+            if (ch.nom !== 'MC PRO TV' || ch.logo !== MC_PROD_TV_LOGO || ch.lien !== 'https://eggproiptv.duckdns.org:3561/hybrid/play.m3u8' || ch.ch !== '8') {
               migrated = true;
               ch = {
                 ...ch,
                 id: 'ch_mcprod',
-                nom: "MC PROD TV",
+                nom: "MC PRO TV",
                 logo: MC_PROD_TV_LOGO,
                 lien: "https://eggproiptv.duckdns.org:3561/hybrid/play.m3u8",
                 m3u8Source: "https://eggproiptv.duckdns.org:3561/hybrid/play.m3u8",
                 rtmpUrl: "rtmp://191.215.38.95/live",
                 rtmpKey: "cle_mcprod_1m_live",
-                desc: "MC PROD TV - Émissions, Musique, Séries & Divertissement en direct HD",
+                desc: "MC PRO TV - Émissions, Musique, Séries & Divertissement en direct HD",
                 cat: "GENERALISTE",
                 ch: "8"
               };
@@ -578,22 +651,25 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_rtp' || (ch.nom && ch.nom.trim().toUpperCase() === 'RTP')) {
-            if (!ch.lien.includes('cle_rtp_1m_ju9k_aac.m3u8')) {
+            if (ch.lien !== 'http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8') {
               migrated = true;
               ch = {
                 ...ch,
                 nom: "RTP",
                 logo: RTP_TV_LOGO,
-                lien: "http://191.215.38.95:8080/live/cle_rtp_1m_ju9k_aac.m3u8",
-                m3u8Source: "http://191.215.38.95:8080/live/cle_rtp_1m_ju9k_aac.m3u8",
-                desc: "RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Audio AAC 44.1kHz Optimisé Mobile/PC)",
+                lien: "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8",
+                m3u8Source: "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8",
+                cloudRemix: "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8",
+                rtmpUrl: "rtmp://191.215.38.95/live",
+                rtmpKey: "cle_rtptv_1m_u4tx",
+                desc: "RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Flux Principal & Secours cle_rtptv_1m_u4tx)",
                 qualite: "4K",
                 cat: "GENERALISTE",
                 ch: "4"
               };
             }
           }
-          if (ch.id === 'ch_congo' || (ch.nom && (ch.nom.toUpperCase().includes('CONGO FLASH') || ch.nom.toUpperCase().includes('CONGO TV')))) {
+          if (ch.id === 'ch_congo' || (ch.nom && (ch.nom.trim().toUpperCase() === 'CONGO FLASH NEWS' || ch.nom.trim().toUpperCase() === 'CONGO FLASH'))) {
             if (ch.lien !== 'https://www.youtube.com/watch?v=YUCkBgK-qac' || ch.m3u8Source !== 'https://www.youtube.com/watch?v=YUCkBgK-qac') {
               migrated = true;
               ch = {
@@ -1040,35 +1116,9 @@ export default function App() {
           }
         });
 
-        // Remove explicitly deleted deprecated channels and enforce strict single Canal 6, 7, 8
         const initialCount = parsed.length;
-        parsed = parsed.filter(ch => {
-          const upperNom = (ch.nom || '').toUpperCase().trim();
-          const chNum = (ch.ch || '').trim();
+        parsed = deduplicateChannels(parsed);
 
-          // 1. Strict single Canal 6: ONLY ch_rtvradio (RTP RADIO)
-          if (chNum === '6' && ch.id !== 'ch_rtvradio') return false;
-          if (upperNom.includes('CANAL 6') && ch.id !== 'ch_rtvradio') return false;
-
-          // 2. Strict single Canal 7: ONLY ch_news234 (NEWS +243 RDC TV)
-          if (chNum === '7' && ch.id !== 'ch_news234') return false;
-          if (upperNom.includes('CANAL 7') && ch.id !== 'ch_news234') return false;
-
-          // 3. Strict single Canal 8: ONLY ch_mcprod (MC PROD TV)
-          if (chNum === '8' && ch.id !== 'ch_mcprod') return false;
-          if (ch.id === 'ch_339' || upperNom.includes('CANAL 8') || upperNom.includes('CANAL8') || upperNom === '8 TV' || upperNom.startsWith('8 TV')) {
-            if (ch.id !== 'ch_mcprod') return false;
-          }
-
-          // 4. Deprecated / obsolete channel IDs & duplicate names
-          if (ch.id === 'ch_357' || (chNum === '357' && upperNom.includes('ACTUALIT'))) return false;
-          if (upperNom.includes('DIESKOLUS')) return false;
-          if (ch.id === 'ch_70' && upperNom.includes('ALA UNE')) return false;
-          if (ch.id === 'ch_85' && upperNom.includes('SPORTS LIVE')) return false;
-          if (upperNom.includes('ALBKANALEMUSIC') || upperNom.includes('CNA TV') || upperNom.includes('HB TV') || upperNom === 'S CHANNEL') return false;
-
-          return true;
-        });
         if (parsed.length !== initialCount) {
           migrated = true;
         }
@@ -1084,6 +1134,13 @@ export default function App() {
             }
           }
         });
+
+        // Run second deduplication pass to guarantee absolute uniqueness
+        const preFinalCount = parsed.length;
+        parsed = deduplicateChannels(parsed);
+        if (parsed.length !== preFinalCount) {
+          migrated = true;
+        }
 
         // Ensure channels are sorted cleanly by channel number
         parsed.sort((a, b) => {
@@ -1219,19 +1276,20 @@ export default function App() {
 
   // Update channels state and persist to storage
   const handleUpdateChannels = (updatedList: Channel[]) => {
-    setChannels(updatedList);
-    localStorage.setItem('chaines_tvpro', JSON.stringify(updatedList));
+    const cleanList = deduplicateChannels(updatedList);
+    setChannels(cleanList);
+    localStorage.setItem('chaines_tvpro', JSON.stringify(cleanList));
 
     // Automatically propagate to server channels.json for tvpromedia.com, VPS and mobile apps
     fetch('/api/channels', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedList)
+      body: JSON.stringify(cleanList)
     }).catch(() => {});
 
     // Keep active channel reference synced or clear if deleted
     if (activeChannel) {
-      const updatedActive = updatedList.find(ch => ch.id === activeChannel.id);
+      const updatedActive = cleanList.find(ch => ch.id === activeChannel.id);
       if (updatedActive) {
         setActiveChannel(updatedActive);
       } else {

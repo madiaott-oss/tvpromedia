@@ -368,16 +368,17 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
   {
     id: 'ch_rtp',
     nom: "RTP",
-    lien: "http://191.215.38.95:8080/live/cle_rtp_1m_ju9k_aac.m3u8",
+    lien: "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8",
     logo: RTP_TV_LOGO,
     cat: "GENERALISTE",
     ch: "4",
     qualite: "4K",
     pays: "RDC",
-    desc: "RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Audio AAC 44.1kHz Optimisé Mobile/PC)",
-    m3u8Source: "http://191.215.38.95:8080/live/cle_rtp_1m_ju9k_aac.m3u8",
+    desc: "RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Flux Principal & Secours cle_rtptv_1m_u4tx)",
+    m3u8Source: "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8",
+    cloudRemix: "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8",
     rtmpUrl: "rtmp://191.215.38.95/live",
-    rtmpKey: "cle_rtp_1m_ju9k"
+    rtmpKey: "cle_rtptv_1m_u4tx"
   },
   {
     id: 'ch_congo',
@@ -424,14 +425,14 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
   },
   {
     id: 'ch_mcprod',
-    nom: "MC PROD TV",
+    nom: "MC PRO TV",
     lien: "https://eggproiptv.duckdns.org:3561/hybrid/play.m3u8",
     logo: MC_PROD_TV_LOGO,
     cat: "GENERALISTE",
     ch: "8",
     qualite: "4K",
     pays: "RDC",
-    desc: "MC PROD TV - Émissions, Musique, Séries & Divertissement en direct HD",
+    desc: "MC PRO TV - Émissions, Musique, Séries & Divertissement en direct HD",
     m3u8Source: "https://eggproiptv.duckdns.org:3561/hybrid/play.m3u8",
     rtmpUrl: "rtmp://191.215.38.95/live",
     rtmpKey: "cle_mcprod_1m_live"
@@ -1246,17 +1247,6 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     desc: "Olive Live TV"
   },
   {
-    id: 'ch_81',
-    nom: "NEWS 24",
-    lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
-    logo: NEWS_24_LOGO,
-    cat: "NEWS",
-    ch: "81",
-    qualite: "4K",
-    pays: "INTERNATIONAL",
-    desc: "News 24 Live Stream"
-  },
-  {
     id: 'ch_82',
     nom: "MBC MASR",
     lien: "https://mbcmasr.live.m3u8",
@@ -1301,29 +1291,6 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     desc: "Toronto 360 Live Television"
   },
   {
-    id: 'ch_87',
-    nom: "TROPOJA TV",
-    lien: "https://tropoja.live.m3u8",
-    logo: TROPOJA_TV_LOGO,
-    cat: "GENERALISTE",
-    ch: "87",
-    qualite: "4K",
-    pays: "ALBANIE",
-    desc: "Tropoja TV Broadcast"
-  },
-  {
-    id: 'ch_88',
-    nom: "VIVO TV",
-    lien: "http://www.coninfo.net:1935/tvlink/live/playlist.m3u8",
-    logo: VIVO_TV_LOGO,
-    cat: "GENERALISTE",
-    ch: "88",
-    qualite: "4K",
-    pays: "RDC",
-    desc: "VIVO TV - Chaîne de télévision en direct",
-    m3u8Source: "http://www.coninfo.net:1935/tvlink/live/playlist.m3u8"
-  },
-  {
     id: 'ch_89',
     nom: "ICI INFO",
     lien: "https://rcavlive.akamaized.net/hls/live/704025/xcanrdi/master.m3u8",
@@ -1333,17 +1300,6 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     qualite: "4K",
     pays: "CANADA",
     desc: "ICI Radio-Canada Info en direct"
-  },
-  {
-    id: 'ch_90',
-    nom: "SAVOIR MEDIA",
-    lien: "https://savoir.media.live.m3u8",
-    logo: SAVOIR_MEDIA_LOGO,
-    cat: "DOCUMENTAIRE",
-    ch: "90",
-    qualite: "4K",
-    pays: "CANADA",
-    desc: "Savoir média - Éducation, culture et savoirs"
   },
   {
     id: 'ch_92',
@@ -1416,17 +1372,6 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     qualite: "4K",
     pays: "RDC",
     desc: "IGBCB TV - I.G.B. Consulting Télévision"
-  },
-  {
-    id: 'ch_102',
-    nom: "CMC TV",
-    lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
-    logo: CMC_MISSIONNAIRE_LOGO,
-    cat: "RELIGIEUX",
-    ch: "102",
-    qualite: "4K",
-    pays: "RDC",
-    desc: "Centre Missionnaire Chrétien - CMC Télévision"
   },
   {
     id: 'ch_103',

@@ -15,7 +15,8 @@ export const REMIX_PRESETS = {
 };
 
 export const EMERGENCY_VIDEO_PRESETS = {
-  secours: "http://tvpromedia.com:8080/live/test123.m3u8", // Stream HLS de secours SRS TVPRO (panne électricité)
+  secours: "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8", // Stream HLS de secours direct RTP TV VPS (191.215.38.95)
+  rtp_secours: "http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8", // Flux de secours direct RTP
   mire: "https://playertest.longtailvideo.com/adaptive/bipbop/bipbop.m3u8", // Apple official HLS test stream
   nature: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" // Stable MP4 nature loop
 };
@@ -426,7 +427,7 @@ export default function VideoPlayer({ src, title, logoUrl, category, channelNum,
 
   // Determine active media stream (Primary channel url or Backup loop)
   const activeStream = isCloudRemix 
-    ? (backupMode === 'video' ? EMERGENCY_VIDEO_PRESETS[videoGenre] : (cloudRemix || REMIX_PRESETS[remixGenre])) 
+    ? (backupMode === 'video' ? (cloudRemix || EMERGENCY_VIDEO_PRESETS[videoGenre]) : (cloudRemix || REMIX_PRESETS[remixGenre])) 
     : src;
 
   // Re-initialize player whenever activeStream changes
@@ -511,9 +512,9 @@ export default function VideoPlayer({ src, title, logoUrl, category, channelNum,
     // Resolve stream URL: if stream is an AzuraCast public station page, resolve the direct live stream endpoint
     const getStreamUrlToLoad = (rawUrl: string) => {
       let resolved = rawUrl;
-      // Auto-route RTP to the universal AAC-transcoded stream for perfect mobile & desktop sound
-      if (resolved.includes('cle_rtp_1m_ju9k.m3u8') && !resolved.includes('cle_rtp_1m_ju9k_aac.m3u8')) {
-        resolved = resolved.replace('cle_rtp_1m_ju9k.m3u8', 'cle_rtp_1m_ju9k_aac.m3u8');
+      // Auto-route RTP to the official new active stream (cle_rtptv_1m_u4tx)
+      if (resolved.includes('cle_rtp_1m_ju9k') && !resolved.includes('cle_rtptv_1m_u4tx')) {
+        resolved = 'http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8';
       }
 
       // Auto-route ESPEC TV to official live Berosat stream
@@ -1335,7 +1336,7 @@ export default function VideoPlayer({ src, title, logoUrl, category, channelNum,
                     }`}
                   >
                     <Tv className="w-3.5 h-3.5" />
-                    <span>SRS test123.m3u8</span>
+                    <span>RTP TV Secours</span>
                   </button>
                   <button
                     onClick={() => {

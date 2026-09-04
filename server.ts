@@ -243,12 +243,12 @@ async function startServer() {
   });
 
   // Dedicated VPS Stream Endpoints
-  app.get('/api/live/rtp.m3u8', (req, res) => {
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_rtp_1m_ju9k_aac.m3u8')}`);
+  app.get(['/api/live/rtp.m3u8', '/api/live/rtptv.m3u8', '/api/live/rtp_secours.m3u8', '/api/live/rtp_backup.m3u8'], (req, res) => {
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8')}`);
   });
 
   app.get('/api/live/rtp_aac.m3u8', (req, res) => {
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_rtp_1m_ju9k_aac.m3u8')}`);
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8')}`);
   });
 
   app.get('/api/live/congo.m3u8', (req, res) => {
@@ -317,17 +317,80 @@ async function startServer() {
   const CHANNELS_FILE_DIST = path.join(process.cwd(), 'dist', 'channels.json');
   const CHANNELS_BACKUP_FILE = path.join(process.cwd(), 'public', 'channels_backup.json');
 
+  const cleanAndDeduplicateChannels = (list: any[]): any[] => {
+    if (!Array.isArray(list)) return [];
+    const seenKeys = new Set<string>();
+    const seenIds = new Set<string>();
+
+    return list.filter(ch => {
+      if (!ch) return false;
+      const upperNom = (ch.nom || '').trim().toUpperCase();
+      const chNum = String(ch.ch || '').trim();
+
+      // 1. Strict single RTP (Canal 4)
+      if (ch.id === 'ch_rtp' || upperNom === 'RTP' || (chNum === '4' && ch.id !== 'ch_rtvradio')) {
+        if (seenKeys.has('CANAL_4_RTP') || seenIds.has('ch_rtp')) return false;
+        seenKeys.add('CANAL_4_RTP');
+        seenIds.add('ch_rtp');
+        seenIds.add(ch.id);
+        return true;
+      }
+
+      // 2. Strict single CONGO FLASH NEWS (Canal 5)
+      if (ch.id === 'ch_congo' || upperNom === 'CONGO FLASH NEWS' || upperNom === 'CONGO FLASH') {
+        if (seenKeys.has('CANAL_5_CONGO') || seenIds.has('ch_congo')) return false;
+        seenKeys.add('CANAL_5_CONGO');
+        seenIds.add('ch_congo');
+        seenIds.add(ch.id);
+        return true;
+      }
+
+      // 3. Strict single RTP RADIO (Canal 6)
+      if (ch.id === 'ch_rtvradio' || upperNom === 'RTP RADIO' || upperNom === 'RTV RADIO' || chNum === '6') {
+        if (seenKeys.has('CANAL_6_RTPRADIO') || seenIds.has('ch_rtvradio')) return false;
+        seenKeys.add('CANAL_6_RTPRADIO');
+        seenIds.add('ch_rtvradio');
+        seenIds.add(ch.id);
+        return true;
+      }
+
+      // 4. Strict single NEWS +243 RDC TV (Canal 7)
+      if (ch.id === 'ch_news234' || upperNom === 'NEWS +243 RDC TV' || upperNom === 'NEWS +243' || upperNom === 'NEWS 243 RDC TV' || upperNom === 'NEWS 243' || chNum === '7') {
+        if (seenKeys.has('CANAL_7_NEWS243') || seenIds.has('ch_news234')) return false;
+        seenKeys.add('CANAL_7_NEWS243');
+        seenIds.add('ch_news234');
+        seenIds.add(ch.id);
+        return true;
+      }
+
+      // 5. Strict single MC PRO TV (Canal 8)
+      if (ch.id === 'ch_mcprod' || upperNom === 'MC PRO TV' || upperNom === 'MC PROD TV' || upperNom === 'MC PRO' || upperNom === 'MC PROD' || chNum === '8') {
+        if (seenKeys.has('CANAL_8_MCPRO') || seenIds.has('ch_mcprod')) return false;
+        seenKeys.add('CANAL_8_MCPRO');
+        seenIds.add('ch_mcprod');
+        seenIds.add(ch.id);
+        return true;
+      }
+
+      if (ch.id === 'ch_81' || ch.id === 'ch_87' || ch.id === 'ch_88' || ch.id === 'ch_90' || ch.id === 'ch_102') return false;
+
+      if (seenIds.has(ch.id)) return false;
+      seenIds.add(ch.id);
+      return true;
+    });
+  };
+
   const getChannels = (): any[] => {
     try {
       if (fs.existsSync(CHANNELS_FILE_PUBLIC)) {
         const raw = fs.readFileSync(CHANNELS_FILE_PUBLIC, 'utf-8');
         const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) return cleanAndDeduplicateChannels(parsed);
       }
       if (fs.existsSync(CHANNELS_FILE_DIST)) {
         const raw = fs.readFileSync(CHANNELS_FILE_DIST, 'utf-8');
         const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) return cleanAndDeduplicateChannels(parsed);
       }
     } catch (e) {
       console.error('Error reading channels.json:', e);
@@ -337,7 +400,8 @@ async function startServer() {
 
   const saveChannels = (channels: any[]): boolean => {
     try {
-      const jsonStr = JSON.stringify(channels, null, 2);
+      const deduped = cleanAndDeduplicateChannels(channels);
+      const jsonStr = JSON.stringify(deduped, null, 2);
       const publicDir = path.join(process.cwd(), 'public');
       if (!fs.existsSync(publicDir)) {
         fs.mkdirSync(publicDir, { recursive: true });
