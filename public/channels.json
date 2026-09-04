@@ -885,7 +885,7 @@
   {
     "id": "ch_93",
     "nom": "CEM TV",
-    "lien": "http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8",
+    "lien": "https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8",
     "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 700 350\" width=\"100%\" height=\"100%\"><rect width=\"700\" height=\"350\" fill=\"%23ffffff\"/><g transform=\"translate(15, 60)\"><rect x=\"0\" y=\"0\" width=\"410\" height=\"200\" fill=\"%23e50914\"/><text x=\"205\" y=\"145\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"160\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"-6\">CEM</text><text x=\"205\" y=\"185\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"17\" fill=\"%23000000\" text-anchor=\"middle\" letter-spacing=\"1\">CENTRE EVANGELIQUE MAHANAIM</text><rect x=\"410\" y=\"0\" width=\"260\" height=\"200\" fill=\"%23080066\"/><text x=\"540\" y=\"145\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"160\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"-4\">tv</text></g></svg>",
     "cat": "RELIGIEUX",
     "ch": "93",
@@ -893,8 +893,8 @@
     "pays": "RDC",
     "desc": "CEM TV - Centre Évangélique Mahanaïm • Direct HLS VPS 191.215.38.95 (Flux Principal cle_cem_1m_lvt6)",
     "youtubeBackup": "https://www.youtube.com/watch?v=OwkjaS75qvA",
-    "m3u8Source": "http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8",
-    "cloudRemix": "http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8",
+    "m3u8Source": "https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8",
+    "cloudRemix": "https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
     "rtmpKey": "cle_cem_1m_lvt6"
   },

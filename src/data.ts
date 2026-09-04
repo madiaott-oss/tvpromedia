@@ -1317,18 +1317,18 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
   {
     id: 'ch_93',
     nom: "CEM TV",
-    lien: "http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8",
+    lien: "https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8",
     logo: CEM_TV_LOGO,
     cat: "RELIGIEUX",
     ch: "93",
     qualite: "4K",
     pays: "RDC",
     desc: "CEM TV - Centre Évangélique Mahanaïm • Direct HLS VPS 191.215.38.95 (Flux Principal cle_cem_1m_lvt6)",
-    cloudRemix: "http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8",
+    cloudRemix: "https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8",
     rtmpUrl: "rtmp://191.215.38.95/live",
     rtmpKey: "cle_cem_1m_lvt6",
     youtubeBackup: "https://www.youtube.com/watch?v=OwkjaS75qvA",
-    m3u8Source: "http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8"
+    m3u8Source: "https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8"
   },
   {
     id: 'ch_94',

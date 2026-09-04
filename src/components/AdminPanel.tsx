@@ -388,7 +388,7 @@ export default function AdminPanel({ channels, viewCounts, onUpdateChannels, onR
         contact: 'Direction CEM TV Mahanaïm (Kinshasa)',
         rtmpUrl: 'rtmp://191.215.38.95/live',
         streamKey: 'cle_cem_1m_lvt6',
-        m3u8Url: 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8',
+        m3u8Url: 'https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8',
         durationMonths: 12,
         issuedAt: today.toISOString().split('T')[0],
         expiresAt: d3.toISOString().split('T')[0],

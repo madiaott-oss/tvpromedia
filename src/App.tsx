@@ -113,9 +113,9 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.id = 'ch_93';
       ch.nom = 'CEM TV';
       ch.ch = '93';
-      ch.lien = 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8';
-      ch.m3u8Source = 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8';
-      ch.cloudRemix = 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8';
+      ch.lien = 'https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8';
+      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8';
+      ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8';
       ch.rtmpKey = 'cle_cem_1m_lvt6';
       ch.rtmpUrl = 'rtmp://191.215.38.95/live';
       ch.youtubeBackup = 'https://www.youtube.com/watch?v=OwkjaS75qvA';
@@ -847,7 +847,7 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_93' || (ch.nom && ch.nom.toUpperCase().includes('CEM TV')) || (ch.nom && ch.nom.toUpperCase().trim() === 'CEM TV')) {
-            const targetCemStream = 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8';
+            const targetCemStream = 'https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8';
             if (ch.lien !== targetCemStream || ch.m3u8Source !== targetCemStream || ch.logo !== CEM_TV_LOGO || ch.rtmpKey !== 'cle_cem_1m_lvt6') {
               migrated = true;
               ch = { 

@@ -299,8 +299,7 @@ async function startServer() {
 
   // Dedicated CEM TV HLS endpoint
   app.get(['/api/live/cem.m3u8', '/api/live/cemtv.m3u8'], (req, res) => {
-    const vpsTargetUrl = `http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8`;
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent(vpsTargetUrl)}`);
+    res.redirect('/live/cle_cem_1m_lvt6.m3u8');
   });
 
   // Hosted HLS Live Stream Playback URL (.m3u8) connected to VPS 191.215.38.95
@@ -411,9 +410,9 @@ async function startServer() {
         ch.id = 'ch_93';
         ch.nom = 'CEM TV';
         ch.ch = '93';
-        ch.lien = 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8';
-        ch.m3u8Source = 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8';
-        ch.cloudRemix = 'http://191.215.38.95:8080/live/cle_cem_1m_lvt6.m3u8';
+        ch.lien = 'https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8';
+        ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8';
+        ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8';
         ch.rtmpKey = 'cle_cem_1m_lvt6';
         ch.rtmpUrl = 'rtmp://191.215.38.95/live';
         ch.youtubeBackup = 'https://www.youtube.com/watch?v=OwkjaS75qvA';

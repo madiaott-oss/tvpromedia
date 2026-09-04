@@ -336,9 +336,15 @@ export default function VideoPlayer({ src, title, logoUrl, category, channelNum,
       try {
         if (!isMounted) return;
         setM3u8ProbeStatus('checking');
-        const streamUrl = primaryM3u8.startsWith('http://') && window.location.protocol === 'https:'
-          ? `/api/proxy-stream?url=${encodeURIComponent(primaryM3u8)}`
-          : primaryM3u8;
+        let streamUrl = primaryM3u8;
+        if (streamUrl.includes('191.215.38.95:8080/live/') || streamUrl.includes('191.215.38.95/live/')) {
+          const streamPart = streamUrl.split('/live/')[1];
+          streamUrl = (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com'))
+            ? `/live/${streamPart}`
+            : `https://www.tvpromedia.com/live/${streamPart}`;
+        } else if (streamUrl.startsWith('http://') && typeof window !== 'undefined' && window.location.protocol === 'https:') {
+          streamUrl = `/api/proxy-stream?url=${encodeURIComponent(streamUrl)}`;
+        }
 
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 6000);
@@ -391,9 +397,15 @@ export default function VideoPlayer({ src, title, logoUrl, category, channelNum,
 
     setM3u8ProbeStatus('checking');
     try {
-      const streamUrl = primaryM3u8.startsWith('http://') && window.location.protocol === 'https:'
-        ? `/api/proxy-stream?url=${encodeURIComponent(primaryM3u8)}`
-        : primaryM3u8;
+      let streamUrl = primaryM3u8;
+      if (streamUrl.includes('191.215.38.95:8080/live/') || streamUrl.includes('191.215.38.95/live/')) {
+        const streamPart = streamUrl.split('/live/')[1];
+        streamUrl = (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com'))
+          ? `/live/${streamPart}`
+          : `https://www.tvpromedia.com/live/${streamPart}`;
+      } else if (streamUrl.startsWith('http://') && typeof window !== 'undefined' && window.location.protocol === 'https:') {
+        streamUrl = `/api/proxy-stream?url=${encodeURIComponent(streamUrl)}`;
+      }
 
       const response = await fetch(streamUrl, {
         method: 'GET',
@@ -526,6 +538,28 @@ export default function VideoPlayer({ src, title, logoUrl, category, channelNum,
         resolved = 'https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8';
       }
 
+      // Auto-route CEM TV strictly to the official primary active VPS stream (cle_cem_1m_lvt6)
+      if (
+        (resolved && (resolved.includes('cle_cem') || resolved.includes('cem.m3u8') || resolved.includes('cemtv.m3u8'))) ||
+        (title && title.trim().toUpperCase().includes('CEM TV')) ||
+        (channelNum === '93')
+      ) {
+        if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
+          return `/live/cle_cem_1m_lvt6.m3u8`;
+        }
+        return `https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8`;
+      }
+
+      // Route all VPS 191.215.38.95 SRS streams directly through native HTTPS Nginx /live/ reverse proxy
+      // This completely bypasses mixed-content blocking on HTTPS www.tvpromedia.com
+      if (resolved.includes('191.215.38.95:8080/live/') || resolved.includes('191.215.38.95/live/')) {
+        const streamPart = resolved.split('/live/')[1];
+        if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
+          return `/live/${streamPart}`;
+        }
+        return `https://www.tvpromedia.com/live/${streamPart}`;
+      }
+
       // Convert legacy placeholder domains to real live IP stream
       if (resolved.includes('tvpromedia.ai.studio/live/')) {
         const streamFile = resolved.split('tvpromedia.ai.studio/live/')[1];
@@ -651,6 +685,9 @@ export default function VideoPlayer({ src, title, logoUrl, category, channelNum,
                   const directUrl = streamToLoad.replace('_aac.m3u8', '.m3u8');
                   console.log("AAC stream unavailable, falling back to direct stream:", directUrl);
                   hls.loadSource(directUrl);
+                } else if (streamToLoad.includes('/live/')) {
+                  console.log("VPS stream reload directly:", streamToLoad);
+                  hls.loadSource(streamToLoad);
                 } else {
                   const proxyUrl = `/api/proxy-stream?url=${encodeURIComponent(activeStream)}`;
                   console.log("Rerouting stream via internal proxy:", proxyUrl);
