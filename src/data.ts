@@ -640,14 +640,17 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
   {
     id: 'ch_23',
     nom: "CCPV TV MONTRÉAL",
-    lien: "http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxg9.m3u8",
+    lien: "https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8",
     logo: CCPV_TV_LOGO,
     cat: "RELIGIEUX",
     ch: "23",
     qualite: "4K",
     pays: "CANADA",
-    desc: "Centre Chrétien Parole de Vie - Montréal, Canada • Direct HLS & Secours YouTube",
-    m3u8Source: "http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxg9.m3u8",
+    desc: "CCPV TV Montréal (Centre Chrétien Parole de Vie) • Direct HLS VPS cle_ccpvtv_1m_9miq sur www.tvpromedia.com",
+    cloudRemix: "https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8",
+    rtmpUrl: "rtmp://191.215.38.95/live",
+    rtmpKey: "cle_ccpvtv_1m_9miq",
+    m3u8Source: "https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8",
     youtubeBackup: "https://www.youtube.com/watch?v=jK6kwNwe_1o"
   },
   {
@@ -1304,15 +1307,18 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
   {
     id: 'ch_92',
     nom: "MALAÏKA ACTU",
-    lien: "http://191.215.38.95:8080/live/cle_malaika_1m_vllq.m3u8",
+    lien: "https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8",
     logo: MALAIKA_ACTU_LOGO,
     cat: "NEWS",
     ch: "92",
     qualite: "4K",
     pays: "RDC",
-    desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société (D.G Alpha Michel BOMOLO) • Direct HLS & RTMP",
+    desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_malaika_1m_vllq) sur www.tvpromedia.com",
+    cloudRemix: "https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8",
+    rtmpUrl: "rtmp://191.215.38.95/live",
+    rtmpKey: "cle_malaika_1m_vllq",
     youtubeBackup: "https://youtu.be/P6LUQn6uygI",
-    m3u8Source: "http://191.215.38.95:8080/live/cle_malaika_1m_vllq.m3u8"
+    m3u8Source: "https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8"
   },
   {
     id: 'ch_93',

@@ -123,6 +123,54 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       return true;
     }
 
+    // 7. Strict single MALAÏKA ACTU (Canal 92) - Flux Principal VPS www.tvpromedia.com
+    if (ch.id === 'ch_92' || upperNom === 'MALAIKA ACTU' || upperNom === 'MALAÏKA ACTU' || (chNum === '92' && (upperNom.includes('MALAIKA') || upperNom.includes('MALAÏKA')))) {
+      if (seenKeys.has('CANAL_92_MALAIKA') || seenIds.has('ch_92')) return false;
+      seenKeys.add('CANAL_92_MALAIKA');
+      seenIds.add('ch_92');
+      seenIds.add(ch.id);
+      if (chNum) seenNums.add('92');
+      seenNames.add('MALAÏKA ACTU');
+      ch.id = 'ch_92';
+      ch.nom = 'MALAÏKA ACTU';
+      ch.ch = '92';
+      ch.logo = MALAIKA_ACTU_LOGO;
+      ch.lien = 'https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8';
+      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8';
+      ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8';
+      ch.rtmpKey = 'cle_malaika_1m_vllq';
+      ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+      ch.youtubeBackup = 'https://youtu.be/P6LUQn6uygI';
+      ch.desc = "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_malaika_1m_vllq) sur www.tvpromedia.com";
+      ch.cat = 'NEWS';
+      return true;
+    }
+
+    // 8. Strict single CCPV TV (Canal 23) - Flux Principal VPS www.tvpromedia.com
+    if (ch.id === 'ch_23' || upperNom === 'CCPV TV' || upperNom === 'CCPTV' || upperNom.includes('CCPV') || upperNom.includes('CEPV') || (chNum === '23' && (upperNom.includes('CCPV') || upperNom.includes('PAROLE DE VIE')))) {
+      if (seenKeys.has('CANAL_23_CCPV') || seenIds.has('ch_23')) return false;
+      seenKeys.add('CANAL_23_CCPV');
+      seenIds.add('ch_23');
+      seenIds.add(ch.id);
+      if (chNum) seenNums.add('23');
+      seenNames.add('CCPV TV MONTRÉAL');
+      ch.id = 'ch_23';
+      ch.nom = 'CCPV TV MONTRÉAL';
+      ch.ch = '23';
+      ch.logo = CCPV_TV_LOGO;
+      ch.lien = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
+      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
+      ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
+      ch.rtmpKey = 'cle_ccpvtv_1m_9miq';
+      ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+      ch.youtubeBackup = 'https://www.youtube.com/watch?v=jK6kwNwe_1o';
+      ch.desc = 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Direct HLS VPS cle_ccpvtv_1m_9miq sur www.tvpromedia.com';
+      ch.cat = 'RELIGIEUX';
+      ch.pays = 'CANADA';
+      ch.qualite = '4K';
+      return true;
+    }
+
     // Explicit duplicate channel IDs to eliminate
     const bannedDuplicateIds = [
       'ch_81', 'ch_87', 'ch_88', 'ch_90', 'ch_102', // Duplicates from www.tvpromedia.com
@@ -466,18 +514,26 @@ export default function App() {
               };
             }
           }
-          if (ch.id === 'ch_23' || ch.id === 'ch_29' || (ch.nom && (ch.nom.toUpperCase().includes('CCPV') || ch.nom.toUpperCase().includes('CEPV')))) {
-            if (ch.logo !== CCPV_TV_LOGO || ch.nom !== 'CCPV TV MONTRÉAL' || ch.lien !== 'http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxg9.m3u8' || ch.m3u8Source !== 'http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxg9.m3u8' || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=jK6kwNwe_1o') {
+          if (ch.id === 'ch_23' || (ch.nom && (ch.nom.toUpperCase().includes('CCPV') || ch.nom.toUpperCase().includes('CEPV')))) {
+            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
+            if (ch.logo !== CCPV_TV_LOGO || ch.nom !== 'CCPV TV MONTRÉAL' || ch.lien !== targetCcpvStream || ch.m3u8Source !== targetCcpvStream || ch.rtmpKey !== 'cle_ccpvtv_1m_9miq') {
               migrated = true;
               ch = { 
                 ...ch, 
+                id: 'ch_23',
+                ch: '23',
                 logo: CCPV_TV_LOGO, 
                 nom: 'CCPV TV MONTRÉAL',
-                lien: 'http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxg9.m3u8',
-                m3u8Source: 'http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxg9.m3u8',
+                lien: targetCcpvStream,
+                m3u8Source: targetCcpvStream,
+                cloudRemix: targetCcpvStream,
+                rtmpUrl: 'rtmp://191.215.38.95/live',
+                rtmpKey: 'cle_ccpvtv_1m_9miq',
                 youtubeBackup: 'https://www.youtube.com/watch?v=jK6kwNwe_1o',
-                desc: 'Centre Chrétien Parole de Vie - Montréal, Canada • Direct HLS & Secours YouTube',
-                cat: 'RELIGIEUX'
+                desc: 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Direct HLS VPS cle_ccpvtv_1m_9miq sur www.tvpromedia.com',
+                cat: 'RELIGIEUX',
+                pays: 'CANADA',
+                qualite: '4K'
               };
             }
           }
@@ -619,9 +675,26 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_23' || (ch.nom && (ch.nom.toUpperCase().includes('CCPV') || ch.nom.toUpperCase().includes('CEPV')))) {
-            if (ch.lien !== 'http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxg9.m3u8' || ch.m3u8Source !== 'http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxg9.m3u8' || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=jK6kwNwe_1o' || ch.logo !== CCPV_TV_LOGO || ch.nom !== 'CCPV TV MONTRÉAL') {
+            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
+            if (ch.lien !== targetCcpvStream || ch.m3u8Source !== targetCcpvStream || ch.rtmpKey !== 'cle_ccpvtv_1m_9miq' || ch.logo !== CCPV_TV_LOGO || ch.nom !== 'CCPV TV MONTRÉAL') {
               migrated = true;
-              ch = { ...ch, nom: "CCPV TV MONTRÉAL", lien: 'http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxg9.m3u8', youtubeBackup: 'https://www.youtube.com/watch?v=jK6kwNwe_1o', m3u8Source: 'http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxg9.m3u8', logo: CCPV_TV_LOGO, cat: 'RELIGIEUX', desc: 'Centre Chrétien Parole de Vie - Montréal, Canada • Direct HLS & Secours YouTube' };
+              ch = { 
+                ...ch, 
+                id: 'ch_23',
+                ch: '23',
+                nom: "CCPV TV MONTRÉAL", 
+                lien: targetCcpvStream, 
+                m3u8Source: targetCcpvStream,
+                cloudRemix: targetCcpvStream,
+                rtmpUrl: 'rtmp://191.215.38.95/live',
+                rtmpKey: 'cle_ccpvtv_1m_9miq',
+                youtubeBackup: 'https://www.youtube.com/watch?v=jK6kwNwe_1o', 
+                logo: CCPV_TV_LOGO, 
+                cat: 'RELIGIEUX', 
+                pays: 'CANADA',
+                qualite: '4K',
+                desc: 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Direct HLS VPS cle_ccpvtv_1m_9miq sur www.tvpromedia.com' 
+              };
             }
           }
           if (ch.id === 'ch_66' || (ch.nom && ch.nom.toUpperCase().includes('HORIZON 2000'))) {
@@ -753,17 +826,25 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_92' || (ch.nom && (ch.nom.toUpperCase().includes('MALAIKA') || ch.nom.toUpperCase().includes('MALAÏKA')))) {
-            if (ch.nom !== "MALAÏKA ACTU" || ch.logo !== MALAIKA_ACTU_LOGO || ch.lien !== 'http://191.215.38.95:8080/live/cle_malaika_1m_vllq.m3u8' || ch.m3u8Source !== 'http://191.215.38.95:8080/live/cle_malaika_1m_vllq.m3u8') {
+            const targetMalaikaStream = 'https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8';
+            if (ch.nom !== "MALAÏKA ACTU" || ch.logo !== MALAIKA_ACTU_LOGO || ch.lien !== targetMalaikaStream || ch.m3u8Source !== targetMalaikaStream || ch.rtmpKey !== 'cle_malaika_1m_vllq') {
               migrated = true;
               ch = { 
                 ...ch, 
+                id: 'ch_92',
+                ch: '92',
                 nom: "MALAÏKA ACTU",
                 logo: MALAIKA_ACTU_LOGO, 
-                lien: "http://191.215.38.95:8080/live/cle_malaika_1m_vllq.m3u8",
-                m3u8Source: "http://191.215.38.95:8080/live/cle_malaika_1m_vllq.m3u8",
-                desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société (D.G Alpha Michel BOMOLO) • Direct HLS & RTMP",
+                lien: targetMalaikaStream,
+                m3u8Source: targetMalaikaStream,
+                cloudRemix: targetMalaikaStream,
+                rtmpUrl: "rtmp://191.215.38.95/live",
+                rtmpKey: "cle_malaika_1m_vllq",
+                desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_malaika_1m_vllq) sur www.tvpromedia.com",
                 youtubeBackup: "https://youtu.be/P6LUQn6uygI",
-                cat: "NEWS"
+                cat: "NEWS",
+                pays: "RDC",
+                qualite: "4K"
               };
             }
           }
@@ -1195,7 +1276,7 @@ export default function App() {
         }
 
         // Ensure key VPS principal channels are present and synchronized
-        const requiredIds = ['ch_rtp', 'ch_congo', 'ch_rtvradio', 'ch_news234', 'ch_mcprod', 'ch_trompette', 'ch_gracetv', 'ch_mabanza', 'ch_30'];
+        const requiredIds = ['ch_rtp', 'ch_congo', 'ch_rtvradio', 'ch_news234', 'ch_mcprod', 'ch_trompette', 'ch_gracetv', 'ch_mabanza', 'ch_30', 'ch_23', 'ch_92', 'ch_93'];
         requiredIds.forEach(reqId => {
           if (!parsed.some(c => c.id === reqId)) {
             const foundDef = DEFAULT_CHANNELS.find(c => c.id === reqId);
@@ -1203,6 +1284,16 @@ export default function App() {
               parsed.push(foundDef);
               migrated = true;
             }
+          }
+        });
+
+        // Merge in any newly added default channels that might not be in the user's cached list
+        const existingIds = new Set(parsed.map(c => c.id));
+        const existingNames = new Set(parsed.map(c => (c.nom || '').trim().toUpperCase()));
+        DEFAULT_CHANNELS.forEach(defCh => {
+          if (!existingIds.has(defCh.id) && !existingNames.has((defCh.nom || '').trim().toUpperCase())) {
+            parsed.push(defCh);
+            migrated = true;
           }
         });
 
@@ -1234,6 +1325,22 @@ export default function App() {
       setChannels(DEFAULT_CHANNELS);
       localStorage.setItem('chaines_tvpro', JSON.stringify(DEFAULT_CHANNELS));
     }
+
+    // Background automatic catalog synchronization from /channels.json
+    fetch('/channels.json', { cache: 'no-cache' })
+      .then(res => res.ok ? res.json() : null)
+      .then(serverList => {
+        if (Array.isArray(serverList) && serverList.length > 0) {
+          setChannels(prev => {
+            const merged = deduplicateChannels([...serverList, ...prev]);
+            try {
+              localStorage.setItem('chaines_tvpro', JSON.stringify(merged));
+            } catch {}
+            return merged;
+          });
+        }
+      })
+      .catch(() => {});
 
     // 2. Favorites loading
     const cachedFavs = localStorage.getItem('tvpro_favoris_ids');

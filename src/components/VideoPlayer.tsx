@@ -337,11 +337,9 @@ export default function VideoPlayer({ src, title, logoUrl, category, channelNum,
         if (!isMounted) return;
         setM3u8ProbeStatus('checking');
         let streamUrl = primaryM3u8;
-        if (streamUrl.includes('191.215.38.95:8080/live/') || streamUrl.includes('191.215.38.95/live/')) {
+        if (streamUrl.includes('/live/')) {
           const streamPart = streamUrl.split('/live/')[1];
-          streamUrl = (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com'))
-            ? `/live/${streamPart}`
-            : `https://www.tvpromedia.com/live/${streamPart}`;
+          streamUrl = `/live/${streamPart}`;
         } else if (streamUrl.startsWith('http://') && typeof window !== 'undefined' && window.location.protocol === 'https:') {
           streamUrl = `/api/proxy-stream?url=${encodeURIComponent(streamUrl)}`;
         }
@@ -398,11 +396,9 @@ export default function VideoPlayer({ src, title, logoUrl, category, channelNum,
     setM3u8ProbeStatus('checking');
     try {
       let streamUrl = primaryM3u8;
-      if (streamUrl.includes('191.215.38.95:8080/live/') || streamUrl.includes('191.215.38.95/live/')) {
+      if (streamUrl.includes('/live/')) {
         const streamPart = streamUrl.split('/live/')[1];
-        streamUrl = (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com'))
-          ? `/live/${streamPart}`
-          : `https://www.tvpromedia.com/live/${streamPart}`;
+        streamUrl = `/live/${streamPart}`;
       } else if (streamUrl.startsWith('http://') && typeof window !== 'undefined' && window.location.protocol === 'https:') {
         streamUrl = `/api/proxy-stream?url=${encodeURIComponent(streamUrl)}`;
       }
@@ -544,20 +540,32 @@ export default function VideoPlayer({ src, title, logoUrl, category, channelNum,
         (title && title.trim().toUpperCase().includes('CEM TV')) ||
         (channelNum === '93')
       ) {
-        if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
-          return `/live/cle_cem_1m_lvt6.m3u8`;
-        }
-        return `https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8`;
+        return `/live/cle_cem_1m_lvt6.m3u8`;
+      }
+
+      // Auto-route MALAÏKA ACTU strictly to the official primary active VPS stream (cle_malaika_1m_vllq)
+      if (
+        (resolved && (resolved.includes('cle_malaika') || resolved.includes('malaika.m3u8') || resolved.includes('malaikatv.m3u8'))) ||
+        (title && (title.trim().toUpperCase().includes('MALAIKA') || title.trim().toUpperCase().includes('MALAÏKA'))) ||
+        (channelNum === '92')
+      ) {
+        return `/live/cle_malaika_1m_vllq.m3u8`;
+      }
+
+      // Auto-route CCPV TV (CCPTV) strictly to the official primary active VPS stream (cle_ccpvtv_1m_9miq)
+      if (
+        (resolved && (resolved.includes('cle_ccpvtv') || resolved.includes('ccpv.m3u8') || resolved.includes('ccpvtv.m3u8') || resolved.includes('ccptv.m3u8'))) ||
+        (title && (title.trim().toUpperCase().includes('CCPV') || title.trim().toUpperCase().includes('CCPTV'))) ||
+        (channelNum === '23')
+      ) {
+        return `/live/cle_ccpvtv_1m_9miq.m3u8`;
       }
 
       // Route all VPS 191.215.38.95 SRS streams directly through native HTTPS Nginx /live/ reverse proxy
       // This completely bypasses mixed-content blocking on HTTPS www.tvpromedia.com
       if (resolved.includes('191.215.38.95:8080/live/') || resolved.includes('191.215.38.95/live/')) {
         const streamPart = resolved.split('/live/')[1];
-        if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
-          return `/live/${streamPart}`;
-        }
-        return `https://www.tvpromedia.com/live/${streamPart}`;
+        return `/live/${streamPart}`;
       }
 
       // Convert legacy placeholder domains to real live IP stream
@@ -614,7 +622,14 @@ export default function VideoPlayer({ src, title, logoUrl, category, channelNum,
 
     const handleNativeError = () => {
       setIsLoading(false);
-      setErrorMsg("Signal interrompu ou impossible de lire le fichier vidéo (Vérifiez votre lien de flux).");
+      if (youtubeBackup || parsedChannelYoutubeId) {
+        console.log("Native video offline, auto-switching to YouTube backup stream...");
+        setIsCloudRemix(true);
+        setBackupMode('youtube');
+        setErrorMsg(null);
+      } else {
+        setErrorMsg("Signal interrompu ou en attente du signal direct de la régie.");
+      }
     };
 
     let activeReconnectTimer: any = null;
@@ -678,6 +693,13 @@ export default function VideoPlayer({ src, title, logoUrl, category, channelNum,
           
           switch (data.type) {
             case Hls.ErrorTypes.NETWORK_ERROR:
+              if (data.details === 'manifestLoadError' && (youtubeBackup || parsedChannelYoutubeId)) {
+                console.log("M3U8 offline, immediate seamless switch to YouTube backup stream...");
+                setIsCloudRemix(true);
+                setBackupMode('youtube');
+                setErrorMsg(null);
+                break;
+              }
               setErrorMsg(`Connexion au flux en cours (Tentative #${reconnectAttempts})...`);
               if (reconnectAttempts === 1) {
                 // If AAC stream failed, try direct original stream

@@ -238,7 +238,8 @@ async function startServer() {
     }
 
     // If not found locally, proxy to VPS HLS stream on 8080
-    const fallbackTarget = `http://127.0.0.1:8080/live/${filename}`;
+    const queryStr = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+    const fallbackTarget = `http://191.215.38.95:8080/live/${filename}${queryStr}`;
     res.redirect(`/api/proxy-stream?url=${encodeURIComponent(fallbackTarget)}`);
   });
 
@@ -292,14 +293,18 @@ async function startServer() {
   });
 
   // Dedicated Malaïka Actu HLS endpoint
-  app.get('/api/live/malaika.m3u8', (req, res) => {
-    const vpsTargetUrl = `http://191.215.38.95:8080/live/cle_malaika_1m_vllq.m3u8`;
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent(vpsTargetUrl)}`);
+  app.get(['/api/live/malaika.m3u8', '/api/live/malaikatv.m3u8'], (req, res) => {
+    res.redirect('/live/cle_malaika_1m_vllq.m3u8');
   });
 
   // Dedicated CEM TV HLS endpoint
   app.get(['/api/live/cem.m3u8', '/api/live/cemtv.m3u8'], (req, res) => {
     res.redirect('/live/cle_cem_1m_lvt6.m3u8');
+  });
+
+  // Dedicated CCPV TV (CCPTV) HLS endpoint
+  app.get(['/api/live/ccpv.m3u8', '/api/live/ccpvtv.m3u8', '/api/live/ccptv.m3u8'], (req, res) => {
+    res.redirect('/live/cle_ccpvtv_1m_9miq.m3u8');
   });
 
   // Hosted HLS Live Stream Playback URL (.m3u8) connected to VPS 191.215.38.95
@@ -417,6 +422,50 @@ async function startServer() {
         ch.rtmpUrl = 'rtmp://191.215.38.95/live';
         ch.youtubeBackup = 'https://www.youtube.com/watch?v=OwkjaS75qvA';
         ch.desc = 'CEM TV - Centre Évangélique Mahanaïm • Direct HLS VPS 191.215.38.95 (Flux Principal cle_cem_1m_lvt6)';
+        return true;
+      }
+
+      // 7. Strict single MALAÏKA ACTU (Canal 92) - Flux Principal VPS www.tvpromedia.com
+      if (ch.id === 'ch_92' || upperNom === 'MALAIKA ACTU' || upperNom === 'MALAÏKA ACTU' || (chNum === '92' && (upperNom.includes('MALAIKA') || upperNom.includes('MALAÏKA')))) {
+        if (seenKeys.has('CANAL_92_MALAIKA') || seenIds.has('ch_92')) return false;
+        seenKeys.add('CANAL_92_MALAIKA');
+        seenIds.add('ch_92');
+        seenIds.add(ch.id);
+        if (chNum) seenNums.add('92');
+        seenNames.add('MALAÏKA ACTU');
+        ch.id = 'ch_92';
+        ch.nom = 'MALAÏKA ACTU';
+        ch.ch = '92';
+        ch.lien = 'https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8';
+        ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8';
+        ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8';
+        ch.rtmpKey = 'cle_malaika_1m_vllq';
+        ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+        ch.youtubeBackup = 'https://youtu.be/P6LUQn6uygI';
+        ch.desc = "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_malaika_1m_vllq) sur www.tvpromedia.com";
+        ch.cat = 'NEWS';
+        return true;
+      }
+
+      // 8. Strict single CCPV TV (Canal 23) - Flux Principal VPS www.tvpromedia.com
+      if (ch.id === 'ch_23' || upperNom === 'CCPV TV' || upperNom === 'CCPTV' || upperNom.includes('CCPV') || upperNom.includes('CEPV') || (chNum === '23' && (upperNom.includes('CCPV') || upperNom.includes('PAROLE DE VIE')))) {
+        if (seenKeys.has('CANAL_23_CCPV') || seenIds.has('ch_23')) return false;
+        seenKeys.add('CANAL_23_CCPV');
+        seenIds.add('ch_23');
+        seenIds.add(ch.id);
+        if (chNum) seenNums.add('23');
+        seenNames.add('CCPV TV MONTRÉAL');
+        ch.id = 'ch_23';
+        ch.nom = 'CCPV TV MONTRÉAL';
+        ch.ch = '23';
+        ch.lien = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
+        ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
+        ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
+        ch.rtmpKey = 'cle_ccpvtv_1m_9miq';
+        ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+        ch.youtubeBackup = 'https://www.youtube.com/watch?v=jK6kwNwe_1o';
+        ch.desc = 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Direct HLS VPS cle_ccpvtv_1m_9miq sur www.tvpromedia.com';
+        ch.cat = 'RELIGIEUX';
         return true;
       }
 
@@ -647,6 +696,7 @@ async function startServer() {
         else if (item.id === 'ch_gracetv' || id === '29') streamUrl = `${base}/api/live/gracetv.m3u8`;
         else if (item.id === 'ch_30' || name.toUpperCase().includes('ESPERANCE')) streamUrl = `${base}/api/live/paroledesperance.m3u8`;
         else if (item.id === 'ch_mabanza' || id === '33' || name.toUpperCase().includes('MABANZA')) streamUrl = `${base}/api/live/alliancemabanza.m3u8`;
+        else if (item.id === 'ch_23' || id === '23' || name.toUpperCase().includes('CCPV') || name.toUpperCase().includes('CCPTV')) streamUrl = `${base}/api/live/ccpv.m3u8`;
         else if (item.id === 'ch_92' || name.toUpperCase().includes('MALAIKA')) streamUrl = `${base}/api/live/malaika.m3u8`;
         else if (item.id === 'ch_93' || id === '93' || name.toUpperCase().includes('CEM TV') || name.toUpperCase() === 'CEM') streamUrl = `${base}/api/live/cem.m3u8`;
         else if (item.id === 'ch_3' || name.toUpperCase().includes('ESPEC')) streamUrl = `${base}/api/live/espec.m3u8`;
