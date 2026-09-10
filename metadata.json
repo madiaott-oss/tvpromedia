@@ -1,0 +1,8 @@
+{
+  "name": "Remix: TV Pro Media",
+  "description": "Premium live stream directory and player with customizable channel management for news, sports, gospel, films, and documentaries.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
