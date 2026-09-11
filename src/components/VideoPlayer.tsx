@@ -685,12 +685,17 @@ export default function VideoPlayer({
     };
 
     let activeReconnectTimer: any = null;
+    let reconnectTimeout: any = null;
+    let isCleanedUp = false;
 
     if (isHlsSupported) {
       const hls = new Hls({
         lowLatencyMode: true,
-        backBufferLength: 60,
-        enableWorker: false, // Disabled worker for better mobile audio & sync stability
+        backBufferLength: 30,
+        maxBufferLength: 30,
+        maxMaxBufferLength: 60,
+        maxBufferSize: 30 * 1000 * 1000,
+        enableWorker: true, // Use Web Worker so video processing never freezes the UI thread
         autoStartLoad: true,
         startLevel: -1,
         capLevelToPlayerSize: true,
@@ -713,6 +718,14 @@ export default function VideoPlayer({
       });
 
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        if (reconnectTimeout) {
+          clearTimeout(reconnectTimeout);
+          reconnectTimeout = null;
+        }
+        if (activeReconnectTimer) {
+          clearInterval(activeReconnectTimer);
+          activeReconnectTimer = null;
+        }
         setIsLoading(false);
         setErrorMsg(null);
         video.volume = 1.0;
@@ -736,8 +749,10 @@ export default function VideoPlayer({
       });
 
       let reconnectAttempts = 0;
+      let mediaRecoveryAttempts = 0;
 
       hls.on(Hls.Events.ERROR, (event, data) => {
+        if (isCleanedUp) return;
         if (data.fatal) {
           console.warn('HLS Fatal Error detected:', data.type, data.details);
           setIsLoading(false);
@@ -747,60 +762,67 @@ export default function VideoPlayer({
             case Hls.ErrorTypes.NETWORK_ERROR:
               if (data.details === 'manifestLoadError' && (youtubeBackup || parsedChannelYoutubeId)) {
                 console.log("M3U8 offline, immediate seamless switch to YouTube backup stream...");
+                hls.stopLoad();
                 setIsCloudRemix(true);
                 setBackupMode('youtube');
                 setErrorMsg(null);
                 break;
               }
-              setErrorMsg(`Connexion au flux en cours (Tentative #${reconnectAttempts})...`);
+
               if (reconnectAttempts === 1) {
-                // If AAC stream failed, try direct original stream
-                if (streamToLoad.includes('_aac.m3u8')) {
-                  const directUrl = streamToLoad.replace('_aac.m3u8', '.m3u8');
-                  console.log("AAC stream unavailable, falling back to direct stream:", directUrl);
-                  hls.loadSource(directUrl);
-                } else if (streamToLoad.includes('/live/')) {
-                  console.log("VPS stream reload directly:", streamToLoad);
-                  hls.loadSource(streamToLoad);
-                } else {
-                  const proxyUrl = `/api/proxy-stream?url=${encodeURIComponent(activeStream)}`;
-                  console.log("Rerouting stream via internal proxy:", proxyUrl);
-                  hls.loadSource(proxyUrl);
-                }
-                hls.startLoad();
+                setErrorMsg(`Connexion au flux en cours (Tentative #1)...`);
+                if (reconnectTimeout) clearTimeout(reconnectTimeout);
+                reconnectTimeout = setTimeout(() => {
+                  if (isCleanedUp || !hlsRef.current) return;
+                  if (streamToLoad.includes('_aac.m3u8')) {
+                    const directUrl = streamToLoad.replace('_aac.m3u8', '.m3u8');
+                    hlsRef.current.loadSource(directUrl);
+                  } else if (streamToLoad.includes('/live/')) {
+                    hlsRef.current.loadSource(streamToLoad);
+                  } else {
+                    const proxyUrl = `/api/proxy-stream?url=${encodeURIComponent(activeStream)}`;
+                    hlsRef.current.loadSource(proxyUrl);
+                  }
+                  hlsRef.current.startLoad();
+                }, 1500);
               } else if (m3u8Source && m3u8Source !== activeStream && reconnectAttempts === 2) {
-                console.log("Switching to m3u8Source fallback:", m3u8Source);
-                hls.loadSource(getStreamUrlToLoad(m3u8Source));
-                hls.startLoad();
-              } else if (reconnectAttempts >= 2 && (youtubeBackup || parsedChannelYoutubeId)) {
-                // Auto-switch seamlessly to YouTube backup loop with background watchdog
+                setErrorMsg(`Connexion au flux de secours...`);
+                if (reconnectTimeout) clearTimeout(reconnectTimeout);
+                reconnectTimeout = setTimeout(() => {
+                  if (isCleanedUp || !hlsRef.current) return;
+                  hlsRef.current.loadSource(getStreamUrlToLoad(m3u8Source));
+                  hlsRef.current.startLoad();
+                }, 2000);
+              } else if (youtubeBackup || parsedChannelYoutubeId) {
+                // Auto-switch seamlessly to YouTube backup loop
                 console.log("M3U8 offline, auto-switching to YouTube backup stream...");
+                hls.stopLoad();
                 setIsCloudRemix(true);
                 setBackupMode('youtube');
                 setErrorMsg(null);
               } else {
-                hls.startLoad();
-              }
-              
-              // Set background watchdog timer
-              if (!activeReconnectTimer) {
-                activeReconnectTimer = setInterval(() => {
-                  if (hlsRef.current) {
-                    console.log('Watchdog auto-retry loading M3U8 source...');
-                    hlsRef.current.loadSource(getStreamUrlToLoad(activeStream));
-                    hlsRef.current.startLoad();
-                  }
-                }, 10000);
+                // STOP all immediate loops! Keep the browser responsive and show standby overlay
+                console.log("Stream offline or waiting for RTMP broadcast. Stopping HLS load.");
+                hls.stopLoad();
+                setIsLoading(false);
+                setErrorMsg("En attente du signal direct de la régie.");
               }
               break;
 
             case Hls.ErrorTypes.MEDIA_ERROR:
-              setErrorMsg("Erreur de média: Le flux est temporairement interrompu chez le diffuseur. Récupération...");
-              hls.recoverMediaError();
+              mediaRecoveryAttempts++;
+              if (mediaRecoveryAttempts <= 2) {
+                setErrorMsg("Erreur de média: Le flux est temporairement interrompu. Récupération...");
+                hls.recoverMediaError();
+              } else {
+                hls.stopLoad();
+                setErrorMsg("Signal temporairement interrompu chez le diffuseur.");
+              }
               break;
 
             default:
-              setErrorMsg("Signal interrompu. Reconnexion automatique au serveur SRS...");
+              hls.stopLoad();
+              setErrorMsg("Signal interrompu. En attente de diffusion.");
               if (hlsRef.current) {
                 hlsRef.current.destroy();
                 hlsRef.current = null;
@@ -811,6 +833,10 @@ export default function VideoPlayer({
       });
 
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        if (reconnectTimeout) {
+          clearTimeout(reconnectTimeout);
+          reconnectTimeout = null;
+        }
         if (activeReconnectTimer) {
           clearInterval(activeReconnectTimer);
           activeReconnectTimer = null;
@@ -837,6 +863,11 @@ export default function VideoPlayer({
     }
 
     return () => {
+      isCleanedUp = true;
+      if (reconnectTimeout) {
+        clearTimeout(reconnectTimeout);
+        reconnectTimeout = null;
+      }
       if (activeReconnectTimer) {
         clearInterval(activeReconnectTimer);
         activeReconnectTimer = null;

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Channel, ViewTab } from './types';
 import { 
   DEFAULT_CHANNELS, ADMIN_PASSWORD, CATEGORIES, AFRI_TV_LOGO, CCPV_TV_LOGO, HORIZON_2000_LOGO,
@@ -1774,54 +1774,60 @@ export default function App() {
       .trim();
   };
 
-  const searchFilterLower = normalizeText(searchQuery);
-  
-  const filteredChannels = channels.filter(ch => {
-    // 1. Search Query filter
-    const nameNormalized = normalizeText(ch.nom);
-    const catNormalized = normalizeText(ch.cat || '');
-    const numNormalized = normalizeText(ch.ch || '');
-    const descNormalized = normalizeText(ch.desc || '');
+  const filteredChannels = useMemo(() => {
+    const searchFilterLower = normalizeText(searchQuery);
+    return channels.filter(ch => {
+      // 1. Search Query filter
+      const nameNormalized = normalizeText(ch.nom);
+      const catNormalized = normalizeText(ch.cat || '');
+      const numNormalized = normalizeText(ch.ch || '');
+      const descNormalized = normalizeText(ch.desc || '');
 
-    const matchesKeyword = !searchQuery || 
-      nameNormalized.includes(searchFilterLower) ||
-      catNormalized.includes(searchFilterLower) ||
-      numNormalized.includes(searchFilterLower) ||
-      descNormalized.includes(searchFilterLower);
+      const matchesKeyword = !searchQuery || 
+        nameNormalized.includes(searchFilterLower) ||
+        catNormalized.includes(searchFilterLower) ||
+        numNormalized.includes(searchFilterLower) ||
+        descNormalized.includes(searchFilterLower);
 
-    // 2. Favorites Toggle filter
-    const matchesTab = activeTab === 'tout' || favorites.includes(ch.id);
+      // 2. Favorites Toggle filter
+      const matchesTab = activeTab === 'tout' || favorites.includes(ch.id);
 
-    // 3. Category scroll trigger filter
-    const matchesCategory = !selectedCategory || ch.cat === selectedCategory;
+      // 3. Category scroll trigger filter
+      const matchesCategory = !selectedCategory || ch.cat === selectedCategory;
 
-    return matchesKeyword && matchesTab && matchesCategory;
-  });
-
-  // Group filtered channels by their category
-  const channelsByCategory = filteredChannels.reduce<Record<string, Channel[]>>((groups, ch) => {
-    if (!groups[ch.cat]) {
-      groups[ch.cat] = [];
-    }
-    groups[ch.cat].push(ch);
-    return groups;
-  }, {});
-
-  // Sort channels inside each category depending on the sorting mode chosen (Alphabetical A-Z by default)
-  Object.keys(channelsByCategory).forEach(cat => {
-    channelsByCategory[cat].sort((a, b) => {
-      if (sortBy === 'alpha') {
-        return a.nom.localeCompare(b.nom, 'fr', { sensitivity: 'base' });
-      } else {
-        const numA = parseInt(a.ch, 10) || 0;
-        const numB = parseInt(b.ch, 10) || 0;
-        if (numA !== numB) {
-          return numA - numB;
-        }
-        return a.nom.localeCompare(b.nom, 'fr', { sensitivity: 'base' });
-      }
+      return matchesKeyword && matchesTab && matchesCategory;
     });
-  });
+  }, [channels, searchQuery, activeTab, favorites, selectedCategory]);
+
+  // Group filtered channels by their category with memoization
+  const channelsByCategory = useMemo(() => {
+    const groups = filteredChannels.reduce<Record<string, Channel[]>>((acc, ch) => {
+      const cat = ch.cat || 'GENERALISTE';
+      if (!acc[cat]) {
+        acc[cat] = [];
+      }
+      acc[cat].push(ch);
+      return acc;
+    }, {});
+
+    // Sort channels inside each category depending on the sorting mode chosen (Alphabetical A-Z by default)
+    Object.keys(groups).forEach(cat => {
+      groups[cat].sort((a, b) => {
+        if (sortBy === 'alpha') {
+          return a.nom.localeCompare(b.nom, 'fr', { sensitivity: 'base' });
+        } else {
+          const numA = parseInt(a.ch, 10) || 0;
+          const numB = parseInt(b.ch, 10) || 0;
+          if (numA !== numB) {
+            return numA - numB;
+          }
+          return a.nom.localeCompare(b.nom, 'fr', { sensitivity: 'base' });
+        }
+      });
+    });
+
+    return groups;
+  }, [filteredChannels, sortBy]);
 
   const handleFooterCategoryClick = (cat: string) => {
     setSelectedCategory(cat === 'ALL' ? null : cat);
@@ -2248,7 +2254,7 @@ export default function App() {
               if (!catChan || catChan.length === 0) return null;
 
               const isSearchingOrFiltering = !!searchQuery || activeTab !== 'tout';
-              const limit = isSearchingOrFiltering ? catChan.length : (expandedCategories[categoryName] || 48);
+              const limit = isSearchingOrFiltering ? catChan.length : (expandedCategories[categoryName] || 24);
               const displayedChannels = catChan.slice(0, limit);
               const hasMore = catChan.length > limit;
 
@@ -2268,11 +2274,11 @@ export default function App() {
                         type="button"
                         onClick={() => setExpandedCategories(prev => ({
                           ...prev,
-                          [categoryName]: (prev[categoryName] || 48) + 48
+                          [categoryName]: (prev[categoryName] || 24) + 24
                         }))}
                         className="text-xs text-red-400 hover:text-white font-bold bg-white/5 hover:bg-white/10 px-3 py-1 rounded-lg transition-all border border-white/5"
                       >
-                        +48 suivantes ({catChan.length - limit} restantes)
+                        +24 suivantes ({catChan.length - limit} restantes)
                       </button>
                     )}
                   </div>

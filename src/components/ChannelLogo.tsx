@@ -12,7 +12,7 @@ interface ChannelLogoProps {
   className?: string;
 }
 
-export const ChannelLogo: React.FC<ChannelLogoProps> = ({
+export const ChannelLogo: React.FC<ChannelLogoProps> = React.memo(({
   channelName,
   logoUrl,
   category,
@@ -166,6 +166,7 @@ export const ChannelLogo: React.FC<ChannelLogoProps> = ({
           src={logoUrl}
           alt={channelName}
           loading="lazy"
+          decoding="async"
           className="w-full h-full object-contain filter group-hover/logo:scale-110 transition-all duration-500 select-none relative z-10"
           onError={() => setHasError(true)}
           referrerPolicy="no-referrer"
@@ -184,7 +185,7 @@ export const ChannelLogo: React.FC<ChannelLogoProps> = ({
       {/* Decorative vector background lines / grids */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:8px_8px] pointer-events-none"></div>
       <div className="absolute -top-10 -left-10 w-24 h-24 bg-white/[0.02] rounded-full blur-xl pointer-events-none"></div>
-      <div className={`absolute -bottom-8 -right-8 w-20 h-20 ${style.accent} opacity-5 rounded-full blur-lg pointer-events-none`}></div>
+      <div className={`absolute -bottom-8 -right-8 w-20 h-20 ${style.accent} opacity-50 rounded-full blur-lg pointer-events-none`}></div>
       
       {/* Glossy diagonal overlay reflection effect */}
       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-transparent -translate-x-full group-hover/vector:translate-x-full duration-1000 transition-transform ease-out pointer-events-none"></div>
@@ -212,4 +213,4 @@ export const ChannelLogo: React.FC<ChannelLogoProps> = ({
       <div className={`absolute top-0 bottom-0 left-0 w-1 ${style.accent} opacity-70`}></div>
     </div>
   );
-};
+});
