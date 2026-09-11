@@ -486,12 +486,12 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     m3u8Source: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8"
   },
   {
-    id: 'ch_2',
+    id: 'ch_85',
     nom: "AFRI TV",
     lien: "https://www.tvpromedia.com/live/cle_afritv_1m_5jma.m3u8",
     logo: AFRI_TV_LOGO,
     cat: "GENERALISTE",
-    ch: "2",
+    ch: "85",
     qualite: "4K",
     pays: "BRAZZAVILLE",
     desc: "AFRI TV - L'Afrique en direct, informations, culture et divertissement en continu • Direct HLS & Secours YouTube",
@@ -499,28 +499,17 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     m3u8Source: "https://www.tvpromedia.com/live/cle_afritv_1m_5jma.m3u8"
   },
   {
-    id: 'ch_3',
+    id: 'ch_87',
     nom: "ESPEC TV",
     lien: "https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8",
     logo: EGLISE_ESPEC_LOGO,
     cat: "RELIGIEUX",
-    ch: "3",
+    ch: "87",
     qualite: "4K",
     pays: "RDC",
     desc: "ESPEC TV - Église ESPEC International (Culte, enseignements et diffusion continue) • Direct HLS & Secours YouTube",
     youtubeBackup: "https://www.youtube.com/watch?v=Z4gy-GRZHr4",
     m3u8Source: "https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8"
-  },
-  {
-    id: 'ch_9',
-    nom: "NEWS 24",
-    lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
-    logo: "",
-    cat: "NEWS",
-    ch: "9",
-    qualite: "4K",
-    pays: "ALBANIE",
-    desc: ""
   },
   {
     id: 'ch_10',
@@ -1155,17 +1144,6 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     desc: "ICI RDI Canada Live"
   },
   {
-    id: 'ch_71',
-    nom: "SAVOIR MEDIA TV",
-    lien: "https://mdstrm.com/live-stream-playlist/533adcc949386ce765657d7c.m3u8",
-    logo: "",
-    cat: "GENERALISTE",
-    ch: "71",
-    qualite: "HD",
-    pays: "CANADA",
-    desc: ""
-  },
-  {
     id: 'ch_75',
     nom: "OCEAN TV",
     lien: "https://stream.berosat.live:19360/ocean-tv/stream.m3u8",
@@ -1188,17 +1166,6 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     desc: "RTVD 4 Live Direct"
   },
   {
-    id: 'ch_78',
-    nom: "ÓČKO TV",
-    lien: "https://ockotv-live.infomaniak.ch/live/ockotv.smil/playlist.m3u8",
-    logo: OCKO_TV_LOGO,
-    cat: "MUSIQUE",
-    ch: "78",
-    qualite: "HD",
-    pays: "TCHEQUIE",
-    desc: "ÓČKO Music Channel"
-  },
-  {
     id: 'ch_79',
     nom: "080 NEWS",
     lien: "https://080news.live/stream.m3u8",
@@ -1210,50 +1177,6 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     desc: "080 News Channel"
   },
   {
-    id: 'ch_80',
-    nom: "OLIVE TV",
-    lien: "https://olivetv.stream.m3u8",
-    logo: OLIVE_TV_LOGO,
-    cat: "GENERALISTE",
-    ch: "80",
-    qualite: "4K",
-    pays: "RDC",
-    desc: "Olive Live TV"
-  },
-  {
-    id: 'ch_82',
-    nom: "MBC MASR",
-    lien: "https://mbcmasr.live.m3u8",
-    logo: MBC_MASR_LOGO,
-    cat: "GENERALISTE",
-    ch: "82",
-    qualite: "4K",
-    pays: "EGYPTE",
-    desc: "MBC Masr Egypt Live"
-  },
-  {
-    id: 'ch_83',
-    nom: "ISTV HD",
-    lien: "https://istv.live.m3u8",
-    logo: ISTV_HD_LOGO,
-    cat: "GENERALISTE",
-    ch: "83",
-    qualite: "4K",
-    pays: "BRESIL",
-    desc: "ISTV HD Digital"
-  },
-  {
-    id: 'ch_84',
-    nom: "KANAL HOVEDSTADEN",
-    lien: "https://kanalhovedstaden.live.m3u8",
-    logo: KANAL_HOVEDSTADEN_LOGO,
-    cat: "GENERALISTE",
-    ch: "84",
-    qualite: "HD",
-    pays: "DANEMARK",
-    desc: "Kanal Hovedstaden Denmark"
-  },
-  {
     id: 'ch_86',
     nom: "TORONTO 360 TV",
     lien: "https://toronto360.live.m3u8",
@@ -1263,17 +1186,6 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     qualite: "4K",
     pays: "CANADA",
     desc: "Toronto 360 Live Television"
-  },
-  {
-    id: 'ch_89',
-    nom: "ICI INFO",
-    lien: "https://rcavlive.akamaized.net/hls/live/704025/xcanrdi/master.m3u8",
-    logo: ICI_INFO_LOGO,
-    cat: "NEWS",
-    ch: "89",
-    qualite: "4K",
-    pays: "CANADA",
-    desc: "ICI Radio-Canada Info en direct"
   },
   {
     id: 'ch_92',
@@ -1308,17 +1220,6 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     m3u8Source: "https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8"
   },
   {
-    id: 'ch_94',
-    nom: "PRODIGE TV",
-    lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
-    logo: PRODIGE_TV_LOGO,
-    cat: "GENERALISTE",
-    ch: "94",
-    qualite: "4K",
-    pays: "RDC",
-    desc: "Prodige Télévision en direct"
-  },
-  {
     id: 'ch_99',
     nom: "SNL KONGO TV",
     lien: "https://www.youtube.com/watch?v=_V573y2j2To",
@@ -1330,29 +1231,6 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     desc: "SNL Kongo TV - Télévision d'information, culture et divertissement",
     youtubeBackup: "https://www.youtube.com/watch?v=_V573y2j2To",
     m3u8Source: "https://www.youtube.com/watch?v=_V573y2j2To"
-  },
-  {
-    id: 'ch_100',
-    nom: "IGBCB TV",
-    lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
-    logo: IGBCB_TV_LOGO,
-    cat: "GENERALISTE",
-    ch: "100",
-    qualite: "4K",
-    pays: "RDC",
-    desc: "IGBCB TV - I.G.B. Consulting Télévision"
-  },
-  {
-    id: 'ch_103',
-    nom: "NG FEDERAL",
-    lien: "http://www.coninfo.net:1935/tvlink/live/playlist.m3u8",
-    logo: NG_FEDERAL_LOGO,
-    cat: "GENERALISTE",
-    ch: "103",
-    qualite: "4K",
-    pays: "RDC",
-    desc: "NG FEDERAL TV - Nouvelle Génération Fédérale Télévision en direct",
-    m3u8Source: "http://www.coninfo.net:1935/tvlink/live/playlist.m3u8"
   },
   {
     id: 'ch_104',
@@ -1533,30 +1411,6 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     pays: "INTERNATIONAL",
     desc: "Canal 12 - Télévision généraliste, actualités en continu, magazines de société, divertissement et séries en direct",
     m3u8Source: "https://sv-canal12-canal12-live.ned.media/canal12/smil:canal12.smil/playlist.m3u8"
-  },
-  {
-    id: 'ch_121',
-    nom: "CTV",
-    lien: "https://ctv.dc.beltelecom.by/ctv/ctv.stream/playlist.m3u8",
-    logo: CTV_TV_LOGO,
-    cat: "GENERALISTE",
-    ch: "121",
-    qualite: "4K",
-    pays: "CANADA",
-    desc: "CTV Television Network - Grande chaîne de divertissement, grands journaux d'actualité, shows et séries cultes",
-    m3u8Source: "https://ctv.dc.beltelecom.by/ctv/ctv.stream/playlist.m3u8"
-  },
-  {
-    id: 'ch_123',
-    nom: "E TV",
-    lien: "https://streamer.metronethn.com/EEntertainment/index.m3u8",
-    logo: E_TV_LOGO,
-    cat: "GENERALISTE",
-    ch: "123",
-    qualite: "4K",
-    pays: "USA",
-    desc: "E! TV (Entertainment Television) - Télé-réalité, actualités des célébrités, tapis rouges d'Hollywood et mode en direct",
-    m3u8Source: "https://streamer.metronethn.com/EEntertainment/index.m3u8"
   },
   {
     id: 'ch_125',
@@ -2903,18 +2757,6 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     m3u8Source: "https://jmp2.uk/stvp-FRBC3500002E4"
   },
   {
-    id: 'ch_254',
-    nom: "BFM 2",
-    lien: "https://jmp2.uk/stvp-FR1400003Y0",
-    logo: "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR1400003Y0_20241015T040216SQUARE.png",
-    cat: "NEWS",
-    ch: "254",
-    qualite: "HD",
-    pays: "FRANCE",
-    desc: "BFM 2 - Le direct événementiel et les grandes éditions spéciales de BFM TV",
-    m3u8Source: "https://jmp2.uk/stvp-FR1400003Y0"
-  },
-  {
     id: 'ch_259',
     nom: "CNN HEADLINES",
     lien: "https://jmp2.uk/stvp-FRBD190001055",
@@ -3681,18 +3523,6 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     qualite: "HD",
     pays: "COLOMBIE",
     desc: "Buenísima TV - Entretenimiento, música, programas variados y cultura en vivo 24/7",
-    m3u8Source: "https://canal.mediaserver.com.co/live/buenisimatv.m3u8"
-  },
-  {
-    id: 'ch_340',
-    nom: "BCTV",
-    lien: "https://canal.mediaserver.com.co/live/buenisimatv.m3u8",
-    logo: BCTV_LOGO,
-    cat: "GENERALISTE",
-    ch: "340",
-    qualite: "HD",
-    pays: "INTERNATIONAL",
-    desc: "BCTV - Télévision d'actualités, culture, divertissement et émissions en continu",
     m3u8Source: "https://canal.mediaserver.com.co/live/buenisimatv.m3u8"
   },
   {

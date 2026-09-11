@@ -451,6 +451,16 @@ async function startServer() {
     res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://3abn.bozztv.com/3abn2/Kids_live/smil:Kids_live.smil/playlist.m3u8')}`);
   });
 
+  // EVI TV Direct HLS Playback (Canal 2)
+  app.get(['/api/live/evitv.m3u8', '/api/live/evi_tv.m3u8', '/api/live/evitvlive.m3u8'], (req, res) => {
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://mistserver.evi-tv.com/hls/evi_tv_live/index.m3u8')}`);
+  });
+
+  // RADIO EVI / EVI RADIO Direct Stream Playback (Canal 3)
+  app.get(['/api/live/radioevi.mp3', '/api/live/eviradio.mp3', '/api/live/radio_evi.mp3', '/api/live/evi_radio.mp3'], (req, res) => {
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.zeno.fm/bgblkbhq4kjuv')}`);
+  });
+
   // MSTV Direct HLS & Secours Playback
   app.get(['/api/live/mstv.m3u8', '/api/live/mstvlive.m3u8'], (req, res) => {
     res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8')}`);
@@ -487,6 +497,7 @@ async function startServer() {
     const seenIds = new Set<string>();
     const seenNames = new Set<string>();
     const seenNums = new Set<string>();
+    const seenStreams = new Set<string>();
 
     return list.filter(ch => {
       if (!ch) return false;
@@ -738,7 +749,7 @@ async function startServer() {
         'ch_mabanza', 'ch_96', 'ch_116', '33', '96', '116',
         'ch_trompette', '12',
         'ch_72', '72', 'ch_gracetv', '29', 'ch_23', '23',
-        'ch_81', 'ch_87', 'ch_88', 'ch_90', 'ch_102', // Duplicates from www.tvpromedia.com
+        'ch_81', 'ch_88', 'ch_90', 'ch_102', // Duplicates from www.tvpromedia.com
         'ch_121', // Duplicate of ch_14 (C TV)
         'ch_340', // Duplicate of ch_338 (BUENÍSIMA TV)
         'ch_89',  // Duplicate of ch_69 (INFO CANADA)
@@ -747,18 +758,32 @@ async function startServer() {
         'ch_78',  // Duplicate of ch_42 (OCKO TV)
         'ch_71',  // Duplicate of ch_364 (SAVOIR MEDIA)
         'ch_80',  // Duplicate of ch_43 (O LIVE TV)
+        'ch_83',  // Duplicate of ch_36 (ISTV)
         'ch_123', // Duplicate of ch_54 (ETV+)
-        'ch_357', 'ch_339', 'ch_70', 'ch_85'
+        'ch_254', // Duplicate of ch_170 (BFM TV 2)
+        'ch_9',   // Duplicate dummy placeholder of ch_1 (ESPOIR TV)
+        'ch_94',  // Duplicate stream of ch_1 (ESPOIR TV)
+        'ch_100', // Duplicate stream of ch_1 (ESPOIR TV)
+        'ch_103', // Duplicate stream of ch_21 (VIVO TV)
+        'ch_357', 'ch_339', 'ch_70'
       ];
       if (bannedDuplicateIds.includes(ch.id)) return false;
+
+      // Unique stream URL check (except tvpromedia multi-feed and berosat mstv)
+      const stream = (ch.lien || ch.m3u8Source || '').trim().toLowerCase();
+      if (stream && !stream.includes('tvpromedia.com/live/') && !stream.includes('191.215.38.95') && !stream.includes('mstv')) {
+        if (seenStreams.has(stream)) return false;
+        seenStreams.add(stream);
+      }
 
       // Unique ID check
       if (seenIds.has(ch.id)) return false;
       seenIds.add(ch.id);
 
-      // Unique channel name check
-      if (upperNom && seenNames.has(upperNom)) return false;
-      if (upperNom) seenNames.add(upperNom);
+      // Unique channel name check (normalized)
+      const normN = upperNom.replace(/[^A-Z0-9]/g, '');
+      if (normN && seenNames.has(normN)) return false;
+      if (normN) seenNames.add(normN);
 
       // Unique channel number check
       if (chNum && seenNums.has(chNum)) return false;
@@ -1148,7 +1173,7 @@ echo -e "\${CYAN}===============================================================
 APP_DIR="/var/www/tvpromedia"
 mkdir -p "\$APP_DIR/public" "\$APP_DIR/dist"
 
-echo -e "\${BLUE}[1/3] Écriture directe du catalogue (${channels.length} chaînes avec MSTV & MS RADIO)...\${NC}"
+echo -e "\${BLUE}[1/3] Écriture directe du catalogue (${channels.length} chaînes avec EVI TV, RADIO EVI, MSTV & MS RADIO)...\${NC}"
 
 cat > "\$APP_DIR/public/channels.json" << 'TVPRO_CHANNELS_PAYLOAD_EOF'
 ${channelsJson}

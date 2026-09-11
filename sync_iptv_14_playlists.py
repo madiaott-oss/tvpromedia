@@ -37,34 +37,52 @@ ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
+BANNED_IDS = {
+    'ch_mabanza', 'ch_96', 'ch_116', '33', '96', '116',
+    'ch_trompette', '12', 'ch_72', '72', 'ch_gracetv', '29', 'ch_23', '23',
+    'ch_81', 'ch_88', 'ch_90', 'ch_102',
+    'ch_121', 'ch_340', 'ch_89', 'ch_84', 'ch_82', 'ch_78', 'ch_71', 'ch_80', 'ch_83',
+    'ch_123', 'ch_254', 'ch_9', 'ch_94', 'ch_100', 'ch_103', 'ch_357', 'ch_339', 'ch_70'
+}
+
 def clean_and_normalize(chs):
     seen_ids = set()
     seen_names = set()
     seen_urls = set()
+    seen_nums = set()
     cleaned = []
 
     for ch in chs:
         if not ch or not isinstance(ch, dict):
             continue
+        ch_id = str(ch.get('id') or '').strip()
         nom = (ch.get('nom') or '').strip()
-        lien = (ch.get('lien') or '').strip()
-        ch_id = ch.get('id') or ''
-        upper_nom = nom.upper()
+        lien = (ch.get('lien') or ch.get('m3u8Source') or '').strip()
+        ch_num = str(ch.get('ch') or '').strip()
 
+        if ch_id in BANNED_IDS:
+            continue
         if not nom or not lien:
             continue
-        if lien in seen_urls:
+        if lien.lower() in seen_urls:
             continue
         if ch_id in seen_ids:
             continue
-        if upper_nom in seen_names and upper_nom not in ["RTP", "MSTV"]:
+
+        norm_n = re.sub(r'[^a-zA-Z0-9]', '', nom.lower())
+        if norm_n in seen_names and nom.upper() not in ["RTP", "MSTV", "EVI TV", "RADIO EVI"]:
+            continue
+
+        if ch_num and ch_num in seen_nums:
             continue
 
         seen_ids.add(ch_id)
-        if upper_nom:
-            seen_names.add(upper_nom)
+        if norm_n:
+            seen_names.add(norm_n)
         if lien:
-            seen_urls.add(lien)
+            seen_urls.add(lien.lower())
+        if ch_num:
+            seen_nums.add(ch_num)
         cleaned.append(ch)
 
     return cleaned

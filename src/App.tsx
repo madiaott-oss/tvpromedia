@@ -13,7 +13,7 @@ import {
   WIN_SPORTS_LOGO, LATAM_VDO_LOGO, RUMBA_TV_LOGO, CGTN_FRANCAIS_LOGO, PM_TV_LOGO, ALTERNATIVA_TV_LOGO, TELEBILBAO_LOGO, TVC_CANARIAS_LOGO, ETB_1_LOGO,
   CADENA_103_LOGO, CANAL_9_LINK_LOGO, AMERICA_TV_LOGO, MWD_MOVIE_LOGO, K100_TV_LOGO, FTV_SECRETS_LOGO, FRANCE_24_LOGO,
   RTP_TV_LOGO, RTP_RADIO_LOGO, CONGO_TV_LOGO, CONGO_FLASH_NEWS_LOGO, RTV_RADIO_LOGO, NEWS_234_LOGO, NEWS_243_RDC_LOGO, MC_PROD_TV_LOGO, restoreOriginalChannelM3u8,
-  ALLIANCE_MABANZA_LOGO
+  ALLIANCE_MABANZA_LOGO, EVI_TV_LOGO, RADIO_EVI_LOGO
 } from './data';
 import VideoPlayer from './components/VideoPlayer';
 import AdminPanel from './components/AdminPanel';
@@ -45,6 +45,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
   const seenIds = new Set<string>();
   const seenNames = new Set<string>();
   const seenNums = new Set<string>();
+  const seenStreams = new Set<string>();
 
   return channelList.filter(ch => {
     if (!ch) return false;
@@ -78,6 +79,52 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       upperNom === 'GRACE TV' || upperNom.includes('GRACE TV')
     ) {
       return false;
+    }
+
+    // 0a. Strict single Canal 2: ONLY ONE ch_evi_tv (EVI TV)
+    if (ch.id === 'ch_evi_tv' || upperNom === 'EVI TV' || (upperNom.includes('EVI TV') && !upperNom.includes('RADIO')) || (chNum === '2' && !upperNom.includes('RADIO'))) {
+      if (seenKeys.has('CANAL_2_EVITV') || seenIds.has('ch_evi_tv')) return false;
+      seenKeys.add('CANAL_2_EVITV');
+      seenIds.add('ch_evi_tv');
+      seenIds.add(ch.id);
+      if (chNum) seenNums.add('2');
+      seenNames.add('EVI TV');
+      ch.id = 'ch_evi_tv';
+      ch.nom = 'EVI TV';
+      ch.ch = '2';
+      ch.lien = 'https://mistserver.evi-tv.com/hls/evi_tv_live/index.m3u8';
+      ch.m3u8Source = 'https://mistserver.evi-tv.com/hls/evi_tv_live/index.m3u8';
+      ch.cloudRemix = 'https://mistserver.evi-tv.com/hls/evi_tv_live/index.m3u8';
+      ch.logo = EVI_TV_LOGO;
+      ch.desc = 'EVI TV LIVE - Chaîne de télévision évangélique et chrétienne en direct 24h/24 en haute définition Full HD';
+      ch.cat = 'RELIGIEUX';
+      ch.pays = 'INTERNATIONAL';
+      ch.qualite = 'FHD';
+      ch.direct = true;
+      return true;
+    }
+
+    // 0b. Strict single Canal 3: ONLY ONE ch_radio_evi (RADIO EVI)
+    if (ch.id === 'ch_radio_evi' || upperNom === 'RADIO EVI' || upperNom === 'EVI RADIO' || upperNom.includes('RADIO EVI') || upperNom.includes('EVI RADIO') || (chNum === '3' && (upperNom.includes('EVI') || upperNom.includes('RADIO')))) {
+      if (seenKeys.has('CANAL_3_RADIOEVI') || seenIds.has('ch_radio_evi')) return false;
+      seenKeys.add('CANAL_3_RADIOEVI');
+      seenIds.add('ch_radio_evi');
+      seenIds.add(ch.id);
+      if (chNum) seenNums.add('3');
+      seenNames.add('RADIO EVI');
+      ch.id = 'ch_radio_evi';
+      ch.nom = 'RADIO EVI';
+      ch.ch = '3';
+      ch.lien = 'https://stream.zeno.fm/bgblkbhq4kjuv';
+      ch.m3u8Source = 'https://stream.zeno.fm/bgblkbhq4kjuv';
+      ch.cloudRemix = 'https://stream.zeno.fm/bgblkbhq4kjuv';
+      ch.logo = RADIO_EVI_LOGO;
+      ch.desc = 'RADIO EVI - Diffusion radio en direct continu • Flux Zeno.fm Stéréo';
+      ch.cat = 'RADIO';
+      ch.pays = 'INTERNATIONAL';
+      ch.qualite = 'HD';
+      ch.direct = true;
+      return true;
     }
 
     // 1. Strict single Canal 4: ONLY ONE ch_rtp (RTP)
@@ -219,7 +266,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       'ch_mabanza', 'ch_96', 'ch_116', '33', '96', '116',
       'ch_trompette', '12',
       'ch_72', '72', 'ch_gracetv', '29', 'ch_23', '23',
-      'ch_81', 'ch_87', 'ch_88', 'ch_90', 'ch_102', // Duplicates from www.tvpromedia.com
+      'ch_81', 'ch_88', 'ch_90', 'ch_102', // Duplicates from www.tvpromedia.com
       'ch_121', // Duplicate of ch_14 (C TV)
       'ch_340', // Duplicate of ch_338 (BUENÍSIMA TV)
       'ch_89',  // Duplicate of ch_69 (INFO CANADA)
@@ -228,18 +275,32 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       'ch_78',  // Duplicate of ch_42 (OCKO TV)
       'ch_71',  // Duplicate of ch_364 (SAVOIR MEDIA)
       'ch_80',  // Duplicate of ch_43 (O LIVE TV)
+      'ch_83',  // Duplicate of ch_36 (ISTV)
       'ch_123', // Duplicate of ch_54 (ETV+)
-      'ch_357', 'ch_339', 'ch_70', 'ch_85'
+      'ch_254', // Duplicate of ch_170 (BFM TV 2)
+      'ch_9',   // Duplicate dummy placeholder of ch_1 (ESPOIR TV)
+      'ch_94',  // Duplicate stream of ch_1 (ESPOIR TV)
+      'ch_100', // Duplicate stream of ch_1 (ESPOIR TV)
+      'ch_103', // Duplicate stream of ch_21 (VIVO TV)
+      'ch_357', 'ch_339', 'ch_70'
     ];
     if (bannedDuplicateIds.includes(ch.id)) return false;
+
+    // Unique stream URL check (except tvpromedia multi-feed and berosat mstv)
+    const stream = (ch.lien || ch.m3u8Source || '').trim().toLowerCase();
+    if (stream && !stream.includes('tvpromedia.com/live/') && !stream.includes('191.215.38.95') && !stream.includes('mstv')) {
+      if (seenStreams.has(stream)) return false;
+      seenStreams.add(stream);
+    }
 
     // General deduplication by unique channel ID
     if (seenIds.has(ch.id)) return false;
     seenIds.add(ch.id);
 
-    // General deduplication by exact channel name
-    if (upperNom && seenNames.has(upperNom)) return false;
-    if (upperNom) seenNames.add(upperNom);
+    // General deduplication by normalized channel name
+    const normName = upperNom.replace(/[^A-Z0-9]/g, '');
+    if (normName && seenNames.has(normName)) return false;
+    if (normName) seenNames.add(normName);
 
     // General deduplication by channel number
     if (chNum && seenNums.has(chNum)) return false;
@@ -307,12 +368,25 @@ export default function App() {
 
   // Initialize data on load
   useEffect(() => {
-    // 1. Core Catalog loading
+    // 1. Core Catalog loading - ensure legacy bloated cache is purged for lightning fast loading
+    const CATALOG_VERSION = 'v15_clean_312_channels';
+    if (localStorage.getItem('chaines_tvpro_version') !== CATALOG_VERSION) {
+      try {
+        localStorage.removeItem('chaines_tvpro');
+        localStorage.setItem('chaines_tvpro_version', CATALOG_VERSION);
+      } catch {}
+    }
+
     let loadedChannels = DEFAULT_CHANNELS;
     const cachedCh = localStorage.getItem('chaines_tvpro');
     if (cachedCh) {
       try {
         let parsed: Channel[] = JSON.parse(cachedCh);
+        if (!Array.isArray(parsed) || parsed.length > 400) {
+          // If previous cache was bloated beyond catalog size, reset to DEFAULT_CHANNELS
+          parsed = DEFAULT_CHANNELS;
+          localStorage.setItem('chaines_tvpro', JSON.stringify(DEFAULT_CHANNELS));
+        }
         // Remove deleted / requested removed channels
         const REMOVED_CH_IDS = new Set([
           'ch_76', 'ch_97', 'ch_73', 'ch_74',
@@ -370,6 +444,46 @@ export default function App() {
           if (ch.cat === 'GOSPEL' as any) {
             migrated = true;
             ch = { ...ch, cat: 'NEWS' };
+          }
+          if (ch.id === 'ch_evi_tv' || (ch.nom && ch.nom.trim().toUpperCase() === 'EVI TV') || (ch.ch === '2' && ch.id !== 'ch_radio_evi')) {
+            if (ch.nom !== 'EVI TV' || ch.logo !== EVI_TV_LOGO || ch.lien !== 'https://mistserver.evi-tv.com/hls/evi_tv_live/index.m3u8' || ch.ch !== '2' || ch.cat !== 'RELIGIEUX') {
+              migrated = true;
+              ch = {
+                ...ch,
+                id: 'ch_evi_tv',
+                nom: "EVI TV",
+                logo: EVI_TV_LOGO,
+                lien: "https://mistserver.evi-tv.com/hls/evi_tv_live/index.m3u8",
+                m3u8Source: "https://mistserver.evi-tv.com/hls/evi_tv_live/index.m3u8",
+                cloudRemix: "https://mistserver.evi-tv.com/hls/evi_tv_live/index.m3u8",
+                desc: "EVI TV LIVE - Chaîne de télévision évangélique et chrétienne en direct 24h/24 en haute définition Full HD",
+                cat: "RELIGIEUX",
+                ch: "2",
+                qualite: "FHD",
+                pays: "INTERNATIONAL",
+                direct: true
+              };
+            }
+          }
+          if (ch.id === 'ch_radio_evi' || (ch.nom && (ch.nom.trim().toUpperCase() === 'RADIO EVI' || ch.nom.trim().toUpperCase() === 'EVI RADIO')) || (ch.ch === '3' && ch.id !== 'ch_evi_tv')) {
+            if (ch.nom !== 'RADIO EVI' || ch.logo !== RADIO_EVI_LOGO || ch.lien !== 'https://stream.zeno.fm/bgblkbhq4kjuv' || ch.ch !== '3' || ch.cat !== 'RADIO') {
+              migrated = true;
+              ch = {
+                ...ch,
+                id: 'ch_radio_evi',
+                nom: "RADIO EVI",
+                logo: RADIO_EVI_LOGO,
+                lien: "https://stream.zeno.fm/bgblkbhq4kjuv",
+                m3u8Source: "https://stream.zeno.fm/bgblkbhq4kjuv",
+                cloudRemix: "https://stream.zeno.fm/bgblkbhq4kjuv",
+                desc: "RADIO EVI - Diffusion radio en direct continu • Flux Zeno.fm Stéréo",
+                cat: "RADIO",
+                ch: "3",
+                qualite: "HD",
+                pays: "INTERNATIONAL",
+                direct: true
+              };
+            }
           }
           if (ch.id === 'ch_rtp' || (ch.nom && ch.nom.trim().toUpperCase() === 'RTP') || (ch.ch === '4' && ch.id !== 'ch_rtvradio')) {
             if (ch.nom !== 'RTP' || ch.logo !== RTP_TV_LOGO || ch.lien !== 'https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8' || ch.ch !== '4') {
@@ -1313,27 +1427,24 @@ export default function App() {
           }
         }
 
-        // If channels.json had few channels or failed, query backend API
-        if (!serverList || serverList.length < 500) {
+        // If channels.json failed or was empty, query backend API
+        if (!serverList || serverList.length === 0) {
           const resApi = await fetch(`/api/channels?t=${Date.now()}`, { cache: 'no-cache' });
           if (resApi.ok) {
             const dataApi = await resApi.json();
             const list = Array.isArray(dataApi) ? dataApi : (dataApi?.channels || []);
-            if (Array.isArray(list) && list.length > (serverList?.length || 0)) {
+            if (Array.isArray(list) && list.length > 0) {
               serverList = list;
             }
           }
         }
 
         if (Array.isArray(serverList) && serverList.length > 0) {
-          setChannels(prev => {
-            const baseList = serverList.length > prev.length ? [...serverList, ...prev] : [...prev, ...serverList];
-            const merged = deduplicateChannels(baseList);
-            try {
-              localStorage.setItem('chaines_tvpro', JSON.stringify(merged));
-            } catch {}
-            return merged;
-          });
+          const cleanCatalog = deduplicateChannels(serverList);
+          setChannels(cleanCatalog);
+          try {
+            localStorage.setItem('chaines_tvpro', JSON.stringify(cleanCatalog));
+          } catch {}
         }
       } catch (e) {
         console.warn('Catalog sync notice:', e);
