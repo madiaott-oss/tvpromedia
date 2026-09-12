@@ -7,3 +7,11 @@ src.pre-*/
 node_modules/
 *.log
 on
+
+dist.backup-*
+dist_backup*
+src.backup-*
+src.before-*
+src.pre-*
+on
+*.bak
