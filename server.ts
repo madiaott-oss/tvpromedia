@@ -48,6 +48,7 @@ async function startServer() {
   // JSON & URL-encoded Body parser with large limit for multi-thousand channel catalogs
   app.use(express.json({ limit: '50mb' }));
   app.use(express.urlencoded({ limit: '50mb', extended: true }));
+  app.use(express.static(path.join(process.cwd(), 'public')));
 
   // API Route: Download the entire project as a ZIP
   app.get('/api/download-zip', (req, res) => {
@@ -307,13 +308,13 @@ async function startServer() {
     res.redirect(`/api/proxy-stream?url=${encodeURIComponent(fallbackTarget)}`);
   });
 
-  // Dedicated VPS Stream Endpoints
+  // Dedicated VPS & Relay Stream Endpoints
   app.get(['/api/live/rtp.m3u8', '/api/live/rtptv.m3u8', '/api/live/rtp_secours.m3u8', '/api/live/rtp_backup.m3u8'], (req, res) => {
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8')}`);
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8')}`);
   });
 
   app.get('/api/live/rtp_aac.m3u8', (req, res) => {
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_rtptv_1m_u4tx.m3u8')}`);
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8')}`);
   });
 
   app.get('/api/live/congo.m3u8', (req, res) => {
@@ -580,12 +581,14 @@ async function startServer() {
         ch.id = 'ch_rtp';
         ch.nom = 'RTP';
         ch.ch = '4';
-        ch.lien = 'https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8';
-        ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8';
-        ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8';
+        ch.lien = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
+        ch.m3u8Source = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
+        ch.cloudRemix = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
+        ch.youtubeBackup = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
         ch.rtmpKey = 'cle_rtptv_1m_u4tx';
         ch.rtmpUrl = 'rtmp://191.215.38.95/live';
-        ch.desc = 'RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Flux Principal cle_rtptv_1m_u4tx)';
+        ch.qualite = 'HD';
+        ch.desc = 'RTP - Radio Télévision Puissance • Direct HD HLS BeroSat (Flux Principal & Secours)';
         return true;
       }
 

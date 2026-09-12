@@ -366,9 +366,9 @@ export function formatChannelWithTvProLive(ch: Channel): Channel {
   };
 }
 
-export const EVI_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" rx="40" fill="%230b132b"/><circle cx="250" cy="210" r="140" fill="%231c2541" stroke="%2348bfe3" stroke-width="8"/><path d="M 180 210 L 235 150 L 290 210 L 255 210 L 255 275 L 215 275 L 215 210 Z" fill="%235bc0be"/><polygon points="250,110 265,145 305,145 272,168 285,205 250,182 215,205 228,168 195,145 235,145" fill="%23f72585"/><text x="250" y="385" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="70" fill="%23ffffff" text-anchor="middle" letter-spacing="4">EVI TV</text><rect x="180" y="415" width="140" height="38" rx="8" fill="%23e63946"/><text x="250" y="441" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="%23ffffff" text-anchor="middle" letter-spacing="1">LIVE HD</text></svg>`;
+export const EVI_TV_LOGO = '/logos/evi_tv.png';
 
-export const RADIO_EVI_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" rx="40" fill="%230a0e1a"/><circle cx="250" cy="205" r="135" fill="%23111936" stroke="%236366f1" stroke-width="8"/><path d="M 190 205 A 60 60 0 0 1 310 205" fill="none" stroke="%23818cf8" stroke-width="12" stroke-linecap="round"/><path d="M 160 205 A 90 90 0 0 1 340 205" fill="none" stroke="%23a5b4fc" stroke-width="10" stroke-linecap="round"/><circle cx="250" cy="205" r="24" fill="%23ef4444"/><text x="250" y="375" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="60" fill="%23ffffff" text-anchor="middle" letter-spacing="3">RADIO EVI</text><rect x="170" y="405" width="160" height="36" rx="8" fill="%234f46e5"/><text x="250" y="429" font-family="'Arial Black', sans-serif" font-weight="900" font-size="18" fill="%23ffffff" text-anchor="middle" letter-spacing="1">DIRECT AUDIO</text></svg>`;
+export const RADIO_EVI_LOGO = '/logos/evi_radio.png';
 
 const RAW_DEFAULT_CHANNELS: Channel[] = [
   {
@@ -404,15 +404,16 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
   {
     id: 'ch_rtp',
     nom: "RTP",
-    lien: "https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8",
+    lien: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
     logo: RTP_TV_LOGO,
     cat: "GENERALISTE",
     ch: "4",
-    qualite: "4K",
+    qualite: "HD",
     pays: "RDC",
-    desc: "RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Flux Principal cle_rtptv_1m_u4tx)",
-    m3u8Source: "https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8",
-    cloudRemix: "https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8",
+    desc: "RTP - Radio Télévision Puissance • Direct HD HLS BeroSat (Flux Principal & Secours)",
+    m3u8Source: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
+    cloudRemix: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
+    youtubeBackup: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
     rtmpUrl: "rtmp://191.215.38.95/live",
     rtmpKey: "cle_rtptv_1m_u4tx"
   },

@@ -139,12 +139,14 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.id = 'ch_rtp';
       ch.nom = 'RTP';
       ch.ch = '4';
-      ch.lien = 'https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8';
-      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8';
-      ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8';
+      ch.lien = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
+      ch.m3u8Source = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
+      ch.cloudRemix = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
+      ch.youtubeBackup = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
       ch.rtmpKey = 'cle_rtptv_1m_u4tx';
       ch.rtmpUrl = 'rtmp://191.215.38.95/live';
-      ch.desc = 'RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Flux Principal cle_rtptv_1m_u4tx)';
+      ch.qualite = 'HD';
+      ch.desc = 'RTP - Radio Télévision Puissance • Direct HD HLS BeroSat (Flux Principal & Secours)';
       return true;
     }
 
@@ -369,7 +371,7 @@ export default function App() {
   // Initialize data on load
   useEffect(() => {
     // 1. Core Catalog loading - ensure legacy bloated cache is purged for lightning fast loading
-    const CATALOG_VERSION = 'v15_clean_312_channels';
+    const CATALOG_VERSION = 'v16_rtp_berosat_312_channels';
     if (localStorage.getItem('chaines_tvpro_version') !== CATALOG_VERSION) {
       try {
         localStorage.removeItem('chaines_tvpro');
@@ -486,19 +488,21 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_rtp' || (ch.nom && ch.nom.trim().toUpperCase() === 'RTP') || (ch.ch === '4' && ch.id !== 'ch_rtvradio')) {
-            if (ch.nom !== 'RTP' || ch.logo !== RTP_TV_LOGO || ch.lien !== 'https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8' || ch.ch !== '4') {
+            if (ch.nom !== 'RTP' || ch.logo !== RTP_TV_LOGO || ch.lien !== 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8' || ch.ch !== '4') {
               migrated = true;
               ch = {
                 ...ch,
                 id: 'ch_rtp',
                 nom: "RTP",
                 logo: RTP_TV_LOGO,
-                lien: "https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8",
-                m3u8Source: "https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8",
-                cloudRemix: "https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8",
+                lien: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
+                m3u8Source: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
+                cloudRemix: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
+                youtubeBackup: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
                 rtmpUrl: "rtmp://191.215.38.95/live",
                 rtmpKey: "cle_rtptv_1m_u4tx",
-                desc: "RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Flux Principal & Secours cle_rtptv_1m_u4tx)",
+                desc: "RTP - Radio Télévision Puissance • Direct HD HLS BeroSat (Flux Principal & Secours)",
+                qualite: "HD",
                 cat: "GENERALISTE",
                 ch: "4"
               };
@@ -911,19 +915,20 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_rtp' || (ch.nom && ch.nom.trim().toUpperCase() === 'RTP')) {
-            if (ch.lien !== 'https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8') {
+            if (ch.lien !== 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8') {
               migrated = true;
               ch = {
                 ...ch,
                 nom: "RTP",
                 logo: RTP_TV_LOGO,
-                lien: "https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8",
-                m3u8Source: "https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8",
-                cloudRemix: "https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8",
+                lien: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
+                m3u8Source: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
+                cloudRemix: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
+                youtubeBackup: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
                 rtmpUrl: "rtmp://191.215.38.95/live",
                 rtmpKey: "cle_rtptv_1m_u4tx",
-                desc: "RTP - Radio Télévision Puissance • Direct HLS VPS 191.215.38.95 (Flux Principal & Secours cle_rtptv_1m_u4tx)",
-                qualite: "4K",
+                desc: "RTP - Radio Télévision Puissance • Direct HD HLS BeroSat (Flux Principal & Secours)",
+                qualite: "HD",
                 cat: "GENERALISTE",
                 ch: "4"
               };
