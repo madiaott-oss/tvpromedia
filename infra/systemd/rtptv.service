@@ -1,9 +1,12 @@
 [Unit]
-Description=RTP TV to HLS AAC from RTMP (cle_rtptv_1m_u4tx)
+Description=RTP TV to HLS from BeroSat HD (https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8)
 After=network.target
+
 [Service]
 User=www-data
 Restart=always
-ExecStart=/usr/bin/ffmpeg -re -i rtmp://127.0.0.1:1935/live/cle_rtptv_1m_u4tx -c:v copy -c:a aac -b:a 128k -ar 48000 -hls_time 4 -hls_list_size 450 -hls_flags delete_segments+append_list+program_date_time -hls_segment_filename /var/www/hls/live/cle_rtptv_1m_u4tx-%%05d.ts /var/www/hls/live/cle_rtptv_1m_u4tx.m3u8
+RestartSec=5
+ExecStart=/usr/bin/ffmpeg -re -i https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8 -c:v copy -c:a aac -b:a 128k -ar 48000 -hls_time 4 -hls_list_size 30 -hls_flags delete_segments+append_list -hls_segment_filename /var/www/hls/live/cle_rtptv_1m_u4tx-%05d.ts /var/www/hls/live/cle_rtptv_1m_u4tx.m3u8
+
 [Install]
 WantedBy=multi-user.target

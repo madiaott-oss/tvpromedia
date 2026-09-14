@@ -302,6 +302,11 @@ async function startServer() {
       }
     }
 
+    // If RTP stream is requested via /live/, route directly to official BeroSat live stream
+    if (filename.includes('rtp') || filename.includes('cle_rtptv')) {
+      return res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8')}`);
+    }
+
     // If not found locally, proxy to VPS HLS stream on 8080
     const queryStr = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
     const fallbackTarget = `http://191.215.38.95:8080/live/${filename}${queryStr}`;
@@ -309,7 +314,7 @@ async function startServer() {
   });
 
   // Dedicated VPS & Relay Stream Endpoints
-  app.get(['/api/live/rtp.m3u8', '/api/live/rtptv.m3u8', '/api/live/rtp_secours.m3u8', '/api/live/rtp_backup.m3u8'], (req, res) => {
+  app.get(['/api/live/rtp.m3u8', '/api/live/rtptv.m3u8', '/api/live/rtp_secours.m3u8', '/api/live/rtp_backup.m3u8', '/api/live/rtp-hd.m3u8', '/api/live/rtphd.m3u8'], (req, res) => {
     res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8')}`);
   });
 
@@ -584,7 +589,7 @@ async function startServer() {
         ch.lien = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
         ch.m3u8Source = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
         ch.cloudRemix = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
-        ch.youtubeBackup = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
+        ch.youtubeBackup = '';
         ch.rtmpKey = 'cle_rtptv_1m_u4tx';
         ch.rtmpUrl = 'rtmp://191.215.38.95/live';
         ch.qualite = 'HD';
@@ -1187,16 +1192,29 @@ cp -f "\$APP_DIR/public/channels.json" "\$APP_DIR/dist/channels.json" 2>/dev/nul
 echo -e "\${GREEN}✓ Fichier /var/www/tvpromedia/public/channels.json écrit avec succès (${channels.length} chaînes).\${NC}"
 echo -e "\${GREEN}✓ Fichier /var/www/tvpromedia/dist/channels.json synchronisé.\${NC}"
 
-echo -e "\${BLUE}[2/3] Rechargement du service Node.js/PM2...\${NC}"
+echo -e "\${BLUE}[2/3] Configuration & rechargement du service Node.js/PM2...\${NC}"
 if command -v pm2 &>/dev/null; then
   pm2 reload tvpromedia 2>/dev/null || pm2 restart tvpromedia 2>/dev/null || true
   echo -e "\${GREEN}✓ Service PM2 tvpromedia rechargé.\${NC}"
 fi
 
-echo -e "\${BLUE}[3/3] Rechargement du serveur Nginx...\${NC}"
-if command -v systemctl &>/dev/null && command -v nginx &>/dev/null; then
-  systemctl reload nginx 2>/dev/null || true
-  echo -e "\${GREEN}✓ Nginx rechargé avec succès.\${NC}"
+echo -e "\${BLUE}[3/3] Configuration Nginx & Services RTP BeroSat HD...\${NC}"
+# Configuration automatique de la règle RTP BeroSat dans Nginx si elle n'est pas déjà présente
+if [ -f /etc/nginx/sites-available/tvpromedia ] && ! grep -q "berosat.live" /etc/nginx/sites-available/tvpromedia; then
+  sed -i '/location \/live\/ {/i \    # Relais direct RTP BeroSat HD (www.tvpromedia.com)\n    location ~* ^\/live\/.*(rtp|cle_rtptv) {\n        add_header Access-Control-Allow-Origin * always;\n        add_header Access-Control-Allow-Methods "GET, OPTIONS, HEAD" always;\n        return 302 https:\/\/stream.berosat.live\/hls\/rtp-hd\/rtp-hd.m3u8;\n    }\n' /etc/nginx/sites-available/tvpromedia 2>/dev/null || true
+fi
+
+# Synchronisation des unités systemd RTP si présentes
+if [ -d "$APP_DIR/infra/systemd" ] && [ -d /etc/systemd/system ]; then
+  cp -f "$APP_DIR/infra/systemd/"*.service /etc/systemd/system/ 2>/dev/null || true
+  systemctl daemon-reload 2>/dev/null || true
+  systemctl enable --now rtptv rtp-aac 2>/dev/null || true
+  echo -e "\${GREEN}✓ Services systemd RTP HD BeroSat synchronisés.\${NC}"
+fi
+
+if command -v nginx &>/dev/null; then
+  nginx -t 2>/dev/null && systemctl reload nginx 2>/dev/null || true
+  echo -e "\${GREEN}✓ Nginx configuré et rechargé avec succès (RTP routé vers BeroSat HD).\${NC}"
 fi
 
 echo ""

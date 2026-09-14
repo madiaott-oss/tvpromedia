@@ -16,8 +16,8 @@ export const REMIX_PRESETS = {
 };
 
 export const EMERGENCY_VIDEO_PRESETS = {
-  secours: "https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8", // Stream HLS de secours direct RTP TV VPS (www.tvpromedia.com)
-  rtp_secours: "https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8", // Flux de secours direct RTP
+  secours: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8", // Stream HLS de secours direct RTP BeroSat
+  rtp_secours: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8", // Flux de secours direct RTP BeroSat
   mire: "https://playertest.longtailvideo.com/adaptive/bipbop/bipbop.m3u8", // Apple official HLS test stream
   nature: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" // Stable MP4 nature loop
 };
@@ -546,13 +546,13 @@ export default function VideoPlayer({
       if (resolved && resolved.includes('stream.zeno.fm/')) {
         resolved = resolved.replace(/\.(m3u|pls)$/i, '');
       }
-      // Auto-route RTP strictly to the official primary active stream (cle_rtptv_1m_u4tx)
+      // Auto-route RTP strictly to the official live BeroSat stream
       if (
-        (resolved && (resolved.includes('cle_rtp') || resolved.includes('rtptv.m3u8') || resolved.includes('rtp.m3u8'))) ||
+        (resolved && (resolved.includes('cle_rtp') || resolved.includes('rtptv.m3u8') || resolved.includes('rtp-hd') || (resolved.includes('rtp.m3u8') && !resolved.includes('rtp_radio')))) ||
         ((title && title.trim().toUpperCase() === 'RTP') && (!title.toUpperCase().includes('RADIO'))) ||
         (channelNum === '4')
       ) {
-        resolved = '/live/cle_rtptv_1m_u4tx.m3u8';
+        resolved = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
       }
 
       // Auto-route ESPEC TV to official live Berosat stream
@@ -674,7 +674,7 @@ export default function VideoPlayer({
 
     const handleNativeError = () => {
       setIsLoading(false);
-      if (youtubeBackup || parsedChannelYoutubeId) {
+      if (parsedChannelYoutubeId) {
         console.log("Native video offline, auto-switching to YouTube backup stream...");
         setIsCloudRemix(true);
         setBackupMode('youtube');
@@ -760,15 +760,6 @@ export default function VideoPlayer({
           
           switch (data.type) {
             case Hls.ErrorTypes.NETWORK_ERROR:
-              if (data.details === 'manifestLoadError' && (youtubeBackup || parsedChannelYoutubeId)) {
-                console.log("M3U8 offline, immediate seamless switch to YouTube backup stream...");
-                hls.stopLoad();
-                setIsCloudRemix(true);
-                setBackupMode('youtube');
-                setErrorMsg(null);
-                break;
-              }
-
               if (reconnectAttempts === 1) {
                 setErrorMsg(`Connexion au flux en cours (Tentative #1)...`);
                 if (reconnectTimeout) clearTimeout(reconnectTimeout);
@@ -777,14 +768,16 @@ export default function VideoPlayer({
                   if (streamToLoad.includes('_aac.m3u8')) {
                     const directUrl = streamToLoad.replace('_aac.m3u8', '.m3u8');
                     hlsRef.current.loadSource(directUrl);
-                  } else if (streamToLoad.includes('/live/')) {
-                    hlsRef.current.loadSource(streamToLoad);
+                  } else if (streamToLoad.startsWith('/api/proxy-stream')) {
+                    // Already proxied, reload source directly
+                    hlsRef.current.loadSource(activeStream);
                   } else {
+                    // Try via internal proxy to bypass any browser CORS or mixed-content block
                     const proxyUrl = `/api/proxy-stream?url=${encodeURIComponent(activeStream)}`;
                     hlsRef.current.loadSource(proxyUrl);
                   }
                   hlsRef.current.startLoad();
-                }, 1500);
+                }, 1200);
               } else if (m3u8Source && m3u8Source !== activeStream && reconnectAttempts === 2) {
                 setErrorMsg(`Connexion au flux de secours...`);
                 if (reconnectTimeout) clearTimeout(reconnectTimeout);
@@ -792,9 +785,9 @@ export default function VideoPlayer({
                   if (isCleanedUp || !hlsRef.current) return;
                   hlsRef.current.loadSource(getStreamUrlToLoad(m3u8Source));
                   hlsRef.current.startLoad();
-                }, 2000);
-              } else if (youtubeBackup || parsedChannelYoutubeId) {
-                // Auto-switch seamlessly to YouTube backup loop
+                }, 1500);
+              } else if (parsedChannelYoutubeId) {
+                // Auto-switch seamlessly to YouTube backup loop only if a real YouTube ID exists
                 console.log("M3U8 offline, auto-switching to YouTube backup stream...");
                 hls.stopLoad();
                 setIsCloudRemix(true);

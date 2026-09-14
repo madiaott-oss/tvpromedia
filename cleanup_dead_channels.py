@@ -68,6 +68,5 @@ for p in ROOT.rglob('*.json'):
     new,removed,kept=clean_node(data)
     if removed:
         rel=p.relative_to(ROOT); dest=BACK/rel; dest.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(p,dest)
-        p.write_text(json.dumps(new,ensure_ascii=False,indent=2)+'
-',encoding='utf-8')
+        p.write_text(json.dumps(new,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         print(f'{p}: removed={removed} preserved_owned_dead={kept}')

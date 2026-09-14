@@ -253,11 +253,11 @@ export default function AdminPanel({ channels, viewCounts, onUpdateChannels, onR
         contact: '+243 89 000 0001 (WhatsApp / Direct)',
         rtmpUrl: 'rtmp://191.215.38.95/live',
         streamKey: 'cle_rtptv_1m_u4tx',
-        m3u8Url: 'https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8',
+        m3u8Url: 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8',
         durationMonths: 12,
         issuedAt: today.toISOString().split('T')[0],
         expiresAt: d3.toISOString().split('T')[0],
-        notes: 'Chaîne Principale & Secours RTP - VPS 191.215.38.95 (cle_rtptv_1m_u4tx)',
+        notes: 'Chaîne Principale & Secours RTP - BeroSat HD (https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8)',
       },
       {
         id: 'lic-congo',

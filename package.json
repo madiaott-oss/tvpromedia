@@ -9,6 +9,7 @@
     "start": "node dist/server.cjs",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
+    "deploy": "bash vps_sync_deploy.sh",
     "lint": "tsc --noEmit"
   },
   "dependencies": {

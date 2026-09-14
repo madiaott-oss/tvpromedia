@@ -1,0 +1,14 @@
+{
+  "updatedAt": "2026-09-14T20:30:00.000Z",
+  "channels": [
+    { "name": "RTP", "url": "rtmp://191.215.38.95/live/cle_rtptv_1m_u4tx" },
+    { "name": "MALAÏKA ACTU", "url": "rtmp://191.215.38.95/live/cle_malaika_1m_vllq" },
+    { "name": "CCPV TV MONTRÉAL", "url": "rtmp://191.215.38.95/live/cle_ccpvtv_1m_9miq" },
+    { "name": "CEM TV", "url": "rtmp://191.215.38.95/live/cle_cem_1m_lvt6" },
+    { "name": "BALADE MONDE TV", "url": "rtmp://191.215.38.95/live/cle_baladetv_inf_gx5l" },
+    { "name": "AFRI TV", "url": "rtmp://191.215.38.95/live/cle_afritv_1m_5jma" },
+    { "name": "ESPEC TV", "url": "rtmp://191.215.38.95/live/cle_espectv_2m_r2od" },
+    { "name": "HORIZON 2000 TV", "url": "rtmp://191.215.38.95/live/cle_horizontv_12m_c0wv" },
+    { "name": "CONGO FLASH NEWS", "url": "rtmp://191.215.38.95/live/cle_congo_1m_cl0b" }
+  ]
+}

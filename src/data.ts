@@ -413,7 +413,7 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     desc: "RTP - Radio Télévision Puissance • Direct HD HLS BeroSat (Flux Principal & Secours)",
     m3u8Source: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
     cloudRemix: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
-    youtubeBackup: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
+    youtubeBackup: "",
     rtmpUrl: "rtmp://191.215.38.95/live",
     rtmpKey: "cle_rtptv_1m_u4tx"
   },

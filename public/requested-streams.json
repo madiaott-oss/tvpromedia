@@ -1,0 +1,25 @@
+{
+  "updatedAt": "2026-09-14T20:30:00.000Z",
+  "channels": [
+    {
+      "name": "Malaïka Actu",
+      "m3u8": "https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8",
+      "rtmp": "rtmp://191.215.38.95/live/cle_malaika_1m_vllq"
+    },
+    {
+      "name": "RTP",
+      "m3u8": "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
+      "rtmp": "rtmp://191.215.38.95/live/cle_rtptv_1m_u4tx"
+    },
+    {
+      "name": "CCPTV (CCPV TV Montréal)",
+      "m3u8": "https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8",
+      "rtmp": "rtmp://191.215.38.95/live/cle_ccpvtv_1m_9miq"
+    },
+    {
+      "name": "Balade Mode TV (Balade Monde TV)",
+      "m3u8": "http://191.215.38.95:8080/live/cle_baladetv_inf_gx5l.m3u8",
+      "rtmp": "rtmp://191.215.38.95/live/cle_baladetv_inf_gx5l"
+    }
+  ]
+}
