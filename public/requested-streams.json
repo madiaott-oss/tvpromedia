@@ -17,6 +17,16 @@
       "rtmp": "rtmp://191.215.38.95/live/cle_ccpvtv_1m_9miq"
     },
     {
+      "name": "AFRI TV",
+      "m3u8": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
+      "rtmp": "rtmp://191.215.38.95/live/cle_afritv_1m_5jma"
+    },
+    {
+      "name": "C6 TV",
+      "m3u8": "https://www.tvpromedia.com/live/cle_c6tv_1m_live.m3u8",
+      "rtmp": "rtmp://191.215.38.95/live/cle_c6tv_1m_live"
+    },
+    {
       "name": "Balade Mode TV (Balade Monde TV)",
       "m3u8": "http://191.215.38.95:8080/live/cle_baladetv_inf_gx5l.m3u8",
       "rtmp": "rtmp://191.215.38.95/live/cle_baladetv_inf_gx5l"

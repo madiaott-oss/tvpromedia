@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <defs>
+    <!-- Background Radial Glow -->
+    <radialGradient id="bgGlow" cx="50%" cy="48%" r="55%">
+      <stop offset="0%" stop-color="#1565c0"/>
+      <stop offset="40%" stop-color="#0d47a1"/>
+      <stop offset="75%" stop-color="#06236b"/>
+      <stop offset="100%" stop-color="#020d29"/>
+    </radialGradient>
+
+    <!-- 3D C Extrusion Shading -->
+    <linearGradient id="cExtrusion" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b2f70"/>
+      <stop offset="50%" stop-color="#061a45"/>
+      <stop offset="100%" stop-color="#020a1c"/>
+    </linearGradient>
+
+    <!-- 3D C Front Metallic Face -->
+    <linearGradient id="cFront" x1="15%" y1="5%" x2="85%" y2="95%">
+      <stop offset="0%" stop-color="#64b5f6"/>
+      <stop offset="25%" stop-color="#1e88e5"/>
+      <stop offset="60%" stop-color="#1565c0"/>
+      <stop offset="90%" stop-color="#0d47a1"/>
+      <stop offset="100%" stop-color="#082e6e"/>
+    </linearGradient>
+
+    <!-- C Top Gloss Specular Highlight -->
+    <linearGradient id="cGloss" x1="0%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="30%" stop-color="#e1f5fe" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="#4fc3f7" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0288d1" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- 3D 6 Extrusion Shading -->
+    <linearGradient id="sixExtrusion" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7f0000"/>
+      <stop offset="60%" stop-color="#4a0000"/>
+      <stop offset="100%" stop-color="#200000"/>
+    </linearGradient>
+
+    <!-- 3D 6 Front Vivid Crimson Face -->
+    <linearGradient id="sixFront" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#ff5252"/>
+      <stop offset="25%" stop-color="#ff1744"/>
+      <stop offset="65%" stop-color="#d50000"/>
+      <stop offset="90%" stop-color="#b71c1c"/>
+      <stop offset="100%" stop-color="#7f0000"/>
+    </linearGradient>
+
+    <!-- 6 Gloss Specular -->
+    <linearGradient id="sixGloss" x1="0%" y1="0%" x2="70%" y2="80%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="35%" stop-color="#ffcdd2" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#ff5252" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#d50000" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- TV Badge Body -->
+    <linearGradient id="tvBadgeGrad" x1="0%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#ff5252"/>
+      <stop offset="40%" stop-color="#d50000"/>
+      <stop offset="100%" stop-color="#8e0000"/>
+    </linearGradient>
+
+    <!-- TV Screen Inner Shine -->
+    <linearGradient id="tvShine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.35"/>
+    </linearGradient>
+
+    <!-- Antenna Metallic Blue -->
+    <linearGradient id="antGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#80d8ff"/>
+      <stop offset="50%" stop-color="#0091ea"/>
+      <stop offset="100%" stop-color="#01579b"/>
+    </linearGradient>
+
+    <!-- Antenna Tip Sphere 3D -->
+    <radialGradient id="sphere3d" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#40c4ff"/>
+      <stop offset="70%" stop-color="#0091ea"/>
+      <stop offset="100%" stop-color="#002171"/>
+    </radialGradient>
+
+    <!-- Dynamic Swoosh Gradient Blue -->
+    <linearGradient id="swooshBlue" x1="0%" y1="30%" x2="100%" y2="70%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="25%" stop-color="#40c4ff" stop-opacity="0.9"/>
+      <stop offset="65%" stop-color="#2979ff" stop-opacity="0.85"/>
+      <stop offset="90%" stop-color="#1565c0" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0d47a1" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Dynamic Swoosh Gradient Red -->
+    <linearGradient id="swooshRed" x1="0%" y1="0%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#ff1744" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#d50000" stop-opacity="0.85"/>
+      <stop offset="85%" stop-color="#8e0000" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#4a0000" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="c6Shadow" x="-15%" y="-15%" width="135%" height="135%">
+      <feDropShadow dx="5" dy="10" stdDeviation="9" flood-color="#000511" flood-opacity="0.75"/>
+    </filter>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bgGlow)"/>
+  <rect width="600" height="400" fill="none" stroke="#1976d2" stroke-width="2" opacity="0.25"/>
+
+  <g filter="url(#c6Shadow)" transform="translate(5, 5)">
+
+    <!-- ==================== C LETTER (3D BEVEL & METALLIC FACE) ==================== -->
+    <!-- C Extrusion / 3D Shadow Layer -->
+    <path d="M 265,108 C 248,82 216,68 178,68 C 105,68 55,122 55,204 C 55,286 106,340 180,340 C 218,340 252,324 270,298 L 270,306 C 248,342 208,354 168,354 C 88,354 38,294 38,206 C 38,118 92,54 172,54 C 218,54 254,74 274,104 Z" fill="url(#cExtrusion)"/>
+
+    <!-- C Main Body Face -->
+    <path d="M 265,116 C 246,88 214,72 174,72 C 104,72 56,126 56,204 C 56,282 104,336 176,336 C 214,336 248,318 266,290 L 222,258 C 210,274 195,284 174,284 C 132,284 106,250 106,204 C 106,158 132,124 174,124 C 195,124 212,134 224,152 Z" fill="url(#cFront)" stroke="#1565c0" stroke-width="2"/>
+
+    <!-- C Bevel Edge Inner Ridge -->
+    <path d="M 265,116 C 246,88 214,72 174,72 C 104,72 56,126 56,204 C 56,282 104,336 176,336" fill="none" stroke="#80d8ff" stroke-width="4" opacity="0.5"/>
+
+    <!-- C Specular Highlighting on Top Shoulder -->
+    <path d="M 252,110 C 234,88 206,75 174,75 C 114,75 72,120 64,185 C 72,128 116,92 168,92 C 198,92 228,102 245,122 Z" fill="url(#cGloss)"/>
+    <ellipse cx="175" cy="80" rx="55" ry="6" fill="#ffffff" opacity="0.65"/>
+
+    <!-- ==================== 6 NUMBER (3D BEVEL & GLOSSY CRIMSON) ==================== -->
+    <!-- 6 Extrusion Depth -->
+    <path d="M 380,82 C 342,82 308,102 284,136 C 262,168 252,204 252,246 C 252,308 288,354 348,354 C 404,354 444,314 444,258 C 444,204 406,166 352,166 C 326,166 304,176 288,194 C 294,158 316,134 352,122 L 392,106 L 388,82 Z" fill="url(#sixExtrusion)" transform="translate(8, 8)"/>
+
+    <!-- 6 Main Body -->
+    <path d="M 382,82 C 344,82 310,104 286,138 C 264,170 254,206 254,248 C 254,308 290,352 350,352 C 406,352 444,312 444,256 C 444,202 406,164 352,164 C 326,164 304,174 288,192 C 294,156 318,130 354,118 L 394,104 L 382,82 Z M 350,214 C 378,214 396,232 396,256 C 396,280 378,298 350,298 C 322,298 304,280 304,256 C 304,232 322,214 350,214 Z" fill="url(#sixFront)" stroke="#b71c1c" stroke-width="2"/>
+
+    <!-- 6 Eye Hole Inner Shadow -->
+    <ellipse cx="350" cy="256" rx="46" ry="42" fill="none" stroke="#7f0000" stroke-width="5" opacity="0.8"/>
+
+    <!-- 6 Specular Crest Highlight -->
+    <path d="M 382,84 C 354,84 326,100 306,126 C 288,150 278,178 274,208 C 278,184 290,158 312,136 C 330,116 354,102 380,98 Z" fill="url(#sixGloss)"/>
+    <!-- 6 Bottom Bowl Specular Arc -->
+    <path d="M 314,290 C 324,302 336,308 350,308 C 374,308 392,294 394,272 C 392,284 374,296 350,296 C 334,296 322,290 314,290 Z" fill="#ffffff" opacity="0.4"/>
+
+    <!-- ==================== TV SCREEN BADGE WITH ANTENNAS ==================== -->
+    <g transform="translate(390, 75) rotate(-6)">
+      <!-- Antenna Rods -->
+      <line x1="50" y1="10" x2="24" y2="-34" stroke="url(#antGrad)" stroke-width="5" stroke-linecap="round"/>
+      <line x1="64" y1="10" x2="92" y2="-34" stroke="url(#antGrad)" stroke-width="5" stroke-linecap="round"/>
+
+      <!-- Antenna Knobs / Spheres -->
+      <circle cx="24" cy="-34" r="8" fill="url(#sphere3d)" filter="url(#softGlow)"/>
+      <circle cx="22" cy="-36" r="2.5" fill="#ffffff" opacity="0.9"/>
+      <circle cx="92" cy="-34" r="8" fill="url(#sphere3d)" filter="url(#softGlow)"/>
+      <circle cx="90" cy="-36" r="2.5" fill="#ffffff" opacity="0.9"/>
+
+      <!-- TV Screen Outer Bezel 3D -->
+      <rect x="8" y="10" width="102" height="78" rx="22" fill="#640000"/>
+      <!-- TV Screen Main Crimson Body -->
+      <rect x="5" y="6" width="102" height="78" rx="20" fill="url(#tvBadgeGrad)" stroke="#ff8a80" stroke-width="2.5"/>
+
+      <!-- TV Screen Glass Reflection -->
+      <rect x="11" y="12" width="90" height="66" rx="16" fill="url(#tvShine)"/>
+      <path d="M 14,14 L 98,14 C 94,36 22,46 14,32 Z" fill="#ffffff" opacity="0.3"/>
+
+      <!-- 'Tv' Text in White -->
+      <text x="34" y="58" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="44" fill="#ffffff" text-anchor="middle" letter-spacing="-1">T</text>
+      <text x="68" y="58" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="38" fill="#ffffff" text-anchor="middle" letter-spacing="-0.5">v</text>
+    </g>
+
+    <!-- ==================== ORBITAL SWOOSH / DYNAMIC RING ==================== -->
+    <!-- Blue Glow Underneath -->
+    <path d="M 90,325 C 130,370 240,390 380,365 C 460,350 510,325 540,295 C 500,320 440,345 360,355 C 230,370 140,350 90,325 Z" fill="url(#swooshBlue)" opacity="0.85"/>
+    <!-- Red Accent Ribbon -->
+    <path d="M 120,336 C 170,372 260,385 370,366 C 440,353 485,334 515,310 C 475,328 425,344 355,354 C 250,368 170,355 120,336 Z" fill="url(#swooshRed)"/>
+    <!-- Specular White Crest on Swoosh -->
+    <path d="M 140,336 C 220,372 320,374 410,354 C 330,366 230,364 140,336 Z" fill="#ffffff" opacity="0.9"/>
+  </g>
+</svg>

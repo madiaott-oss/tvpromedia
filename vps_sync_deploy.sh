@@ -147,6 +147,14 @@ server {
         return 302 https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8;
     }
 
+    # Règle prioritaire pour AFRI TV : routage direct vers le flux officiel HD BeroSat
+    location ~* ^/live/.*(afri|cle_afritv) {
+        add_header Access-Control-Allow-Origin * always;
+        add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
+        add_header Access-Control-Allow-Headers '*' always;
+        return 302 https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8;
+    }
+
     location /live/ {
         proxy_pass http://127.0.0.1:8080/live/;
         proxy_set_header Host $host;

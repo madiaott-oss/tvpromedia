@@ -13,7 +13,7 @@ import {
   WIN_SPORTS_LOGO, LATAM_VDO_LOGO, RUMBA_TV_LOGO, CGTN_FRANCAIS_LOGO, PM_TV_LOGO, ALTERNATIVA_TV_LOGO, TELEBILBAO_LOGO, TVC_CANARIAS_LOGO, ETB_1_LOGO,
   CADENA_103_LOGO, CANAL_9_LINK_LOGO, AMERICA_TV_LOGO, MWD_MOVIE_LOGO, K100_TV_LOGO, FTV_SECRETS_LOGO, FRANCE_24_LOGO,
   RTP_TV_LOGO, RTP_RADIO_LOGO, CONGO_TV_LOGO, CONGO_FLASH_NEWS_LOGO, RTV_RADIO_LOGO, NEWS_234_LOGO, NEWS_243_RDC_LOGO, MC_PROD_TV_LOGO, restoreOriginalChannelM3u8,
-  ALLIANCE_MABANZA_LOGO, EVI_TV_LOGO, RADIO_EVI_LOGO
+  ALLIANCE_MABANZA_LOGO, EVI_TV_LOGO, RADIO_EVI_LOGO, C6_TV_LOGO
 } from './data';
 import VideoPlayer from './components/VideoPlayer';
 import AdminPanel from './components/AdminPanel';
@@ -261,6 +261,37 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.pays = 'CANADA';
       ch.qualite = '4K';
       return true;
+    }
+
+    // 9. Strict AFRI TV - Direct HLS BeroSat HD (Principal & Secours) sur www.tvpromedia.com
+    if (ch.id === 'ch_85' || (ch.id === 'ch_2' && upperNom.includes('AFRI')) || upperNom === 'AFRI TV') {
+      ch.nom = 'AFRI TV';
+      ch.logo = AFRI_TV_LOGO;
+      ch.lien = 'https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8';
+      ch.m3u8Source = 'https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8';
+      ch.cloudRemix = 'https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8';
+      ch.youtubeBackup = 'https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8';
+      ch.rtmpKey = 'cle_afritv_1m_5jma';
+      ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+      ch.qualite = 'HD';
+      ch.pays = 'BRAZZAVILLE';
+      ch.cat = 'GENERALISTE';
+      ch.desc = "AFRI TV - L'Afrique en direct, informations, culture et divertissement en continu • Direct HLS BeroSat HD (Principal & Secours)";
+    }
+
+    // Strict Protection: NE JAMAIS MODIFIER CANAL 4561 (TV Mar La Paz)
+    if (ch.ch === '4561' || ch.id === 'iptv_7gp2828' || upperNom === 'TV MAR LA PAZ') {
+      return true; // Protégé strictement sans modification
+    }
+
+    // Strict C6 TV - Logo officiel C6 TV
+    if (ch.id === 'ch_c6_tv' || ch.id === 'ch_c6' || (upperNom.includes('C6') && upperNom.includes('TV')) || upperNom === 'C6 TV') {
+      ch.nom = 'C6 TV';
+      ch.logo = C6_TV_LOGO;
+      ch.cat = 'GENERALISTE';
+      ch.qualite = 'HD';
+      if (!ch.ch) ch.ch = '4560';
+      if (!ch.desc) ch.desc = "C6 TV - Télévision en direct, informations, culture et divertissement en continu";
     }
 
     // Explicit duplicate channel IDs to eliminate
@@ -595,19 +626,36 @@ export default function App() {
               };
             }
           }
-          if (ch.id === 'ch_2' || (ch.nom && ch.nom.toUpperCase().includes('AFRI TV'))) {
-            if (ch.logo !== AFRI_TV_LOGO || ch.lien !== 'https://www.tvpromedia.com/live/cle_afritv_1m_5jma.m3u8' || ch.m3u8Source !== 'https://www.tvpromedia.com/live/cle_afritv_1m_5jma.m3u8' || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=Tvh6RL0WnWI') {
+          if (ch.id === 'ch_2' || ch.id === 'ch_85' || (ch.nom && ch.nom.toUpperCase().includes('AFRI TV'))) {
+            const targetAfriStream = 'https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8';
+            if (ch.logo !== AFRI_TV_LOGO || ch.lien !== targetAfriStream || ch.m3u8Source !== targetAfriStream) {
               migrated = true;
               ch = { 
                 ...ch, 
                 nom: "AFRI TV",
                 logo: AFRI_TV_LOGO,
-                lien: "https://www.tvpromedia.com/live/cle_afritv_1m_5jma.m3u8",
-                m3u8Source: "https://www.tvpromedia.com/live/cle_afritv_1m_5jma.m3u8",
-                youtubeBackup: "https://www.youtube.com/watch?v=Tvh6RL0WnWI",
-                desc: "AFRI TV - L'Afrique en direct, informations, culture et divertissement en continu • Direct HLS & Secours YouTube",
+                lien: targetAfriStream,
+                m3u8Source: targetAfriStream,
+                cloudRemix: targetAfriStream,
+                youtubeBackup: targetAfriStream,
+                desc: "AFRI TV - L'Afrique en direct, informations, culture et divertissement en continu • Direct HLS BeroSat HD (Principal & Secours)",
                 cat: "GENERALISTE",
-                ch: "2"
+                qualite: "HD",
+                rtmpKey: 'cle_afritv_1m_5jma',
+                rtmpUrl: 'rtmp://191.215.38.95/live'
+              };
+            }
+          }
+          if (ch.id === 'ch_c6_tv' || (ch.nom && ch.nom.toUpperCase().trim() === 'C6 TV')) {
+            if (ch.logo !== C6_TV_LOGO) {
+              migrated = true;
+              ch = {
+                ...ch,
+                nom: "C6 TV",
+                logo: C6_TV_LOGO,
+                cat: "GENERALISTE",
+                qualite: "HD",
+                desc: "C6 TV - Télévision en direct, informations, culture et divertissement en continu"
               };
             }
           }
@@ -1327,7 +1375,7 @@ export default function App() {
         }
 
         // Ensure key VPS principal channels are present and synchronized
-        const requiredIds = ['ch_rtp', 'ch_congo', 'ch_rtvradio', 'ch_news234', 'ch_mcprod', 'ch_30', 'ch_24', 'ch_92', 'ch_93'];
+        const requiredIds = ['ch_rtp', 'ch_congo', 'ch_rtvradio', 'ch_news234', 'ch_mcprod', 'ch_30', 'ch_24', 'ch_92', 'ch_93', 'ch_85'];
         requiredIds.forEach(reqId => {
           if (!parsed.some(c => c.id === reqId)) {
             const foundDef = DEFAULT_CHANNELS.find(c => c.id === reqId);

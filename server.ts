@@ -307,6 +307,17 @@ async function startServer() {
       return res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8')}`);
     }
 
+    // If AFRI TV stream is requested via /live/, route directly to official BeroSat live stream
+    if (filename.includes('afritv') || filename.includes('cle_afritv') || filename.includes('afri-tv') || filename.includes('afri_tv')) {
+      return res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8')}`);
+    }
+
+    // If C6 TV stream is requested via /live/, proxy or route
+    if (filename.includes('c6tv') || filename.includes('cle_c6tv') || filename.includes('c6_tv')) {
+      const fallbackTarget = `http://191.215.38.95:8080/live/${filename}`;
+      return res.redirect(`/api/proxy-stream?url=${encodeURIComponent(fallbackTarget)}`);
+    }
+
     // If not found locally, proxy to VPS HLS stream on 8080
     const queryStr = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
     const fallbackTarget = `http://191.215.38.95:8080/live/${filename}${queryStr}`;
@@ -316,6 +327,10 @@ async function startServer() {
   // Dedicated VPS & Relay Stream Endpoints
   app.get(['/api/live/rtp.m3u8', '/api/live/rtptv.m3u8', '/api/live/rtp_secours.m3u8', '/api/live/rtp_backup.m3u8', '/api/live/rtp-hd.m3u8', '/api/live/rtphd.m3u8'], (req, res) => {
     res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8')}`);
+  });
+
+  app.get(['/api/live/afri.m3u8', '/api/live/afritv.m3u8', '/api/live/afri_secours.m3u8', '/api/live/afri_backup.m3u8', '/api/live/afri-tv.m3u8', '/api/live/afritv_hd.m3u8'], (req, res) => {
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8')}`);
   });
 
   app.get('/api/live/rtp_aac.m3u8', (req, res) => {
@@ -728,6 +743,36 @@ async function startServer() {
         ch.pays = 'BRAZZAVILLE';
         ch.qualite = 'HD';
         return true;
+      }
+
+      // 10. Strict AFRI TV - Flux Principal & Secours BeroSat HD (www.tvpromedia.com)
+      if (ch.id === 'ch_85' || (ch.id === 'ch_2' && upperNom.includes('AFRI')) || upperNom === 'AFRI TV') {
+        ch.nom = 'AFRI TV';
+        ch.lien = 'https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8';
+        ch.m3u8Source = 'https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8';
+        ch.cloudRemix = 'https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8';
+        ch.youtubeBackup = 'https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8';
+        ch.rtmpKey = 'cle_afritv_1m_5jma';
+        ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+        ch.qualite = 'HD';
+        ch.pays = 'BRAZZAVILLE';
+        ch.cat = 'GENERALISTE';
+        ch.desc = "AFRI TV - L'Afrique en direct, informations, culture et divertissement en continu • Direct HLS BeroSat HD (Principal & Secours)";
+      }
+
+      // NE JAMAIS MODIFIER CANAL 4561 (TV Mar La Paz)
+      if (ch.ch === '4561' || ch.id === 'iptv_7gp2828' || upperNom === 'TV MAR LA PAZ') {
+        return true; // Strictement préservé sans modification
+      }
+
+      // Strict C6 TV - Assure logo officiel
+      if (ch.id === 'ch_c6_tv' || ch.id === 'ch_c6' || (upperNom.includes('C6') && upperNom.includes('TV')) || upperNom === 'C6 TV') {
+        ch.nom = 'C6 TV';
+        ch.logo = '/logos/c6_tv.svg';
+        ch.cat = 'GENERALISTE';
+        ch.qualite = 'HD';
+        if (!ch.ch) ch.ch = '4560';
+        if (!ch.desc) ch.desc = "C6 TV - Télévision en direct, informations, culture et divertissement en continu";
       }
 
       // 10. Strict MS RADIO (Canal 390) - Flux Radio Direct Berosat HLS
@@ -1198,10 +1243,15 @@ if command -v pm2 &>/dev/null; then
   echo -e "\${GREEN}✓ Service PM2 tvpromedia rechargé.\${NC}"
 fi
 
-echo -e "\${BLUE}[3/3] Configuration Nginx & Services RTP BeroSat HD...\${NC}"
-# Configuration automatique de la règle RTP BeroSat dans Nginx si elle n'est pas déjà présente
-if [ -f /etc/nginx/sites-available/tvpromedia ] && ! grep -q "berosat.live" /etc/nginx/sites-available/tvpromedia; then
-  sed -i '/location \/live\/ {/i \    # Relais direct RTP BeroSat HD (www.tvpromedia.com)\n    location ~* ^\/live\/.*(rtp|cle_rtptv) {\n        add_header Access-Control-Allow-Origin * always;\n        add_header Access-Control-Allow-Methods "GET, OPTIONS, HEAD" always;\n        return 302 https:\/\/stream.berosat.live\/hls\/rtp-hd\/rtp-hd.m3u8;\n    }\n' /etc/nginx/sites-available/tvpromedia 2>/dev/null || true
+echo -e "\${BLUE}[3/3] Configuration Nginx & Services RTP & AFRI TV BeroSat HD...\${NC}"
+# Configuration automatique des règles RTP et AFRI TV BeroSat dans Nginx si elles ne sont pas déjà présentes
+if [ -f /etc/nginx/sites-available/tvpromedia ]; then
+  if ! grep -q "afri-tv" /etc/nginx/sites-available/tvpromedia; then
+    sed -i '/location \/live\/ {/i \    # Relais direct AFRI TV BeroSat HD (www.tvpromedia.com)\n    location ~* ^\/live\/.*(afri|cle_afritv) {\n        add_header Access-Control-Allow-Origin * always;\n        add_header Access-Control-Allow-Methods "GET, OPTIONS, HEAD" always;\n        return 302 https:\/\/stream.berosat.live\/hls\/afri-tv\/afri-tv.m3u8;\n    }\n' /etc/nginx/sites-available/tvpromedia 2>/dev/null || true
+  fi
+  if ! grep -q "rtp-hd" /etc/nginx/sites-available/tvpromedia; then
+    sed -i '/location \/live\/ {/i \    # Relais direct RTP BeroSat HD (www.tvpromedia.com)\n    location ~* ^\/live\/.*(rtp|cle_rtptv) {\n        add_header Access-Control-Allow-Origin * always;\n        add_header Access-Control-Allow-Methods "GET, OPTIONS, HEAD" always;\n        return 302 https:\/\/stream.berosat.live\/hls\/rtp-hd\/rtp-hd.m3u8;\n    }\n' /etc/nginx/sites-available/tvpromedia 2>/dev/null || true
+  fi
 fi
 
 # Synchronisation des unités systemd RTP si présentes
