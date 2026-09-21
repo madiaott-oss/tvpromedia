@@ -331,6 +331,21 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState<ViewTab>('tout');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [continentActif, setContinentActif] = useState<string | null>(null);
+  const CONTINENTS_MAP: Record<string, string[]> = {
+    AFRIQUE: ["CD","CG","CI","CM","SN","ML","MA","DZ","TN","EG","NG","GH","ZA","AO","BJ","BF","GA","GN","KE","ET","RW","ZM","ZW","TG","NE","MR","LY","SD","SS","UG","TZ","BI","MW","MZ","BW","NA","SL","LR","GM","GW","CV","ST","KM","DJ","SO","ER","TD","CF","GQ","RE","MU","YT","RDC","CONGO","AFRIQUE","AFRICA","SENEGAL","MALI","CAMEROUN","COTE","IVOIRE","GABON","GUINEE"],
+    EUROPE: ["FR","BE","CH","DE","GB","UK","IT","ES","PT","NL","PL","TR","RU","UA","RO","GR","SE","NO","DK","FI","IE","AT","CZ","HU","BG","RS","HR","SI","SK","BA","AL","ME","MK","BY","MD","LT","LV","EE","LU","MT","CY","IS","FRANCE","EUROPE"],
+    AMERIQUE: ["US","USA","CA","MX","BR","AR","CO","PE","VE","CL","EC","BO","PY","UY","PA","CR","GT","HN","SV","NI","CU","DO","HT","JM","AMERIQUE","AMERICA"],
+    ASIE: ["CN","JP","KR","IN","PK","BD","ID","MY","SG","TH","VN","PH","KH","LA","MM","NP","LK","SA","AE","QA","KW","BH","OM","JO","LB","IL","IR","IQ","ASIE","ASIA"]
+  };
+  const getContinent = (ch: any): string => {
+    const txt = ((ch.pays||"")+" "+(ch.nom||"")+" "+(ch.categorie||"")).toUpperCase();
+    for (const [cont, mots] of Object.entries(CONTINENTS_MAP)) {
+      if (mots.some(m => txt.includes(m))) return cont;
+    }
+    return "AUTRES";
+  };
+
   const [sortBy, setSortBy] = useState<'alpha' | 'num'>('alpha');
   const [expandedCategories, setExpandedCategories] = useState<Record<string, number>>({});
 
@@ -1782,6 +1797,7 @@ export default function App() {
   const filteredChannels = useMemo(() => {
     const searchFilterLower = normalizeText(searchQuery);
     return channels.filter(ch => {
+      if (continentActif && getContinent(ch) !== continentActif) return false;
       // 1. Search Query filter
       const nameNormalized = normalizeText(ch.nom);
       const catNormalized = normalizeText(ch.cat || '');
@@ -2095,6 +2111,24 @@ export default function App() {
                 <span>🌐 tvpromedia.com</span>
               </div>
             </div>
+
+      {/* ===== FILTRES CONTINENTS BOSS ===== */}
+      <div className="w-full bg-gradient-to-r from-[#0a1931] via-[#102a5c] to-[#0a1931] border-y-2 border-yellow-500/30 py-3 px-2 flex flex-wrap gap-2 justify-center items-center sticky top-[64px] z-20 shadow-xl">
+        <span className="text-yellow-400 font-black text-xs mr-1">🌍 CONTINENT:</span>
+        {[
+          { id:'AFRIQUE', label:'🌍 AFRIQUE', grad:'from-green-600 to-yellow-500' },
+          { id:'EUROPE', label:'🌐 EUROPE', grad:'from-blue-600 to-blue-300' },
+          { id:'AMERIQUE', label:'🌎 AMERIQUE', grad:'from-red-600 to-blue-600' },
+          { id:'ASIE', label:'🌏 ASIE', grad:'from-red-600 to-yellow-400' },
+        ].map(b=>{
+          const cnt = channels.filter((c:any)=>{ const t=((c.pays||'')+' '+(c.nom||'')).toUpperCase(); return (CONTINENTS_MAP as any)[b.id].some((m:string)=>t.includes(m)); }).length;
+          const active = continentActif===b.id;
+          return <button key={b.id} onClick={()=>setContinentActif(active?null:b.id)} className={`px-5 py-2 rounded-full font-black text-xs md:text-sm transition-all hover:scale-110 ${active?`bg-gradient-to-r ${b.grad} text-white ring-2 ring-white scale-110`:'bg-white/10 text-white border border-white/20 hover:bg-white/20'}`}>{b.label} <span className="bg-black/30 px-2 rounded-full ml-1">{cnt}</span></button>
+        })}
+        {continentActif && <button onClick={()=>setContinentActif(null)} className="px-4 py-2 rounded-full bg-red-600 text-white font-bold text-xs">✕ TOUT ({channels.length})</button>}
+      </div>
+
+
             
             <div className="flex items-center gap-2 shrink-0">
               <button
@@ -2477,7 +2511,7 @@ export default function App() {
                 <div className="flex flex-wrap gap-2 pt-1">
                   <a 
                     href="#" 
-                    onClick={(e) => { e.preventDefault(); alert("Téléchargement de l'APK Android TV PRO bientôt disponible boss !"); }}
+                    onClick={(e) => { e.preventDefault(); window.location.href = "/apk/TV-PRO-MEDIA.apk"; }}
                     className="flex items-center gap-2 px-3 py-1.5 bg-[#0a0f1d] border border-[#ffffff]/10 hover:border-red-650 rounded-lg text-left transition-all scale-95 origin-left hover:scale-100 group"
                     title="Télécharger l'APK sur le Play Store"
                   >
@@ -2494,7 +2528,7 @@ export default function App() {
                   </a>
                   <a 
                     href="#" 
-                    onClick={(e) => { e.preventDefault(); alert("Téléchargement direct du fichier APK TV PRO bientôt disponible boss !"); }}
+                    onClick={(e) => { e.preventDefault(); window.location.href = "/apk/TV-PRO-MEDIA.apk"; }}
                     className="flex items-center gap-2 px-3 py-1.5 bg-[#0a0f1d] border border-white/10 hover:border-red-600 rounded-lg text-left transition-all scale-95 origin-left hover:scale-100 group"
                     title="Lien direct pour télécharger le APK"
                   >
