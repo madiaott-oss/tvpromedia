@@ -94,15 +94,15 @@
   {
     "id": "ch_2",
     "nom": "AFRI TV",
-    "lien": "https://www.tvpromedia.com/live/cle_afritv_1m_5jma.m3u8",
+    "lien": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
     "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 350\" width=\"100%\" height=\"100%\"><rect width=\"600\" height=\"350\" fill=\"%23ffffff\"/><g transform=\"translate(10, 10)\"><path d=\"M 125,45 C 150,35 195,50 210,60 C 220,68 232,72 235,85 C 237,98 220,105 225,122 C 230,135 242,145 245,158 C 247,172 235,182 222,195 C 212,210 208,228 198,245 C 188,262 175,280 162,295 C 150,305 138,285 135,268 C 130,250 124,236 115,222 C 105,208 112,195 112,176 C 112,160 102,152 90,148 C 75,145 52,155 40,140 C 28,125 24,105 30,85 C 38,65 62,50 90,45 C 105,42 115,48 125,45 Z\" fill=\"%23001aa3\"/><path d=\"M 90,75 C 130,65 178,75 188,105 C 192,118 188,132 175,142 C 160,150 132,150 115,160 C 92,170 92,190 115,200 C 138,208 170,202 192,195 L 192,218 C 165,228 125,228 98,218 C 70,208 65,178 82,162 C 100,146 132,146 150,138 C 162,132 162,122 158,114 C 152,105 128,102 98,110 C 82,115 75,102 78,92 C 80,84 85,78 90,75 Z\" fill=\"%23ffffff\"/><path d=\"M 110,168 C 132,160 160,165 165,182 C 170,200 142,212 120,210 C 102,208 98,190 110,168 Z\" fill=\"%23e61c1c\"/><text x=\"220\" y=\"215\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"150\" fill=\"%23001aa3\" letter-spacing=\"-6\">fri</text><text x=\"415\" y=\"215\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"150\" fill=\"%23f33800\" letter-spacing=\"-6\">tv</text></g></svg>",
     "cat": "GENERALISTE",
     "ch": "7",
     "qualite": "4K",
     "pays": "BRAZZAVILLE",
-    "desc": "AFRI TV - L'Afrique en direct, informations, culture et divertissement en continu • Direct HLS & Secours YouTube",
+    "desc": "AFRI TV - L'Afrique en direct - Nouveau flux HLS berosat live",
     "youtubeBackup": "https://www.youtube.com/watch?v=Tvh6RL0WnWI",
-    "m3u8Source": "https://www.tvpromedia.com/live/cle_afritv_1m_5jma.m3u8",
+    "m3u8Source": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
     "categorie": "GENERALISTE"
   },
   {
@@ -86053,5 +86053,17 @@
     "desc": "ESPEC TV - Église ESPEC International (Culte, enseignements et diffusion continue) • Direct HLS & Secours YouTube",
     "youtubeBackup": "https://www.youtube.com/watch?v=Z4gy-GRZHr4",
     "m3u8Source": "https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8"
+  },
+  {
+    "id": "afri-tv",
+    "name": "AFRI TV",
+    "title": "AFRI TV",
+    "logo": "https://i.ibb.co/placeholder-afri.png",
+    "url": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
+    "stream": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
+    "src": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
+    "group": "Divertissement",
+    "category": "General",
+    "country": "CD"
   }
 ]
