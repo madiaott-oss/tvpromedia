@@ -100,7 +100,7 @@
     "ch": "7",
     "qualite": "4K",
     "pays": "BRAZZAVILLE",
-    "desc": "AFRI TV - L'Afrique en direct - Nouveau flux HLS berosat live",
+    "desc": "AFRI TV - L'Afrique en direct - Nouveau flux HLS berosat LIVE 24/7",
     "youtubeBackup": "https://www.youtube.com/watch?v=Tvh6RL0WnWI",
     "m3u8Source": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
     "categorie": "GENERALISTE"
@@ -86053,17 +86053,5 @@
     "desc": "ESPEC TV - Église ESPEC International (Culte, enseignements et diffusion continue) • Direct HLS & Secours YouTube",
     "youtubeBackup": "https://www.youtube.com/watch?v=Z4gy-GRZHr4",
     "m3u8Source": "https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8"
-  },
-  {
-    "id": "afri-tv",
-    "name": "AFRI TV",
-    "title": "AFRI TV",
-    "logo": "https://i.ibb.co/placeholder-afri.png",
-    "url": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
-    "stream": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
-    "src": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
-    "group": "Divertissement",
-    "category": "General",
-    "country": "CD"
   }
 ]
