@@ -228,13 +228,13 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.nom = 'MALAÏKA ACTU';
       ch.ch = '92';
       ch.logo = MALAIKA_ACTU_LOGO;
-      ch.lien = 'https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8';
-      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8';
-      ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8';
-      ch.rtmpKey = 'cle_malaika_1m_vllq';
+      ch.lien = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
+      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
+      ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
+      ch.rtmpKey = 'cle_mala_ka_actu_3q6o5';
       ch.rtmpUrl = 'rtmp://191.215.38.95/live';
       ch.youtubeBackup = 'https://youtu.be/P6LUQn6uygI';
-      ch.desc = "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_malaika_1m_vllq) sur www.tvpromedia.com";
+      ch.desc = "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_mala_ka_actu_3q6o5) sur www.tvpromedia.com";
       ch.cat = 'NEWS';
       return true;
     }
@@ -955,8 +955,8 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_92' || (ch.nom && (ch.nom.toUpperCase().includes('MALAIKA') || ch.nom.toUpperCase().includes('MALAÏKA')))) {
-            const targetMalaikaStream = 'https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8';
-            if (ch.nom !== "MALAÏKA ACTU" || ch.logo !== MALAIKA_ACTU_LOGO || ch.lien !== targetMalaikaStream || ch.m3u8Source !== targetMalaikaStream || ch.rtmpKey !== 'cle_malaika_1m_vllq') {
+            const targetMalaikaStream = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
+            if (ch.nom !== "MALAÏKA ACTU" || ch.logo !== MALAIKA_ACTU_LOGO || ch.lien !== targetMalaikaStream || ch.m3u8Source !== targetMalaikaStream || ch.rtmpKey !== 'cle_mala_ka_actu_3q6o5') {
               migrated = true;
               ch = { 
                 ...ch, 
@@ -968,8 +968,8 @@ export default function App() {
                 m3u8Source: targetMalaikaStream,
                 cloudRemix: targetMalaikaStream,
                 rtmpUrl: "rtmp://191.215.38.95/live",
-                rtmpKey: "cle_malaika_1m_vllq",
-                desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_malaika_1m_vllq) sur www.tvpromedia.com",
+                rtmpKey: "cle_mala_ka_actu_3q6o5",
+                desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_mala_ka_actu_3q6o5) sur www.tvpromedia.com",
                 youtubeBackup: "https://youtu.be/P6LUQn6uygI",
                 cat: "NEWS",
                 pays: "RDC",
