@@ -228,13 +228,13 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.nom = 'MALAÏKA ACTU';
       ch.ch = '92';
       ch.logo = MALAIKA_ACTU_LOGO;
-      ch.lien = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
-      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
-      ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
-      ch.rtmpKey = 'cle_mala_ka_actu_3q6o5';
+        ch.lien = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
+        ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
+        ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
+      ch.rtmpKey = 'cle_mala_ka_actu_3q6o5
       ch.rtmpUrl = 'rtmp://191.215.38.95/live';
       ch.youtubeBackup = 'https://youtu.be/P6LUQn6uygI';
-      ch.desc = "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_mala_ka_actu_3q6o5) sur www.tvpromedia.com";
+      ch.desc = "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_mala_ka_actu_3q6o5";
       ch.cat = 'NEWS';
       return true;
     }
@@ -250,13 +250,13 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.nom = 'CCPV TV MONTRÉAL';
       ch.ch = '24';
       ch.logo = CCPV_TV_LOGO;
-      ch.lien = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
-      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
-      ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
-      ch.rtmpKey = 'cle_ccpvtv_1m_9miq';
+      ch.lien = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9
+      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9
+      ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9
+      ch.rtmpKey = 'cle_ccpvtv_inf_mxg9
       ch.rtmpUrl = 'rtmp://191.215.38.95/live';
       delete ch.youtubeBackup;
-      ch.desc = 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_1m_9miq (Principal & Secours HLS) sur www.tvpromedia.com';
+      ch.desc = 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_inf_mxg9
       ch.cat = 'RELIGIEUX';
       ch.pays = 'CANADA';
       ch.qualite = '4K';
@@ -628,7 +628,7 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_24' || ch.id === '24' || ch.ch === '24' || (ch.nom && (ch.nom.toUpperCase().includes('13 CULTURA') || ch.nom.toUpperCase().includes('CULTURA')))) {
-            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
+            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9
             migrated = true;
             const { youtubeBackup: _unused, ...rest } = ch;
             ch = { 
@@ -641,8 +641,8 @@ export default function App() {
               m3u8Source: targetCcpvStream,
               cloudRemix: targetCcpvStream,
               rtmpUrl: 'rtmp://191.215.38.95/live',
-              rtmpKey: 'cle_ccpvtv_1m_9miq',
-              desc: `CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_1m_9miq (Principal & Secours HLS) sur www.tvpromedia.com`,
+              rtmpKey: 'cle_ccpvtv_inf_mxg9
+              desc: `CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_inf_mxg9
               cat: 'RELIGIEUX',
               pays: 'CANADA',
               qualite: '4K'
@@ -805,7 +805,7 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_24' || ch.id === '24' || ch.ch === '24' || (ch.nom && (ch.nom.toUpperCase().includes('13 CULTURA') || ch.nom.toUpperCase().includes('CULTURA')))) {
-            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
+            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9
             migrated = true;
             const { youtubeBackup: _unused, ...rest } = ch;
             ch = { 
@@ -817,12 +817,12 @@ export default function App() {
               m3u8Source: targetCcpvStream,
               cloudRemix: targetCcpvStream,
               rtmpUrl: 'rtmp://191.215.38.95/live',
-              rtmpKey: 'cle_ccpvtv_1m_9miq',
+              rtmpKey: 'cle_ccpvtv_inf_mxg9
               logo: CCPV_TV_LOGO, 
               cat: 'RELIGIEUX', 
               pays: 'CANADA',
               qualite: '4K',
-              desc: 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_1m_9miq (Principal & Secours HLS) sur www.tvpromedia.com'
+              desc: 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_inf_mxg9
             };
           }
           if (ch.id === 'ch_66' || (ch.nom && ch.nom.toUpperCase().includes('HORIZON 2000'))) {
@@ -955,8 +955,8 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_92' || (ch.nom && (ch.nom.toUpperCase().includes('MALAIKA') || ch.nom.toUpperCase().includes('MALAÏKA')))) {
-            const targetMalaikaStream = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
-            if (ch.nom !== "MALAÏKA ACTU" || ch.logo !== MALAIKA_ACTU_LOGO || ch.lien !== targetMalaikaStream || ch.m3u8Source !== targetMalaikaStream || ch.rtmpKey !== 'cle_mala_ka_actu_3q6o5') {
+            const targetMalaikaStream = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5
+            if (ch.nom !== "MALAÏKA ACTU" || ch.logo !== MALAIKA_ACTU_LOGO || ch.lien !== targetMalaikaStream || ch.m3u8Source !== targetMalaikaStream || ch.rtmpKey !== 'cle_mala_ka_actu_3q6o5
               migrated = true;
               ch = { 
                 ...ch, 
@@ -969,7 +969,7 @@ export default function App() {
                 cloudRemix: targetMalaikaStream,
                 rtmpUrl: "rtmp://191.215.38.95/live",
                 rtmpKey: "cle_mala_ka_actu_3q6o5",
-                desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_mala_ka_actu_3q6o5) sur www.tvpromedia.com",
+                desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_mala_ka_actu_3q6o5",
                 youtubeBackup: "https://youtu.be/P6LUQn6uygI",
                 cat: "NEWS",
                 pays: "RDC",
@@ -1340,7 +1340,7 @@ export default function App() {
 
         // Absolute guarantee that Canal 24 (CCPV TV MONTRÉAL) is present with the correct stream & name
         const idx24 = parsed.findIndex(c => c.id === 'ch_24' || c.ch === '24');
-        const ccpv24Stream = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
+        const ccpv24Stream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9
         if (idx24 === -1) {
           parsed.push({
             id: 'ch_24',
@@ -1349,13 +1349,13 @@ export default function App() {
             m3u8Source: ccpv24Stream,
             cloudRemix: ccpv24Stream,
             rtmpUrl: 'rtmp://191.215.38.95/live',
-            rtmpKey: 'cle_ccpvtv_1m_9miq',
+            rtmpKey: 'cle_ccpvtv_inf_mxg9
             logo: CCPV_TV_LOGO,
             cat: 'RELIGIEUX',
             ch: '24',
             qualite: '4K',
             pays: 'CANADA',
-            desc: 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_1m_9miq (Principal & Secours HLS) sur www.tvpromedia.com'
+            desc: 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_inf_mxg9
           });
           migrated = true;
         } else {
@@ -1370,12 +1370,12 @@ export default function App() {
               m3u8Source: ccpv24Stream,
               cloudRemix: ccpv24Stream,
               rtmpUrl: 'rtmp://191.215.38.95/live',
-              rtmpKey: 'cle_ccpvtv_1m_9miq',
+              rtmpKey: 'cle_ccpvtv_inf_mxg9
               logo: CCPV_TV_LOGO,
               cat: 'RELIGIEUX',
               pays: 'CANADA',
               qualite: '4K',
-              desc: 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_1m_9miq (Principal & Secours HLS) sur www.tvpromedia.com'
+              desc: 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_inf_mxg9
             };
             migrated = true;
           }
