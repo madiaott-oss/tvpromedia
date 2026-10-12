@@ -372,7 +372,35 @@ export default function App() {
   // Initialize data on load
   useEffect(() => {
     // 1. Core Catalog loading - ensure legacy bloated cache is purged for lightning fast loading
-    const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
+    
+const isCustomOrBerosat = (ch:any)=>{
+  if(!ch) return false;
+  const lien=(ch.lien||'').toLowerCase();
+  const id=(ch.id||'').toLowerCase();
+  if(['ch_rtp','ch_congo','ch_rtvradio','ch_news234','ch_mcprod','ch_1','ch_3','ch_30','ch_31','ch_92','ch_93'].includes(id)) return true;
+  if(lien.includes('191.215.38.95')||lien.includes('tvpromedia.com/live')||lien.includes('cle_')) return true;
+  if(lien.includes('berosat')||lien.includes('19360')) return true;
+  return false;
+};
+const DOMAIN_MAP: Record<string, number> = {'europe':0,'satellite':1,'afrique':2,'amerique':3,'canada':4,'asia':5,'www':6,'tvpromedia.com':6};
+const getChannelsForHost = (all:any[]): any[]=>{
+  try{
+    const host=window.location.hostname.toLowerCase();
+    const sub=host.split('.')[0];
+    const idx = (DOMAIN_MAP as any)[sub]!==undefined? (DOMAIN_MAP as any)[sub] : 6;
+    // www = 1017 aussi (même logique que sous-domaines)
+    if(all.length>4000){ /* garde 1000 */ }
+    const customs=all.filter(isCustomOrBerosat);
+    const rest=all.filter((c:any)=>!isCustomOrBerosat(c));
+    const slice=rest.slice(idx*1000, idx*1000+1000);
+    const seen=new Set(); const out:any[]=[];
+    customs.forEach((c:any)=>{ if(!seen.has(c.id)){ seen.add(c.id); out.push(c); }});
+    slice.forEach((c:any)=>{ if(!seen.has(c.id)){ seen.add(c.id); out.push(c); }});
+    return out;
+  }catch{ return all; }
+};
+
+const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
     if (localStorage.getItem('chaines_tvpro_version') !== CATALOG_VERSION) {
       try {
         localStorage.removeItem('chaines_tvpro');
