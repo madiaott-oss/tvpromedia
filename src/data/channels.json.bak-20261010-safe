@@ -1,0 +1,54 @@
+[
+  {
+    "nom": "BALADE TV",
+    "rtmpKey": "cle_balade_1m_pc47",
+    "lien": "https://www.tvpromedia.com/live/cle_balade_1m_pc47.m3u8",
+    "logo": "/logos/balade.png"
+  },
+  {
+    "nom": "HORIZON TV",
+    "rtmpKey": "cle_horizontv_12m_c0wv",
+    "lien": "https://www.tvpromedia.com/live/cle_horizontv_12m_c0wv.m3u8",
+    "logo": "/logos/horizon.png"
+  },
+  {
+    "nom": "CCPV TV",
+    "rtmpKey": "cle_ccpvtv_1m_9miq",
+    "lien": "https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8",
+    "logo": "/logos/ccpv.png"
+  },
+  {
+    "nom": "CEM TV",
+    "rtmpKey": "cle_cem_1m_lvt6",
+    "lien": "https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8",
+    "logo": "/logos/cem.png"
+  },
+  {
+    "nom": "STAR TV",
+    "rtmpKey": "cle_star_1m_nmo2",
+    "lien": "https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8",
+    "logo": "/logos/star.png"
+  },
+  {
+    "nom": "MPASA TV",
+    "rtmpKey": "cle_mpasatv_1m_8vpj",
+    "lien": "https://www.tvpromedia.com/live/cle_mpasatv_1m_8vpj.m3u8",
+    "logo": "/logos/mpasa.png",
+    "m3u8Source": "https://www.tvpromedia.com/live/cle_mpasatv_1m_8vpj.m3u8",
+    "src": "https://www.tvpromedia.com/live/cle_mpasatv_1m_8vpj.m3u8"
+  },
+  {
+    "nom": "A LA UNE TV",
+    "rtmpKey": "cle_alaunetv_1m_r8vj",
+    "lien": "https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8",
+    "logo": "/logos/alaune.png"
+  },
+  {
+    "nom": "PAROLE TV",
+    "rtmpKey": "cle_paroletv_1m_jf6h",
+    "lien": "https://www.tvpromedia.com/live/cle_paroletv_1m_jf6h.m3u8",
+    "logo": "/logos/parole.png",
+    "m3u8Source": "https://www.tvpromedia.com/live/cle_paroletv_1m_jf6h.m3u8",
+    "src": "https://www.tvpromedia.com/live/cle_paroletv_1m_jf6h.m3u8"
+  }
+]
