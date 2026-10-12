@@ -231,7 +231,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
         ch.lien = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
         ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
         ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
-      ch.rtmpKey = 'cle_mala_ka_actu_3q6o5
+      ch.rtmpKey = 'cle_mala_ka_actu_3q6o5';
       ch.rtmpUrl = 'rtmp://191.215.38.95/live';
       ch.youtubeBackup = 'https://youtu.be/P6LUQn6uygI';
       ch.desc = "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_mala_ka_actu_3q6o5";
@@ -250,9 +250,9 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.nom = 'CCPV TV MONTRÉAL';
       ch.ch = '24';
       ch.logo = CCPV_TV_LOGO;
-      ch.lien = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9
-      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9
-      ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9
+      ch.lien = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9';
+      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9';
+      ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9';
       ch.rtmpKey = 'cle_ccpvtv_inf_mxg9
       ch.rtmpUrl = 'rtmp://191.215.38.95/live';
       delete ch.youtubeBackup;
@@ -628,7 +628,7 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_24' || ch.id === '24' || ch.ch === '24' || (ch.nom && (ch.nom.toUpperCase().includes('13 CULTURA') || ch.nom.toUpperCase().includes('CULTURA')))) {
-            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9
+            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9';
             migrated = true;
             const { youtubeBackup: _unused, ...rest } = ch;
             ch = { 
@@ -805,7 +805,7 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_24' || ch.id === '24' || ch.ch === '24' || (ch.nom && (ch.nom.toUpperCase().includes('13 CULTURA') || ch.nom.toUpperCase().includes('CULTURA')))) {
-            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9
+            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9';
             migrated = true;
             const { youtubeBackup: _unused, ...rest } = ch;
             ch = { 
@@ -955,7 +955,7 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_92' || (ch.nom && (ch.nom.toUpperCase().includes('MALAIKA') || ch.nom.toUpperCase().includes('MALAÏKA')))) {
-            const targetMalaikaStream = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5
+            const targetMalaikaStream = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5';
             if (ch.nom !== "MALAÏKA ACTU" || ch.logo !== MALAIKA_ACTU_LOGO || ch.lien !== targetMalaikaStream || ch.m3u8Source !== targetMalaikaStream || ch.rtmpKey !== 'cle_mala_ka_actu_3q6o5
               migrated = true;
               ch = { 
@@ -1340,7 +1340,7 @@ export default function App() {
 
         // Absolute guarantee that Canal 24 (CCPV TV MONTRÉAL) is present with the correct stream & name
         const idx24 = parsed.findIndex(c => c.id === 'ch_24' || c.ch === '24');
-        const ccpv24Stream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9
+        const ccpv24Stream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9';
         if (idx24 === -1) {
           parsed.push({
             id: 'ch_24',
