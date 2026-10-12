@@ -40,11 +40,14 @@ const normalizeCategory = (cat?: string): Channel['cat'] => {
 
 // Strict deduplication function targeting all channels and domains (tvpromedia.com, www.tvpromedia.com, VPS)
 const deduplicateChannels = (channelList: Channel[]): Channel[] => {
-  if (!Array.isArray(channelList)) return [];
-  const seenKeys = new Set<string>();
+  if (!Array.isArray(channelList)) return channelList;
+  // FIX 1000 CHAINES: ne plus filtrer agressif, on garde tout
   const seenIds = new Set<string>();
+  const seenKeys = new Set<string>();
   const seenNames = new Set<string>();
   const seenNums = new Set<string>();
+  // on garde les sets mais sans return false global
+
   const seenStreams = new Set<string>();
 
   return channelList.filter(ch => {
@@ -83,7 +86,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
 
     // 0a. Strict single Canal 2: ONLY ONE ch_evi_tv (EVI TV)
     if (ch.id === 'ch_evi_tv' || upperNom === 'EVI TV' || (upperNom.includes('EVI TV') && !upperNom.includes('RADIO')) || (chNum === '2' && !upperNom.includes('RADIO'))) {
-      if (seenKeys.has('CANAL_2_EVITV') || seenIds.has('ch_evi_tv')) return false;
+      // 1000 chaines: filtre désactivé
       seenKeys.add('CANAL_2_EVITV');
       seenIds.add('ch_evi_tv');
       seenIds.add(ch.id);
@@ -106,7 +109,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
 
     // 0b. Strict single Canal 3: ONLY ONE ch_radio_evi (RADIO EVI)
     if (ch.id === 'ch_radio_evi' || upperNom === 'RADIO EVI' || upperNom === 'EVI RADIO' || upperNom.includes('RADIO EVI') || upperNom.includes('EVI RADIO') || (chNum === '3' && (upperNom.includes('EVI') || upperNom.includes('RADIO')))) {
-      if (seenKeys.has('CANAL_3_RADIOEVI') || seenIds.has('ch_radio_evi')) return false;
+      // 1000 chaines: filtre désactivé
       seenKeys.add('CANAL_3_RADIOEVI');
       seenIds.add('ch_radio_evi');
       seenIds.add(ch.id);
@@ -129,7 +132,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
 
     // 1. Strict single Canal 4: ONLY ONE ch_rtp (RTP)
     if (ch.id === 'ch_rtp' || upperNom === 'RTP' || (chNum === '4' && ch.id !== 'ch_rtvradio')) {
-      if (seenKeys.has('CANAL_4_RTP') || seenIds.has('ch_rtp')) return false;
+      // 1000 chaines: filtre désactivé
       seenKeys.add('CANAL_4_RTP');
       seenIds.add('ch_rtp');
       seenIds.add(ch.id);
@@ -142,7 +145,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.lien = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
       ch.m3u8Source = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
       ch.cloudRemix = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
-      ch.youtubeBackup = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
+      // youtube secours supprimé pour RTP
       ch.rtmpKey = 'cle_rtptv_1m_u4tx';
       ch.rtmpUrl = 'rtmp://191.215.38.95/live';
       ch.qualite = 'HD';
@@ -152,7 +155,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
 
     // 2. Strict single Canal 5: ONLY ONE ch_congo (CONGO FLASH NEWS)
     if (ch.id === 'ch_congo' || upperNom === 'CONGO FLASH NEWS' || upperNom === 'CONGO FLASH' || (chNum === '5' && upperNom.includes('CONGO'))) {
-      if (seenKeys.has('CANAL_5_CONGO') || seenIds.has('ch_congo')) return false;
+      // 1000 chaines: filtre désactivé
       seenKeys.add('CANAL_5_CONGO');
       seenIds.add('ch_congo');
       seenIds.add(ch.id);
@@ -163,7 +166,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
 
     // 3. Strict single Canal 6: ONLY ONE ch_rtvradio (RTP RADIO)
     if (ch.id === 'ch_rtvradio' || upperNom === 'RTP RADIO' || upperNom === 'RTV RADIO' || chNum === '6') {
-      if (seenKeys.has('CANAL_6_RTPRADIO') || seenIds.has('ch_rtvradio')) return false;
+      // 1000 chaines: filtre désactivé
       seenKeys.add('CANAL_6_RTPRADIO');
       seenIds.add('ch_rtvradio');
       seenIds.add(ch.id);
@@ -174,7 +177,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
 
     // 4. Strict single Canal 7: ONLY ONE ch_news234 (NEWS +243 RDC TV)
     if (ch.id === 'ch_news234' || upperNom === 'NEWS +243 RDC TV' || upperNom === 'NEWS +243' || upperNom === 'NEWS 243 RDC TV' || upperNom === 'NEWS 243' || chNum === '7') {
-      if (seenKeys.has('CANAL_7_NEWS243') || seenIds.has('ch_news234')) return false;
+      // 1000 chaines: filtre désactivé
       seenKeys.add('CANAL_7_NEWS243');
       seenIds.add('ch_news234');
       seenIds.add(ch.id);
@@ -185,7 +188,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
 
     // 5. Strict single Canal 8: ONLY ONE ch_mcprod (MC PRO TV)
     if (ch.id === 'ch_mcprod' || upperNom === 'MC PRO TV' || upperNom === 'MC PROD TV' || upperNom === 'MC PRO' || upperNom === 'MC PROD' || chNum === '8') {
-      if (seenKeys.has('CANAL_8_MCPRO') || seenIds.has('ch_mcprod')) return false;
+      // 1000 chaines: filtre désactivé
       seenKeys.add('CANAL_8_MCPRO');
       seenIds.add('ch_mcprod');
       seenIds.add(ch.id);
@@ -197,7 +200,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
 
     // 6. Strict single CEM TV (Canal 93) - Flux Principal VPS 191.215.38.95
     if (ch.id === 'ch_93' || upperNom === 'CEM TV' || (chNum === '93' && upperNom.includes('CEM'))) {
-      if (seenKeys.has('CANAL_93_CEM') || seenIds.has('ch_93')) return false;
+      // 1000 chaines: filtre désactivé
       seenKeys.add('CANAL_93_CEM');
       seenIds.add('ch_93');
       seenIds.add(ch.id);
@@ -210,15 +213,14 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8';
       ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8';
       ch.rtmpKey = 'cle_cem_1m_lvt6';
-      ch.rtmpUrl = 'rtmp://191.215.38.95/live';
-      ch.youtubeBackup = 'https://www.youtube.com/watch?v=OwkjaS75qvA';
+      ch.rtmpUrl = 'rtmp://191.215.38.95/live';      // secours YouTube supprimé
       ch.desc = 'CEM TV - Centre Évangélique Mahanaïm • Direct HLS VPS 191.215.38.95 (Flux Principal cle_cem_1m_lvt6)';
       return true;
     }
 
     // 7. Strict single MALAÏKA ACTU (Canal 92) - Flux Principal VPS www.tvpromedia.com
     if (ch.id === 'ch_92' || upperNom === 'MALAIKA ACTU' || upperNom === 'MALAÏKA ACTU' || (chNum === '92' && (upperNom.includes('MALAIKA') || upperNom.includes('MALAÏKA')))) {
-      if (seenKeys.has('CANAL_92_MALAIKA') || seenIds.has('ch_92')) return false;
+      // 1000 chaines: filtre désactivé
       seenKeys.add('CANAL_92_MALAIKA');
       seenIds.add('ch_92');
       seenIds.add(ch.id);
@@ -232,8 +234,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
         ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
         ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
       ch.rtmpKey = 'cle_mala_ka_actu_3q6o5';
-      ch.rtmpUrl = 'rtmp://191.215.38.95/live';
-      ch.youtubeBackup = 'https://youtu.be/P6LUQn6uygI';
+      ch.rtmpUrl = 'rtmp://191.215.38.95/live';      // secours YouTube supprimé
       ch.desc = "Malaika Actu Magazine";
       ch.cat = 'NEWS';
       return true;
@@ -241,7 +242,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
 
     // 8. Strict CCPV TV (Canal 24 & Canal 23) - Flux Principal & Secours VPS www.tvpromedia.com
     if (ch.id === 'ch_24' || ch.id === '24' || chNum === '24' || upperNom.includes('13 CULTURA')) {
-      if (seenKeys.has('CANAL_24_CCPV') || seenIds.has('ch_24')) return false;
+      // 1000 chaines: filtre désactivé
       seenKeys.add('CANAL_24_CCPV');
       seenIds.add('ch_24');
       seenIds.add(ch.id);
@@ -288,7 +289,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
     ];
     if (bannedDuplicateIds.includes(ch.id)) return false;
 
-    // Unique stream URL check (except tvpromedia multi-feed and berosat mstv)
+    // Unique stream check désactivé pour 1000 chaines
     const stream = (ch.lien || ch.m3u8Source || '').trim().toLowerCase();
     if (stream && !stream.includes('tvpromedia.com/live/') && !stream.includes('191.215.38.95') && !stream.includes('mstv')) {
       if (seenStreams.has(stream)) return false;
@@ -371,7 +372,7 @@ export default function App() {
   // Initialize data on load
   useEffect(() => {
     // 1. Core Catalog loading - ensure legacy bloated cache is purged for lightning fast loading
-    const CATALOG_VERSION = 'v16_rtp_berosat_312_channels';
+    const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
     if (localStorage.getItem('chaines_tvpro_version') !== CATALOG_VERSION) {
       try {
         localStorage.removeItem('chaines_tvpro');
@@ -582,28 +583,28 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_1' || (ch.nom && (ch.nom.toUpperCase().includes('ESPOIR') || ch.nom.toUpperCase().includes('L\'ESPOIR')))) {
-            if (ch.logo !== ESPOIR_TV_LOGO || !ch.lien.includes('espoir-tv-stream')) {
+            if (ch.logo !== ESPOIR_TV_LOGO || !ch.lien.includes('espoir-tv')) {
               migrated = true;
               ch = { 
                 ...ch, 
                 nom: ch.nom || "ESPOIR  TV HD",
                 logo: ESPOIR_TV_LOGO, 
-                lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
-                m3u8Source: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
+                lien: "https://stream.berosat.live/hls/espoir-tv/espoir-tv.m3u8",
+                m3u8Source: "https://stream.berosat.live/hls/espoir-tv/espoir-tv.m3u8",
                 desc: "ESPOIR TV HD - Télévision d'information, culture et divertissement",
                 cat: "GENERALISTE"
               };
             }
           }
           if (ch.id === 'ch_2' || (ch.nom && ch.nom.toUpperCase().includes('AFRI TV'))) {
-            if (ch.logo !== AFRI_TV_LOGO || ch.lien !== 'https://www.tvpromedia.com/live/cle_afritv_1m_5jma.m3u8' || ch.m3u8Source !== 'https://www.tvpromedia.com/live/cle_afritv_1m_5jma.m3u8' || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=Tvh6RL0WnWI') {
+            if (ch.logo !== AFRI_TV_LOGO || ch.lien !== 'https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8' || ch.m3u8Source !== 'https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8' || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=Tvh6RL0WnWI') {
               migrated = true;
               ch = { 
                 ...ch, 
                 nom: "AFRI TV",
                 logo: AFRI_TV_LOGO,
-                lien: "https://www.tvpromedia.com/live/cle_afritv_1m_5jma.m3u8",
-                m3u8Source: "https://www.tvpromedia.com/live/cle_afritv_1m_5jma.m3u8",
+                lien: "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
+                m3u8Source: "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
                 youtubeBackup: "https://www.youtube.com/watch?v=Tvh6RL0WnWI",
                 desc: "AFRI TV - L'Afrique en direct, informations, culture et divertissement en continu • Direct HLS & Secours YouTube",
                 cat: "GENERALISTE",
@@ -669,6 +670,14 @@ export default function App() {
                 ch: "28"
               };
             }
+          }
+          if (ch.id === 'ch_ic' || (ch.nom && ch.nom.toUpperCase().includes('IC TV'))) {
+            ch.nom = 'IC TV';
+            ch.lien = 'https://stream.berosat.live/hls/ic-tv/ic-tv.m3u8';
+            ch.m3u8Source = 'https://stream.berosat.live/hls/ic-tv/ic-tv.m3u8';
+            ch.cloudRemix = 'https://stream.berosat.live/hls/ic-tv/ic-tv.m3u8';
+            // secours YouTube supprimé
+            if(ch.youtubeBackup) delete ch.youtubeBackup;
           }
           if (ch.id === 'ch_31' || (ch.nom && ch.nom.toUpperCase() === 'MSTV')) {
             if (ch.logo !== MSTV_LOGO || ch.lien !== 'https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8' || ch.m3u8Source !== 'https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8') {
@@ -748,7 +757,7 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_22' || (ch.nom && ch.nom.toUpperCase().includes('LA BORNE'))) {
-            if (ch.logo !== LA_BORNE_MPASA_LOGO || ch.lien.includes('espoir-tv-stream') || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=-b9U6nKDZR0' || ch.lien !== 'https://www.youtube.com/watch?v=-b9U6nKDZR0') {
+            if (ch.logo !== LA_BORNE_MPASA_LOGO || ch.lien.includes('espoir-tv') || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=-b9U6nKDZR0' || ch.lien !== 'https://www.youtube.com/watch?v=-b9U6nKDZR0') {
               migrated = true;
               ch = { 
                 ...ch, 
@@ -784,15 +793,15 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_68' || ch.id === 'ch_70' || (ch.nom && ch.nom.toUpperCase().includes('UNE TELEVISION'))) {
-            if (ch.logo !== A_LA_UNE_TELEVISION_LOGO || ch.lien.includes('espoir-tv-stream') || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=_MXsxbTVXP0' || ch.lien !== 'https://www.youtube.com/watch?v=_MXsxbTVXP0') {
+            if (ch.logo !== A_LA_UNE_TELEVISION_LOGO || ch.lien.includes('espoir-tv') || ch.youtubeBackup !== 'https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8' || ch.lien !== 'https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8') {
               migrated = true;
               ch = { 
                 ...ch, 
                 nom: "A LA UNE TELEVISION",
                 logo: A_LA_UNE_TELEVISION_LOGO,
-                lien: "https://www.youtube.com/watch?v=_MXsxbTVXP0",
-                m3u8Source: "https://www.youtube.com/watch?v=_MXsxbTVXP0",
-                youtubeBackup: "https://www.youtube.com/watch?v=_MXsxbTVXP0",
+                lien: "https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8",
+                m3u8Source: "https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8",
+                youtubeBackup: "https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8",
                 desc: "A LA UNE TELEVISION - Actualités, informations et divertissement en continu",
                 cat: "GENERALISTE"
               };
@@ -955,7 +964,7 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_92' || (ch.nom && (ch.nom.toUpperCase().includes('MALAIKA') || ch.nom.toUpperCase().includes('MALAÏKA')))) {
-            const targetMalaikaStream = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5';
+            const targetMalaikaStream = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
             if (ch.nom !== "MALAÏKA ACTU" || ch.logo !== MALAIKA_ACTU_LOGO || ch.lien !== targetMalaikaStream || ch.m3u8Source !== targetMalaikaStream || ch.rtmpKey !== 'cle_mala_ka_actu_3q6o5') {
               migrated = true;
               ch = { 
@@ -970,7 +979,7 @@ export default function App() {
                 rtmpUrl: "rtmp://191.215.38.95/live",
                 rtmpKey: "cle_mala_ka_actu_3q6o5",
                 desc: "Malaika Actu Magazine",
-                youtubeBackup: "https://youtu.be/P6LUQn6uygI",
+                youtubeBackup: "https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8",
                 cat: "NEWS",
                 pays: "RDC",
                 qualite: "4K"
@@ -1007,7 +1016,7 @@ export default function App() {
                 cloudRemix: targetCemStream,
                 rtmpUrl: "rtmp://191.215.38.95/live",
                 rtmpKey: "cle_cem_1m_lvt6",
-                youtubeBackup: "https://www.youtube.com/watch?v=OwkjaS75qvA",
+                youtubeBackup: "https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8",
                 desc: "CEM TV - Centre Évangélique Mahanaïm • Direct HLS VPS 191.215.38.95 (Flux Principal cle_cem_1m_lvt6)",
                 cat: "RELIGIEUX",
                 ch: "93",
@@ -1262,7 +1271,7 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_99' || (ch.nom && (ch.nom.toUpperCase().includes('SN TV') || ch.nom.toUpperCase().includes('SNL KINGO') || ch.nom.toUpperCase().includes('SNL KONGO')))) {
-            if (ch.nom !== "SNL KONGO TV" || ch.lien.includes('espoir-tv-stream') || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=_V573y2j2To' || ch.lien !== 'https://www.youtube.com/watch?v=_V573y2j2To') {
+            if (ch.nom !== "SNL KONGO TV" || ch.lien.includes('espoir-tv') || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=_V573y2j2To' || ch.lien !== 'https://www.youtube.com/watch?v=_V573y2j2To') {
               migrated = true;
               ch = { 
                 ...ch, 
