@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Channel, ViewTab } from './types';
 import { 
   DEFAULT_CHANNELS, ADMIN_PASSWORD, CATEGORIES, AFRI_TV_LOGO, CCPV_TV_LOGO, HORIZON_2000_LOGO,
@@ -13,13 +13,15 @@ import {
   WIN_SPORTS_LOGO, LATAM_VDO_LOGO, RUMBA_TV_LOGO, CGTN_FRANCAIS_LOGO, PM_TV_LOGO, ALTERNATIVA_TV_LOGO, TELEBILBAO_LOGO, TVC_CANARIAS_LOGO, ETB_1_LOGO,
   CADENA_103_LOGO, CANAL_9_LINK_LOGO, AMERICA_TV_LOGO, MWD_MOVIE_LOGO, K100_TV_LOGO, FTV_SECRETS_LOGO, FRANCE_24_LOGO,
   RTP_TV_LOGO, RTP_RADIO_LOGO, CONGO_TV_LOGO, CONGO_FLASH_NEWS_LOGO, RTV_RADIO_LOGO, NEWS_234_LOGO, NEWS_243_RDC_LOGO, MC_PROD_TV_LOGO, restoreOriginalChannelM3u8,
-  ALLIANCE_MABANZA_LOGO, EVI_TV_LOGO, RADIO_EVI_LOGO
+  ALLIANCE_MABANZA_LOGO, EVI_TV_LOGO, RADIO_EVI_LOGO, IC_TV_LOGO
 } from './data';
 import VideoPlayer from './components/VideoPlayer';
 import AdminPanel from './components/AdminPanel';
 import { ChannelLogo } from './components/ChannelLogo';
 import PartnerAdPortalModal from './components/PartnerAdPortalModal';
 import SponsorBanner from './components/SponsorBanner';
+import BroadcastClock from './components/BroadcastClock';
+import FULL_CHANNELS_SEPT26 from './data/channels.json';
 import { 
   Tv, Star, Search, Trash2, ArrowUpRight, Play, Info, Heart, Smartphone, HelpCircle, Shield, Globe, Mail, Phone, ExternalLink, Lock, X, Share2, Download, AlertTriangle, CreditCard, Check, Camera, Megaphone, Sparkles, RefreshCw
 } from 'lucide-react';
@@ -40,14 +42,11 @@ const normalizeCategory = (cat?: string): Channel['cat'] => {
 
 // Strict deduplication function targeting all channels and domains (tvpromedia.com, www.tvpromedia.com, VPS)
 const deduplicateChannels = (channelList: Channel[]): Channel[] => {
-  if (!Array.isArray(channelList)) return channelList;
-  // FIX 1000 CHAINES: ne plus filtrer agressif, on garde tout
-  const seenIds = new Set<string>();
+  if (!Array.isArray(channelList)) return [];
   const seenKeys = new Set<string>();
+  const seenIds = new Set<string>();
   const seenNames = new Set<string>();
   const seenNums = new Set<string>();
-  // on garde les sets mais sans return false global
-
   const seenStreams = new Set<string>();
 
   return channelList.filter(ch => {
@@ -84,9 +83,33 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       return false;
     }
 
+    // 0. Strict single Canal 1: ONLY ONE ch_stars_brazza (STARS BRAZZAVILLE BY AFRICA - MUSIQUE)
+    if (ch.id === 'ch_stars_brazza' || upperNom.includes('STARS BRAZZAVILLE') || upperNom.includes('STARS BRAZZA') || (chNum === '1' && (upperNom.includes('STARS') || upperNom.includes('BRAZZA')))) {
+      if (seenKeys.has('CANAL_1_STARS') || seenIds.has('ch_stars_brazza')) return false;
+      seenKeys.add('CANAL_1_STARS');
+      seenIds.add('ch_stars_brazza');
+      seenIds.add(ch.id);
+      seenNums.add('1');
+      seenNames.add('STARS BRAZZAVILLE BY AFRICA');
+      ch.id = 'ch_stars_brazza';
+      ch.nom = 'STARS BRAZZAVILLE BY AFRICA';
+      ch.ch = '1';
+      ch.lien = 'https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8';
+      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8';
+      ch.cloudRemix = 'https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8';
+      ch.youtubeBackup = 'https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8';
+      ch.cat = 'MUSIQUE';
+      ch.pays = 'BRAZZAVILLE';
+      ch.qualite = 'HD';
+      ch.direct = true;
+      ch.logo = '/logos/stars_brazzaville.png';
+      ch.desc = 'STARS BRAZZAVILLE BY AFRICA - Chaîne N° 1 Musique & Culture (Brazzaville) • Direct HLS Régie (Secours M3U8 cle_star_1m_ay2q)';
+      return true;
+    }
+
     // 0a. Strict single Canal 2: ONLY ONE ch_evi_tv (EVI TV)
     if (ch.id === 'ch_evi_tv' || upperNom === 'EVI TV' || (upperNom.includes('EVI TV') && !upperNom.includes('RADIO')) || (chNum === '2' && !upperNom.includes('RADIO'))) {
-      // 1000 chaines: filtre désactivé
+      if (seenKeys.has('CANAL_2_EVITV') || seenIds.has('ch_evi_tv')) return false;
       seenKeys.add('CANAL_2_EVITV');
       seenIds.add('ch_evi_tv');
       seenIds.add(ch.id);
@@ -109,7 +132,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
 
     // 0b. Strict single Canal 3: ONLY ONE ch_radio_evi (RADIO EVI)
     if (ch.id === 'ch_radio_evi' || upperNom === 'RADIO EVI' || upperNom === 'EVI RADIO' || upperNom.includes('RADIO EVI') || upperNom.includes('EVI RADIO') || (chNum === '3' && (upperNom.includes('EVI') || upperNom.includes('RADIO')))) {
-      // 1000 chaines: filtre désactivé
+      if (seenKeys.has('CANAL_3_RADIOEVI') || seenIds.has('ch_radio_evi')) return false;
       seenKeys.add('CANAL_3_RADIOEVI');
       seenIds.add('ch_radio_evi');
       seenIds.add(ch.id);
@@ -130,9 +153,50 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       return true;
     }
 
+    // 0c. Strict single Canal 1: ONLY ONE ch_1 (ESPOIR TV HD)
+    if (ch.id === 'ch_1' || ch.id === 'ch_100' || upperNom === 'ESPOIR TV HD' || upperNom === 'ESPOIR  TV HD' || upperNom === 'ESPOIR TV' || (upperNom.includes('ESPOIR') && !upperNom.includes('PAROLE'))) {
+      if (seenKeys.has('CANAL_1_ESPOIR') || seenIds.has('ch_1')) return false;
+      seenKeys.add('CANAL_1_ESPOIR');
+      seenIds.add('ch_1');
+      seenIds.add(ch.id);
+      seenNames.add('ESPOIR TV HD');
+      ch.id = 'ch_1';
+      ch.nom = 'ESPOIR TV HD';
+      ch.ch = '1';
+      ch.logo = ESPOIR_TV_LOGO;
+      ch.lien = 'https://www.tvpromedia.com/live/espoir-tv-stream.m3u8';
+      ch.m3u8Source = 'https://www.tvpromedia.com/live/espoir-tv-stream.m3u8';
+      ch.cloudRemix = 'https://www.tvpromedia.com/live/espoir-tv-stream.m3u8';
+      ch.qualite = 'HD';
+      ch.direct = true;
+      ch.desc = "ESPOIR TV HD - Télévision d'information, culture et divertissement • Direct HD HLS (Flux Principal)";
+      return true;
+    }
+
+    // 0d. Strict single Canal 5: ONLY ONE ch_2 (AFRI TV)
+    if (ch.id === 'ch_2' || ch.id === 'ch_85' || upperNom === 'AFRI TV' || upperNom.includes('AFRI TV') || upperNom === 'AFRI') {
+      if (seenKeys.has('CANAL_2_AFRI') || seenIds.has('ch_2')) return false;
+      seenKeys.add('CANAL_2_AFRI');
+      seenIds.add('ch_2');
+      seenIds.add(ch.id);
+      seenNames.add('AFRI TV');
+      ch.id = 'ch_2';
+      ch.nom = 'AFRI TV';
+      ch.ch = ch.ch || '5';
+      ch.logo = AFRI_TV_LOGO;
+      ch.lien = 'https://www.tvpromedia.com/live/afri-tv.m3u8';
+      ch.m3u8Source = 'https://www.tvpromedia.com/live/afri-tv.m3u8';
+      ch.cloudRemix = 'https://www.tvpromedia.com/live/afri-tv.m3u8';
+      ch.youtubeBackup = '';
+      ch.qualite = 'HD';
+      ch.direct = true;
+      ch.desc = 'AFRI TV - Direct HD HLS (Flux Principal & Secours)';
+      return true;
+    }
+
     // 1. Strict single Canal 4: ONLY ONE ch_rtp (RTP)
     if (ch.id === 'ch_rtp' || upperNom === 'RTP' || (chNum === '4' && ch.id !== 'ch_rtvradio')) {
-      // 1000 chaines: filtre désactivé
+      if (seenKeys.has('CANAL_4_RTP') || seenIds.has('ch_rtp')) return false;
       seenKeys.add('CANAL_4_RTP');
       seenIds.add('ch_rtp');
       seenIds.add(ch.id);
@@ -142,20 +206,43 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.id = 'ch_rtp';
       ch.nom = 'RTP';
       ch.ch = '4';
-      ch.lien = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
-      ch.m3u8Source = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
-      ch.cloudRemix = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
-      // youtube secours supprimé pour RTP
+      ch.logo = RTP_TV_LOGO;
+      ch.lien = 'https://www.tvpromedia.com/live/rtp-hd.m3u8';
+      ch.m3u8Source = 'https://www.tvpromedia.com/live/rtp-hd.m3u8';
+      ch.cloudRemix = 'https://www.tvpromedia.com/live/rtp-hd.m3u8';
+      ch.youtubeBackup = '';
       ch.rtmpKey = 'cle_rtptv_1m_u4tx';
       ch.rtmpUrl = 'rtmp://191.215.38.95/live';
       ch.qualite = 'HD';
-      ch.desc = 'RTP - Radio Télévision Puissance • Direct HD HLS BeroSat (Flux Principal & Secours)';
+      ch.direct = true;
+      ch.desc = 'RTP - Radio Télévision Puissance • Direct HD HLS (Flux Principal & Secours)';
+      return true;
+    }
+
+    // 1b. Strict single Canal 9: ONLY ONE ch_ictv (IC-TV)
+    if (ch.id === 'ch_ictv' || upperNom === 'IC-TV' || upperNom === 'ICTV' || (chNum === '9' && (upperNom.includes('IC-TV') || upperNom.includes('ICTV')))) {
+      if (seenKeys.has('CANAL_9_ICTV') || seenIds.has('ch_ictv')) return false;
+      seenKeys.add('CANAL_9_ICTV');
+      seenIds.add('ch_ictv');
+      seenIds.add(ch.id);
+      if (chNum) seenNums.add('9');
+      seenNames.add('IC-TV');
+      ch.id = 'ch_ictv';
+      ch.nom = 'IC-TV';
+      ch.ch = '9';
+      ch.logo = IC_TV_LOGO;
+      ch.lien = 'https://www.tvpromedia.com/live/ictv.m3u8';
+      ch.m3u8Source = 'https://www.tvpromedia.com/live/ictv.m3u8';
+      ch.cloudRemix = 'https://www.tvpromedia.com/live/ictv.m3u8';
+      ch.qualite = 'HD';
+      ch.direct = true;
+      ch.desc = 'IC-TV - Information, Culture & Divertissement • Direct HD HLS (Flux Principal)';
       return true;
     }
 
     // 2. Strict single Canal 5: ONLY ONE ch_congo (CONGO FLASH NEWS)
     if (ch.id === 'ch_congo' || upperNom === 'CONGO FLASH NEWS' || upperNom === 'CONGO FLASH' || (chNum === '5' && upperNom.includes('CONGO'))) {
-      // 1000 chaines: filtre désactivé
+      if (seenKeys.has('CANAL_5_CONGO') || seenIds.has('ch_congo')) return false;
       seenKeys.add('CANAL_5_CONGO');
       seenIds.add('ch_congo');
       seenIds.add(ch.id);
@@ -166,7 +253,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
 
     // 3. Strict single Canal 6: ONLY ONE ch_rtvradio (RTP RADIO)
     if (ch.id === 'ch_rtvradio' || upperNom === 'RTP RADIO' || upperNom === 'RTV RADIO' || chNum === '6') {
-      // 1000 chaines: filtre désactivé
+      if (seenKeys.has('CANAL_6_RTPRADIO') || seenIds.has('ch_rtvradio')) return false;
       seenKeys.add('CANAL_6_RTPRADIO');
       seenIds.add('ch_rtvradio');
       seenIds.add(ch.id);
@@ -177,7 +264,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
 
     // 4. Strict single Canal 7: ONLY ONE ch_news234 (NEWS +243 RDC TV)
     if (ch.id === 'ch_news234' || upperNom === 'NEWS +243 RDC TV' || upperNom === 'NEWS +243' || upperNom === 'NEWS 243 RDC TV' || upperNom === 'NEWS 243' || chNum === '7') {
-      // 1000 chaines: filtre désactivé
+      if (seenKeys.has('CANAL_7_NEWS243') || seenIds.has('ch_news234')) return false;
       seenKeys.add('CANAL_7_NEWS243');
       seenIds.add('ch_news234');
       seenIds.add(ch.id);
@@ -188,7 +275,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
 
     // 5. Strict single Canal 8: ONLY ONE ch_mcprod (MC PRO TV)
     if (ch.id === 'ch_mcprod' || upperNom === 'MC PRO TV' || upperNom === 'MC PROD TV' || upperNom === 'MC PRO' || upperNom === 'MC PROD' || chNum === '8') {
-      // 1000 chaines: filtre désactivé
+      if (seenKeys.has('CANAL_8_MCPRO') || seenIds.has('ch_mcprod')) return false;
       seenKeys.add('CANAL_8_MCPRO');
       seenIds.add('ch_mcprod');
       seenIds.add(ch.id);
@@ -200,7 +287,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
 
     // 6. Strict single CEM TV (Canal 93) - Flux Principal VPS 191.215.38.95
     if (ch.id === 'ch_93' || upperNom === 'CEM TV' || (chNum === '93' && upperNom.includes('CEM'))) {
-      // 1000 chaines: filtre désactivé
+      if (seenKeys.has('CANAL_93_CEM') || seenIds.has('ch_93')) return false;
       seenKeys.add('CANAL_93_CEM');
       seenIds.add('ch_93');
       seenIds.add(ch.id);
@@ -213,14 +300,15 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8';
       ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8';
       ch.rtmpKey = 'cle_cem_1m_lvt6';
-      ch.rtmpUrl = 'rtmp://191.215.38.95/live';      // secours YouTube supprimé
+      ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+      ch.youtubeBackup = 'https://www.youtube.com/watch?v=OwkjaS75qvA';
       ch.desc = 'CEM TV - Centre Évangélique Mahanaïm • Direct HLS VPS 191.215.38.95 (Flux Principal cle_cem_1m_lvt6)';
       return true;
     }
 
     // 7. Strict single MALAÏKA ACTU (Canal 92) - Flux Principal VPS www.tvpromedia.com
     if (ch.id === 'ch_92' || upperNom === 'MALAIKA ACTU' || upperNom === 'MALAÏKA ACTU' || (chNum === '92' && (upperNom.includes('MALAIKA') || upperNom.includes('MALAÏKA')))) {
-      // 1000 chaines: filtre désactivé
+      if (seenKeys.has('CANAL_92_MALAIKA') || seenIds.has('ch_92')) return false;
       seenKeys.add('CANAL_92_MALAIKA');
       seenIds.add('ch_92');
       seenIds.add(ch.id);
@@ -230,19 +318,20 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.nom = 'MALAÏKA ACTU';
       ch.ch = '92';
       ch.logo = MALAIKA_ACTU_LOGO;
-        ch.lien = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
-        ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
-        ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
-      ch.rtmpKey = 'cle_mala_ka_actu_3q6o5';
-      ch.rtmpUrl = 'rtmp://191.215.38.95/live';      // secours YouTube supprimé
-      ch.desc = "Malaika Actu Magazine";
+      ch.lien = 'https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8';
+      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8';
+      delete (ch as any).cloudRemix;
+      delete (ch as any).youtubeBackup;
+      ch.rtmpKey = 'cle_malaika_1m_p461';
+      ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+      ch.desc = "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS (cle_malaika_1m_p461)";
       ch.cat = 'NEWS';
       return true;
     }
 
     // 8. Strict CCPV TV (Canal 24 & Canal 23) - Flux Principal & Secours VPS www.tvpromedia.com
     if (ch.id === 'ch_24' || ch.id === '24' || chNum === '24' || upperNom.includes('13 CULTURA')) {
-      // 1000 chaines: filtre désactivé
+      if (seenKeys.has('CANAL_24_CCPV') || seenIds.has('ch_24')) return false;
       seenKeys.add('CANAL_24_CCPV');
       seenIds.add('ch_24');
       seenIds.add(ch.id);
@@ -251,13 +340,13 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.nom = 'CCPV TV MONTRÉAL';
       ch.ch = '24';
       ch.logo = CCPV_TV_LOGO;
-      ch.lien = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9';
-      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9';
-      ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9';
-      ch.rtmpKey = 'cle_ccpvtv_inf_mxg9';
-      ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+      ch.lien = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
+      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
+      delete (ch as any).cloudRemix;
       delete ch.youtubeBackup;
-      ch.desc = 'CCPV TV Montreal Canal 24';
+      ch.rtmpKey = 'cle_ccpvtv_inf_mxq';
+      ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+      ch.desc = 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com';
       ch.cat = 'RELIGIEUX';
       ch.pays = 'CANADA';
       ch.qualite = '4K';
@@ -289,7 +378,7 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
     ];
     if (bannedDuplicateIds.includes(ch.id)) return false;
 
-    // Unique stream check désactivé pour 1000 chaines
+    // Unique stream URL check (except tvpromedia multi-feed and berosat mstv)
     const stream = (ch.lien || ch.m3u8Source || '').trim().toLowerCase();
     if (stream && !stream.includes('tvpromedia.com/live/') && !stream.includes('191.215.38.95') && !stream.includes('mstv')) {
       if (seenStreams.has(stream)) return false;
@@ -332,6 +421,21 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState<ViewTab>('tout');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [continentActif, setContinentActif] = useState<string | null>(null);
+  const CONTINENTS_MAP: Record<string, string[]> = {
+    AFRIQUE: ["CD","CG","CI","CM","SN","ML","MA","DZ","TN","EG","NG","GH","ZA","AO","BJ","BF","GA","GN","KE","ET","RW","ZM","ZW","TG","NE","MR","LY","SD","SS","UG","TZ","BI","MW","MZ","BW","NA","SL","LR","GM","GW","CV","ST","KM","DJ","SO","ER","TD","CF","GQ","RE","MU","YT","RDC","CONGO","AFRIQUE","AFRICA","SENEGAL","MALI","CAMEROUN","COTE","IVOIRE","GABON","GUINEE"],
+    EUROPE: ["FR","BE","CH","DE","GB","UK","IT","ES","PT","NL","PL","TR","RU","UA","RO","GR","SE","NO","DK","FI","IE","AT","CZ","HU","BG","RS","HR","SI","SK","BA","AL","ME","MK","BY","MD","LT","LV","EE","LU","MT","CY","IS","FRANCE","EUROPE"],
+    AMERIQUE: ["US","USA","CA","MX","BR","AR","CO","PE","VE","CL","EC","BO","PY","UY","PA","CR","GT","HN","SV","NI","CU","DO","HT","JM","AMERIQUE","AMERICA"],
+    ASIE: ["CN","JP","KR","IN","PK","BD","ID","MY","SG","TH","VN","PH","KH","LA","MM","NP","LK","SA","AE","QA","KW","BH","OM","JO","LB","IL","IR","IQ","ASIE","ASIA"]
+  };
+  const getContinent = (ch: any): string => {
+    const txt = ((ch.pays||"")+" "+(ch.nom||"")+" "+(ch.categorie||"")).toUpperCase();
+    for (const [cont, mots] of Object.entries(CONTINENTS_MAP)) {
+      if (mots.some(m => txt.includes(m))) return cont;
+    }
+    return "AUTRES";
+  };
+
   const [sortBy, setSortBy] = useState<'alpha' | 'num'>('alpha');
   const [expandedCategories, setExpandedCategories] = useState<Record<string, number>>({});
 
@@ -371,36 +475,8 @@ export default function App() {
 
   // Initialize data on load
   useEffect(() => {
-    // 1. Core Catalog loading - ensure legacy bloated cache is purged for lightning fast loading
-    
-const isCustomOrBerosat = (ch:any)=>{
-  if(!ch) return false;
-  const lien=(ch.lien||'').toLowerCase();
-  const id=(ch.id||'').toLowerCase();
-  if(['ch_rtp','ch_congo','ch_rtvradio','ch_news234','ch_mcprod','ch_1','ch_3','ch_30','ch_31','ch_92','ch_93'].includes(id)) return true;
-  if(lien.includes('191.215.38.95')||lien.includes('tvpromedia.com/live')||lien.includes('cle_')) return true;
-  if(lien.includes('berosat')||lien.includes('19360')) return true;
-  return false;
-};
-const DOMAIN_MAP: Record<string, number> = {'europe':0,'satellite':1,'afrique':2,'amerique':3,'canada':4,'asia':5,'www':6,'tvpromedia.com':6};
-const getChannelsForHost = (all:any[]): any[]=>{
-  try{
-    const host=window.location.hostname.toLowerCase();
-    const sub=host.split('.')[0];
-    const idx = (DOMAIN_MAP as any)[sub]!==undefined? (DOMAIN_MAP as any)[sub] : 6;
-    // www = 1017 aussi (même logique que sous-domaines)
-    if(all.length>4000){ /* garde 1000 */ }
-    const customs=all.filter(isCustomOrBerosat);
-    const rest=all.filter((c:any)=>!isCustomOrBerosat(c));
-    const slice=rest.slice(idx*1000, idx*1000+1000);
-    const seen=new Set(); const out:any[]=[];
-    customs.forEach((c:any)=>{ if(!seen.has(c.id)){ seen.add(c.id); out.push(c); }});
-    slice.forEach((c:any)=>{ if(!seen.has(c.id)){ seen.add(c.id); out.push(c); }});
-    return out;
-  }catch{ return all; }
-};
-
-const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
+    // 1. Core Catalog loading - restore all 4,000+ channels from September 26, 2026 backup
+    const CATALOG_VERSION = 'v42_restore_4167_channels_sept26_2026';
     if (localStorage.getItem('chaines_tvpro_version') !== CATALOG_VERSION) {
       try {
         localStorage.removeItem('chaines_tvpro');
@@ -408,15 +484,14 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
       } catch {}
     }
 
-    let loadedChannels = DEFAULT_CHANNELS;
+    const fullRestoredList = (FULL_CHANNELS_SEPT26 && FULL_CHANNELS_SEPT26.length > 0 ? FULL_CHANNELS_SEPT26 : DEFAULT_CHANNELS) as Channel[];
+    let loadedChannels = fullRestoredList;
     const cachedCh = localStorage.getItem('chaines_tvpro');
     if (cachedCh) {
       try {
         let parsed: Channel[] = JSON.parse(cachedCh);
-        if (!Array.isArray(parsed) || parsed.length > 400) {
-          // If previous cache was bloated beyond catalog size, reset to DEFAULT_CHANNELS
-          parsed = DEFAULT_CHANNELS;
-          localStorage.setItem('chaines_tvpro', JSON.stringify(DEFAULT_CHANNELS));
+        if (Array.isArray(parsed) && parsed.length > 500) {
+          loadedChannels = parsed;
         }
         // Remove deleted / requested removed channels
         const REMOVED_CH_IDS = new Set([
@@ -517,17 +592,17 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
             }
           }
           if (ch.id === 'ch_rtp' || (ch.nom && ch.nom.trim().toUpperCase() === 'RTP') || (ch.ch === '4' && ch.id !== 'ch_rtvradio')) {
-            if (ch.nom !== 'RTP' || ch.logo !== RTP_TV_LOGO || ch.lien !== 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8' || ch.ch !== '4') {
+            if (ch.nom !== 'RTP' || ch.logo !== RTP_TV_LOGO || ch.lien !== 'https://stream.berosat.live:19360/rtp-hd/rtp-hd.m3u8' || ch.ch !== '4' || ch.youtubeBackup) {
               migrated = true;
               ch = {
                 ...ch,
                 id: 'ch_rtp',
                 nom: "RTP",
                 logo: RTP_TV_LOGO,
-                lien: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
-                m3u8Source: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
-                cloudRemix: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
-                youtubeBackup: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
+                lien: "https://stream.berosat.live:19360/rtp-hd/rtp-hd.m3u8",
+                m3u8Source: "https://stream.berosat.live:19360/rtp-hd/rtp-hd.m3u8",
+                cloudRemix: "https://stream.berosat.live:19360/rtp-hd/rtp-hd.m3u8",
+                youtubeBackup: "",
                 rtmpUrl: "rtmp://191.215.38.95/live",
                 rtmpKey: "cle_rtptv_1m_u4tx",
                 desc: "RTP - Radio Télévision Puissance • Direct HD HLS BeroSat (Flux Principal & Secours)",
@@ -611,32 +686,51 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
             }
           }
           if (ch.id === 'ch_1' || (ch.nom && (ch.nom.toUpperCase().includes('ESPOIR') || ch.nom.toUpperCase().includes('L\'ESPOIR')))) {
-            if (ch.logo !== ESPOIR_TV_LOGO || !ch.lien.includes('espoir-tv')) {
+            if (ch.logo !== ESPOIR_TV_LOGO || !ch.lien.includes('espoir-tv-stream')) {
               migrated = true;
               ch = { 
                 ...ch, 
                 nom: ch.nom || "ESPOIR  TV HD",
                 logo: ESPOIR_TV_LOGO, 
-                lien: "https://stream.berosat.live/hls/espoir-tv/espoir-tv.m3u8",
-                m3u8Source: "https://stream.berosat.live/hls/espoir-tv/espoir-tv.m3u8",
+                lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
+                m3u8Source: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
                 desc: "ESPOIR TV HD - Télévision d'information, culture et divertissement",
                 cat: "GENERALISTE"
               };
             }
           }
           if (ch.id === 'ch_2' || (ch.nom && ch.nom.toUpperCase().includes('AFRI TV'))) {
-            if (ch.logo !== AFRI_TV_LOGO || ch.lien !== 'https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8' || ch.m3u8Source !== 'https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8' || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=Tvh6RL0WnWI') {
+            if (ch.logo !== AFRI_TV_LOGO || ch.lien !== 'https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8' || ch.m3u8Source !== 'https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8') {
               migrated = true;
               ch = { 
                 ...ch, 
+                id: 'ch_2',
                 nom: "AFRI TV",
                 logo: AFRI_TV_LOGO,
-                lien: "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
-                m3u8Source: "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
-                youtubeBackup: "https://www.youtube.com/watch?v=Tvh6RL0WnWI",
-                desc: "AFRI TV - L'Afrique en direct, informations, culture et divertissement en continu • Direct HLS & Secours YouTube",
+                lien: "https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8",
+                m3u8Source: "https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8",
+                cloudRemix: "https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8",
+                youtubeBackup: "",
+                desc: "AFRI TV - L'Afrique en direct, informations, culture et divertissement en continu • Direct HD HLS BeroSat",
                 cat: "GENERALISTE",
-                ch: "2"
+                ch: "5"
+              };
+            }
+          }
+          if (ch.id === 'ch_ictv' || (ch.nom && (ch.nom.toUpperCase().includes('IC-TV') || ch.nom.toUpperCase().includes('ICTV')))) {
+            if (ch.logo !== IC_TV_LOGO || ch.lien !== 'https://stream.berosat.live:19360/ictv/ictv.m3u8') {
+              migrated = true;
+              ch = {
+                ...ch,
+                id: 'ch_ictv',
+                nom: "IC-TV",
+                logo: IC_TV_LOGO,
+                lien: "https://stream.berosat.live:19360/ictv/ictv.m3u8",
+                m3u8Source: "https://stream.berosat.live:19360/ictv/ictv.m3u8",
+                cloudRemix: "https://stream.berosat.live:19360/ictv/ictv.m3u8",
+                desc: "IC-TV - Information, Culture & Divertissement • Direct HD HLS BeroSat",
+                cat: "GENERALISTE",
+                ch: "9"
               };
             }
           }
@@ -657,7 +751,7 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
             }
           }
           if (ch.id === 'ch_24' || ch.id === '24' || ch.ch === '24' || (ch.nom && (ch.nom.toUpperCase().includes('13 CULTURA') || ch.nom.toUpperCase().includes('CULTURA')))) {
-            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9';
+            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
             migrated = true;
             const { youtubeBackup: _unused, ...rest } = ch;
             ch = { 
@@ -668,10 +762,9 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
               nom: 'CCPV TV MONTRÉAL',
               lien: targetCcpvStream,
               m3u8Source: targetCcpvStream,
-              cloudRemix: targetCcpvStream,
               rtmpUrl: 'rtmp://191.215.38.95/live',
-              rtmpKey: 'cle_ccpvtv_inf_mxg9',
-              desc: `CCPV TV Montreal Canal 24`,
+              rtmpKey: 'cle_ccpvtv_1m_9miq',
+              desc: `CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_1m_9miq sur www.tvpromedia.com`,
               cat: 'RELIGIEUX',
               pays: 'CANADA',
               qualite: '4K'
@@ -683,29 +776,27 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
               ch = { ...ch, logo: METEO_TV_LOGO };
             }
           }
-          if (ch.id === 'ch_28' || (ch.nom && ch.nom.toUpperCase().includes('BALADE'))) {
-            if (ch.logo !== BALADE_MONDE_LOGO || ch.lien !== 'https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8' || ch.m3u8Source !== 'https://stream.berosat.live:19360/live-tv/live-tv.m3u8' || ch.cloudRemix !== 'https://stream.berosat.live:19360/live-tv/live-tv.m3u8' || ch.nom === 'BALADE MONDE TV ') {
+          if (ch.id === 'ch_28' || (ch.nom && (ch.nom.toUpperCase().includes('BALADE') || ch.nom.toUpperCase().includes('BALADE MODE')))) {
+            const targetBaladeStream = 'https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8';
+            if (ch.logo !== BALADE_MONDE_LOGO || ch.lien !== targetBaladeStream || ch.m3u8Source !== targetBaladeStream || ch.rtmpKey !== 'cle_baladetv_inf_gx5l') {
               migrated = true;
               ch = { 
                 ...ch, 
+                id: 'ch_28',
                 nom: 'BALADE MONDE TV',
                 logo: BALADE_MONDE_LOGO,
-                lien: 'https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8',
-                m3u8Source: 'https://stream.berosat.live:19360/live-tv/live-tv.m3u8',
-                cloudRemix: 'https://stream.berosat.live:19360/live-tv/live-tv.m3u8',
-                desc: "Chaîne généraliste d'évasion, voyages et découvertes du monde. • Direct HLS & Secours",
+                lien: targetBaladeStream,
+                m3u8Source: targetBaladeStream,
+                cloudRemix: targetBaladeStream,
+                rtmpUrl: 'rtmp://191.215.38.95/live',
+                rtmpKey: 'cle_baladetv_inf_gx5l',
+                desc: "BALADE MONDE TV - Découverte, voyages et reportages internationaux en direct • Direct HLS VPS cle_baladetv_inf_gx5l sur www.tvpromedia.com",
                 cat: "GENERALISTE",
-                ch: "28"
+                ch: "28",
+                qualite: "4K",
+                pays: "RDC"
               };
             }
-          }
-          if (ch.id === 'ch_ic' || (ch.nom && ch.nom.toUpperCase().includes('IC TV'))) {
-            ch.nom = 'IC TV';
-            ch.lien = 'https://stream.berosat.live/hls/ic-tv/ic-tv.m3u8';
-            ch.m3u8Source = 'https://stream.berosat.live/hls/ic-tv/ic-tv.m3u8';
-            ch.cloudRemix = 'https://stream.berosat.live/hls/ic-tv/ic-tv.m3u8';
-            // secours YouTube supprimé
-            if(ch.youtubeBackup) delete ch.youtubeBackup;
           }
           if (ch.id === 'ch_31' || (ch.nom && ch.nom.toUpperCase() === 'MSTV')) {
             if (ch.logo !== MSTV_LOGO || ch.lien !== 'https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8' || ch.m3u8Source !== 'https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8') {
@@ -785,7 +876,7 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
             }
           }
           if (ch.id === 'ch_22' || (ch.nom && ch.nom.toUpperCase().includes('LA BORNE'))) {
-            if (ch.logo !== LA_BORNE_MPASA_LOGO || ch.lien.includes('espoir-tv') || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=-b9U6nKDZR0' || ch.lien !== 'https://www.youtube.com/watch?v=-b9U6nKDZR0') {
+            if (ch.logo !== LA_BORNE_MPASA_LOGO || ch.lien.includes('espoir-tv-stream') || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=-b9U6nKDZR0' || ch.lien !== 'https://www.youtube.com/watch?v=-b9U6nKDZR0') {
               migrated = true;
               ch = { 
                 ...ch, 
@@ -820,20 +911,25 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
               };
             }
           }
-          if (ch.id === 'ch_68' || ch.id === 'ch_70' || (ch.nom && ch.nom.toUpperCase().includes('UNE TELEVISION'))) {
-            if (ch.logo !== A_LA_UNE_TELEVISION_LOGO || ch.lien.includes('espoir-tv') || ch.youtubeBackup !== 'https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8' || ch.lien !== 'https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8') {
-              migrated = true;
-              ch = { 
-                ...ch, 
-                nom: "A LA UNE TELEVISION",
-                logo: A_LA_UNE_TELEVISION_LOGO,
-                lien: "https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8",
-                m3u8Source: "https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8",
-                youtubeBackup: "https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8",
-                desc: "A LA UNE TELEVISION - Actualités, informations et divertissement en continu",
-                cat: "GENERALISTE"
-              };
-            }
+          if (ch.id === 'ch_68' || ch.id === 'ch_70' || ch.ch === '68' || (ch.nom && (ch.nom.toUpperCase().includes('UNE TELEVISION') || ch.nom.toUpperCase().includes('A LA UNE')))) {
+            migrated = true;
+            ch = { 
+              ...ch, 
+              id: 'ch_68',
+              ch: '68',
+              nom: "A LA UNE TELEVISION",
+              logo: A_LA_UNE_TELEVISION_LOGO,
+              lien: "https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8",
+              m3u8Source: "https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8",
+              cloudRemix: "https://files.catbox.moe/0ssfyb.mp4",
+              youtubeBackup: "https://files.catbox.moe/0ssfyb.mp4",
+              desc: "A la une Music toujours en mouvement avec tonton Guez kuama avec invité Benjamin PENGE • Canal 68",
+              cat: "GENERALISTE",
+              rtmpKey: "cle_alaunetv_1m_r8vj",
+              rtmpUrl: "rtmp://191.215.38.95/live",
+              pays: "RDC",
+              qualite: "4K"
+            };
           }
           if (ch.id === 'ch_75' || (ch.nom && ch.nom.toUpperCase().includes('OCEAN TV'))) {
             if (ch.logo !== OCEAN_TV_LOGO) {
@@ -841,8 +937,8 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
               ch = { ...ch, logo: OCEAN_TV_LOGO };
             }
           }
-          if (ch.id === 'ch_24' || ch.id === '24' || ch.ch === '24' || (ch.nom && (ch.nom.toUpperCase().includes('13 CULTURA') || ch.nom.toUpperCase().includes('CULTURA')))) {
-            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9';
+          if (ch.id === 'ch_24' || ch.id === '24' || ch.ch === '24' || (ch.nom && (ch.nom.toUpperCase().includes('CCPV') || ch.nom.toUpperCase().includes('13 CULTURA') || ch.nom.toUpperCase().includes('CULTURA')))) {
+            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
             migrated = true;
             const { youtubeBackup: _unused, ...rest } = ch;
             ch = { 
@@ -852,14 +948,13 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
               nom: "CCPV TV MONTRÉAL", 
               lien: targetCcpvStream, 
               m3u8Source: targetCcpvStream,
-              cloudRemix: targetCcpvStream,
               rtmpUrl: 'rtmp://191.215.38.95/live',
-              rtmpKey: 'cle_ccpvtv_inf_mxg9',
+              rtmpKey: 'cle_ccpvtv_inf_mxq',
               logo: CCPV_TV_LOGO, 
               cat: 'RELIGIEUX', 
               pays: 'CANADA',
               qualite: '4K',
-              desc: 'CCPV TV Montreal Canal 24',
+              desc: 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com'
             };
           }
           if (ch.id === 'ch_66' || (ch.nom && ch.nom.toUpperCase().includes('HORIZON 2000'))) {
@@ -952,22 +1047,70 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
             }
           }
           if (ch.id === 'ch_rtp' || (ch.nom && ch.nom.trim().toUpperCase() === 'RTP')) {
-            if (ch.lien !== 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8') {
+            if (ch.lien !== 'https://www.tvpromedia.com/live/rtp-hd.m3u8') {
               migrated = true;
               ch = {
                 ...ch,
                 nom: "RTP",
                 logo: RTP_TV_LOGO,
-                lien: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
-                m3u8Source: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
-                cloudRemix: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
-                youtubeBackup: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
+                lien: "https://www.tvpromedia.com/live/rtp-hd.m3u8",
+                m3u8Source: "https://www.tvpromedia.com/live/rtp-hd.m3u8",
+                cloudRemix: "https://www.tvpromedia.com/live/rtp-hd.m3u8",
+                youtubeBackup: "",
                 rtmpUrl: "rtmp://191.215.38.95/live",
                 rtmpKey: "cle_rtptv_1m_u4tx",
-                desc: "RTP - Radio Télévision Puissance • Direct HD HLS BeroSat (Flux Principal & Secours)",
+                desc: "RTP - Radio Télévision Puissance • Direct HD HLS (Flux Principal & Secours)",
                 qualite: "HD",
                 cat: "GENERALISTE",
                 ch: "4"
+              };
+            }
+          }
+          if (ch.id === 'ch_1' || (ch.nom && (ch.nom.trim().toUpperCase() === 'ESPOIR TV HD' || ch.nom.trim().toUpperCase() === 'ESPOIR TV'))) {
+            if (ch.lien !== 'https://www.tvpromedia.com/live/espoir-tv-stream.m3u8') {
+              migrated = true;
+              ch = {
+                ...ch,
+                nom: "ESPOIR TV HD",
+                logo: ESPOIR_TV_LOGO,
+                lien: "https://www.tvpromedia.com/live/espoir-tv-stream.m3u8",
+                m3u8Source: "https://www.tvpromedia.com/live/espoir-tv-stream.m3u8",
+                cloudRemix: "https://www.tvpromedia.com/live/espoir-tv-stream.m3u8",
+                qualite: "HD",
+                cat: "GENERALISTE",
+                ch: "1"
+              };
+            }
+          }
+          if (ch.id === 'ch_2' || (ch.nom && (ch.nom.trim().toUpperCase() === 'AFRI TV' || ch.nom.trim().toUpperCase() === 'AFRI'))) {
+            if (ch.lien !== 'https://www.tvpromedia.com/live/afri-tv.m3u8') {
+              migrated = true;
+              ch = {
+                ...ch,
+                nom: "AFRI TV",
+                logo: AFRI_TV_LOGO,
+                lien: "https://www.tvpromedia.com/live/afri-tv.m3u8",
+                m3u8Source: "https://www.tvpromedia.com/live/afri-tv.m3u8",
+                cloudRemix: "https://www.tvpromedia.com/live/afri-tv.m3u8",
+                qualite: "HD",
+                cat: "GENERALISTE",
+                ch: "5"
+              };
+            }
+          }
+          if (ch.id === 'ch_ictv' || (ch.nom && (ch.nom.trim().toUpperCase() === 'IC-TV' || ch.nom.trim().toUpperCase() === 'ICTV'))) {
+            if (ch.lien !== 'https://www.tvpromedia.com/live/ictv.m3u8') {
+              migrated = true;
+              ch = {
+                ...ch,
+                nom: "IC-TV",
+                logo: IC_TV_LOGO,
+                lien: "https://www.tvpromedia.com/live/ictv.m3u8",
+                m3u8Source: "https://www.tvpromedia.com/live/ictv.m3u8",
+                cloudRemix: "https://www.tvpromedia.com/live/ictv.m3u8",
+                qualite: "HD",
+                cat: "GENERALISTE",
+                ch: "9"
               };
             }
           }
@@ -992,8 +1135,9 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
             }
           }
           if (ch.id === 'ch_92' || (ch.nom && (ch.nom.toUpperCase().includes('MALAIKA') || ch.nom.toUpperCase().includes('MALAÏKA')))) {
-            const targetMalaikaStream = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
-            if (ch.nom !== "MALAÏKA ACTU" || ch.logo !== MALAIKA_ACTU_LOGO || ch.lien !== targetMalaikaStream || ch.m3u8Source !== targetMalaikaStream || ch.rtmpKey !== 'cle_mala_ka_actu_3q6o5') {
+            const targetMalaikaStream = 'https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8';
+            const backupMalaikaStream = 'https://tvpromedia.com/live/cle_malaika_1m_p461.m3u8';
+            if (ch.nom !== "MALAÏKA ACTU" || ch.logo !== MALAIKA_ACTU_LOGO || ch.lien !== targetMalaikaStream || ch.m3u8Source !== backupMalaikaStream || ch.rtmpKey !== 'cle_malaika_1m_p461') {
               migrated = true;
               ch = { 
                 ...ch, 
@@ -1002,16 +1146,16 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
                 nom: "MALAÏKA ACTU",
                 logo: MALAIKA_ACTU_LOGO, 
                 lien: targetMalaikaStream,
-                m3u8Source: targetMalaikaStream,
-                cloudRemix: targetMalaikaStream,
+                m3u8Source: backupMalaikaStream,
                 rtmpUrl: "rtmp://191.215.38.95/live",
-                rtmpKey: "cle_mala_ka_actu_3q6o5",
-                desc: "Malaika Actu Magazine",
-                youtubeBackup: "https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8",
+                rtmpKey: "cle_malaika_1m_p461",
+                desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS (cle_malaika_1m_p461)",
                 cat: "NEWS",
                 pays: "RDC",
                 qualite: "4K"
               };
+              delete (ch as any).cloudRemix;
+              delete (ch as any).youtubeBackup;
             }
           }
           if (ch.id === 'ch_3' || (ch.nom && ch.nom.toUpperCase().includes('ESPEC'))) {
@@ -1044,7 +1188,7 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
                 cloudRemix: targetCemStream,
                 rtmpUrl: "rtmp://191.215.38.95/live",
                 rtmpKey: "cle_cem_1m_lvt6",
-                youtubeBackup: "https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8",
+                youtubeBackup: "https://www.youtube.com/watch?v=OwkjaS75qvA",
                 desc: "CEM TV - Centre Évangélique Mahanaïm • Direct HLS VPS 191.215.38.95 (Flux Principal cle_cem_1m_lvt6)",
                 cat: "RELIGIEUX",
                 ch: "93",
@@ -1299,7 +1443,7 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
             }
           }
           if (ch.id === 'ch_99' || (ch.nom && (ch.nom.toUpperCase().includes('SN TV') || ch.nom.toUpperCase().includes('SNL KINGO') || ch.nom.toUpperCase().includes('SNL KONGO')))) {
-            if (ch.nom !== "SNL KONGO TV" || ch.lien.includes('espoir-tv') || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=_V573y2j2To' || ch.lien !== 'https://www.youtube.com/watch?v=_V573y2j2To') {
+            if (ch.nom !== "SNL KONGO TV" || ch.lien.includes('espoir-tv-stream') || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=_V573y2j2To' || ch.lien !== 'https://www.youtube.com/watch?v=_V573y2j2To') {
               migrated = true;
               ch = { 
                 ...ch, 
@@ -1364,7 +1508,7 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
         }
 
         // Ensure key VPS principal channels are present and synchronized
-        const requiredIds = ['ch_rtp', 'ch_congo', 'ch_rtvradio', 'ch_news234', 'ch_mcprod', 'ch_30', 'ch_24', 'ch_92', 'ch_93'];
+        const requiredIds = ['ch_rtp', 'ch_congo', 'ch_rtvradio', 'ch_news234', 'ch_mcprod', 'ch_30', 'ch_24', 'ch_92', 'ch_93', 'ch_ictv', 'ch_2', 'ch_1'];
         requiredIds.forEach(reqId => {
           if (!parsed.some(c => c.id === reqId)) {
             const foundDef = DEFAULT_CHANNELS.find(c => c.id === reqId);
@@ -1377,27 +1521,26 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
 
         // Absolute guarantee that Canal 24 (CCPV TV MONTRÉAL) is present with the correct stream & name
         const idx24 = parsed.findIndex(c => c.id === 'ch_24' || c.ch === '24');
-        const ccpv24Stream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxg9';
+        const ccpv24Stream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
         if (idx24 === -1) {
           parsed.push({
             id: 'ch_24',
             nom: 'CCPV TV MONTRÉAL',
             lien: ccpv24Stream,
             m3u8Source: ccpv24Stream,
-            cloudRemix: ccpv24Stream,
             rtmpUrl: 'rtmp://191.215.38.95/live',
-            rtmpKey: 'cle_ccpvtv_inf_mxg9',
+            rtmpKey: 'cle_ccpvtv_inf_mxq',
             logo: CCPV_TV_LOGO,
             cat: 'RELIGIEUX',
             ch: '24',
             qualite: '4K',
             pays: 'CANADA',
-            desc: 'CCPV TV Montreal Canal 24',
+            desc: 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com'
           });
           migrated = true;
         } else {
           const current24 = parsed[idx24];
-          if (current24.nom !== 'CCPV TV MONTRÉAL' || current24.id !== 'ch_24' || current24.ch !== '24' || current24.lien !== ccpv24Stream || current24.logo !== CCPV_TV_LOGO) {
+          if (current24.nom !== 'CCPV TV MONTRÉAL' || current24.id !== 'ch_24' || current24.ch !== '24' || current24.lien !== ccpv24Stream || current24.logo !== CCPV_TV_LOGO || current24.rtmpKey !== 'cle_ccpvtv_inf_mxq') {
             parsed[idx24] = {
               ...current24,
               id: 'ch_24',
@@ -1405,14 +1548,13 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
               nom: 'CCPV TV MONTRÉAL',
               lien: ccpv24Stream,
               m3u8Source: ccpv24Stream,
-              cloudRemix: ccpv24Stream,
               rtmpUrl: 'rtmp://191.215.38.95/live',
-              rtmpKey: 'cle_ccpvtv_inf_mxg9',
+              rtmpKey: 'cle_ccpvtv_inf_mxq',
               logo: CCPV_TV_LOGO,
               cat: 'RELIGIEUX',
               pays: 'CANADA',
               qualite: '4K',
-              desc: 'CCPV TV Montreal Canal 24',
+              desc: 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com'
             };
             migrated = true;
           }
@@ -1449,12 +1591,14 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
         loadedChannels = parsed;
         setChannels(loadedChannels);
       } catch (err) {
-        setChannels(DEFAULT_CHANNELS);
-        localStorage.setItem('chaines_tvpro', JSON.stringify(DEFAULT_CHANNELS));
+        setChannels(fullRestoredList);
+        localStorage.setItem('chaines_tvpro', JSON.stringify(fullRestoredList));
       }
     } else {
-      setChannels(DEFAULT_CHANNELS);
-      localStorage.setItem('chaines_tvpro', JSON.stringify(DEFAULT_CHANNELS));
+      setChannels(fullRestoredList);
+      try {
+        localStorage.setItem('chaines_tvpro', JSON.stringify(fullRestoredList));
+      } catch {}
     }
 
     // Background automatic catalog synchronization from /channels.json and /api/channels with cache buster
@@ -1483,6 +1627,12 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
 
         if (Array.isArray(serverList) && serverList.length > 0) {
           const cleanCatalog = deduplicateChannels(serverList);
+          cleanCatalog.sort((a, b) => {
+            const numA = parseInt(a.ch || '999', 10);
+            const numB = parseInt(b.ch || '999', 10);
+            if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+            return 0;
+          });
           setChannels(cleanCatalog);
           try {
             localStorage.setItem('chaines_tvpro', JSON.stringify(cleanCatalog));
@@ -1816,9 +1966,53 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
       .trim();
   };
 
+  // Multi-domaine : distribution 1000 chaînes + customs par domaine (europe, satellite, afrique, amerique, canada, asia, www)
+  const getChannelsForHost = (all: Channel[]): Channel[] => {
+    if (typeof window === 'undefined') return all;
+    if (all.length <= 150) return all;
+    const hostname = window.location.hostname.toLowerCase();
+    if (!hostname.includes('tvpromedia.com')) return all;
+
+    const domains = ['europe', 'satellite', 'afrique', 'amerique', 'canada', 'asia', 'www'];
+    let idx = domains.findIndex(d => hostname.startsWith(d));
+    if (idx === -1) {
+      if (hostname.includes('www') || hostname === 'tvpromedia.com') {
+        idx = 6;
+      }
+    }
+    if (idx === -1) return all;
+
+    // www = 1017 aussi (même logique que sous-domaines)
+    // if(idx===6) return all; // désactivé - www = 1017
+
+    const customs = all.filter(c => {
+      const s = (JSON.stringify(c) || '').toLowerCase();
+      return s.includes('berosat') || s.includes('tvpromedia.com/live');
+    });
+    const rest = all.filter(c => {
+      const s = (JSON.stringify(c) || '').toLowerCase();
+      return !s.includes('berosat') && !s.includes('tvpromedia.com/live');
+    });
+
+    const start = (idx % 7) * 1000;
+    const pos = rest.length ? start % rest.length : 0;
+    const slice = rest.slice(pos, pos + 1000);
+    if (slice.length < 1000 && rest.length > 1000) {
+      slice.push(...rest.slice(0, 1000 - slice.length));
+    }
+    return [...customs, ...slice];
+  };
+
+  const hostChannels = useMemo(() => {
+    return getChannelsForHost(channels);
+  }, [channels]);
+
   const filteredChannels = useMemo(() => {
     const searchFilterLower = normalizeText(searchQuery);
-    return channels.filter(ch => {
+    // When searching, allow searching across entire catalog, otherwise display partitioned host slice
+    const sourceList = searchQuery.trim() ? channels : hostChannels;
+    return sourceList.filter(ch => {
+      if (continentActif && getContinent(ch) !== continentActif) return false;
       // 1. Search Query filter
       const nameNormalized = normalizeText(ch.nom);
       const catNormalized = normalizeText(ch.cat || '');
@@ -1839,7 +2033,7 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
 
       return matchesKeyword && matchesTab && matchesCategory;
     });
-  }, [channels, searchQuery, activeTab, favorites, selectedCategory]);
+  }, [channels, hostChannels, searchQuery, activeTab, favorites, selectedCategory]);
 
   // Group filtered channels by their category with memoization
   const channelsByCategory = useMemo(() => {
@@ -1921,11 +2115,11 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
 
       {/* HEADER SECTION */}
       <header className="sticky top-0 bg-[#0f1424]/90 backdrop-blur-md border-b border-white/[0.06] py-3.5 px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-4 z-50 shadow-xl" id="global-header-layout">
-        <div className="flex items-center justify-between w-full md:w-auto">
+        <div className="flex items-center justify-between w-full md:w-auto gap-3">
           {/* Logo with 3-click target handler */}
           <div 
             onClick={handleLogoClick}
-            className="flex items-center gap-2 select-none cursor-pointer group active:scale-[0.98] transition-all"
+            className="flex items-center gap-2 select-none cursor-pointer group active:scale-[0.98] transition-all shrink-0"
             title="Cliquez 3 fois pour débloquer l'accès Admin"
             id="logo"
           >
@@ -1973,7 +2167,7 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
         </div>
 
         {/* Search Engine element */}
-        <div className="relative w-full md:max-w-md" id="search-bar-box">
+        <div className="relative w-full md:max-w-xs xl:max-w-md" id="search-bar-box">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-4.5 h-4.5" />
           <input
             type="text"
@@ -2110,7 +2304,7 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
         id="now"
       >
         {activeChannel ? (
-          <div className="flex flex-wrap items-center justify-center gap-3 text-red-500">
+          <div className="flex flex-wrap items-center justify-between w-full max-w-7xl mx-auto gap-3 text-red-500">
             <div className="flex items-center gap-2.5">
               <span className="h-2 w-2 rounded-full bg-red-600 relative inline-block shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
@@ -2132,8 +2326,11 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
                 <span>🌐 tvpromedia.com</span>
               </div>
             </div>
-            
-            <div className="flex items-center gap-2 shrink-0">
+
+            {/* Menu d'actions (Copier le lien, WhatsApp, Capture d'écran) & Date / Heure en temps réel */}
+            <div className="flex items-center gap-2 shrink-0 flex-wrap">
+              <BroadcastClock className="text-xs py-1 px-2.5 shadow-md shrink-0" compactOnMobile={false} />
+
               <button
                 onClick={() => handleShareChannel(activeChannel)}
                 className="inline-flex items-center gap-1.5 text-[11px] font-bold text-gray-300 hover:text-white px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 border border-white/5 transition-all focus:outline-none"
@@ -2167,11 +2364,30 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
             </div>
           </div>
         ) : (
-          <div className="flex items-center gap-2 text-gray-400">
-            <Info className="w-4 h-4 text-gray-500" />
-            <span>Sélectionnez une chaîne ci-dessous dans la grille pour lancer lecriture du flux</span>
+          <div className="flex items-center justify-between w-full max-w-7xl mx-auto flex-wrap gap-2 text-gray-400">
+            <div className="flex items-center gap-2">
+              <Info className="w-4 h-4 text-gray-500" />
+              <span>Sélectionnez une chaîne ci-dessous dans la grille pour lancer le flux</span>
+            </div>
+            <BroadcastClock className="text-xs py-1 px-2.5 shadow-md shrink-0" compactOnMobile={false} />
           </div>
         )}
+      </div>
+
+      {/* ===== FILTRES CONTINENTS ===== */}
+      <div className="w-full bg-gradient-to-r from-[#0a1931] via-[#102a5c] to-[#0a1931] border-y-2 border-yellow-500/30 py-3 px-2 flex flex-wrap gap-2 justify-center items-center sticky top-[64px] z-20 shadow-xl">
+        <span className="text-yellow-400 font-black text-xs mr-1">🌍 CONTINENT:</span>
+        {[
+          { id:'AFRIQUE', label:'🌍 AFRIQUE', grad:'from-green-600 to-yellow-500' },
+          { id:'EUROPE', label:'🌐 EUROPE', grad:'from-blue-600 to-blue-300' },
+          { id:'AMERIQUE', label:'🌎 AMERIQUE', grad:'from-red-600 to-blue-600' },
+          { id:'ASIE', label:'🌏 ASIE', grad:'from-red-600 to-yellow-400' },
+        ].map(b=>{
+          const cnt = channels.filter((c:any)=>{ const t=((c.pays||'')+' '+(c.nom||'')).toUpperCase(); return (CONTINENTS_MAP as any)[b.id].some((m:string)=>t.includes(m)); }).length;
+          const active = continentActif===b.id;
+          return <button key={b.id} onClick={()=>setContinentActif(active?null:b.id)} className={`px-5 py-2 rounded-full font-black text-xs md:text-sm transition-all hover:scale-110 ${active?`bg-gradient-to-r ${b.grad} text-white ring-2 ring-white scale-110`:'bg-white/10 text-white border border-white/20 hover:bg-white/20'}`}>{b.label} <span className="bg-black/30 px-2 rounded-full ml-1">{cnt}</span></button>
+        })}
+        {continentActif && <button onClick={()=>setContinentActif(null)} className="px-4 py-2 rounded-full bg-red-600 text-white font-bold text-xs">✕ TOUT ({channels.length})</button>}
       </div>
 
       {/* SPONSOR & ADVERTISING WEEKLY CTA BANNER */}
@@ -2514,7 +2730,7 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
                 <div className="flex flex-wrap gap-2 pt-1">
                   <a 
                     href="#" 
-                    onClick={(e) => { e.preventDefault(); alert("Téléchargement de l'APK Android TV PRO bientôt disponible boss !"); }}
+                    onClick={(e) => { e.preventDefault(); window.location.href = "/apk/TV-PRO-MEDIA.apk"; }}
                     className="flex items-center gap-2 px-3 py-1.5 bg-[#0a0f1d] border border-[#ffffff]/10 hover:border-red-650 rounded-lg text-left transition-all scale-95 origin-left hover:scale-100 group"
                     title="Télécharger l'APK sur le Play Store"
                   >
@@ -2531,7 +2747,7 @@ const CATALOG_VERSION = 'v17_1000_channels_berosat_fixed';
                   </a>
                   <a 
                     href="#" 
-                    onClick={(e) => { e.preventDefault(); alert("Téléchargement direct du fichier APK TV PRO bientôt disponible boss !"); }}
+                    onClick={(e) => { e.preventDefault(); window.location.href = "/apk/TV-PRO-MEDIA.apk"; }}
                     className="flex items-center gap-2 px-3 py-1.5 bg-[#0a0f1d] border border-white/10 hover:border-red-600 rounded-lg text-left transition-all scale-95 origin-left hover:scale-100 group"
                     title="Lien direct pour télécharger le APK"
                   >

@@ -32,7 +32,7 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
-  // Global CORS Middleware (enables TV apps, VLC, web players on all domains: tvpromedia.com, www.tvpromedia.com, 191.215.38.95)
+  // Global CORS Middleware (enables TV apps, VLC, web players on all domains: tvpromedia.com, www.tvpromedia.com, www.europe.tvpromedia.com)
   app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -98,6 +98,26 @@ async function startServer() {
     }
   });
 
+  // API Route: Download pre-built production dist folder as ZIP for ultra-fast VPS sync
+  app.get('/api/download-dist', (req, res) => {
+    try {
+      const distDir = path.join(process.cwd(), 'dist');
+      if (!fs.existsSync(distDir)) {
+        return res.status(404).send('Dossier dist non trouvé.');
+      }
+      const zip = new AdmZip();
+      zip.addLocalFolder(distDir);
+      const zipBuffer = zip.toBuffer();
+      res.setHeader('Content-Type', 'application/zip');
+      res.setHeader('Content-Disposition', 'attachment; filename="tvpro_dist.zip"');
+      res.setHeader('Content-Length', zipBuffer.length);
+      res.send(zipBuffer);
+    } catch (err: any) {
+      console.error('Dist ZIP error:', err);
+      res.status(500).json({ error: err.message });
+    }
+  });
+
   // API Healthcheck
   app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', serverTime: new Date().toISOString() });
@@ -124,6 +144,30 @@ async function startServer() {
 
       const urlObj = new URL(targetUrl);
       const baseUrl = targetUrl.substring(0, targetUrl.lastIndexOf('/') + 1);
+
+      // ANTI-LOOP & ANTI-OVERLOAD PROTECTION: Prevent self-referencing recursive proxy loops
+      const hostLower = urlObj.hostname.toLowerCase();
+      const isRunningOnVps = fs.existsSync('/var/www/tvpromedia');
+      
+      // Only check local disk if actually running on VPS host itself
+      if (isRunningOnVps && (hostLower === 'localhost' || hostLower === '127.0.0.1')) {
+        const streamFile = path.basename(urlObj.pathname);
+        const localCandidates = [
+          path.join('/var/www/hls/live', streamFile),
+          path.join('/var/www/hls', streamFile),
+          path.join(process.cwd(), 'hls', 'live', streamFile),
+          path.join(process.cwd(), 'hls', streamFile),
+          path.join(process.cwd(), 'public', 'live', streamFile)
+        ];
+        for (const lp of localCandidates) {
+          if (fs.existsSync(lp)) {
+            res.setHeader('Content-Type', streamFile.endsWith('.m3u8') ? 'application/vnd.apple.mpegurl; charset=utf-8' : 'video/mp2t');
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+            return res.sendFile(lp);
+          }
+        }
+      }
 
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000);
@@ -255,8 +299,14 @@ async function startServer() {
         res.setHeader('Content-Type', outContentType);
         res.setHeader('Accept-Ranges', 'bytes');
         res.setHeader('Cache-Control', 'public, max-age=3600');
-        const arrayBuffer = await response.arrayBuffer();
-        res.status(response.status).send(Buffer.from(arrayBuffer));
+        if (response.body) {
+          const { Readable } = await import('stream');
+          // @ts-ignore
+          Readable.fromWeb(response.body).pipe(res);
+        } else {
+          const arrayBuffer = await response.arrayBuffer();
+          res.status(response.status).send(Buffer.from(arrayBuffer));
+        }
       }
     } catch (err: any) {
       console.error('Error proxying stream:', err.message);
@@ -276,10 +326,33 @@ async function startServer() {
     const possiblePaths = [
       path.join('/var/www/hls/live', filename),
       path.join('/var/www/hls', filename),
+      path.join('/var/www/hls/star_15min', filename),
       path.join(process.cwd(), 'hls', 'live', filename),
       path.join(process.cwd(), 'hls', filename),
+      path.join(process.cwd(), 'hls', 'star_15min', filename),
       path.join(process.cwd(), 'public', 'live', filename)
     ];
+
+    // Dedicated rewrite for cle_star_1m_ay2q.m3u8 so relative TS segments point to /hls/star_15min/
+    if (filename.includes('ay2q') || filename.includes('cle_star_1m_ay2q')) {
+      const starCandidates = [
+        path.join('/var/www/hls/star_15min', 'index.m3u8'),
+        path.join('/var/www/hls', 'cle_star_1m_ay2q.m3u8'),
+        path.join(process.cwd(), 'hls', 'star_15min', 'index.m3u8')
+      ];
+      for (const p of starCandidates) {
+        if (fs.existsSync(p)) {
+          let content = fs.readFileSync(p, 'utf-8');
+          content = content.replace(/(^|\n)(seg_[0-9]+\.ts)/g, '$1/hls/star_15min/$2');
+          res.setHeader('Content-Type', 'application/vnd.apple.mpegurl; charset=utf-8');
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS, HEAD');
+          res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+          return res.send(content);
+        }
+      }
+      return res.redirect('https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8');
+    }
 
     for (const p of possiblePaths) {
       if (fs.existsSync(p)) {
@@ -302,35 +375,149 @@ async function startServer() {
       }
     }
 
-    // If not found locally, proxy to VPS HLS stream on 8080
-    const queryStr = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
-    const fallbackTarget = `http://191.215.38.95:8080/live/${filename}${queryStr}`;
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent(fallbackTarget)}`);
+    // Dedicated routing for RTP HD BeroSat
+    if (filename.includes('rtp') || filename.includes('cle_rtptv')) {
+      return res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live:19360/rtp-hd/rtp-hd.m3u8')}`);
+    }
+
+    // Dedicated routing for AFRI TV BeroSat
+    if (filename.includes('afri') || filename.includes('cle_afritv')) {
+      return res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8')}`);
+    }
+
+    // Dedicated routing for IC-TV BeroSat
+    if (filename.includes('ictv') || filename.includes('ic-tv')) {
+      return res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live:19360/ictv/ictv.m3u8')}`);
+    }
+
+    // Dedicated routing for ESPOIR TV HD BeroSat
+    if (filename.includes('espoir') || filename.includes('cle_espoir')) {
+      return res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8')}`);
+    }
+
+    // If Stars Brazzaville stream is requested via /live/, route to cle_star_1m_ay2q.m3u8 secours
+    if (filename.includes('star') || filename.includes('cle_star')) {
+      return res.redirect('https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8');
+    }
+
+    // Auto-alias for CCPV TV Montréal: legacy keys -> cle_ccpvtv_inf_mxq (flux actif)
+    if (filename.includes('cle_ccpvtv_inf_mxg') || filename.includes('cle_ccpvtv_1m_9miq')) {
+      return res.redirect('/live/cle_ccpvtv_inf_mxq.m3u8');
+    }
+
+    // Auto-alias for Malaïka Actu: legacy keys -> cle_malaika_1m_p461 (flux actif)
+    if (filename.includes('cle_mala_ka_actu_3q6o5') || filename.includes('cle_malaika_1m_vllq') || filename.includes('cle_mala_ka_actu_3q6o')) {
+      return res.redirect('/live/cle_malaika_1m_p461.m3u8');
+    }
+
+    // For MALAIKA ACTU, CCPTV / CCPV and local live broadcasts:
+    // If not on disk, check local SRS port 8080 directly without redirect loop!
+    try {
+      const srsUrl = `http://127.0.0.1:8080/live/${filename}`;
+      const ctrl = new AbortController();
+      const tid = setTimeout(() => ctrl.abort(), 2000);
+      const srsRes = await fetch(srsUrl, { signal: ctrl.signal }).catch(() => null);
+      clearTimeout(tid);
+      if (srsRes && srsRes.ok) {
+        const srsContentType = srsRes.headers.get('content-type') || (filename.endsWith('.m3u8') ? 'application/vnd.apple.mpegurl; charset=utf-8' : 'video/mp2t');
+        res.setHeader('Content-Type', srsContentType);
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS, HEAD');
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        if (filename.endsWith('.m3u8')) {
+          const body = await srsRes.text();
+          return res.send(body);
+        } else if (srsRes.body) {
+          const { Readable } = await import('stream');
+          // @ts-ignore
+          return Readable.fromWeb(srsRes.body).pipe(res);
+        }
+      }
+    } catch (e) {
+      // Ignore SRS lookup error
+    }
+
+    // Never redirect to self or create proxy loops: return 404 cleanly with no-cache
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS, HEAD');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    return res.status(404).send('Flux en direct en attente du signal de diffusion RTMP par la régie.');
+  });
+
+  // Dedicated /hls static & proxy handler (serves /var/www/hls, public/hls, or redirects to live star_15min)
+  app.use('/hls', (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS, HEAD');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    if (req.method === 'OPTIONS') return res.sendStatus(204);
+
+    const subPath = req.path.replace(/^\//, '');
+    const possibleHlsPaths = [
+      path.join('/var/www/hls', subPath),
+      path.join(process.cwd(), 'hls', subPath),
+      path.join(process.cwd(), 'public', 'hls', subPath)
+    ];
+
+    for (const p of possibleHlsPaths) {
+      if (fs.existsSync(p) && fs.statSync(p).isFile()) {
+        const ext = path.extname(p).toLowerCase();
+        if (ext === '.m3u8') {
+          res.setHeader('Content-Type', 'application/vnd.apple.mpegurl; charset=utf-8');
+          res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        } else if (ext === '.ts') {
+          res.setHeader('Content-Type', 'video/mp2t');
+          res.setHeader('Cache-Control', 'public, max-age=86400');
+        } else if (ext === '.mp4') {
+          res.setHeader('Content-Type', 'video/mp4');
+        }
+        return res.sendFile(p);
+      }
+    }
+
+    const fallbackHls = `https://tvpromedia.com/hls/${subPath}`;
+    return res.redirect(`/api/proxy-stream?url=${encodeURIComponent(fallbackHls)}`);
+  });
+
+  // Dedicated Stars Brazzaville by Africa HLS endpoint
+  app.get(['/api/live/stars.m3u8', '/api/live/starsbrazza.m3u8', '/api/live/cle_star_1m_nmo2.m3u8'], (req, res) => {
+    res.redirect('https://tvpromedia.com/hls/star_15min/index.m3u8');
   });
 
   // Dedicated VPS & Relay Stream Endpoints
-  app.get(['/api/live/rtp.m3u8', '/api/live/rtptv.m3u8', '/api/live/rtp_secours.m3u8', '/api/live/rtp_backup.m3u8'], (req, res) => {
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8')}`);
+  app.get(['/api/live/rtp.m3u8', '/api/live/rtptv.m3u8', '/api/live/rtp_secours.m3u8', '/api/live/rtp_backup.m3u8', '/api/live/rtp-hd.m3u8', '/api/live/rtphd.m3u8'], (req, res) => {
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live:19360/rtp-hd/rtp-hd.m3u8')}`);
   });
 
   app.get('/api/live/rtp_aac.m3u8', (req, res) => {
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8')}`);
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live:19360/rtp-hd/rtp-hd.m3u8')}`);
+  });
+
+  app.get(['/api/live/afri.m3u8', '/api/live/afritv.m3u8', '/api/live/afri-tv.m3u8'], (req, res) => {
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8')}`);
+  });
+
+  app.get(['/api/live/ictv.m3u8', '/api/live/ic-tv.m3u8'], (req, res) => {
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live:19360/ictv/ictv.m3u8')}`);
+  });
+
+  app.get(['/api/live/espoir.m3u8', '/api/live/espoirtv.m3u8', '/api/live/espoir-tv.m3u8'], (req, res) => {
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8')}`);
   });
 
   app.get('/api/live/congo.m3u8', (req, res) => {
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_congo_1m_cl0b.m3u8')}`);
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://www.europe.tvpromedia.com/live/cle_congo_1m_cl0b.m3u8')}`);
   });
 
   app.get(['/api/live/rtpradio.m3u8', '/api/live/rtvradio.m3u8'], (req, res) => {
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_rtvradio_1m_xxmm.m3u8')}`);
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://www.europe.tvpromedia.com/live/cle_rtvradio_1m_xxmm.m3u8')}`);
   });
 
   app.get('/api/live/news243.m3u8', (req, res) => {
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_news234_1m_jgx9.m3u8')}`);
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://www.europe.tvpromedia.com/live/cle_news234_1m_jgx9.m3u8')}`);
   });
 
   app.get('/api/live/news234.m3u8', (req, res) => {
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_news234_1m_jgx9.m3u8')}`);
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://www.europe.tvpromedia.com/live/cle_news234_1m_jgx9.m3u8')}`);
   });
 
   app.get('/api/live/mcprod.m3u8', (req, res) => {
@@ -342,20 +529,30 @@ async function startServer() {
   });
 
   app.get(['/api/live/trompette.m3u8', '/api/live/trompettemedia.m3u8'], (req, res) => {
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_trompette_1m.m3u8')}`);
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://www.europe.tvpromedia.com/live/cle_trompette_1m.m3u8')}`);
   });
 
   app.get(['/api/live/alliancemabanza.m3u8', '/api/live/mabanza.m3u8'], (req, res) => {
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_alliancemabanza_1m.m3u8')}`);
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://www.europe.tvpromedia.com/live/cle_alliancemabanza_1m.m3u8')}`);
   });
 
   app.get(['/api/live/paroledesperance.m3u8', '/api/live/esperance.m3u8'], (req, res) => {
-    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_paroleesperance_1m.m3u8')}`);
+    res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://www.europe.tvpromedia.com/live/cle_paroleesperance_1m.m3u8')}`);
   });
 
   // Dedicated Malaïka Actu HLS endpoint
-  app.get(['/api/live/malaika.m3u8', '/api/live/malaikatv.m3u8'], (req, res) => {
-    res.redirect('/live/cle_malaika_1m_vllq.m3u8');
+  app.get(['/api/live/malaika.m3u8', '/api/live/malaikatv.m3u8', '/api/live/cle_mala_ka_actu_3q6o5.m3u8', '/api/live/cle_mala_ka_actu_3q6o.m3u8', '/api/live/cle_malaika_1m_p461.m3u8'], (req, res) => {
+    res.redirect('/live/cle_malaika_1m_p461.m3u8');
+  });
+
+  // Dedicated CCPV TV Montréal HLS endpoint
+  app.get(['/api/live/ccpv.m3u8', '/api/live/ccpvtv.m3u8', '/api/live/ccptv.m3u8', '/api/live/cle_ccpvtv_1m_9miq.m3u8', '/api/live/cle_ccpvtv_inf_mxg.m3u8', '/api/live/cle_ccpvtv_inf_mxq.m3u8'], (req, res) => {
+    res.redirect('/live/cle_ccpvtv_inf_mxq.m3u8');
+  });
+
+  // Dedicated BALADE MONDE TV HLS endpoint
+  app.get(['/api/live/balade.m3u8', '/api/live/baladetv.m3u8', '/api/live/balademondetv.m3u8', '/api/live/cle_baladetv_inf_gx5l.m3u8'], (req, res) => {
+    res.redirect('/live/cle_baladetv_inf_gx5l.m3u8');
   });
 
   // Dedicated CEM TV HLS endpoint
@@ -452,6 +649,14 @@ async function startServer() {
     res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://3abn.bozztv.com/3abn2/Kids_live/smil:Kids_live.smil/playlist.m3u8')}`);
   });
 
+  // STARS BRAZZAVILLE Direct & Secours HLS Playback (Canal 1)
+  app.get(['/api/live/stars_brazza.m3u8', '/api/live/star.m3u8', '/api/live/star_brazza.m3u8', '/api/live/cle_star_1m_ay2q.m3u8', '/api/live/star_ay2q.m3u8'], (req, res) => {
+    res.redirect('https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8');
+  });
+  app.get(['/api/live/star_secours.m3u8', '/api/live/star_15min.m3u8', '/live/star_15min.m3u8'], (req, res) => {
+    res.redirect('https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8');
+  });
+
   // EVI TV Direct HLS Playback (Canal 2)
   app.get(['/api/live/evitv.m3u8', '/api/live/evi_tv.m3u8', '/api/live/evitvlive.m3u8'], (req, res) => {
     res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://mistserver.evi-tv.com/hls/evi_tv_live/index.m3u8')}`);
@@ -472,18 +677,18 @@ async function startServer() {
     res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8')}`);
   });
 
-  // Hosted HLS Live Stream Playback URL (.m3u8) connected to VPS 191.215.38.95
+  // Hosted HLS Live Stream Playback URL (.m3u8) connected to VPS www.europe.tvpromedia.com
   app.get('/api/live/stream.m3u8', (req, res) => {
-    const vpsTargetUrl = `http://191.215.38.95:8080/live/cle_tvpro_hnxky2.m3u8`;
+    const vpsTargetUrl = `https://www.europe.tvpromedia.com/live/cle_tvpro_hnxky2.m3u8`;
     res.redirect(`/api/proxy-stream?url=${encodeURIComponent(vpsTargetUrl)}`);
   });
 
-  // Dynamic HLS Live Stream Playback URL by Key (.m3u8) connected to VPS 191.215.38.95
+  // Dynamic HLS Live Stream Playback URL by Key (.m3u8) connected to VPS www.europe.tvpromedia.com
   app.get('/api/live/:key/stream.m3u8', (req, res) => {
     const streamKey = req.params.key || 'cle_tvpro_hnxky2';
     // Remove .m3u8 if user passed key.m3u8
     const cleanKey = streamKey.replace(/\.m3u8$/, '');
-    const vpsTargetUrl = `http://191.215.38.95:8080/live/${cleanKey}.m3u8`;
+    const vpsTargetUrl = `https://www.europe.tvpromedia.com/live/${cleanKey}.m3u8`;
     res.redirect(`/api/proxy-stream?url=${encodeURIComponent(vpsTargetUrl)}`);
   });
 
@@ -522,6 +727,31 @@ async function startServer() {
         upperNom === 'GRACE TV' || upperNom.includes('GRACE TV')
       ) {
         return false;
+      }
+
+      // 0. Strict single STARS BRAZZAVILLE BY AFRICA (Canal 1 - MUSIQUE)
+      if (ch.id === 'ch_stars_brazza' || upperNom.includes('STARS BRAZZAVILLE') || upperNom.includes('STARS BRAZZA')) {
+        if (seenKeys.has('CANAL_1_STARS') || seenIds.has('ch_stars_brazza')) return false;
+        seenKeys.add('CANAL_1_STARS');
+        seenIds.add('ch_stars_brazza');
+        seenIds.add(ch.id);
+        seenNums.add('1');
+        seenNames.add('STARS BRAZZAVILLE BY AFRICA');
+        ch.id = 'ch_stars_brazza';
+        ch.nom = 'STARS BRAZZAVILLE BY AFRICA';
+        ch.ch = '1';
+        ch.lien = 'https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8';
+        ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8';
+        ch.categorie = 'MUSIQUE';
+        ch.cat = 'MUSIQUE';
+        ch.pays = 'BRAZZAVILLE';
+        ch.qualite = 'HD';
+        ch.direct = true;
+        ch.logo = '/logos/stars_brazzaville.png';
+        ch.desc = 'STARS BRAZZAVILLE BY AFRICA - Chaîne N° 1 Musique & Culture (Brazzaville) • Direct HLS Régie (Secours M3U8 cle_star_1m_ay2q)';
+        ch.cloudRemix = 'https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8';
+        ch.youtubeBackup = 'https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8';
+        return true;
       }
 
       // 0a. Strict single EVI TV (Canal 2)
@@ -570,6 +800,48 @@ async function startServer() {
         return true;
       }
 
+      // 0c. Strict single ESPOIR TV HD (Canal 1) - BeroSat HD
+      if (ch.id === 'ch_1' || ch.id === 'ch_100' || upperNom === 'ESPOIR TV HD' || upperNom === 'ESPOIR  TV HD' || upperNom === 'ESPOIR TV' || (upperNom.includes('ESPOIR') && !upperNom.includes('PAROLE'))) {
+        if (seenKeys.has('CANAL_1_ESPOIR') || seenIds.has('ch_1')) return false;
+        seenKeys.add('CANAL_1_ESPOIR');
+        seenIds.add('ch_1');
+        seenIds.add(ch.id);
+        seenNames.add('ESPOIR TV HD');
+        ch.id = 'ch_1';
+        ch.nom = 'ESPOIR TV HD';
+        ch.ch = '1';
+        ch.lien = 'https://www.tvpromedia.com/live/espoir-tv-stream.m3u8';
+        ch.m3u8Source = 'https://www.tvpromedia.com/live/espoir-tv-stream.m3u8';
+        ch.cloudRemix = 'https://www.tvpromedia.com/live/espoir-tv-stream.m3u8';
+        ch.qualite = 'HD';
+        ch.direct = true;
+        ch.desc = "ESPOIR TV HD - Télévision d'information, culture et divertissement • Direct HD HLS (Flux Principal)";
+        return true;
+      }
+
+      // 1b. Strict single AFRI TV (Canal 2 ou 5)
+      if (ch.id === 'ch_2' || ch.id === 'ch_85' || upperNom === 'AFRI TV' || upperNom.includes('AFRI TV') || upperNom === 'AFRI' || chNum === '2' || chNum === '5') {
+        if (seenKeys.has('CANAL_2_AFRI') || seenIds.has('ch_2')) return false;
+        seenKeys.add('CANAL_2_AFRI');
+        seenIds.add('ch_2');
+        seenIds.add(ch.id);
+        if (chNum) seenNums.add(chNum);
+        seenNames.add('AFRI TV');
+        ch.id = 'ch_2';
+        ch.nom = 'AFRI TV';
+        ch.ch = ch.ch || '5';
+        ch.lien = 'https://www.tvpromedia.com/live/afri-tv.m3u8';
+        ch.m3u8Source = 'https://www.tvpromedia.com/live/afri-tv.m3u8';
+        ch.cloudRemix = 'https://www.tvpromedia.com/live/afri-tv.m3u8';
+        ch.youtubeBackup = '';
+        ch.rtmpKey = 'cle_afritv_1m_5jma';
+        ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+        ch.qualite = 'HD';
+        ch.direct = true;
+        ch.desc = 'AFRI TV - Direct HD HLS (Flux Principal & Secours)';
+        return true;
+      }
+
       // 1. Strict single RTP (Canal 4)
       if (ch.id === 'ch_rtp' || upperNom === 'RTP' || (chNum === '4' && ch.id !== 'ch_rtvradio')) {
         if (seenKeys.has('CANAL_4_RTP') || seenIds.has('ch_rtp')) return false;
@@ -581,14 +853,35 @@ async function startServer() {
         ch.id = 'ch_rtp';
         ch.nom = 'RTP';
         ch.ch = '4';
-        ch.lien = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
-        ch.m3u8Source = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
-        ch.cloudRemix = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
-        ch.youtubeBackup = 'https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8';
+        ch.lien = 'https://www.tvpromedia.com/live/rtp-hd.m3u8';
+        ch.m3u8Source = 'https://www.tvpromedia.com/live/rtp-hd.m3u8';
+        ch.cloudRemix = 'https://www.tvpromedia.com/live/rtp-hd.m3u8';
+        ch.youtubeBackup = '';
         ch.rtmpKey = 'cle_rtptv_1m_u4tx';
         ch.rtmpUrl = 'rtmp://191.215.38.95/live';
         ch.qualite = 'HD';
-        ch.desc = 'RTP - Radio Télévision Puissance • Direct HD HLS BeroSat (Flux Principal & Secours)';
+        ch.direct = true;
+        ch.desc = 'RTP - Radio Télévision Puissance • Direct HD HLS (Flux Principal & Secours)';
+        return true;
+      }
+
+      // 1c. Strict single IC-TV (Canal 9)
+      if (ch.id === 'ch_ictv' || upperNom === 'IC-TV' || upperNom === 'ICTV' || (chNum === '9' && (upperNom.includes('IC-TV') || upperNom.includes('ICTV')))) {
+        if (seenKeys.has('CANAL_9_ICTV') || seenIds.has('ch_ictv')) return false;
+        seenKeys.add('CANAL_9_ICTV');
+        seenIds.add('ch_ictv');
+        seenIds.add(ch.id);
+        if (chNum) seenNums.add('9');
+        seenNames.add('IC-TV');
+        ch.id = 'ch_ictv';
+        ch.nom = 'IC-TV';
+        ch.ch = '9';
+        ch.lien = 'https://www.tvpromedia.com/live/ictv.m3u8';
+        ch.m3u8Source = 'https://www.tvpromedia.com/live/ictv.m3u8';
+        ch.cloudRemix = 'https://www.tvpromedia.com/live/ictv.m3u8';
+        ch.qualite = 'HD';
+        ch.direct = true;
+        ch.desc = 'IC-TV - Information, Culture & Divertissement • Direct HD HLS (Flux Principal)';
         return true;
       }
 
@@ -637,7 +930,7 @@ async function startServer() {
         return true;
       }
 
-      // 6. Strict single CEM TV (Canal 93) - Direct HLS VPS 191.215.38.95
+      // 6. Strict single CEM TV (Canal 93) - Direct HLS VPS www.europe.tvpromedia.com
       if (ch.id === 'ch_93' || upperNom === 'CEM TV' || (chNum === '93' && upperNom.includes('CEM'))) {
         if (seenKeys.has('CANAL_93_CEM') || seenIds.has('ch_93')) return false;
         seenKeys.add('CANAL_93_CEM');
@@ -652,9 +945,9 @@ async function startServer() {
         ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8';
         ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8';
         ch.rtmpKey = 'cle_cem_1m_lvt6';
-        ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+        ch.rtmpUrl = 'rtmp://www.europe.tvpromedia.com/live';
         ch.youtubeBackup = 'https://www.youtube.com/watch?v=OwkjaS75qvA';
-        ch.desc = 'CEM TV - Centre Évangélique Mahanaïm • Direct HLS VPS 191.215.38.95 (Flux Principal cle_cem_1m_lvt6)';
+        ch.desc = 'CEM TV - Centre Évangélique Mahanaïm • Direct HLS VPS www.europe.tvpromedia.com (Flux Principal cle_cem_1m_lvt6)';
         return true;
       }
 
@@ -669,19 +962,43 @@ async function startServer() {
         ch.id = 'ch_92';
         ch.nom = 'MALAÏKA ACTU';
         ch.ch = '92';
-        ch.lien = 'https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8';
-        ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8';
-        ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8';
-        ch.rtmpKey = 'cle_malaika_1m_vllq';
+        ch.lien = 'https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8';
+        ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8';
+        delete (ch as any).cloudRemix;
+        delete (ch as any).youtubeBackup;
+        ch.rtmpKey = 'cle_malaika_1m_p461';
         ch.rtmpUrl = 'rtmp://191.215.38.95/live';
-        ch.youtubeBackup = 'https://youtu.be/P6LUQn6uygI';
-        ch.desc = "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_malaika_1m_vllq) sur www.tvpromedia.com";
+        ch.desc = "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS (cle_malaika_1m_p461)";
         ch.cat = 'NEWS';
         return true;
       }
 
+      // 7b. Strict single A LA UNE TELEVISION (Canal 68)
+      if (ch.id === 'ch_68' || ch.id === 'ch_70' || chNum === '68' || upperNom.includes('UNE TELEVISION') || upperNom.includes('A LA UNE')) {
+        if (seenKeys.has('CANAL_68_ALAUNE') || seenIds.has('ch_68')) return false;
+        seenKeys.add('CANAL_68_ALAUNE');
+        seenIds.add('ch_68');
+        seenIds.add(ch.id);
+        if (chNum) seenNums.add('68');
+        seenNames.add('A LA UNE TELEVISION');
+        ch.id = 'ch_68';
+        ch.nom = 'A LA UNE TELEVISION';
+        ch.ch = '68';
+        ch.lien = 'https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8';
+        ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8';
+        ch.cloudRemix = 'https://files.catbox.moe/0ssfyb.mp4';
+        ch.youtubeBackup = 'https://files.catbox.moe/0ssfyb.mp4';
+        ch.rtmpKey = 'cle_alaunetv_1m_r8vj';
+        ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+        ch.desc = "A la une Music toujours en mouvement avec tonton Guez kuama avec invité Benjamin PENGE • Canal 68";
+        ch.cat = 'GENERALISTE';
+        ch.pays = 'RDC';
+        ch.qualite = '4K';
+        return true;
+      }
+
       // 8. Strict CCPV TV (Canal 24 & Canal 23) - Flux Principal & Secours VPS www.tvpromedia.com
-      if (ch.id === 'ch_24' || ch.id === '24' || chNum === '24' || upperNom.includes('13 CULTURA')) {
+      if (ch.id === 'ch_24' || ch.id === '24' || chNum === '24' || upperNom.includes('13 CULTURA') || upperNom.includes('CCPV')) {
         if (seenKeys.has('CANAL_24_CCPV') || seenIds.has('ch_24')) return false;
         seenKeys.add('CANAL_24_CCPV');
         seenIds.add('ch_24');
@@ -690,15 +1007,37 @@ async function startServer() {
         ch.id = 'ch_24';
         ch.nom = 'CCPV TV MONTRÉAL';
         ch.ch = '24';
-        ch.lien = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
-        ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
-        ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
-        ch.rtmpKey = 'cle_ccpvtv_1m_9miq';
+        ch.lien = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
+        ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
+        delete (ch as any).cloudRemix;
+        delete (ch as any).youtubeBackup;
+        ch.rtmpKey = 'cle_ccpvtv_inf_mxq';
         ch.rtmpUrl = 'rtmp://191.215.38.95/live';
-        delete ch.youtubeBackup;
-        ch.desc = 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_1m_9miq (Principal & Secours HLS) sur www.tvpromedia.com';
+        ch.desc = 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com';
         ch.cat = 'RELIGIEUX';
         ch.pays = 'CANADA';
+        ch.qualite = '4K';
+        return true;
+      }
+
+      // 8b. Strict BALADE MONDE TV (Canal 28) - Flux Principal VPS www.tvpromedia.com
+      if (ch.id === 'ch_28' || ch.id === '28' || chNum === '28' || upperNom.includes('BALADE MONDE') || upperNom.includes('BALADE MODE')) {
+        if (seenKeys.has('CANAL_28_BALADE') || seenIds.has('ch_28')) return false;
+        seenKeys.add('CANAL_28_BALADE');
+        seenIds.add('ch_28');
+        seenIds.add(ch.id);
+        if (chNum) seenNums.add('28');
+        ch.id = 'ch_28';
+        ch.nom = 'BALADE MONDE TV';
+        ch.ch = '28';
+        ch.lien = 'https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8';
+        ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8';
+        ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8';
+        ch.rtmpKey = 'cle_baladetv_inf_gx5l';
+        ch.rtmpUrl = 'rtmp://191.215.38.95/live';
+        ch.desc = 'BALADE MONDE TV - Découverte, voyages et reportages internationaux en direct • Direct HLS VPS cle_baladetv_inf_gx5l sur www.tvpromedia.com';
+        ch.cat = 'GENERALISTE';
+        ch.pays = 'RDC';
         ch.qualite = '4K';
         return true;
       }
@@ -774,7 +1113,7 @@ async function startServer() {
 
       // Unique stream URL check (except tvpromedia multi-feed and berosat mstv)
       const stream = (ch.lien || ch.m3u8Source || '').trim().toLowerCase();
-      if (stream && !stream.includes('tvpromedia.com/live/') && !stream.includes('191.215.38.95') && !stream.includes('mstv')) {
+      if (stream && !stream.includes('tvpromedia.com/live/') && !stream.includes('www.europe.tvpromedia.com') && !stream.includes('mstv')) {
         if (seenStreams.has(stream)) return false;
         seenStreams.add(stream);
       }
@@ -825,6 +1164,7 @@ async function startServer() {
       if (fs.existsSync(CHANNELS_FILE_PUBLIC)) {
         fs.copyFileSync(CHANNELS_FILE_PUBLIC, CHANNELS_BACKUP_FILE);
       }
+
       fs.writeFileSync(CHANNELS_FILE_PUBLIC, jsonStr, 'utf-8');
 
       const distDir = path.join(process.cwd(), 'dist');
@@ -876,13 +1216,13 @@ async function startServer() {
       success: true,
       total: channels.length,
       count: filtered.length,
-      vpsHost: '191.215.38.95',
-      allowedDomains: ['tvpromedia.com', 'www.tvpromedia.com', 'tvpromedia.ai.studio'],
+      vpsHost: 'www.europe.tvpromedia.com',
+      allowedDomains: ['tvpromedia.com', 'www.tvpromedia.com', 'www.europe.tvpromedia.com'],
       channels: filtered
     });
   });
 
-  // Channels API: POST sync channels across tvpromedia.ai.studio, tvpromedia.com, www.tvpromedia.com
+  // Channels API: POST sync channels across www.europe.tvpromedia.com, tvpromedia.com, www.tvpromedia.com
   app.post(['/api/channels', '/api/channels/sync', '/api/chaines'], (req, res) => {
     try {
       const payload = req.body;
@@ -948,12 +1288,12 @@ async function startServer() {
       syncedDomains: [
         'https://tvpromedia.com',
         'https://www.tvpromedia.com',
-        'https://tvpromedia.ai.studio'
+        'https://www.europe.tvpromedia.com'
       ],
       vps: {
-        ip: '191.215.38.95',
+        ip: 'www.europe.tvpromedia.com',
         srsLivePort: 8080,
-        rtmpIngest: 'rtmp://191.215.38.95/live'
+        rtmpIngest: 'rtmp://www.europe.tvpromedia.com/live'
       },
       github: {
         repository: 'madiaott-oss/tvpromedia.site',
@@ -1141,6 +1481,39 @@ async function startServer() {
     }
   });
 
+  // Turnkey SSL & Firewall diagnostic script endpoint
+  app.get(['/api/diagnose-script', '/diagnose.sh', '/api/diagnose-ssl'], (req, res) => {
+    const diagPath = path.join(process.cwd(), 'infra', 'scripts', 'diagnose_ssl_firewall.sh');
+    if (fs.existsSync(diagPath)) {
+      res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+      res.sendFile(diagPath);
+    } else {
+      res.status(404).send('#!/usr/bin/env bash\necho "Script de diagnostic non trouvé."\n');
+    }
+  });
+
+  // Turnkey python channel repair & recovery script
+  app.get(['/repair_channels.py', '/api/repair_channels.py'], (req, res) => {
+    const scriptPath = path.join(process.cwd(), 'infra', 'scripts', 'repair_channels_now.py');
+    if (fs.existsSync(scriptPath)) {
+      res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+      res.sendFile(scriptPath);
+    } else {
+      res.status(404).send('# Script non trouvé\n');
+    }
+  });
+
+  // Turnkey python clean dead streams script
+  app.get(['/clean_dead_streams.py', '/api/clean_dead_streams.py'], (req, res) => {
+    const scriptPath = path.join(process.cwd(), 'clean_dead_streams.py');
+    if (fs.existsSync(scriptPath)) {
+      res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+      res.sendFile(scriptPath);
+    } else {
+      res.status(404).send('# Script non trouvé\n');
+    }
+  });
+
   // Turnkey python IPTV-ORG sync script
   app.get(['/sync_iptv.py', '/api/sync_iptv.py'], (req, res) => {
     const scriptPath = path.join(process.cwd(), 'sync_iptv_14_playlists.py');
@@ -1184,19 +1557,51 @@ TVPRO_CHANNELS_PAYLOAD_EOF
 
 cp -f "\$APP_DIR/public/channels.json" "\$APP_DIR/dist/channels.json" 2>/dev/null || true
 
+TMP_DIST="/tmp/tvpro_dist.zip"
+if curl -sSL -f "https://tvpromedia.ai.studio/api/download-dist" -o "\$TMP_DIST" || curl -sSL -f "https://ais-pre-22v7n5rsoqfibioxsxj42n-987104672711.europe-west2.run.app/api/download-dist" -o "\$TMP_DIST"; then
+  command -v unzip &>/dev/null || (apt-get update -qq && apt-get install -y -qq unzip)
+  unzip -q -o "\$TMP_DIST" -d "\$APP_DIR/dist/" 2>/dev/null || true
+  rm -f "\$TMP_DIST"
+  cp -f "\$APP_DIR/public/channels.json" "\$APP_DIR/dist/channels.json" 2>/dev/null || true
+  echo -e "\${GREEN}✓ Nouveau build frontend avec interface actualisée installé avec succès.\${NC}"
+fi
+
 echo -e "\${GREEN}✓ Fichier /var/www/tvpromedia/public/channels.json écrit avec succès (${channels.length} chaînes).\${NC}"
 echo -e "\${GREEN}✓ Fichier /var/www/tvpromedia/dist/channels.json synchronisé.\${NC}"
 
-echo -e "\${BLUE}[2/3] Rechargement du service Node.js/PM2...\${NC}"
+echo -e "\${BLUE}[2/3] Configuration & rechargement du service Node.js/PM2...\${NC}"
 if command -v pm2 &>/dev/null; then
   pm2 reload tvpromedia 2>/dev/null || pm2 restart tvpromedia 2>/dev/null || true
   echo -e "\${GREEN}✓ Service PM2 tvpromedia rechargé.\${NC}"
 fi
 
-echo -e "\${BLUE}[3/3] Rechargement du serveur Nginx...\${NC}"
-if command -v systemctl &>/dev/null && command -v nginx &>/dev/null; then
-  systemctl reload nginx 2>/dev/null || true
-  echo -e "\${GREEN}✓ Nginx rechargé avec succès.\${NC}"
+echo -e "\${BLUE}[3/3] Configuration Nginx & Services RTP BeroSat HD...\${NC}"
+# Configuration automatique de la règle RTP BeroSat dans Nginx si elle n'est pas déjà présente
+if [ -f /etc/nginx/sites-available/tvpromedia ] && ! grep -q "19360" /etc/nginx/sites-available/tvpromedia; then
+  sed -i '/location \/live\/ {/i \    # Relais direct RTP BeroSat HD (www.tvpromedia.com)\n    location ~* ^\/live\/.*(rtp|cle_rtptv) {\n        add_header Access-Control-Allow-Origin * always;\n        add_header Access-Control-Allow-Methods "GET, OPTIONS, HEAD" always;\n        return 302 https:\/\/stream.berosat.live:19360\/rtp-hd\/rtp-hd.m3u8;\n    }\n' /etc/nginx/sites-available/tvpromedia 2>/dev/null || true
+fi
+
+# Configuration automatique de la règle Stars Brazzaville star_15min dans Nginx si elle n'est pas déjà présente
+if [ -f /etc/nginx/sites-available/tvpromedia ] && ! grep -q "star_15min" /etc/nginx/sites-available/tvpromedia; then
+  sed -i '/location \/live\/ {/i \    # Relais direct Stars Brazzaville (Secours HLS star_15min)\n    location ~* ^\/live\/.*(star|starsbrazza|cle_star) {\n        proxy_pass http:\/\/127.0.0.1:8080;\n        proxy_intercept_errors on;\n        error_page 404 502 503 =302 \/hls\/star_15min\/index.m3u8;\n        add_header Access-Control-Allow-Origin * always;\n        add_header Access-Control-Allow-Methods "GET, OPTIONS, HEAD" always;\n        add_header Access-Control-Allow-Headers "*" always;\n    }\n' /etc/nginx/sites-available/tvpromedia 2>/dev/null || true
+fi
+
+# Configuration automatique du dossier HLS statique dans Nginx
+if [ -f /etc/nginx/sites-available/tvpromedia ] && ! grep -q "location \/hls\/" /etc/nginx/sites-available/tvpromedia; then
+  sed -i '/location \/ {/i \    # Fichiers HLS statiques (star_15min, boucles de secours)\n    location \/hls\/ {\n        alias \/var\/www\/hls\/;\n        add_header Access-Control-Allow-Origin * always;\n        add_header Access-Control-Allow-Methods "GET, OPTIONS, HEAD" always;\n        add_header Access-Control-Allow-Headers "*" always;\n        expires -1;\n        add_header Cache-Control no-cache;\n    }\n' /etc/nginx/sites-available/tvpromedia 2>/dev/null || true
+fi
+
+# Synchronisation des unités systemd RTP si présentes
+if [ -d "$APP_DIR/infra/systemd" ] && [ -d /etc/systemd/system ]; then
+  cp -f "$APP_DIR/infra/systemd/"*.service /etc/systemd/system/ 2>/dev/null || true
+  systemctl daemon-reload 2>/dev/null || true
+  systemctl enable --now rtptv rtp-aac 2>/dev/null || true
+  echo -e "\${GREEN}✓ Services systemd RTP HD BeroSat synchronisés.\${NC}"
+fi
+
+if command -v nginx &>/dev/null; then
+  nginx -t 2>/dev/null && systemctl reload nginx 2>/dev/null || true
+  echo -e "\${GREEN}✓ Nginx configuré et rechargé avec succès (RTP routé vers BeroSat HD).\${NC}"
 fi
 
 echo ""
@@ -1238,6 +1643,7 @@ echo ""
         else if (item.id === 'ch_news234' || id === '7') streamUrl = `${base}/api/live/news243.m3u8`;
         else if (item.id === 'ch_mcprod' || id === '8') streamUrl = `${base}/api/live/mcprod.m3u8`;
         else if (item.id === 'ch_30' || name.toUpperCase().includes('ESPERANCE')) streamUrl = `${base}/api/live/paroledesperance.m3u8`;
+        else if (item.id === 'ch_24' || id === '24' || name.toUpperCase().includes('CCPV')) streamUrl = `${base}/api/live/ccpv.m3u8`;
         else if (item.id === 'ch_92' || name.toUpperCase().includes('MALAIKA')) streamUrl = `${base}/api/live/malaika.m3u8`;
         else if (item.id === 'ch_93' || id === '93' || name.toUpperCase().includes('CEM TV') || name.toUpperCase() === 'CEM') streamUrl = `${base}/api/live/cem.m3u8`;
         else if (item.id === 'ch_3' || name.toUpperCase().includes('ESPEC')) streamUrl = `${base}/api/live/espec.m3u8`;

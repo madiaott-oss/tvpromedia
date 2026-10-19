@@ -9,6 +9,8 @@ export const ADMIN_PASSWORD = 'Microsoft';
 
 export const AFRI_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" width="100%" height="100%"><rect width="600" height="350" fill="%23ffffff"/><g transform="translate(10, 10)"><path d="M 125,45 C 150,35 195,50 210,60 C 220,68 232,72 235,85 C 237,98 220,105 225,122 C 230,135 242,145 245,158 C 247,172 235,182 222,195 C 212,210 208,228 198,245 C 188,262 175,280 162,295 C 150,305 138,285 135,268 C 130,250 124,236 115,222 C 105,208 112,195 112,176 C 112,160 102,152 90,148 C 75,145 52,155 40,140 C 28,125 24,105 30,85 C 38,65 62,50 90,45 C 105,42 115,48 125,45 Z" fill="%23001aa3"/><path d="M 90,75 C 130,65 178,75 188,105 C 192,118 188,132 175,142 C 160,150 132,150 115,160 C 92,170 92,190 115,200 C 138,208 170,202 192,195 L 192,218 C 165,228 125,228 98,218 C 70,208 65,178 82,162 C 100,146 132,146 150,138 C 162,132 162,122 158,114 C 152,105 128,102 98,110 C 82,115 75,102 78,92 C 80,84 85,78 90,75 Z" fill="%23ffffff"/><path d="M 110,168 C 132,160 160,165 165,182 C 170,200 142,212 120,210 C 102,208 98,190 110,168 Z" fill="%23e61c1c"/><text x="220" y="215" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="150" fill="%23001aa3" letter-spacing="-6">fri</text><text x="415" y="215" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="150" fill="%23f33800" letter-spacing="-6">tv</text></g></svg>`;
 
+export const IC_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" width="100%" height="100%"><rect width="600" height="350" fill="%230b132b"/><g transform="translate(40, 40)"><circle cx="120" cy="135" r="110" fill="%231c2541" stroke="%2348cae4" stroke-width="8"/><text x="120" y="180" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="110" fill="%2300b4d8" text-anchor="middle">IC</text><rect x="270" y="55" width="230" height="160" rx="24" fill="%23e63946"/><text x="385" y="175" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="120" fill="%23ffffff" text-anchor="middle">TV</text><text x="385" y="240" font-family="'Arial Black', sans-serif" font-weight="900" font-size="24" fill="%23caf0f8" text-anchor="middle" letter-spacing="3">HD DIRECT</text></g></svg>`;
+
 export const CCPV_TV_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" width="100%" height="100%"><rect width="600" height="350" fill="%23000000"/><g transform="translate(35, 40)"><polygon points="10,20 100,20 80,180 1,180" fill="%2360c0ea" stroke="%23000" stroke-width="2"/><path d="M 40,75 Q 50,55 60,75 Q 50,105 40,75 M 35,105 Q 50,90 65,105 Q 50,120 35,105" fill="%230a2540"/><path d="M 45,65 Q 50,45 55,65" fill="none" stroke="%23fff" stroke-width="3"/><polygon points="105,20 195,20 175,180 85,180" fill="%2360c0ea" stroke="%23000" stroke-width="2"/><text x="115" y="140" font-family="Arial Black, sans-serif" font-weight="900" font-size="100" fill="%23ffffff">C</text><polygon points="200,20 290,20 270,180 180,180" fill="%2360c0ea" stroke="%23000" stroke-width="2"/><text x="210" y="140" font-family="Arial Black, sans-serif" font-weight="900" font-size="100" fill="%23ffffff">C</text><polygon points="295,20 385,20 365,180 275,180" fill="%2360c0ea" stroke="%23000" stroke-width="2"/><text x="310" y="140" font-family="Arial Black, sans-serif" font-weight="900" font-size="100" fill="%23ffffff">P</text><polygon points="390,20 530,20 510,180 370,180" fill="%2360c0ea" stroke="%23000" stroke-width="2"/><text x="400" y="140" font-family="Arial Black, sans-serif" font-weight="900" font-size="95" fill="%23ffffff">V</text><text x="465" y="140" font-family="Arial Black, sans-serif" font-weight="900" font-size="80" fill="%230a2560">TV</text><text x="95" y="174" font-family="Arial, sans-serif" font-weight="900" font-size="13" fill="%230a2560" letter-spacing="1">CENTRE CHRETIEN PAROLE DE VIE</text><rect x="0" y="185" width="520" height="45" fill="%23ffffff" rx="4"/><text x="135" y="220" font-family="Arial Black, sans-serif" font-weight="900" font-size="32" fill="%2300bcd4" letter-spacing="2">MONTRÉAL</text></g></svg>`;
 
 export const HORIZON_2000_LOGO = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" width="100%" height="100%"><rect width="500" height="350" fill="%231b35e8"/><circle cx="90" cy="175" r="140" fill="%232542f5" opacity="0.6"/><circle cx="410" cy="175" r="140" fill="%232542f5" opacity="0.6"/><circle cx="250" cy="175" r="140" fill="%23ffffff"/><text x="145" y="200" font-family="'Times New Roman', Georgia, serif" font-weight="900" font-size="160" fill="%23221bb8" letter-spacing="-10">HD</text><text x="145" y="260" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="22" fill="%23221bb8" letter-spacing="1">HORIZON 2000 TV</text></svg>`;
@@ -404,16 +406,16 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
   {
     id: 'ch_rtp',
     nom: "RTP",
-    lien: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
+    lien: "https://www.tvpromedia.com/live/rtp-hd.m3u8",
     logo: RTP_TV_LOGO,
     cat: "GENERALISTE",
     ch: "4",
     qualite: "HD",
     pays: "RDC",
-    desc: "RTP - Radio Télévision Puissance • Direct HD HLS BeroSat (Flux Principal & Secours)",
-    m3u8Source: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
-    cloudRemix: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
-    youtubeBackup: "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
+    desc: "RTP - Radio Télévision Puissance • Direct HD HLS (Flux Principal & Secours)",
+    m3u8Source: "https://www.tvpromedia.com/live/rtp-hd.m3u8",
+    cloudRemix: "https://www.tvpromedia.com/live/rtp-hd.m3u8",
+    youtubeBackup: "",
     rtmpUrl: "rtmp://191.215.38.95/live",
     rtmpKey: "cle_rtptv_1m_u4tx"
   },
@@ -475,29 +477,58 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     rtmpKey: "cle_mcprod_1m_live"
   },
   {
-    id: 'ch_1',
-    nom: "ESPOIR  TV HD",
-    lien: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
+    id: 'ch_stars_brazza',
+    nom: "STARS BRAZZAVILLE BY AFRICA",
+    lien: "https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8",
+    logo: "/logos/stars_brazzaville.png",
+    cat: "MUSIQUE",
+    ch: "1",
+    qualite: "HD",
+    pays: "BRAZZAVILLE",
+    desc: "STARS BRAZZAVILLE BY AFRICA - Chaîne N° 1 Musique & Culture (Brazzaville) • Direct HLS Régie (Secours M3U8 cle_star_1m_ay2q)",
+    m3u8Source: "https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8",
+    cloudRemix: "https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8",
+    youtubeBackup: "https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8"
+  },
+  {
+    id: 'ch_100',
+    nom: "ESPOIR TV HD",
+    lien: "https://www.tvpromedia.com/live/espoir-tv-stream.m3u8",
     logo: ESPOIR_TV_LOGO,
     cat: "GENERALISTE",
     ch: "1",
     qualite: "4K",
     pays: "RDC",
-    desc: "ESPOIR TV HD - Télévision d'information, culture et divertissement",
-    m3u8Source: "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8"
+    desc: "ESPOIR TV HD - Télévision d'information, culture et divertissement • Direct HD HLS (Flux Principal)",
+    m3u8Source: "https://www.tvpromedia.com/live/espoir-tv-stream.m3u8",
+    cloudRemix: "https://www.tvpromedia.com/live/espoir-tv-stream.m3u8"
   },
   {
     id: 'ch_85',
     nom: "AFRI TV",
-    lien: "https://www.tvpromedia.com/live/cle_afritv_1m_5jma.m3u8",
+    lien: "https://www.tvpromedia.com/live/afri-tv.m3u8",
     logo: AFRI_TV_LOGO,
     cat: "GENERALISTE",
-    ch: "85",
-    qualite: "4K",
-    pays: "BRAZZAVILLE",
-    desc: "AFRI TV - L'Afrique en direct, informations, culture et divertissement en continu • Direct HLS & Secours YouTube",
-    youtubeBackup: "https://www.youtube.com/watch?v=Tvh6RL0WnWI",
-    m3u8Source: "https://www.tvpromedia.com/live/cle_afritv_1m_5jma.m3u8"
+    ch: "5",
+    qualite: "HD",
+    pays: "AFRIQUE",
+    desc: "AFRI TV - L'Afrique en direct, informations, culture et divertissement en continu • Direct HD HLS (Flux Principal & Secours)",
+    m3u8Source: "https://www.tvpromedia.com/live/afri-tv.m3u8",
+    cloudRemix: "https://www.tvpromedia.com/live/afri-tv.m3u8"
+  },
+  {
+    id: 'ch_ictv',
+    nom: "IC-TV",
+    lien: "https://www.tvpromedia.com/live/ictv.m3u8",
+    logo: IC_TV_LOGO,
+    cat: "GENERALISTE",
+    ch: "9",
+    qualite: "HD",
+    pays: "RDC",
+    desc: "IC-TV - Information, Culture & Divertissement • Direct HD HLS (Flux Principal)",
+    m3u8Source: "https://www.tvpromedia.com/live/ictv.m3u8",
+    cloudRemix: "https://www.tvpromedia.com/live/ictv.m3u8",
+    direct: true
   },
   {
     id: 'ch_87',
@@ -651,17 +682,16 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
   {
     id: 'ch_24',
     nom: "CCPV TV MONTRÉAL",
-    lien: "https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8",
+    lien: "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
     logo: CCPV_TV_LOGO,
     cat: "RELIGIEUX",
     ch: "24",
     qualite: "4K",
     pays: "CANADA",
-    desc: "CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_1m_9miq (Principal & Secours HLS) sur www.tvpromedia.com",
-    cloudRemix: "https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8",
     rtmpUrl: "rtmp://191.215.38.95/live",
-    rtmpKey: "cle_ccpvtv_1m_9miq",
-    m3u8Source: "https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8"
+    rtmpKey: "cle_ccpvtv_inf_mxq",
+    m3u8Source: "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
+    desc: "CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com"
   },
   {
     id: 'ch_25',
@@ -705,9 +735,11 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     ch: "28",
     qualite: "4K",
     pays: "RDC",
-    desc: "Chaîne généraliste d'évasion, voyages et découvertes du monde. • Direct HLS & Secours",
-    cloudRemix: "https://stream.berosat.live:19360/live-tv/live-tv.m3u8",
-    m3u8Source: "https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8"
+    desc: "BALADE MONDE TV - Découverte, voyages et reportages internationaux en direct • Direct HLS VPS cle_baladetv_inf_gx5l sur www.tvpromedia.com",
+    cloudRemix: "https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8",
+    m3u8Source: "https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8",
+    rtmpUrl: "rtmp://191.215.38.95/live",
+    rtmpKey: "cle_baladetv_inf_gx5l"
   },
   {
     id: 'ch_30',
@@ -1123,15 +1155,18 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
   {
     id: 'ch_68',
     nom: "A LA UNE TELEVISION",
-    lien: "https://www.youtube.com/watch?v=_MXsxbTVXP0",
+    lien: "https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8",
     logo: A_LA_UNE_TELEVISION_LOGO,
     cat: "GENERALISTE",
     ch: "68",
     qualite: "4K",
     pays: "RDC",
-    desc: "A LA UNE TELEVISION - Actualités, informations et divertissement en continu",
-    youtubeBackup: "https://www.youtube.com/watch?v=_MXsxbTVXP0",
-    m3u8Source: "https://www.youtube.com/watch?v=_MXsxbTVXP0"
+    desc: "A la une Music toujours en mouvement avec tonton Guez kuama avec invité Benjamin PENGE • Canal 68",
+    cloudRemix: "https://files.catbox.moe/0ssfyb.mp4",
+    youtubeBackup: "https://files.catbox.moe/0ssfyb.mp4",
+    m3u8Source: "https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8",
+    rtmpKey: "cle_alaunetv_1m_r8vj",
+    rtmpUrl: "rtmp://191.215.38.95/live"
   },
   {
     id: 'ch_69',
@@ -1191,18 +1226,16 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
   {
     id: 'ch_92',
     nom: "MALAÏKA ACTU",
-    lien: "https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8",
+    lien: "https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8",
     logo: MALAIKA_ACTU_LOGO,
     cat: "NEWS",
     ch: "92",
     qualite: "4K",
     pays: "RDC",
-    desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS VPS (cle_malaika_1m_vllq) sur www.tvpromedia.com",
-    cloudRemix: "https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8",
+    desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS (cle_malaika_1m_p461)",
     rtmpUrl: "rtmp://191.215.38.95/live",
-    rtmpKey: "cle_malaika_1m_vllq",
-    youtubeBackup: "https://youtu.be/P6LUQn6uygI",
-    m3u8Source: "https://www.tvpromedia.com/live/cle_malaika_1m_vllq.m3u8"
+    rtmpKey: "cle_malaika_1m_p461",
+    m3u8Source: "https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8"
   },
   {
     id: 'ch_93',

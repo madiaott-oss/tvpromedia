@@ -23,6 +23,7 @@ echo -e "${BLUE}Serveur VPS :${NC} 191.215.38.95"
 echo -e "${BLUE}Dépôt GitHub :${NC} madiaott-oss/tvpromedia.site"
 echo ""
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 APP_DIR="/var/www/tvpromedia"
 MASTER_URL="https://tvpromedia.ai.studio"
 BACKUP_URL="https://ais-pre-22v7n5rsoqfibioxsxj42n-987104672711.europe-west2.run.app"
@@ -38,6 +39,14 @@ fi
 if [ ! -d "$APP_DIR" ]; then
   echo -e "${CYAN}[1/6] Création du dossier applicatif $APP_DIR...${NC}"
   mkdir -p "$APP_DIR"
+fi
+
+# Si exécuté depuis un clone externe (ex: ~/tvpromedia/tvpromedia), copier les fichiers vers APP_DIR
+if [ "$SCRIPT_DIR" != "$APP_DIR" ] && [ -f "$SCRIPT_DIR/package.json" ]; then
+  echo -e "${CYAN}Copie des fichiers récents depuis $SCRIPT_DIR vers $APP_DIR...${NC}"
+  mkdir -p "$APP_DIR"
+  cp -rf "$SCRIPT_DIR"/* "$APP_DIR"/ 2>/dev/null || true
+  [ -d "$SCRIPT_DIR/.git" ] && cp -rf "$SCRIPT_DIR/.git" "$APP_DIR"/ 2>/dev/null || true
 fi
 
 cd "$APP_DIR"
@@ -129,7 +138,57 @@ server {
         add_header Cache-Control "public, max-age=60, s-maxage=60";
     }
 
-    # Relais HLS direct vers le serveur de streaming SRS (port 8080)
+    # Relais HLS direct vers le serveur de streaming SRS / MediaMTX (port 8080)
+    # Règle prioritaire pour RTP : routage direct vers le flux officiel HD BeroSat
+    location ~* ^/live/.*(rtp|cle_rtptv) {
+        add_header Access-Control-Allow-Origin * always;
+        add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
+        add_header Access-Control-Allow-Headers '*' always;
+        return 302 https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8;
+    }
+
+    # Relais direct Stars Brazzaville vers SRS 8080
+    location ~* ^/live/.*(star|starsbrazza|cle_star) {
+        proxy_pass http://127.0.0.1:8080;
+        add_header Access-Control-Allow-Origin * always;
+        add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
+        add_header Access-Control-Allow-Headers '*' always;
+    }
+
+    # Relais direct CCPV TV Montréal vers SRS port 8080
+    location ~* ^/live/.*(ccpv|ccptv) {
+        proxy_pass http://127.0.0.1:8080;
+        add_header Access-Control-Allow-Origin * always;
+        add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
+        add_header Access-Control-Allow-Headers '*' always;
+    }
+
+    # Relais direct Malaïka Actu vers SRS port 8080
+    location ~* ^/live/.*(malaika|mala_ka) {
+        proxy_pass http://127.0.0.1:8080;
+        add_header Access-Control-Allow-Origin * always;
+        add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
+        add_header Access-Control-Allow-Headers '*' always;
+    }
+
+    # Relais direct Balade Monde TV vers SRS port 8080
+    location ~* ^/live/.*(balade|baladetv) {
+        proxy_pass http://127.0.0.1:8080;
+        add_header Access-Control-Allow-Origin * always;
+        add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
+        add_header Access-Control-Allow-Headers '*' always;
+    }
+
+    # Fichiers HLS statiques (boucles de secours star_15min, etc.)
+    location /hls/ {
+        alias /var/www/hls/;
+        add_header Access-Control-Allow-Origin * always;
+        add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
+        add_header Access-Control-Allow-Headers '*' always;
+        expires -1;
+        add_header Cache-Control no-cache;
+    }
+
     location /live/ {
         proxy_pass http://127.0.0.1:8080/live/;
         proxy_set_header Host $host;
@@ -158,6 +217,16 @@ ln -sf /etc/nginx/sites-available/tvpromedia /etc/nginx/sites-enabled/tvpromedia
 if command -v nginx &> /dev/null; then
   nginx -t && systemctl reload nginx
   echo -e "${GREEN}✓ Nginx configuré et rechargé avec succès.${NC}"
+fi
+
+# 5.bis Activation des services d'arrière-plan RTP BeroSat si disponibles
+if [ -d "$APP_DIR/infra/systemd" ]; then
+  cp -f "$APP_DIR/infra/systemd/"*.service /etc/systemd/system/ 2>/dev/null || true
+  systemctl daemon-reload 2>/dev/null || true
+  systemctl stop malaika 2>/dev/null || true
+  systemctl disable malaika 2>/dev/null || true
+  systemctl enable --now rtptv rtp-aac 2>/dev/null || true
+  echo -e "${GREEN}✓ Services systemd RTP HD BeroSat configurés (boucles CPU désactivées).${NC}"
 fi
 
 # 6. Redémarrage du service Node.js

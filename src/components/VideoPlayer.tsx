@@ -5,7 +5,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
-import { Play, Volume2, VolumeX, Maximize2, Loader2, PlayCircle, AlertTriangle, Zap, Radio, Music, Disc, Tv, Camera, Download, X, Youtube, Check, RefreshCw } from 'lucide-react';
+import { Play, Volume2, VolumeX, Maximize2, Loader2, PlayCircle, AlertTriangle, Zap, Radio, Music, Disc, Tv, Camera, Download, X, Youtube, Check, RefreshCw, Activity, Wifi, WifiOff, ShieldCheck } from 'lucide-react';
 import { ChannelLogo } from './ChannelLogo';
 import type { Channel } from '../types';
 
@@ -16,8 +16,9 @@ export const REMIX_PRESETS = {
 };
 
 export const EMERGENCY_VIDEO_PRESETS = {
-  secours: "https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8", // Stream HLS de secours direct RTP TV VPS (www.tvpromedia.com)
-  rtp_secours: "https://www.tvpromedia.com/live/cle_rtptv_1m_u4tx.m3u8", // Flux de secours direct RTP
+  secours: "https://files.catbox.moe/0ssfyb.mp4", // A la une Music toujours en mouvement avec tonton Guez kuama avec invité Benjamin PENGE
+  alaune: "https://files.catbox.moe/0ssfyb.mp4",
+  rtp_secours: "https://www.tvpromedia.com/live/rtp-hd.m3u8",
   mire: "https://playertest.longtailvideo.com/adaptive/bipbop/bipbop.m3u8", // Apple official HLS test stream
   nature: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" // Stable MP4 nature loop
 };
@@ -42,11 +43,6 @@ export const EMERGENCY_YOUTUBE_PRESETS: Record<string, { id: string; title: stri
     id: "OwkjaS75qvA",
     title: "CEM TV",
     desc: "Centre Évangélique Mahanaïm - Culte & enseignements en continu"
-  },
-  a_la_une: {
-    id: "_MXsxbTVXP0",
-    title: "A LA UNE TELEVISION",
-    desc: "Actualités, informations & direct A La Une Télévision"
   },
   borne_mpasa: {
     id: "-b9U6nKDZR0",
@@ -82,11 +78,6 @@ export const EMERGENCY_YOUTUBE_PRESETS: Record<string, { id: string; title: stri
     id: "EO8_2KJdpZk",
     title: "PAROLE D'ESPERANCE TV",
     desc: "PAROLE D'ESPERANCE TV - Culte, enseignements & foi chrétienne (Vidéo Principale YouTube)"
-  },
-  malaika: {
-    id: "P6LUQn6uygI",
-    title: "Malaïka Actu Magazine",
-    desc: "Grand Magazine d'Actualités & Débats en continu"
   },
   horizon_2000: {
     id: "RyttaeEFYHc",
@@ -216,9 +207,151 @@ export default function VideoPlayer({
   const [backupMode, setBackupMode] = useState<'youtube' | 'video' | 'audio'>('youtube'); // Default to YouTube failover loop
   const [remixGenre, setRemixGenre] = useState<'lofi' | 'lounge' | 'retro'>('lofi');
   const [videoGenre, setVideoGenre] = useState<'secours' | 'mire' | 'nature'>('secours');
-  const [youtubeGenre, setYoutubeGenre] = useState<'custom' | 'vep_tv' | 'afri_tv' | 'espec_tv' | 'cem_tv' | 'a_la_une' | 'borne_mpasa' | 'snl_kongo' | 'congo_flash' | 'trompette_media' | 'grace_tv' | 'alliance_mabanza' | 'parole_esperance' | 'malaika' | 'horizon_2000' | 'ems_tv' | 'sm_video' | 'mstv' | 'adoration' | 'culte' | 'direct' | 'nature'>('borne_mpasa');
+  const [youtubeGenre, setYoutubeGenre] = useState<'custom' | 'vep_tv' | 'afri_tv' | 'espec_tv' | 'cem_tv' | 'borne_mpasa' | 'snl_kongo' | 'congo_flash' | 'trompette_media' | 'grace_tv' | 'alliance_mabanza' | 'parole_esperance' | 'horizon_2000' | 'ems_tv' | 'sm_video' | 'mstv' | 'adoration' | 'culte' | 'direct' | 'nature'>('borne_mpasa');
   const [customYoutubeInput, setCustomYoutubeInput] = useState('');
   const [activeCustomYoutubeId, setActiveCustomYoutubeId] = useState<string | null>(null);
+
+  // Dynamic Stream Switcher (Direct vs Secours M3U8 override)
+  const [streamOverride, setStreamOverride] = useState<string | null>(null);
+
+  // Is Malaika Actu active channel
+  const isMalaika = !!(
+    (src && (src.includes('cle_malaika') || src.includes('cle_mala_ka') || src.includes('malaika'))) ||
+    (title && (title.trim().toUpperCase().includes('MALAIKA') || title.trim().toUpperCase().includes('MALAÏKA'))) ||
+    (channelNum === '92')
+  );
+
+  // Is CCPV TV / CCPTV active channel
+  const isCcptv = !!(
+    (src && (src.includes('cle_ccpvtv') || src.includes('ccpv') || src.includes('ccptv'))) ||
+    (title && (title.trim().toUpperCase().includes('CCPV') || title.trim().toUpperCase().includes('CCPTV'))) ||
+    (channelNum === '23' || channelNum === '24')
+  );
+
+  const isBalade = !!(
+    (src && (src.includes('cle_baladetv') || src.includes('balade.m3u8') || src.includes('baladetv.m3u8'))) ||
+    (title && (title.trim().toUpperCase().includes('BALADE MONDE') || title.trim().toUpperCase().includes('BALADE MODE'))) ||
+    (channelNum === '28')
+  );
+
+  const primaryStreamUrl = isMalaika 
+    ? 'https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8' 
+    : isCcptv
+    ? 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8'
+    : isBalade
+    ? 'https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8'
+    : (src || '');
+
+  const secondaryBackupStream = isMalaika
+    ? 'https://tvpromedia.com/live/cle_malaika_1m_p461.m3u8'
+    : isCcptv
+    ? 'https://tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8'
+    : isBalade
+    ? 'https://tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8'
+    : (m3u8Source && m3u8Source !== src ? m3u8Source : null);
+
+  // Stream Connection Diagnostic System
+  const [isDiagnosticOpen, setIsDiagnosticOpen] = useState(false);
+  const [isDiagnosticRunning, setIsDiagnosticRunning] = useState(false);
+  const [diagPrimaryStatus, setDiagPrimaryStatus] = useState<'idle' | 'testing' | 'online' | 'offline'>('idle');
+  const [diagPrimaryLatency, setDiagPrimaryLatency] = useState<number | null>(null);
+  const [diagPrimaryError, setDiagPrimaryError] = useState<string | null>(null);
+
+  const [diagBackupStatus, setDiagBackupStatus] = useState<'idle' | 'testing' | 'online' | 'offline'>('idle');
+  const [diagBackupLatency, setDiagBackupLatency] = useState<number | null>(null);
+  const [diagBackupError, setDiagBackupError] = useState<string | null>(null);
+
+  const runDiagnostic = async () => {
+    setIsDiagnosticOpen(true);
+    setIsDiagnosticRunning(true);
+    setDiagPrimaryStatus('testing');
+    setDiagPrimaryLatency(null);
+    setDiagPrimaryError(null);
+
+    if (secondaryBackupStream) {
+      setDiagBackupStatus('testing');
+      setDiagBackupLatency(null);
+      setDiagBackupError(null);
+    }
+
+    // 1. Probe Primary Stream
+    try {
+      const startT = performance.now();
+      const testUrl = getStreamUrlToLoad(primaryStreamUrl);
+      const res = await fetch(testUrl, { method: 'GET', cache: 'no-cache' });
+      const elapsed = Math.round(performance.now() - startT);
+      if (res.ok) {
+        const text = await res.text();
+        if (text.includes('#EXTM3U')) {
+          setDiagPrimaryStatus('online');
+          setDiagPrimaryLatency(elapsed);
+        } else {
+          setDiagPrimaryStatus('offline');
+          setDiagPrimaryError('Réponse reçue mais pas de playlist M3U8 valide');
+        }
+      } else {
+        setDiagPrimaryStatus('offline');
+        setDiagPrimaryError(`Erreur HTTP ${res.status} ${res.statusText}`);
+      }
+    } catch (err: any) {
+      setDiagPrimaryStatus('offline');
+      setDiagPrimaryError(err.message || 'Échec de connexion réseau');
+    }
+
+    // 2. Probe Secondary Backup Stream
+    if (secondaryBackupStream) {
+      try {
+        const startT = performance.now();
+        const testUrl = getStreamUrlToLoad(secondaryBackupStream);
+        const res = await fetch(testUrl, { method: 'GET', cache: 'no-cache' });
+        const elapsed = Math.round(performance.now() - startT);
+        if (res.ok) {
+          const text = await res.text();
+          if (text.includes('#EXTM3U')) {
+            setDiagBackupStatus('online');
+            setDiagBackupLatency(elapsed);
+          } else {
+            setDiagBackupStatus('offline');
+            setDiagBackupError('Réponse reçue mais pas de playlist M3U8 valide');
+          }
+        } else {
+          setDiagBackupStatus('offline');
+          setDiagBackupError(`Erreur HTTP ${res.status} ${res.statusText}`);
+        }
+      } catch (err: any) {
+        setDiagBackupStatus('offline');
+        setDiagBackupError(err.message || 'Échec de connexion réseau');
+      }
+    }
+
+    setIsDiagnosticRunning(false);
+  };
+
+  const handleSwitchStream = (targetUrl: string) => {
+    setStreamOverride(targetUrl);
+    setIsCloudRemix(false);
+    setErrorMsg(null);
+    setIsLoading(true);
+    setIsDiagnosticOpen(false);
+
+    const video = videoRef.current;
+    const finalUrl = getStreamUrlToLoad(targetUrl);
+    if (hlsRef.current) {
+      hlsRef.current.loadSource(finalUrl);
+      hlsRef.current.startLoad();
+    } else if (video) {
+      video.src = finalUrl;
+      video.load();
+      video.play().catch(() => {});
+    }
+  };
+
+  // Determine active media stream (Primary channel url, Manual/Auto stream override, or Backup loop)
+  const activeStream = streamOverride 
+    ? streamOverride 
+    : (isCloudRemix 
+        ? (backupMode === 'video' ? (cloudRemix || EMERGENCY_VIDEO_PRESETS[videoGenre]) : (cloudRemix || REMIX_PRESETS[remixGenre])) 
+        : src);
 
   // Auto-Detect M3U8 Stream Watchdog:
   // When in backupMode / isCloudRemix / direct YouTube mode, if an m3u8Source (or m3u8 link) exists,
@@ -292,6 +425,16 @@ export default function VideoPlayer({
 
   // Reset backup mode whenever user clicks a new channel OR automatically set if description mentions emergency/standby
   useEffect(() => {
+    setStreamOverride(null);
+    setIsDiagnosticOpen(false);
+
+    // MALAÏKA ACTU & CCPTV : Never enter YouTube failover loops
+    if (isMalaika || isCcptv) {
+      setIsCloudRemix(false);
+      setBackupMode('video');
+      return;
+    }
+
     // If the stream itself is a valid direct YouTube video, never force Cloud Remix mode
     if (isYouTubeUrl(src) || isYouTubeUrl(m3u8Source)) {
       setIsCloudRemix(false);
@@ -338,18 +481,30 @@ export default function VideoPlayer({
     return () => clearInterval(interval);
   }, [isCloudRemix, backupMode]);
 
-  // AUTO-DETECTION WATCHDOG: Continuously checks if the primary M3U8 stream has resumed
+  // AUTO-DETECTION WATCHDOG: Continuously checks if the primary direct stream has started/resumed
   useEffect(() => {
-    // Only probe when currently displaying failover backup mode
-    if (!isCloudRemix) {
+    // Check if player is currently playing a backup stream (either via isCloudRemix or playing secours link)
+    const isPlayingBackup = isCloudRemix || 
+      Boolean(activeStream && (
+        activeStream.includes('ay2q') || 
+        activeStream.includes('star_15min') || 
+        (cloudRemix && activeStream === cloudRemix)
+      ));
+
+    // Determine target direct stream to monitor for incoming broadcast
+    const targetDirectStream = (m3u8Source && m3u8Source !== activeStream) 
+      ? m3u8Source 
+      : ((src && src !== activeStream && !src.includes('ay2q') && !src.includes('star_15min')) 
+         ? src 
+         : ((channel?.id === 'ch_stars_brazza' || title?.toUpperCase().includes('STARS BRAZZAVILLE')) && !activeStream?.includes('cle_star_1m_nmo2') 
+            ? 'https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8' 
+            : null));
+
+    // DISABLE auto-probe polling loops on Malaika and CCPTV to prevent overloading the VPS!
+    if (!targetDirectStream || !autoDetectM3U8 || !isPlayingBackup || isMalaika || isCcptv) {
       setM3u8ProbeStatus('idle');
       return;
     }
-
-    const primaryM3u8 = (m3u8Source && (m3u8Source.includes('.m3u8') || m3u8Source.includes('/m3u8') || m3u8Source.includes('.m3u'))) 
-      ? m3u8Source 
-      : (src && (src.includes('.m3u8') || src.includes('/m3u8') || src.includes('.m3u')) ? src : null);
-    if (!primaryM3u8 || !autoDetectM3U8) return;
 
     let isMounted = true;
 
@@ -357,33 +512,40 @@ export default function VideoPlayer({
       try {
         if (!isMounted) return;
         setM3u8ProbeStatus('checking');
-        let streamUrl = primaryM3u8;
-        if (streamUrl.includes('/live/')) {
-          const streamPart = streamUrl.split('/live/')[1];
-          streamUrl = `/live/${streamPart}`;
-        } else if (streamUrl.startsWith('http://') && typeof window !== 'undefined' && window.location.protocol === 'https:') {
-          streamUrl = `/api/proxy-stream?url=${encodeURIComponent(streamUrl)}`;
-        }
+        let streamUrl = getStreamUrlToLoad(targetDirectStream);
 
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 6000);
+        const timeoutId = setTimeout(() => controller.abort(), 4000);
 
         const response = await fetch(streamUrl, {
           method: 'GET',
           headers: { 'Range': 'bytes=0-512' },
+          cache: 'no-store',
           signal: controller.signal
         });
         clearTimeout(timeoutId);
 
         if (response.ok) {
+          // If server redirected to the backup stream, it means direct is not live yet
+          if (response.url && (response.url.includes('ay2q') || response.url.includes('star_15min'))) {
+            if (isMounted) setM3u8ProbeStatus('offline');
+            return;
+          }
+
           const text = await response.text();
           if (text.includes('#EXTM3U')) {
             if (isMounted) {
+              console.log("🔴 LE DIRECT EST ENTRÉ ! Bascule automatique sur la diffusion régie...");
               setM3u8ProbeStatus('detected');
               setStreamRestoredAlert(true);
-              // Switch automatically back to the primary live M3U8 stream!
+              // Switch automatically back to the primary live direct stream!
+              setStreamOverride(targetDirectStream);
               setIsCloudRemix(false);
               setErrorMsg(null);
+              if (hlsRef.current) {
+                hlsRef.current.loadSource(getStreamUrlToLoad(targetDirectStream));
+                hlsRef.current.startLoad();
+              }
               setTimeout(() => {
                 if (isMounted) setStreamRestoredAlert(false);
               }, 8000);
@@ -397,16 +559,16 @@ export default function VideoPlayer({
       }
     };
 
-    // Run first check after 3 seconds, then every 10 seconds
-    const initialTimer = setTimeout(probeM3U8, 3000);
-    const intervalTimer = setInterval(probeM3U8, 10000);
+    // Relaxed periodic check to avoid overloading VPS server
+    const initialTimer = setTimeout(probeM3U8, 5000);
+    const intervalTimer = setInterval(probeM3U8, 30000);
 
     return () => {
       isMounted = false;
       clearTimeout(initialTimer);
       clearInterval(intervalTimer);
     };
-  }, [isCloudRemix, directSrcYouTubeId, src, m3u8Source, autoDetectM3U8]);
+  }, [isCloudRemix, directSrcYouTubeId, src, m3u8Source, activeStream, cloudRemix, channel, autoDetectM3U8, streamOverride]);
 
   const handleManualProbeM3U8 = async () => {
     const primaryM3u8 = (m3u8Source && (m3u8Source.includes('.m3u8') || m3u8Source.includes('/m3u8') || m3u8Source.includes('.m3u'))) 
@@ -454,10 +616,202 @@ export default function VideoPlayer({
     return `${mins.toString().padStart(2, '0')}:${remainingSecs.toString().padStart(2, '0')}`;
   };
 
-  // Determine active media stream (Primary channel url or Backup loop)
-  const activeStream = isCloudRemix 
-    ? (backupMode === 'video' ? (cloudRemix || EMERGENCY_VIDEO_PRESETS[videoGenre]) : (cloudRemix || REMIX_PRESETS[remixGenre])) 
-    : src;
+  // Resolve stream URL: handles internal proxying, VPS reverse proxy, and HLS normalization
+  const getStreamUrlToLoad = (rawUrl: string) => {
+    let resolved = rawUrl;
+    if (!resolved) return '';
+    // Strip playlist wrapper extensions from Zeno streams to play the underlying live audio
+    if (resolved && resolved.includes('stream.zeno.fm/')) {
+      resolved = resolved.replace(/\.(m3u|pls)$/i, '');
+    }
+    // Auto-route RTP strictly to active live stream
+    if (
+      (resolved && (resolved.includes('cle_rtp') || resolved.includes('rtptv.m3u8') || resolved.includes('rtp-hd') || (resolved.includes('rtp.m3u8') && !resolved.includes('rtp_radio')))) ||
+      ((title && title.trim().toUpperCase() === 'RTP') && (!title.toUpperCase().includes('RADIO'))) ||
+      (channelNum === '4')
+    ) {
+      return 'https://stream.berosat.live:19360/rtp-hd/rtp-hd.m3u8';
+    }
+
+    // Auto-route AFRI TV strictly to active live stream
+    if (
+      (resolved && (resolved.includes('afri-tv') || resolved.includes('afritv.m3u8'))) ||
+      ((title && title.trim().toUpperCase() === 'AFRI TV')) ||
+      (channelNum === '5' && title && title.trim().toUpperCase().includes('AFRI'))
+    ) {
+      return 'https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8';
+    }
+
+    // Auto-route IC-TV strictly to active live stream
+    if (
+      (resolved && (resolved.includes('ictv') || resolved.includes('ic-tv'))) ||
+      ((title && (title.trim().toUpperCase() === 'IC-TV' || title.trim().toUpperCase() === 'ICTV' || title.trim().toUpperCase().includes('IDENTITÉ CHRÉTIENNE')))) ||
+      (channelNum === '9' && title && title.trim().toUpperCase().includes('IC'))
+    ) {
+      return 'https://stream.berosat.live:19360/ictv/ictv.m3u8';
+    }
+
+    // Auto-route ESPOIR TV HD strictly to active live stream
+    if (
+      (resolved && (resolved.includes('espoir-tv') || resolved.includes('cle_espoir'))) ||
+      ((title && (title.trim().toUpperCase().includes('ESPOIR') && !title.toUpperCase().includes('PAROLE')))) ||
+      (channelNum === '1' && title && title.trim().toUpperCase().includes('ESPOIR'))
+    ) {
+      return 'https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8';
+    }
+
+    // Auto-route A LA UNE TELEVISION (Canal 68) to active media
+    if (
+      (resolved && (resolved.includes('cle_alaunetv') || resolved.includes('alaune'))) ||
+      (title && (title.trim().toUpperCase().includes('A LA UNE') || title.trim().toUpperCase().includes('À LA UNE'))) ||
+      (channelNum === '68')
+    ) {
+      return 'https://files.catbox.moe/0ssfyb.mp4';
+    }
+
+    // Auto-route ESPEC TV to official live Berosat stream or YouTube
+    if (resolved.includes('cle_espectv') || (title && title.toUpperCase().includes('ESPEC'))) {
+      return 'https://www.youtube.com/watch?v=Z4gy-GRZHr4';
+    }
+
+    // Auto-route CEM TV strictly to the official primary active VPS stream (cle_cem_1m_lvt6) or YouTube
+    if (
+      (resolved && (resolved.includes('cle_cem') || resolved.includes('cem.m3u8') || resolved.includes('cemtv.m3u8'))) ||
+      (title && title.trim().toUpperCase().includes('CEM TV')) ||
+      (channelNum === '93')
+    ) {
+      if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
+        return `/live/cle_cem_1m_lvt6.m3u8`;
+      }
+      return 'https://www.youtube.com/watch?v=OwkjaS75qvA';
+    }
+
+    // Auto-route MALAÏKA ACTU strictly to the official primary active VPS stream (cle_malaika_1m_p461)
+    if (
+      (resolved && (resolved.includes('cle_malaika') || resolved.includes('cle_mala_ka') || resolved.includes('malaika.m3u8') || resolved.includes('malaikatv.m3u8'))) ||
+      (title && (title.trim().toUpperCase().includes('MALAIKA') || title.trim().toUpperCase().includes('MALAÏKA'))) ||
+      (channelNum === '92')
+    ) {
+      if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
+        return `/live/cle_malaika_1m_p461.m3u8`;
+      }
+      return 'https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8';
+    }
+
+    // Auto-route CCPV TV (CCPTV) strictly to the official active VPS stream (cle_ccpvtv_inf_mxq)
+    if (
+      (resolved && (resolved.includes('cle_ccpvtv') || resolved.includes('ccpv.m3u8') || resolved.includes('ccpvtv.m3u8') || resolved.includes('ccptv.m3u8'))) ||
+      (title && (title.trim().toUpperCase().includes('CCPV') || title.trim().toUpperCase().includes('CCPTV'))) ||
+      (channelNum === '23' || channelNum === '24')
+    ) {
+      if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
+        return `/live/cle_ccpvtv_inf_mxq.m3u8`;
+      }
+      return 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
+    }
+
+    // Auto-route BALADE MONDE TV strictly to the official active VPS stream (cle_baladetv_inf_gx5l)
+    if (
+      (resolved && (resolved.includes('cle_baladetv') || resolved.includes('balade.m3u8') || resolved.includes('baladetv.m3u8'))) ||
+      (title && (title.trim().toUpperCase().includes('BALADE MONDE') || title.trim().toUpperCase().includes('BALADE MODE'))) ||
+      (channelNum === '28')
+    ) {
+      if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
+        return `/live/cle_baladetv_inf_gx5l.m3u8`;
+      }
+      return 'https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8';
+    }
+
+    // Auto-route MSTV strictly to official live stream
+    if (
+      (resolved && (resolved.includes('cle_mstv') || resolved.includes('mstv.m3u8'))) ||
+      (title && title.trim().toUpperCase() === 'MSTV') ||
+      (channelNum === '31')
+    ) {
+      return 'https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8';
+    }
+
+    // Auto-route MS RADIO strictly to official live stream
+    if (
+      (title && (title.trim().toUpperCase() === 'MS RADIO' || title.trim().toUpperCase().includes('MS RADIO'))) ||
+      (channelNum === '390' || channelNum === '32')
+    ) {
+      return 'https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8';
+    }
+
+    // Route all VPS 191.215.38.95 SRS streams directly through native HTTPS Nginx /live/ reverse proxy
+    if (resolved.includes('191.215.38.95:8080/live/') || resolved.includes('191.215.38.95/live/')) {
+      const streamPart = resolved.split('/live/')[1];
+      return `/live/${streamPart}`;
+    }
+
+    // Normalize tvpromedia.com / www.tvpromedia.com HLS stream paths
+    if (resolved.includes('tvpromedia.com/hls/')) {
+      const hlsPart = resolved.split('tvpromedia.com/hls/')[1];
+      if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
+        return `/hls/${hlsPart}`;
+      }
+      return `https://tvpromedia.com/hls/${hlsPart}`;
+    }
+
+    // Normalize tvpromedia.com /live/ streams to local relative path when on tvpromedia domain
+    if (resolved.includes('tvpromedia.com/live/')) {
+      const livePart = resolved.split('/live/')[1];
+      if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
+        return `/live/${livePart}`;
+      }
+    }
+
+    // Convert legacy placeholder domains to real live IP stream
+    if (resolved.includes('tvpromedia.ai.studio/live/')) {
+      const streamFile = resolved.split('tvpromedia.ai.studio/live/')[1];
+      resolved = `/live/${streamFile}`;
+    }
+
+    // Convert AzuraCast public page to direct radio stream endpoint
+    if (resolved.includes('/public/radio_oasis_')) {
+      resolved = 'https://radiodiffusion.ncdap.com/listen/radio_oasis_m%C3%A9dia_/radio.mp3';
+    } else if (resolved.includes('/public/') && resolved.includes('radiodiffusion.ncdap.com')) {
+      const parts = resolved.split('/public/');
+      if (parts[1]) {
+        const stationSlug = parts[1].replace(/\/$/, '');
+        resolved = `https://radiodiffusion.ncdap.com/listen/${stationSlug}/radio.mp3`;
+      }
+    }
+    
+    // Do NOT proxy streams that already support direct HTTPS & CORS (BeroSat, tvpromedia.com, EVI TV, Zeno)
+    if (
+      resolved.includes('stream.berosat.live') ||
+      resolved.includes('ip-pro.berosat.live') ||
+      resolved.includes('tvpromedia.com') ||
+      resolved.includes('catbox.moe') ||
+      resolved.includes('mistserver.evi-tv.com') ||
+      resolved.includes('stream.zeno.fm')
+    ) {
+      return resolved;
+    }
+    
+    // Auto-proxy HTTP streams, DuckDNS streams, custom port streams, or IP streams on HTTPS
+    if (
+      (resolved.startsWith('http://') && window.location.protocol === 'https:') ||
+      resolved.includes('duckdns.org') ||
+      resolved.includes('191.215.38.95') ||
+      resolved.includes('88.212.15.27') ||
+      resolved.includes('mediapolis.rai.it') ||
+      resolved.includes('mcquack.net') ||
+      resolved.includes('streamlock.net') ||
+      resolved.includes('bozztv.com') ||
+      resolved.includes('srvif.com') ||
+      resolved.includes(':3561') ||
+      resolved.includes(':3628') ||
+      resolved.includes(':8080')
+    ) {
+      // If stream ends with .m3u without the 8, standard HLS requires .m3u8 on Wowza / streamlock
+      const normalized = resolved.endsWith('.m3u') ? `${resolved}8` : resolved;
+      return `/api/proxy-stream?url=${encodeURIComponent(normalized)}`;
+    }
+    return resolved;
+  };
 
   // Re-initialize player whenever activeStream changes
   useEffect(() => {
@@ -539,118 +893,6 @@ export default function VideoPlayer({
     const isMp4 = activeStream.toLowerCase().includes('.mp4');
     let isHlsSupported = Hls.isSupported() && isM3u8;
 
-    // Resolve stream URL: if stream is an AzuraCast public station page, resolve the direct live stream endpoint
-    const getStreamUrlToLoad = (rawUrl: string) => {
-      let resolved = rawUrl;
-      // Strip playlist wrapper extensions from Zeno streams to play the underlying live audio
-      if (resolved && resolved.includes('stream.zeno.fm/')) {
-        resolved = resolved.replace(/\.(m3u|pls)$/i, '');
-      }
-      // Auto-route RTP strictly to the official primary active stream (cle_rtptv_1m_u4tx)
-      if (
-        (resolved && (resolved.includes('cle_rtp') || resolved.includes('rtptv.m3u8') || resolved.includes('rtp.m3u8'))) ||
-        ((title && title.trim().toUpperCase() === 'RTP') && (!title.toUpperCase().includes('RADIO'))) ||
-        (channelNum === '4')
-      ) {
-        resolved = '/live/cle_rtptv_1m_u4tx.m3u8';
-      }
-
-      // Auto-route ESPEC TV to official live Berosat stream
-      if (resolved.includes('cle_espectv_2m_r2od.m3u8')) {
-        resolved = 'https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8';
-      }
-
-      // Auto-route CEM TV strictly to the official primary active VPS stream (cle_cem_1m_lvt6)
-      if (
-        (resolved && (resolved.includes('cle_cem') || resolved.includes('cem.m3u8') || resolved.includes('cemtv.m3u8'))) ||
-        (title && title.trim().toUpperCase().includes('CEM TV')) ||
-        (channelNum === '93')
-      ) {
-        return `/live/cle_cem_1m_lvt6.m3u8`;
-      }
-
-      // Auto-route MALAÏKA ACTU strictly to the official primary active VPS stream (cle_malaika_1m_vllq)
-      if (
-        (resolved && (resolved.includes('cle_malaika') || resolved.includes('malaika.m3u8') || resolved.includes('malaikatv.m3u8'))) ||
-        (title && (title.trim().toUpperCase().includes('MALAIKA') || title.trim().toUpperCase().includes('MALAÏKA'))) ||
-        (channelNum === '92')
-      ) {
-        return `/live/cle_malaika_1m_vllq.m3u8`;
-      }
-
-      // Auto-route CCPV TV (CCPTV) strictly to the official primary active VPS stream (cle_ccpvtv_1m_9miq)
-      if (
-        (resolved && (resolved.includes('cle_ccpvtv') || resolved.includes('ccpv.m3u8') || resolved.includes('ccpvtv.m3u8') || resolved.includes('ccptv.m3u8'))) ||
-        (title && (title.trim().toUpperCase().includes('CCPV') || title.trim().toUpperCase().includes('CCPTV'))) ||
-        (channelNum === '23' || channelNum === '24')
-      ) {
-        return `/live/cle_ccpvtv_1m_9miq.m3u8`;
-      }
-
-      // Auto-route MSTV strictly to official live stream (https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8)
-      if (
-        (resolved && (resolved.includes('cle_mstv') || resolved.includes('mstv.m3u8'))) ||
-        (title && title.trim().toUpperCase() === 'MSTV') ||
-        (channelNum === '31')
-      ) {
-        resolved = 'https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8';
-      }
-
-      // Auto-route MS RADIO strictly to official live stream (https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8)
-      if (
-        (title && (title.trim().toUpperCase() === 'MS RADIO' || title.trim().toUpperCase().includes('MS RADIO'))) ||
-        (channelNum === '390')
-      ) {
-        resolved = 'https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8';
-      }
-
-      // Route all VPS 191.215.38.95 SRS streams directly through native HTTPS Nginx /live/ reverse proxy
-      // This completely bypasses mixed-content blocking on HTTPS www.tvpromedia.com
-      if (resolved.includes('191.215.38.95:8080/live/') || resolved.includes('191.215.38.95/live/')) {
-        const streamPart = resolved.split('/live/')[1];
-        return `/live/${streamPart}`;
-      }
-
-      // Convert legacy placeholder domains to real live IP stream
-      if (resolved.includes('tvpromedia.ai.studio/live/')) {
-        const streamFile = resolved.split('tvpromedia.ai.studio/live/')[1];
-        resolved = `/live/${streamFile}`;
-      }
-
-      // Convert AzuraCast public page to direct radio stream endpoint
-      if (resolved.includes('/public/radio_oasis_')) {
-        resolved = 'https://radiodiffusion.ncdap.com/listen/radio_oasis_m%C3%A9dia_/radio.mp3';
-      } else if (resolved.includes('/public/') && resolved.includes('radiodiffusion.ncdap.com')) {
-        const parts = resolved.split('/public/');
-        if (parts[1]) {
-          const stationSlug = parts[1].replace(/\/$/, '');
-          resolved = `https://radiodiffusion.ncdap.com/listen/${stationSlug}/radio.mp3`;
-        }
-      }
-      
-      // Auto-proxy HTTP streams, DuckDNS streams, custom port streams, or IP streams on HTTPS
-      if (
-        (resolved.startsWith('http://') && window.location.protocol === 'https:') ||
-        resolved.includes('duckdns.org') ||
-        resolved.includes('191.215.38.95') ||
-        resolved.includes('88.212.15.27') ||
-        resolved.includes('mediapolis.rai.it') ||
-        resolved.includes('mcquack.net') ||
-        resolved.includes('streamlock.net') ||
-        resolved.includes('bozztv.com') ||
-        resolved.includes('srvif.com') ||
-        resolved.includes(':3561') ||
-        resolved.includes(':3628') ||
-        resolved.includes(':8080') ||
-        resolved.includes(':19360')
-      ) {
-        // If stream ends with .m3u without the 8, standard HLS requires .m3u8 on Wowza / streamlock
-        const normalized = resolved.endsWith('.m3u') ? `${resolved}8` : resolved;
-        return `/api/proxy-stream?url=${encodeURIComponent(normalized)}`;
-      }
-      return resolved;
-    };
-
     const streamToLoad = getStreamUrlToLoad(activeStream);
 
     const handleNativePlay = () => {
@@ -674,7 +916,7 @@ export default function VideoPlayer({
 
     const handleNativeError = () => {
       setIsLoading(false);
-      if (youtubeBackup || parsedChannelYoutubeId) {
+      if (parsedChannelYoutubeId) {
         console.log("Native video offline, auto-switching to YouTube backup stream...");
         setIsCloudRemix(true);
         setBackupMode('youtube');
@@ -684,21 +926,50 @@ export default function VideoPlayer({
       }
     };
 
+    // Video stall watchdog: automatically kicks the video if it pauses due to network hiccups
+    const handleVideoStalled = () => {
+      if (video && !video.paused && video.readyState >= 2) {
+        video.play().catch(() => {});
+      }
+    };
+    const handleVideoWaiting = () => {
+      setIsLoading(true);
+    };
+    const handleVideoPlaying = () => {
+      setIsLoading(false);
+      setErrorMsg(null);
+    };
+
+    video.addEventListener('stalled', handleVideoStalled);
+    video.addEventListener('waiting', handleVideoWaiting);
+    video.addEventListener('playing', handleVideoPlaying);
+
     let activeReconnectTimer: any = null;
     let reconnectTimeout: any = null;
     let isCleanedUp = false;
 
     if (isHlsSupported) {
       const hls = new Hls({
-        lowLatencyMode: true,
+        lowLatencyMode: false, // Prevents premature 2-second freeze and buffer underrun on live streams
         backBufferLength: 30,
         maxBufferLength: 30,
-        maxMaxBufferLength: 60,
-        maxBufferSize: 30 * 1000 * 1000,
+        maxMaxBufferLength: 120,
+        maxBufferSize: 60 * 1000 * 1000,
         enableWorker: true, // Use Web Worker so video processing never freezes the UI thread
         autoStartLoad: true,
         startLevel: -1,
         capLevelToPlayerSize: true,
+        // Live streaming stability & anti-freeze settings:
+        liveSyncDurationCount: 3,
+        liveMaxLatencyDurationCount: 8,
+        maxBufferHole: 0.5,
+        highBufferWatchdogPeriod: 2,
+        nudgeOffset: 0.15,
+        nudgeMaxRetry: 5,
+        fragLoadingTimeOut: 20000,
+        manifestLoadingTimeOut: 20000,
+        fragLoadingMaxRetry: 4,
+        manifestLoadingMaxRetry: 4,
         xhrSetup: (xhr) => {
           xhr.withCredentials = false;
         }
@@ -753,6 +1024,23 @@ export default function VideoPlayer({
 
       hls.on(Hls.Events.ERROR, (event, data) => {
         if (isCleanedUp) return;
+
+        // Anti-freeze: Auto-recover from non-fatal buffer stalls or small holes
+        if (data.details === Hls.ErrorDetails.BUFFER_STALLED_ERROR) {
+          console.warn('HLS Buffer Stalled detected, auto-nudging player...');
+          if (video && !video.paused) {
+            try {
+              video.currentTime += 0.15;
+              video.play().catch(() => {});
+            } catch (e) {}
+          }
+          return;
+        }
+
+        if (data.details === Hls.ErrorDetails.BUFFER_SEEK_OVER_HOLE) {
+          return;
+        }
+
         if (data.fatal) {
           console.warn('HLS Fatal Error detected:', data.type, data.details);
           setIsLoading(false);
@@ -760,15 +1048,6 @@ export default function VideoPlayer({
           
           switch (data.type) {
             case Hls.ErrorTypes.NETWORK_ERROR:
-              if (data.details === 'manifestLoadError' && (youtubeBackup || parsedChannelYoutubeId)) {
-                console.log("M3U8 offline, immediate seamless switch to YouTube backup stream...");
-                hls.stopLoad();
-                setIsCloudRemix(true);
-                setBackupMode('youtube');
-                setErrorMsg(null);
-                break;
-              }
-
               if (reconnectAttempts === 1) {
                 setErrorMsg(`Connexion au flux en cours (Tentative #1)...`);
                 if (reconnectTimeout) clearTimeout(reconnectTimeout);
@@ -777,24 +1056,40 @@ export default function VideoPlayer({
                   if (streamToLoad.includes('_aac.m3u8')) {
                     const directUrl = streamToLoad.replace('_aac.m3u8', '.m3u8');
                     hlsRef.current.loadSource(directUrl);
-                  } else if (streamToLoad.includes('/live/')) {
-                    hlsRef.current.loadSource(streamToLoad);
+                  } else if (streamToLoad.startsWith('/api/proxy-stream')) {
+                    // Already proxied, reload source directly
+                    hlsRef.current.loadSource(activeStream);
                   } else {
+                    // Try via internal proxy to bypass any browser CORS or mixed-content block
                     const proxyUrl = `/api/proxy-stream?url=${encodeURIComponent(activeStream)}`;
                     hlsRef.current.loadSource(proxyUrl);
                   }
                   hlsRef.current.startLoad();
-                }, 1500);
-              } else if (m3u8Source && m3u8Source !== activeStream && reconnectAttempts === 2) {
+                }, 1200);
+              } else if (secondaryBackupStream && secondaryBackupStream !== activeStream && reconnectAttempts === 2) {
+                // AUTO-FAILOVER TO SECONDARY BACKUP STREAM
                 setErrorMsg(`Connexion au flux de secours...`);
                 if (reconnectTimeout) clearTimeout(reconnectTimeout);
                 reconnectTimeout = setTimeout(() => {
                   if (isCleanedUp || !hlsRef.current) return;
-                  hlsRef.current.loadSource(getStreamUrlToLoad(m3u8Source));
+                  setStreamOverride(secondaryBackupStream);
+                  hlsRef.current.loadSource(getStreamUrlToLoad(secondaryBackupStream));
                   hlsRef.current.startLoad();
-                }, 2000);
-              } else if (youtubeBackup || parsedChannelYoutubeId) {
-                // Auto-switch seamlessly to YouTube backup loop
+                }, 1500);
+              } else if (cloudRemix && cloudRemix !== activeStream && !isMalaika && !isCcptv) {
+                setErrorMsg(`Signal direct en attente. Basculement sur le flux de secours M3U8...`);
+                if (reconnectTimeout) clearTimeout(reconnectTimeout);
+                reconnectTimeout = setTimeout(() => {
+                  if (isCleanedUp || !hlsRef.current) return;
+                  setStreamOverride(cloudRemix);
+                  setIsCloudRemix(true);
+                  setBackupMode('video');
+                  setErrorMsg(null);
+                  hlsRef.current.loadSource(getStreamUrlToLoad(cloudRemix));
+                  hlsRef.current.startLoad();
+                }, 800);
+              } else if (parsedChannelYoutubeId && !isMalaika && !isCcptv) {
+                // Auto-switch seamlessly to YouTube backup loop only if a real YouTube ID exists (Never on Malaika or CCPTV)
                 console.log("M3U8 offline, auto-switching to YouTube backup stream...");
                 hls.stopLoad();
                 setIsCloudRemix(true);
@@ -879,6 +1174,9 @@ export default function VideoPlayer({
       video.removeEventListener('loadedmetadata', handleNativePlay);
       video.removeEventListener('canplay', handleNativePlay);
       video.removeEventListener('error', handleNativeError);
+      video.removeEventListener('stalled', handleVideoStalled);
+      video.removeEventListener('waiting', handleVideoWaiting);
+      video.removeEventListener('playing', handleVideoPlaying);
       video.loop = false;
     };
   }, [activeStream]);
@@ -1473,6 +1771,22 @@ export default function VideoPlayer({
               <div className="flex flex-col gap-1 w-full max-w-sm">
                 <span className="text-[8px] uppercase font-bold text-gray-500 tracking-wider">MODIFIER LE FLUX HLS DE SECOURS (15 MIN) :</span>
                 <div className="grid grid-cols-3 gap-1.5 bg-[#0d1323]/90 p-1 rounded-xl border border-white/5">
+                  {cloudRemix && (
+                    <button
+                      onClick={() => {
+                        setVideoGenre('secours');
+                        setIsLoading(true);
+                        if (hlsRef.current) {
+                          hlsRef.current.loadSource(getStreamUrlToLoad(cloudRemix));
+                          hlsRef.current.startLoad();
+                        }
+                      }}
+                      className="col-span-3 py-1.5 px-2 rounded-lg text-[9px] font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-black shadow-md font-extrabold cursor-pointer"
+                    >
+                      <Zap className="w-3.5 h-3.5 fill-black" />
+                      <span>{cloudRemix.includes('star_15min') ? '★ STARS BRAZZAVILLE - SECOURS (15 MIN)' : '★ FLUX DE SECOURS DE LA CHAÎNE'}</span>
+                    </button>
+                  )}
                   <button
                     onClick={() => {
                       setVideoGenre('secours');
@@ -1598,49 +1912,145 @@ export default function VideoPlayer({
             Le serveur IPTV écoute sur <code className="bg-black/60 px-1.5 py-0.5 rounded text-amber-300 font-mono text-[11px]">rtmp://191.215.38.95/live</code>. Dès que la régie démarre l&apos;émission, la vidéo s&apos;affichera automatiquement ici.
           </p>
           <div className="flex flex-wrap gap-2 justify-center max-w-lg">
+            {/* Check Connection Diagnostic Trigger */}
             <button
-              onClick={() => {
-                const prev = src;
-                const video = videoRef.current;
-                if (video && hlsRef.current && prev) {
-                  hlsRef.current.loadSource(prev);
-                  hlsRef.current.startLoad();
-                  setIsLoading(true);
+              onClick={runDiagnostic}
+              className="px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-black rounded-xl text-xs uppercase tracking-wider transition-all shadow-[0_4px_16px_rgba(6,182,212,0.4)] flex items-center gap-1.5 cursor-pointer active:scale-95"
+              id="btn-diagnostic-trigger"
+            >
+              <Activity className="w-4 h-4 text-cyan-300 animate-pulse" />
+              <span>Vérifier la connexion (Diagnostic)</span>
+            </button>
+
+            {secondaryBackupStream && (
+              <button
+                onClick={() => handleSwitchStream(secondaryBackupStream)}
+                className="px-4 py-2 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-black rounded-xl text-xs uppercase tracking-wider transition-all shadow-[0_4px_16px_rgba(245,158,11,0.4)] flex items-center gap-1.5 cursor-pointer active:scale-95"
+              >
+                <Zap className="w-4 h-4 fill-black" />
+                <span>Flux de Secours ({isMalaika ? 'Secours HTTPS' : 'Secondaire'})</span>
+              </button>
+            )}
+
+            {cloudRemix && !isMalaika && !isCcptv && (
+              <button
+                onClick={() => {
+                  setIsCloudRemix(true);
+                  setBackupMode('video');
                   setErrorMsg(null);
-                } else if (video && prev) {
-                  video.src = prev;
-                  video.load();
-                  setIsLoading(true);
-                  setErrorMsg(null);
-                }
-              }}
+                  if (hlsRef.current) {
+                    hlsRef.current.loadSource(getStreamUrlToLoad(cloudRemix));
+                    hlsRef.current.startLoad();
+                  }
+                }}
+                className="px-4 py-2 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-black rounded-xl text-xs uppercase tracking-wider transition-all shadow-[0_4px_16px_rgba(245,158,11,0.4)] flex items-center gap-1.5 cursor-pointer animate-pulse"
+              >
+                <Zap className="w-4 h-4 fill-black" />
+                <span>Flux de Secours {cloudRemix.includes('star_15min') ? 'Star 15min' : 'HLS'}</span>
+              </button>
+            )}
+            <button
+              onClick={() => handleSwitchStream(primaryStreamUrl)}
               className="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-black rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-[0_4px_12px_rgba(16,185,129,0.3)] flex items-center gap-1.5 cursor-pointer"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Tester le flux direct</span>
             </button>
-            <button
-              onClick={() => {
-                setIsCloudRemix(true);
-                setBackupMode('youtube');
-                setErrorMsg(null);
-              }}
-              className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-[0_4px_12px_rgba(220,38,38,0.4)] flex items-center gap-1.5 cursor-pointer"
-            >
-              <Youtube className="w-4 h-4" />
-              <span>Boucle de Secours / YouTube</span>
-            </button>
-            <button
-              onClick={() => {
-                setIsCloudRemix(true);
-                setBackupMode('video');
-                setErrorMsg(null);
-              }}
-              className="px-3.5 py-2 bg-white/10 hover:bg-white/20 text-gray-200 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all border border-white/10 cursor-pointer"
-            >
-              <span>Mire / Boucle HLS</span>
-            </button>
+            {!isMalaika && !isCcptv && (
+              <button
+                onClick={() => {
+                  setIsCloudRemix(true);
+                  setBackupMode('youtube');
+                  setErrorMsg(null);
+                }}
+                className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-[0_4px_12px_rgba(220,38,38,0.4)] flex items-center gap-1.5 cursor-pointer"
+              >
+                <Youtube className="w-4 h-4" />
+                <span>Boucle de Secours / YouTube</span>
+              </button>
+            )}
+            {!isMalaika && !isCcptv && (
+              <button
+                onClick={() => {
+                  setIsCloudRemix(true);
+                  setBackupMode('video');
+                  setErrorMsg(null);
+                }}
+                className="px-3.5 py-2 bg-white/10 hover:bg-white/20 text-gray-200 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all border border-white/10 cursor-pointer"
+              >
+                <span>Mire / Boucle HLS</span>
+              </button>
+            )}
           </div>
+        </div>
+      )}
+
+      {/* Auto Direct Restored Alert Banner */}
+      {streamRestoredAlert && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2.5 bg-emerald-600 text-white font-black px-4 py-2 rounded-full shadow-2xl border-2 border-emerald-300 text-xs uppercase tracking-wider animate-bounce">
+          <span className="relative flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-90"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+          </span>
+          <span>🔴 LE DIRECT EST EN LIGNE ! Bascule automatique sur la régie</span>
+        </div>
+      )}
+
+      {/* M3U8 Secours indicator pill */}
+      {(isCloudRemix || (activeStream && (activeStream.includes('ay2q') || activeStream.includes('star_15min')))) && (
+        <div className="absolute top-4 left-4 z-30 flex items-center gap-2 bg-black/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-amber-500/60 shadow-xl">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-80"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+          </span>
+          <span className="text-[10px] font-black text-amber-300 uppercase tracking-wider">
+            ⚡ M3U8 DE SECOURS ACTIF
+          </span>
+          <span className="text-[9px] text-gray-300 hidden sm:inline">
+            (Bascule automatique dès que le direct régie émet 🟢)
+          </span>
+        </div>
+      )}
+
+      {/* Stream Switcher for Dual Stream Channels (e.g. MALAÏKA ACTU / CCPTV / STARS BRAZZAVILLE) */}
+      {(isMalaika || isCcptv || secondaryBackupStream || cloudRemix || (channel && (channel.id === 'ch_stars_brazza' || channel.nom?.includes('STARS BRAZZAVILLE')))) && (
+        <div className="absolute top-4 right-4 z-30 flex items-center gap-1.5 bg-black/85 backdrop-blur-md p-1 rounded-full border border-white/10 shadow-xl">
+          <button
+            onClick={() => handleSwitchStream(primaryStreamUrl)}
+            className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer ${
+              !streamOverride || streamOverride === primaryStreamUrl
+                ? 'bg-red-600 text-white shadow-lg ring-2 ring-red-400/50'
+                : 'text-gray-300 hover:text-white hover:bg-white/10'
+            }`}
+            title="Bascule sur le flux Primaire"
+          >
+            <span className={`w-2 h-2 rounded-full ${!streamOverride || streamOverride === primaryStreamUrl ? 'bg-white animate-pulse' : 'bg-red-500'}`}></span>
+            Direct {isMalaika ? 'Principal' : isCcptv ? 'CCPTV' : 'Régie'}
+          </button>
+
+          {secondaryBackupStream && (
+            <button
+              onClick={() => handleSwitchStream(secondaryBackupStream)}
+              className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer ${
+                streamOverride === secondaryBackupStream
+                  ? 'bg-amber-500 text-black font-extrabold shadow-lg ring-2 ring-amber-300/50'
+                  : 'text-gray-300 hover:text-white hover:bg-white/10'
+              }`}
+              title="Bascule sur le flux Secours HLS"
+            >
+              <span className={`w-2 h-2 rounded-full ${streamOverride === secondaryBackupStream ? 'bg-black animate-ping' : 'bg-amber-400'}`}></span>
+              ⚡ Secours {isMalaika || isCcptv ? 'HTTPS' : 'M3U8'}
+            </button>
+          )}
+
+          <button
+            onClick={runDiagnostic}
+            className="px-2.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider flex items-center gap-1 text-cyan-300 hover:text-white hover:bg-cyan-500/20 transition-all border border-cyan-500/30"
+            title="Vérifier la connexion (Diagnostic des flux)"
+          >
+            <Activity className="w-3 h-3 text-cyan-400 animate-pulse" />
+            <span className="hidden sm:inline">Diagnostic</span>
+          </button>
         </div>
       )}
 
@@ -1737,6 +2147,17 @@ export default function VideoPlayer({
                 {isCloudRemix ? 'BOUCLE SECOURS' : 'HLS DIRECT'}
               </span>
 
+              {/* Check Connection Diagnostic Trigger */}
+              <button
+                onClick={runDiagnostic}
+                className="text-cyan-400 hover:text-white transition-colors focus:outline-none flex items-center gap-1 p-1.5 hover:bg-white/10 rounded-lg text-[10px] font-bold"
+                title="Vérifier la connexion & Diagnostiquer le flux"
+                id="btn-player-diagnostic"
+              >
+                <Activity className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                <span className="hidden md:inline">Diagnostic</span>
+              </button>
+
               {/* Capture d'écran */}
               <button
                 onClick={handleCaptureScreen}
@@ -1759,7 +2180,124 @@ export default function VideoPlayer({
             </div>
           </div>
 
-          {/* Mini Play Circle overlay when paused */}
+          {/* Diagnostic Modal Overlay */}
+      {isDiagnosticOpen && (
+        <div className="absolute inset-0 bg-[#070b14]/95 backdrop-blur-md z-50 p-4 sm:p-6 flex flex-col justify-between text-left overflow-y-auto animate-fade-in border-2 border-cyan-500/40 rounded-b-xl shadow-2xl" id="diagnostic-modal">
+          <div>
+            <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
+              <div className="flex items-center gap-2.5">
+                <Activity className="w-5 h-5 text-cyan-400 animate-pulse" />
+                <div>
+                  <h3 className="text-sm sm:text-base font-black text-white uppercase tracking-wider">
+                    Diagnostic de Connexion IPTV
+                  </h3>
+                  <p className="text-[10px] text-gray-400">
+                    Chaîne active : <span className="text-white font-bold">{title || 'MALAÏKA ACTU'}</span> {channelNum ? `(Canal #${channelNum})` : ''}
+                  </p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setIsDiagnosticOpen(false)}
+                className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white transition-all cursor-pointer"
+                title="Fermer le diagnostic"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="space-y-3">
+              {/* Primary Stream status card */}
+              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 flex flex-col gap-2">
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
+                    <span className="text-xs font-bold text-gray-200">Flux Primaire (HLS Direct)</span>
+                  </div>
+                  <span className={`text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full flex items-center gap-1 ${
+                    diagPrimaryStatus === 'online' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' :
+                    diagPrimaryStatus === 'offline' ? 'bg-red-500/20 text-red-300 border border-red-500/40' :
+                    'bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse'
+                  }`}>
+                    {diagPrimaryStatus === 'online' ? <ShieldCheck className="w-3 h-3 text-emerald-400" /> : null}
+                    {diagPrimaryStatus === 'online' ? `En Ligne (${diagPrimaryLatency} ms)` :
+                     diagPrimaryStatus === 'offline' ? '✗ Hors Ligne' : 'Test en cours...'}
+                  </span>
+                </div>
+                <p className="text-[10px] text-gray-400 font-mono break-all bg-black/40 p-1.5 rounded border border-white/5">
+                  {primaryStreamUrl}
+                </p>
+                {diagPrimaryError && (
+                  <p className="text-[10px] text-red-400">Détail : {diagPrimaryError}</p>
+                )}
+                <div className="flex items-center gap-2 pt-1">
+                  <button
+                    onClick={() => handleSwitchStream(primaryStreamUrl)}
+                    className="px-3 py-1 bg-cyan-600 hover:bg-cyan-500 text-white text-[10px] font-black rounded-lg uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer"
+                  >
+                    <Check className="w-3 h-3" />
+                    <span>Activer le flux primaire</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Secondary Backup Stream status card */}
+              {secondaryBackupStream && (
+                <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 flex flex-col gap-2">
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-amber-400"></span>
+                      <span className="text-xs font-bold text-gray-200">Flux Secondaire (Secours HLS)</span>
+                    </div>
+                    <span className={`text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full flex items-center gap-1 ${
+                      diagBackupStatus === 'online' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' :
+                      diagBackupStatus === 'offline' ? 'bg-red-500/20 text-red-300 border border-red-500/40' :
+                      'bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse'
+                    }`}>
+                      {diagBackupStatus === 'online' ? <ShieldCheck className="w-3 h-3 text-emerald-400" /> : null}
+                      {diagBackupStatus === 'online' ? `En Ligne (${diagBackupLatency} ms)` :
+                       diagBackupStatus === 'offline' ? '✗ Hors Ligne' : 'Test en cours...'}
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-gray-400 font-mono break-all bg-black/40 p-1.5 rounded border border-white/5">
+                    {secondaryBackupStream}
+                  </p>
+                  {diagBackupError && (
+                    <p className="text-[10px] text-red-400">Détail : {diagBackupError}</p>
+                  )}
+                  <div className="flex items-center gap-2 pt-1">
+                    <button
+                      onClick={() => handleSwitchStream(secondaryBackupStream)}
+                      className="px-3 py-1 bg-amber-500 hover:bg-amber-400 text-black text-[10px] font-black rounded-lg uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer"
+                    >
+                      <Zap className="w-3 h-3 fill-black" />
+                      <span>Activer le flux de secours</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between pt-4 border-t border-white/10 mt-4 flex-wrap gap-2">
+            <button
+              onClick={runDiagnostic}
+              disabled={isDiagnosticRunning}
+              className="px-3.5 py-1.5 bg-white/10 hover:bg-white/20 text-gray-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${isDiagnosticRunning ? 'animate-spin text-cyan-400' : ''}`} />
+              <span>{isDiagnosticRunning ? 'Diagnostic en cours...' : 'Relancer le test'}</span>
+            </button>
+            <button
+              onClick={() => setIsDiagnosticOpen(false)}
+              className="px-4 py-1.5 bg-red-600 hover:bg-red-500 text-white text-xs font-black rounded-lg uppercase tracking-wider transition-all cursor-pointer"
+            >
+              Fermer
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Mini Play Circle overlay when paused */}
           {!isPlaying && !isLoading && (
             <div
               className="absolute inset-x-0 inset-y-0 m-auto w-16 h-16 bg-black/60 rounded-full flex items-center justify-center border border-white/10 hover:border-[#e50914] hover:bg-[#e50914]/15 cursor-pointer hover:scale-105 active:scale-95 transition-all z-10"
