@@ -181,7 +181,7 @@
   },
   {
     "id": "ch_24",
-    "nom": "CCPV TV MONTRÉAL",
+    "nom": "CCPTV MONTRÉAL (CCPV TV)",
     "ch": "24",
     "categorie": "RELIGIEUX",
     "cat": "RELIGIEUX",
@@ -194,7 +194,7 @@
     "rtmpUrl": "rtmp://191.215.38.95/live",
     "rtmpKey": "cle_ccpvtv_inf_mxq",
     "logo": "https://i.imgur.com/jM4K6Kz.png",
-    "desc": "CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com",
+    "desc": "CCPTV MONTRÉAL (CCPV TV Montréal - Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com",
     "bouquet": "TVPRO_VPS"
   },
   {

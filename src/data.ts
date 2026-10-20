@@ -681,7 +681,7 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
   },
   {
     id: 'ch_24',
-    nom: "CCPV TV MONTRÉAL",
+    nom: "CCPTV MONTRÉAL (CCPV TV)",
     lien: "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
     logo: CCPV_TV_LOGO,
     cat: "RELIGIEUX",
@@ -691,7 +691,8 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     rtmpUrl: "rtmp://191.215.38.95/live",
     rtmpKey: "cle_ccpvtv_inf_mxq",
     m3u8Source: "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
-    desc: "CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com"
+    cloudRemix: "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
+    desc: "CCPTV MONTRÉAL (CCPV TV Montréal - Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com"
   },
   {
     id: 'ch_25',

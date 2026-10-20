@@ -234,20 +234,22 @@ export default function VideoPlayer({
     (channelNum === '28')
   );
 
+  const isHostTvPro = typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com');
+
   const primaryStreamUrl = isMalaika 
-    ? 'https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8' 
+    ? (isHostTvPro ? '/live/cle_malaika_1m_p461.m3u8' : `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8')}`)
     : isCcptv
-    ? 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8'
+    ? (isHostTvPro ? '/live/cle_ccpvtv_inf_mxq.m3u8' : `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8')}`)
     : isBalade
-    ? 'https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8'
+    ? (isHostTvPro ? '/live/cle_baladetv_inf_gx5l.m3u8' : `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8')}`)
     : (src || '');
 
   const secondaryBackupStream = isMalaika
-    ? 'https://tvpromedia.com/live/cle_malaika_1m_p461.m3u8'
+    ? (isHostTvPro ? `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_malaika_1m_p461.m3u8')}` : '/live/cle_malaika_1m_p461.m3u8')
     : isCcptv
-    ? 'https://tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8'
+    ? (isHostTvPro ? `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxq.m3u8')}` : '/live/cle_ccpvtv_inf_mxq.m3u8')
     : isBalade
-    ? 'https://tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8'
+    ? (isHostTvPro ? `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_baladetv_inf_gx5l.m3u8')}` : '/live/cle_baladetv_inf_gx5l.m3u8')
     : (m3u8Source && m3u8Source !== src ? m3u8Source : null);
 
   // Stream Connection Diagnostic System
@@ -693,9 +695,9 @@ export default function VideoPlayer({
       (channelNum === '92')
     ) {
       if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
-        return `/live/cle_malaika_1m_p461.m3u8`;
+        return '/live/cle_malaika_1m_p461.m3u8';
       }
-      return 'https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8';
+      return `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8')}`;
     }
 
     // Auto-route CCPV TV (CCPTV) strictly to the official active VPS stream (cle_ccpvtv_inf_mxq)
@@ -705,9 +707,9 @@ export default function VideoPlayer({
       (channelNum === '23' || channelNum === '24')
     ) {
       if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
-        return `/live/cle_ccpvtv_inf_mxq.m3u8`;
+        return '/live/cle_ccpvtv_inf_mxq.m3u8';
       }
-      return 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
+      return `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8')}`;
     }
 
     // Auto-route BALADE MONDE TV strictly to the official active VPS stream (cle_baladetv_inf_gx5l)
@@ -717,9 +719,9 @@ export default function VideoPlayer({
       (channelNum === '28')
     ) {
       if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
-        return `/live/cle_baladetv_inf_gx5l.m3u8`;
+        return '/live/cle_baladetv_inf_gx5l.m3u8';
       }
-      return 'https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8';
+      return `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8')}`;
     }
 
     // Auto-route MSTV strictly to official live stream
@@ -742,7 +744,10 @@ export default function VideoPlayer({
     // Route all VPS 191.215.38.95 SRS streams directly through native HTTPS Nginx /live/ reverse proxy
     if (resolved.includes('191.215.38.95:8080/live/') || resolved.includes('191.215.38.95/live/')) {
       const streamPart = resolved.split('/live/')[1];
-      return `/live/${streamPart}`;
+      if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
+        return `/live/${streamPart}`;
+      }
+      return `/api/proxy-stream?url=${encodeURIComponent(resolved)}`;
     }
 
     // Normalize tvpromedia.com / www.tvpromedia.com HLS stream paths
@@ -754,12 +759,13 @@ export default function VideoPlayer({
       return `https://tvpromedia.com/hls/${hlsPart}`;
     }
 
-    // Normalize tvpromedia.com /live/ streams to local relative path when on tvpromedia domain
+    // Normalize tvpromedia.com /live/ streams to local relative path when on tvpromedia domain, or proxy on external domains
     if (resolved.includes('tvpromedia.com/live/')) {
       const livePart = resolved.split('/live/')[1];
       if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
         return `/live/${livePart}`;
       }
+      return `/api/proxy-stream?url=${encodeURIComponent(resolved)}`;
     }
 
     // Convert legacy placeholder domains to real live IP stream
@@ -779,11 +785,10 @@ export default function VideoPlayer({
       }
     }
     
-    // Do NOT proxy streams that already support direct HTTPS & CORS (BeroSat, tvpromedia.com, EVI TV, Zeno)
+    // Do NOT proxy streams that already support direct HTTPS & CORS (BeroSat, EVI TV, Zeno)
     if (
       resolved.includes('stream.berosat.live') ||
       resolved.includes('ip-pro.berosat.live') ||
-      resolved.includes('tvpromedia.com') ||
       resolved.includes('catbox.moe') ||
       resolved.includes('mistserver.evi-tv.com') ||
       resolved.includes('stream.zeno.fm')

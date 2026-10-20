@@ -329,24 +329,24 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       return true;
     }
 
-    // 8. Strict CCPV TV (Canal 24 & Canal 23) - Flux Principal & Secours VPS www.tvpromedia.com
-    if (ch.id === 'ch_24' || ch.id === '24' || chNum === '24' || upperNom.includes('13 CULTURA')) {
+    // 8. Strict CCPV TV / CCPTV (Canal 24) - Flux Principal & Secours VPS www.tvpromedia.com
+    if (ch.id === 'ch_24' || ch.id === '24' || chNum === '24' || upperNom.includes('13 CULTURA') || upperNom.includes('CCPV') || upperNom.includes('CCPTV')) {
       if (seenKeys.has('CANAL_24_CCPV') || seenIds.has('ch_24')) return false;
       seenKeys.add('CANAL_24_CCPV');
       seenIds.add('ch_24');
       seenIds.add(ch.id);
       if (chNum) seenNums.add('24');
       ch.id = 'ch_24';
-      ch.nom = 'CCPV TV MONTRÉAL';
+      ch.nom = 'CCPTV MONTRÉAL (CCPV TV)';
       ch.ch = '24';
       ch.logo = CCPV_TV_LOGO;
       ch.lien = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
       ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
-      delete (ch as any).cloudRemix;
+      ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
       delete ch.youtubeBackup;
       ch.rtmpKey = 'cle_ccpvtv_inf_mxq';
       ch.rtmpUrl = 'rtmp://191.215.38.95/live';
-      ch.desc = 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com';
+      ch.desc = 'CCPTV MONTRÉAL (CCPV TV Montréal - Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com';
       ch.cat = 'RELIGIEUX';
       ch.pays = 'CANADA';
       ch.qualite = '4K';
@@ -425,7 +425,7 @@ export default function App() {
   const CONTINENTS_MAP: Record<string, string[]> = {
     AFRIQUE: ["CD","CG","CI","CM","SN","ML","MA","DZ","TN","EG","NG","GH","ZA","AO","BJ","BF","GA","GN","KE","ET","RW","ZM","ZW","TG","NE","MR","LY","SD","SS","UG","TZ","BI","MW","MZ","BW","NA","SL","LR","GM","GW","CV","ST","KM","DJ","SO","ER","TD","CF","GQ","RE","MU","YT","RDC","CONGO","AFRIQUE","AFRICA","SENEGAL","MALI","CAMEROUN","COTE","IVOIRE","GABON","GUINEE"],
     EUROPE: ["FR","BE","CH","DE","GB","UK","IT","ES","PT","NL","PL","TR","RU","UA","RO","GR","SE","NO","DK","FI","IE","AT","CZ","HU","BG","RS","HR","SI","SK","BA","AL","ME","MK","BY","MD","LT","LV","EE","LU","MT","CY","IS","FRANCE","EUROPE"],
-    AMERIQUE: ["US","USA","CA","MX","BR","AR","CO","PE","VE","CL","EC","BO","PY","UY","PA","CR","GT","HN","SV","NI","CU","DO","HT","JM","AMERIQUE","AMERICA"],
+    AMERIQUE: ["US","USA","CA","CAN","CANADA","MONTREAL","QUEBEC","MX","BR","AR","CO","PE","VE","CL","EC","BO","PY","UY","PA","CR","GT","HN","SV","NI","CU","DO","HT","JM","AMERIQUE","AMERICA"],
     ASIE: ["CN","JP","KR","IN","PK","BD","ID","MY","SG","TH","VN","PH","KH","LA","MM","NP","LK","SA","AE","QA","KW","BH","OM","JO","LB","IL","IR","IQ","ASIE","ASIA"]
   };
   const getContinent = (ch: any): string => {
@@ -475,8 +475,8 @@ export default function App() {
 
   // Initialize data on load
   useEffect(() => {
-    // 1. Core Catalog loading - restore all 4,000+ channels from September 26, 2026 backup
-    const CATALOG_VERSION = 'v42_restore_4167_channels_sept26_2026';
+    // 1. Core Catalog loading - refreshed with active VPS and Berosat channels including CCPTV Montréal
+    const CATALOG_VERSION = 'v51_ccpv_montreal_stream_fix_oct20_2026';
     if (localStorage.getItem('chaines_tvpro_version') !== CATALOG_VERSION) {
       try {
         localStorage.removeItem('chaines_tvpro');
@@ -484,13 +484,13 @@ export default function App() {
       } catch {}
     }
 
-    const fullRestoredList = (FULL_CHANNELS_SEPT26 && FULL_CHANNELS_SEPT26.length > 0 ? FULL_CHANNELS_SEPT26 : DEFAULT_CHANNELS) as Channel[];
+    const fullRestoredList = (DEFAULT_CHANNELS && DEFAULT_CHANNELS.length > 0 ? DEFAULT_CHANNELS : FULL_CHANNELS_SEPT26) as Channel[];
     let loadedChannels = fullRestoredList;
     const cachedCh = localStorage.getItem('chaines_tvpro');
     if (cachedCh) {
       try {
         let parsed: Channel[] = JSON.parse(cachedCh);
-        if (Array.isArray(parsed) && parsed.length > 500) {
+        if (Array.isArray(parsed) && parsed.length > 0) {
           loadedChannels = parsed;
         }
         // Remove deleted / requested removed channels
@@ -750,8 +750,8 @@ export default function App() {
               };
             }
           }
-          if (ch.id === 'ch_24' || ch.id === '24' || ch.ch === '24' || (ch.nom && (ch.nom.toUpperCase().includes('13 CULTURA') || ch.nom.toUpperCase().includes('CULTURA')))) {
-            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_1m_9miq.m3u8';
+          if (ch.id === 'ch_24' || ch.id === '24' || ch.ch === '24' || (ch.nom && (ch.nom.toUpperCase().includes('CCPV') || ch.nom.toUpperCase().includes('CCPTV') || ch.nom.toUpperCase().includes('13 CULTURA') || ch.nom.toUpperCase().includes('CULTURA')))) {
+            const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
             migrated = true;
             const { youtubeBackup: _unused, ...rest } = ch;
             ch = { 
@@ -759,12 +759,13 @@ export default function App() {
               id: 'ch_24',
               ch: '24',
               logo: CCPV_TV_LOGO, 
-              nom: 'CCPV TV MONTRÉAL',
+              nom: 'CCPTV MONTRÉAL (CCPV TV)',
               lien: targetCcpvStream,
               m3u8Source: targetCcpvStream,
+              cloudRemix: targetCcpvStream,
               rtmpUrl: 'rtmp://191.215.38.95/live',
-              rtmpKey: 'cle_ccpvtv_1m_9miq',
-              desc: `CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_1m_9miq sur www.tvpromedia.com`,
+              rtmpKey: 'cle_ccpvtv_inf_mxq',
+              desc: `CCPTV MONTRÉAL (CCPV TV Montréal - Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com`,
               cat: 'RELIGIEUX',
               pays: 'CANADA',
               qualite: '4K'
@@ -937,7 +938,7 @@ export default function App() {
               ch = { ...ch, logo: OCEAN_TV_LOGO };
             }
           }
-          if (ch.id === 'ch_24' || ch.id === '24' || ch.ch === '24' || (ch.nom && (ch.nom.toUpperCase().includes('CCPV') || ch.nom.toUpperCase().includes('13 CULTURA') || ch.nom.toUpperCase().includes('CULTURA')))) {
+          if (ch.id === 'ch_24' || ch.id === '24' || ch.ch === '24' || (ch.nom && (ch.nom.toUpperCase().includes('CCPV') || ch.nom.toUpperCase().includes('CCPTV') || ch.nom.toUpperCase().includes('13 CULTURA') || ch.nom.toUpperCase().includes('CULTURA')))) {
             const targetCcpvStream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
             migrated = true;
             const { youtubeBackup: _unused, ...rest } = ch;
@@ -945,16 +946,17 @@ export default function App() {
               ...rest, 
               id: 'ch_24',
               ch: '24',
-              nom: "CCPV TV MONTRÉAL", 
+              nom: "CCPTV MONTRÉAL (CCPV TV)", 
               lien: targetCcpvStream, 
               m3u8Source: targetCcpvStream,
+              cloudRemix: targetCcpvStream,
               rtmpUrl: 'rtmp://191.215.38.95/live',
               rtmpKey: 'cle_ccpvtv_inf_mxq',
               logo: CCPV_TV_LOGO, 
               cat: 'RELIGIEUX', 
               pays: 'CANADA',
               qualite: '4K',
-              desc: 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com'
+              desc: 'CCPTV MONTRÉAL (CCPV TV Montréal - Centre Chrétien Parole de Vie) • Canal 24 (Principal) • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com'
             };
           }
           if (ch.id === 'ch_66' || (ch.nom && ch.nom.toUpperCase().includes('HORIZON 2000'))) {
@@ -1519,15 +1521,16 @@ export default function App() {
           }
         });
 
-        // Absolute guarantee that Canal 24 (CCPV TV MONTRÉAL) is present with the correct stream & name
+        // Absolute guarantee that Canal 24 (CCPTV MONTRÉAL / CCPV TV) is present with the correct stream & name
         const idx24 = parsed.findIndex(c => c.id === 'ch_24' || c.ch === '24');
         const ccpv24Stream = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
         if (idx24 === -1) {
           parsed.push({
             id: 'ch_24',
-            nom: 'CCPV TV MONTRÉAL',
+            nom: 'CCPTV MONTRÉAL (CCPV TV)',
             lien: ccpv24Stream,
             m3u8Source: ccpv24Stream,
+            cloudRemix: ccpv24Stream,
             rtmpUrl: 'rtmp://191.215.38.95/live',
             rtmpKey: 'cle_ccpvtv_inf_mxq',
             logo: CCPV_TV_LOGO,
@@ -1535,26 +1538,27 @@ export default function App() {
             ch: '24',
             qualite: '4K',
             pays: 'CANADA',
-            desc: 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com'
+            desc: 'CCPTV MONTRÉAL (CCPV TV Montréal - Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com'
           });
           migrated = true;
         } else {
           const current24 = parsed[idx24];
-          if (current24.nom !== 'CCPV TV MONTRÉAL' || current24.id !== 'ch_24' || current24.ch !== '24' || current24.lien !== ccpv24Stream || current24.logo !== CCPV_TV_LOGO || current24.rtmpKey !== 'cle_ccpvtv_inf_mxq') {
+          if (current24.nom !== 'CCPTV MONTRÉAL (CCPV TV)' || current24.id !== 'ch_24' || current24.ch !== '24' || current24.lien !== ccpv24Stream || current24.logo !== CCPV_TV_LOGO || current24.rtmpKey !== 'cle_ccpvtv_inf_mxq') {
             parsed[idx24] = {
               ...current24,
               id: 'ch_24',
               ch: '24',
-              nom: 'CCPV TV MONTRÉAL',
+              nom: 'CCPTV MONTRÉAL (CCPV TV)',
               lien: ccpv24Stream,
               m3u8Source: ccpv24Stream,
+              cloudRemix: ccpv24Stream,
               rtmpUrl: 'rtmp://191.215.38.95/live',
               rtmpKey: 'cle_ccpvtv_inf_mxq',
               logo: CCPV_TV_LOGO,
               cat: 'RELIGIEUX',
               pays: 'CANADA',
               qualite: '4K',
-              desc: 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com'
+              desc: 'CCPTV MONTRÉAL (CCPV TV Montréal - Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com'
             };
             migrated = true;
           }
@@ -1987,11 +1991,11 @@ export default function App() {
 
     const customs = all.filter(c => {
       const s = (JSON.stringify(c) || '').toLowerCase();
-      return s.includes('berosat') || s.includes('tvpromedia.com/live');
+      return s.includes('berosat') || s.includes('tvpromedia.com/live') || s.includes('cle_ccpvtv') || s.includes('ccpv') || s.includes('ccptv') || c.id === 'ch_24' || c.ch === '24';
     });
     const rest = all.filter(c => {
       const s = (JSON.stringify(c) || '').toLowerCase();
-      return !s.includes('berosat') && !s.includes('tvpromedia.com/live');
+      return !s.includes('berosat') && !s.includes('tvpromedia.com/live') && !s.includes('cle_ccpvtv') && !s.includes('ccpv') && !s.includes('ccptv') && c.id !== 'ch_24' && c.ch !== '24';
     });
 
     const start = (idx % 7) * 1000;
@@ -2019,7 +2023,11 @@ export default function App() {
       const numNormalized = normalizeText(ch.ch || '');
       const descNormalized = normalizeText(ch.desc || '');
 
+      const isCcpMatch = (searchFilterLower.includes('ccp') || searchFilterLower.includes('ccptv') || searchFilterLower.includes('ccpv')) &&
+        (nameNormalized.includes('ccp') || descNormalized.includes('ccp') || ch.id === 'ch_24' || ch.ch === '24');
+
       const matchesKeyword = !searchQuery || 
+        isCcpMatch ||
         nameNormalized.includes(searchFilterLower) ||
         catNormalized.includes(searchFilterLower) ||
         numNormalized.includes(searchFilterLower) ||
@@ -2033,7 +2041,7 @@ export default function App() {
 
       return matchesKeyword && matchesTab && matchesCategory;
     });
-  }, [channels, hostChannels, searchQuery, activeTab, favorites, selectedCategory]);
+  }, [channels, hostChannels, searchQuery, activeTab, favorites, selectedCategory, continentActif]);
 
   // Group filtered channels by their category with memoization
   const channelsByCategory = useMemo(() => {

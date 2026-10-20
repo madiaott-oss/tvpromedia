@@ -410,28 +410,36 @@ async function startServer() {
       return res.redirect('/live/cle_malaika_1m_p461.m3u8');
     }
 
-    // For MALAIKA ACTU, CCPTV / CCPV and local live broadcasts:
-    // If not on disk, check local SRS port 8080 directly without redirect loop!
+    // For MALAIKA ACTU, CCPTV / CCPV, BALADE and local live broadcasts:
+    // If not on disk, check local SRS port 8080, VPS SRS 191.215.38.95:8080, and remote tvpromedia.com
     try {
-      const srsUrl = `http://127.0.0.1:8080/live/${filename}`;
-      const ctrl = new AbortController();
-      const tid = setTimeout(() => ctrl.abort(), 2000);
-      const srsRes = await fetch(srsUrl, { signal: ctrl.signal }).catch(() => null);
-      clearTimeout(tid);
-      if (srsRes && srsRes.ok) {
-        const srsContentType = srsRes.headers.get('content-type') || (filename.endsWith('.m3u8') ? 'application/vnd.apple.mpegurl; charset=utf-8' : 'video/mp2t');
-        res.setHeader('Content-Type', srsContentType);
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS, HEAD');
-        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-        if (filename.endsWith('.m3u8')) {
-          const body = await srsRes.text();
-          return res.send(body);
-        } else if (srsRes.body) {
-          const { Readable } = await import('stream');
-          // @ts-ignore
-          return Readable.fromWeb(srsRes.body).pipe(res);
-        }
+      const srsCandidates = [
+        `http://191.215.38.95:8080/live/${filename}`,
+        `http://127.0.0.1:8080/live/${filename}`,
+        `https://www.tvpromedia.com/live/${filename}`
+      ];
+      for (const srsUrl of srsCandidates) {
+        try {
+          const ctrl = new AbortController();
+          const tid = setTimeout(() => ctrl.abort(), 1500);
+          const srsRes = await fetch(srsUrl, { signal: ctrl.signal }).catch(() => null);
+          clearTimeout(tid);
+          if (srsRes && srsRes.ok) {
+            const srsContentType = srsRes.headers.get('content-type') || (filename.endsWith('.m3u8') ? 'application/vnd.apple.mpegurl; charset=utf-8' : 'video/mp2t');
+            res.setHeader('Content-Type', srsContentType);
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS, HEAD');
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+            if (filename.endsWith('.m3u8')) {
+              const body = await srsRes.text();
+              return res.send(body);
+            } else if (srsRes.body) {
+              const { Readable } = await import('stream');
+              // @ts-ignore
+              return Readable.fromWeb(srsRes.body).pipe(res);
+            }
+          }
+        } catch {}
       }
     } catch (e) {
       // Ignore SRS lookup error
@@ -997,23 +1005,23 @@ async function startServer() {
         return true;
       }
 
-      // 8. Strict CCPV TV (Canal 24 & Canal 23) - Flux Principal & Secours VPS www.tvpromedia.com
-      if (ch.id === 'ch_24' || ch.id === '24' || chNum === '24' || upperNom.includes('13 CULTURA') || upperNom.includes('CCPV')) {
+      // 8. Strict CCPV TV / CCPTV (Canal 24) - Flux Principal & Secours VPS www.tvpromedia.com
+      if (ch.id === 'ch_24' || ch.id === '24' || chNum === '24' || upperNom.includes('13 CULTURA') || upperNom.includes('CCPV') || upperNom.includes('CCPTV')) {
         if (seenKeys.has('CANAL_24_CCPV') || seenIds.has('ch_24')) return false;
         seenKeys.add('CANAL_24_CCPV');
         seenIds.add('ch_24');
         seenIds.add(ch.id);
         if (chNum) seenNums.add('24');
         ch.id = 'ch_24';
-        ch.nom = 'CCPV TV MONTRÉAL';
+        ch.nom = 'CCPTV MONTRÉAL (CCPV TV)';
         ch.ch = '24';
         ch.lien = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
         ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
-        delete (ch as any).cloudRemix;
+        ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8';
         delete (ch as any).youtubeBackup;
         ch.rtmpKey = 'cle_ccpvtv_inf_mxq';
         ch.rtmpUrl = 'rtmp://191.215.38.95/live';
-        ch.desc = 'CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com';
+        ch.desc = 'CCPTV MONTRÉAL (CCPV TV Montréal - Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com';
         ch.cat = 'RELIGIEUX';
         ch.pays = 'CANADA';
         ch.qualite = '4K';
