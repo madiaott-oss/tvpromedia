@@ -2,7 +2,8 @@ node_modules
 dist
 dist.backup.*
 dist_new/
-data/
+# data/ à la racine seulement
+/data/
 live
 *.bak
 *.backup*
