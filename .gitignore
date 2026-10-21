@@ -14,3 +14,8 @@ public/server.cjs*
 server.ts.CASSE
 update-safe.sh
 channels.json.bak*
+*.mp4
+*.apk
+*.png
+dist/*.json
+dist/*.bak*
