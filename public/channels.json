@@ -15,34 +15,34 @@
     "lien": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
     "m3u8Source": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
     "cloudRemix": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
-    "desc": "IC TV partenaire Berosat"
+    "desc": "IC TV partenaire Berosat - Identité Chrétienne"
+  },
+  {
+    "nom": "CCPTV MONTRÉAL (CCPV TV)",
+    "ch": "3",
+    "categorie": "RELIGIEUX",
+    "lien": "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
+    "m3u8Source": "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
+    "cloudRemix": "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
+    "rtmpKey": "cle_ccpvtv_inf_mxq"
   },
   {
     "nom": "RTP AFRI",
-    "ch": "3",
+    "ch": "4",
     "categorie": "AFRIQUE",
     "lien": "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
-    "m3u8Source": "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8",
-    "desc": "RTP AFRI Berosat"
+    "m3u8Source": "https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8"
   },
   {
     "nom": "STARS BRAZZAVILLE BY AFRICA",
     "ch": "4",
     "categorie": "CONGO",
-    "lien": "https://stream.berosat.live/hls/stars-brazzaville/stars-brazzaville.m3u8",
-    "m3u8Source": "https://stream.berosat.live/hls/stars-brazzaville/stars-brazzaville.m3u8",
-    "desc": "Stars Brazzaville partenaire"
-  },
-  {
-    "nom": "CCPTV MONTRÉAL (CCPV TV)",
-    "ch": "5",
-    "categorie": "RELIGIEUX",
-    "lien": "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
-    "m3u8Source": "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
-    "cloudRemix": "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
+    "lien": "https://www.tvpromedia.com/live/cle_stars_brazzaville.m3u8",
+    "m3u8Source": "https://www.tvpromedia.com/live/cle_stars_brazzaville.m3u8",
+    "desc": "Stars Brazzaville partenaire",
+    "cloudRemix": "https://www.tvpromedia.com/live/cle_stars_brazzaville.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
-    "rtmpKey": "cle_ccpvtv_inf_mxq",
-    "desc": "CCPV live VPS"
+    "rtmpKey": "cle_stars_brazzaville"
   },
   {
     "nom": "CENTRAL OF VOICE TV",
@@ -141,17 +141,6 @@
     "lien": "https://stream.berosat.live/hls/espoir-tv-stream/espoir-tv-stream.m3u8",
     "m3u8Source": "https://stream.berosat.live/hls/espoir-tv-stream/espoir-tv-stream.m3u8",
     "desc": "ESPOIR  TV HD Berosat"
-  },
-  {
-    "nom": "CCPTV MONTRÉAL (CCPV TV)",
-    "ch": "3",
-    "categorie": "RELIGIEUX",
-    "lien": "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
-    "m3u8Source": "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
-    "cloudRemix": "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
-    "rtmpUrl": "rtmp://191.215.38.95/live",
-    "rtmpKey": "cle_ccpvtv_inf_mxq",
-    "desc": "CCPV live"
   },
   {
     "id": "ccpvtv_montreal",
@@ -957,19 +946,6 @@
     "categorie": "GENERALISTE"
   },
   {
-    "id": "iptv_lvb87px",
-    "nom": "Television Espoir 47",
-    "lien": "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
-    "cat": "GENERALISTE",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 240\" width=\"100%\" height=\"100%\"><rect width=\"600\" height=\"240\" fill=\"%23ffffff\"/><circle cx=\"120\" cy=\"120\" r=\"95\" fill=\"%23ff1a1a\"/><circle cx=\"120\" cy=\"120\" r=\"85\" fill=\"%23ffd700\"/><circle cx=\"120\" cy=\"120\" r=\"75\" fill=\"%230015b0\"/><text x=\"75\" y=\"160\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"115\" fill=\"%23ffe600\">E</text><text x=\"220\" y=\"140\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"75\" fill=\"%23ff0000\" letter-spacing=\"-1\">ESPOIR TV</text><line x1=\"220\" y1=\"165\" x2=\"570\" y2=\"165\" stroke=\"%23ff0000\" stroke-width=\"12\"/><text x=\"270\" y=\"215\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"42\" fill=\"%230015b0\">Télévision</text><path d=\"M 360,55 Q 430,10 490,40\" fill=\"none\" stroke=\"%23ff0000\" stroke-width=\"6\"/><circle cx=\"430\" cy=\"22\" r=\"10\" fill=\"%230015b0\"/><circle cx=\"480\" cy=\"38\" r=\"8\" fill=\"%23ffe600\"/><circle cx=\"445\" cy=\"85\" r=\"9\" fill=\"%23ff0000\"/></svg>",
-    "ch": "4430",
-    "qualite": "HD",
-    "description": "Flux officiel extrait de la playlist GENERALISTE",
-    "categorie": "GENERALISTE",
-    "m3u8Source": "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
-    "desc": "ESPOIR TV HD - Télévision d'information, culture et divertissement"
-  },
-  {
     "id": "iptv_v0fzzlw",
     "nom": "Television Tarapoto",
     "lien": "https://live-evg11.tv360.bitel.com.pe/bitel/tvtarapotoSRT/playlist.m3u8",
@@ -1668,13 +1644,17 @@
   {
     "id": "ch_stars_brazza",
     "nom": "STARS BRAZZAVILLE by AFRICA TV",
-    "lien": "https://www.tvpromedia.com/live/cle_star_1m_nmo2/playlist.m3u8",
+    "lien": "https://www.tvpromedia.com/live/cle_stars_brazzaville.m3u8",
     "logo": "https://files.catbox.moe/3sgfwr.PNG",
     "cat": "MUSIQUE",
     "ch": "MUSIQUE",
     "qualite": "HD",
     "pays": "CG",
-    "desc": "STARS BRAZZAVILLE by AFRICA TV - Musique et divertissement Brazzaville"
+    "desc": "STARS BRAZZAVILLE by AFRICA TV - Musique et divertissement Brazzaville",
+    "m3u8Source": "https://www.tvpromedia.com/live/cle_stars_brazzaville.m3u8",
+    "cloudRemix": "https://www.tvpromedia.com/live/cle_stars_brazzaville.m3u8",
+    "rtmpUrl": "rtmp://191.215.38.95/live",
+    "rtmpKey": "cle_stars_brazzaville"
   },
   {
     "id": "iptv_sikc177",
@@ -1716,17 +1696,6 @@
     "cat": "NEWS",
     "logo": "https://i.imgur.com/spQgX7X.png",
     "ch": "1364",
-    "qualite": "HD",
-    "description": "Flux officiel extrait de la playlist NEWS",
-    "categorie": "NEWS"
-  },
-  {
-    "id": "iptv_vfeco9y",
-    "nom": "Baraka Television",
-    "lien": "https://stream.berosat.live:19360/baraka-hd/baraka-hd.m3u8",
-    "cat": "NEWS",
-    "logo": "https://i.imgur.com/IKXddHN.png",
-    "ch": "1439",
     "qualite": "HD",
     "description": "Flux officiel extrait de la playlist NEWS",
     "categorie": "NEWS"
@@ -2818,18 +2787,6 @@
     "rtmpKey": "cle_msradio"
   },
   {
-    "id": "ch_1",
-    "nom": "ESPOIR  TV HD",
-    "lien": "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 240\" width=\"100%\" height=\"100%\"><rect width=\"600\" height=\"240\" fill=\"%23ffffff\"/><circle cx=\"120\" cy=\"120\" r=\"95\" fill=\"%23ff1a1a\"/><circle cx=\"120\" cy=\"120\" r=\"85\" fill=\"%23ffd700\"/><circle cx=\"120\" cy=\"120\" r=\"75\" fill=\"%230015b0\"/><text x=\"75\" y=\"160\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"115\" fill=\"%23ffe600\">E</text><text x=\"220\" y=\"140\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"75\" fill=\"%23ff0000\" letter-spacing=\"-1\">ESPOIR TV</text><line x1=\"220\" y1=\"165\" x2=\"570\" y2=\"165\" stroke=\"%23ff0000\" stroke-width=\"12\"/><text x=\"270\" y=\"215\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"42\" fill=\"%230015b0\">Télévision</text><path d=\"M 360,55 Q 430,10 490,40\" fill=\"none\" stroke=\"%23ff0000\" stroke-width=\"6\"/><circle cx=\"430\" cy=\"22\" r=\"10\" fill=\"%230015b0\"/><circle cx=\"480\" cy=\"38\" r=\"8\" fill=\"%23ffe600\"/><circle cx=\"445\" cy=\"85\" r=\"9\" fill=\"%23ff0000\"/></svg>",
-    "cat": "GENERALISTE",
-    "ch": "1",
-    "qualite": "4K",
-    "pays": "RDC",
-    "desc": "ESPOIR TV HD - Télévision d'information, culture et divertissement",
-    "m3u8Source": "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8"
-  },
-  {
     "id": "ch_6",
     "nom": "HB TV",
     "lien": "https://video1.getstreamhosting.com:1936/8432/8432/playlist.m3u8",
@@ -3253,17 +3210,6 @@
     "ch": "58",
     "qualite": "HD",
     "pays": "Finlande",
-    "desc": ""
-  },
-  {
-    "id": "ch_61",
-    "nom": "LIBERTY TV",
-    "lien": "https://stream.berosat.live:19360/liberty-tv/liberty-tv.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 350\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"350\" fill=\"%23ffffff\"/><path d=\"M 50 180 C 40 110 70 60 190 120 L 260 40 L 210 125 L 100 160 C 80 230 110 320 110 320 C 110 320 60 250 50 180 Z\" fill=\"%230f05a0\"/><circle cx=\"95\" cy=\"58\" r=\"8\" fill=\"%230f05a0\"/><line x1=\"95\" y1=\"58\" x2=\"190\" y2=\"120\" stroke=\"%230f05a0\" stroke-width=\"6\"/><text x=\"140\" y=\"270\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"140\" fill=\"%230f05a0\" letter-spacing=\"-2\">TVLB</text></svg>",
-    "cat": "GENERALISTE",
-    "ch": "61",
-    "qualite": "HD",
-    "pays": "RDC",
     "desc": ""
   },
   {
@@ -12300,28 +12246,6 @@
     "cat": "NEWS",
     "logo": "https://i.imgur.com/hRFa03k.png",
     "ch": "1759",
-    "qualite": "HD",
-    "description": "Flux officiel extrait de la playlist NEWS",
-    "categorie": "NEWS"
-  },
-  {
-    "id": "iptv_eglvsud",
-    "nom": "Madhimugam TV",
-    "lien": "https://mumt01.tangotv.in/O5aw8Zn3MATHIMUGAMTV/index.m3u8",
-    "cat": "NEWS",
-    "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Madhimugam_TV.png",
-    "ch": "1760",
-    "qualite": "HD",
-    "description": "Flux officiel extrait de la playlist NEWS",
-    "categorie": "NEWS"
-  },
-  {
-    "id": "iptv_32iuvk9",
-    "nom": "Mahaa News",
-    "lien": "https://mumt07.tangotv.in/zHjX9OFlMAHAANEWS/index.m3u8",
-    "cat": "NEWS",
-    "logo": "https://i.imgur.com/buT76vR.png",
-    "ch": "1761",
     "qualite": "HD",
     "description": "Flux officiel extrait de la playlist NEWS",
     "categorie": "NEWS"
