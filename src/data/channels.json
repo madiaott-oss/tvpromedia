@@ -6,7 +6,10 @@
     "lien": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
     "m3u8Source": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
     "cloudRemix": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
-    "desc": "AFRI TV partenaire Berosat"
+    "desc": "AFRI TV partenaire Berosat",
+    "lien_secours": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
+    "m3u8_secours": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8",
+    "secours": "https://stream.berosat.live/hls/afri-tv/afri-tv.m3u8"
   },
   {
     "nom": "IC TV - IDENTITE CHRETIENNE",
@@ -15,7 +18,10 @@
     "lien": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
     "m3u8Source": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
     "cloudRemix": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
-    "desc": "IC TV partenaire Berosat - Identité Chrétienne"
+    "desc": "IC TV partenaire Berosat - Identité Chrétienne",
+    "lien_secours": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
+    "m3u8_secours": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
+    "secours": "https://stream.berosat.live/hls/ictv/ictv.m3u8"
   },
   {
     "nom": "CCPTV MONTRÉAL (CCPV TV)",
