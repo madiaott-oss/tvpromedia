@@ -15,7 +15,9 @@
     "lien": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
     "m3u8Source": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
     "cloudRemix": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
-    "desc": "IC TV partenaire Berosat - Identité Chrétienne"
+    "desc": "IC TV partenaire Berosat - Identité Chrétienne",
+    "url": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
+    "src": "https://stream.berosat.live/hls/ictv/ictv.m3u8"
   },
   {
     "nom": "CCPTV MONTRÉAL (CCPV TV)",
