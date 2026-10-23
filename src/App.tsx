@@ -94,16 +94,16 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.id = 'ch_stars_brazza';
       ch.nom = 'STARS BRAZZAVILLE BY AFRICA';
       ch.ch = '1';
-      ch.lien = 'https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8';
+      ch.lien = 'https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8';
       ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8';
-      ch.cloudRemix = 'https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8';
-      ch.youtubeBackup = 'https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8';
+      ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8';
+      ch.youtubeBackup = 'https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8';
       ch.cat = 'MUSIQUE';
       ch.pays = 'BRAZZAVILLE';
       ch.qualite = 'HD';
       ch.direct = true;
       ch.logo = '/logos/stars_brazzaville.png';
-      ch.desc = 'STARS BRAZZAVILLE BY AFRICA - Chaîne N° 1 Musique & Culture (Brazzaville) • Direct HLS Régie (Secours M3U8 cle_star_1m_ay2q)';
+      ch.desc = 'STARS BRAZZAVILLE BY AFRICA - Chaîne N° 1 Musique & Culture (Brazzaville) • Direct HLS Régie (cle_star_1m_nmo2)';
       return true;
     }
 

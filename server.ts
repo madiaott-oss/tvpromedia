@@ -142,7 +142,23 @@ async function startServer() {
         targetUrl = rawTargetUrl;
       }
 
-      const urlObj = new URL(targetUrl);
+      let urlObj = new URL(targetUrl);
+
+      // Direct high-performance resolution for live SRS streams on VPS port 8080 (bypasses corrupted disk files)
+      if (targetUrl.includes('cle_ccpvtv')) {
+        const streamFile = path.basename(urlObj.pathname);
+        targetUrl = `http://191.215.38.95:8080/live/${streamFile}`;
+        urlObj = new URL(targetUrl);
+      } else if (targetUrl.includes('cle_baladetv')) {
+        const streamFile = path.basename(urlObj.pathname);
+        targetUrl = `http://191.215.38.95:8080/live/${streamFile}`;
+        urlObj = new URL(targetUrl);
+      } else if (targetUrl.includes('cle_rtp_1ju9k')) {
+        const streamFile = path.basename(urlObj.pathname);
+        targetUrl = `http://191.215.38.95:8080/live/${streamFile}`;
+        urlObj = new URL(targetUrl);
+      }
+
       const baseUrl = targetUrl.substring(0, targetUrl.lastIndexOf('/') + 1);
 
       // ANTI-LOOP & ANTI-OVERLOAD PROTECTION: Prevent self-referencing recursive proxy loops
@@ -245,14 +261,16 @@ async function startServer() {
           let streamFound = 0;
           for (let i = 0; i < lines.length && streamFound < 25; i++) {
             const line = lines[i].trim();
-            if (line.startsWith('http://') || line.startsWith('https://')) {
+            if ((line.startsWith('http://') || line.startsWith('https://')) && !line.includes(urlObj.pathname) && line !== targetUrl) {
               streamFound++;
               masterM3u += `#EXT-X-STREAM-INF:BANDWIDTH=${1500000 + streamFound * 100000},RESOLUTION=1280x720\n/api/proxy-stream?url=${encodeURIComponent(line)}\n`;
             }
           }
-          res.setHeader('Content-Type', 'application/vnd.apple.mpegurl; charset=utf-8');
-          res.status(200).send(masterM3u);
-          return;
+          if (streamFound > 0) {
+            res.setHeader('Content-Type', 'application/vnd.apple.mpegurl; charset=utf-8');
+            res.status(200).send(masterM3u);
+            return;
+          }
         }
 
         // Rewrite relative URLs inside M3U8 manifest to go through our proxy
@@ -333,11 +351,16 @@ async function startServer() {
       path.join(process.cwd(), 'public', 'live', filename)
     ];
 
-    // Dedicated rewrite for cle_star_1m_ay2q.m3u8 so relative TS segments point to /hls/star_15min/
-    if (filename.includes('ay2q') || filename.includes('cle_star_1m_ay2q')) {
+    // Dedicated routing for CCPV TV Montréal: legacy keys or without extension -> cle_ccpvtv_inf_mxq.m3u8 (flux actif)
+    if (filename.includes('cle_ccpvtv_inf_mxg') || filename.includes('cle_ccpvtv_1m_9miq') || filename === 'cle_ccpvtv_inf_mxq' || (filename.includes('ccpv') && !filename.includes('.m3u8') && !filename.includes('.ts'))) {
+      return res.redirect('/live/cle_ccpvtv_inf_mxq.m3u8');
+    }
+
+    // Dedicated rewrite for cle_star_1m_ay2q.m3u8 -> cle_star_1m_nmo2.m3u8 (active stream)
+    if (filename.includes('ay2q') || filename.includes('cle_star_1m_ay2q') || filename === 'cle_star_1m_nmo2' || (filename.includes('cle_star') && !filename.includes('.m3u8') && !filename.includes('.ts'))) {
       const starCandidates = [
         path.join('/var/www/hls/star_15min', 'index.m3u8'),
-        path.join('/var/www/hls', 'cle_star_1m_ay2q.m3u8'),
+        path.join('/var/www/hls', 'cle_star_1m_nmo2.m3u8'),
         path.join(process.cwd(), 'hls', 'star_15min', 'index.m3u8')
       ];
       for (const p of starCandidates) {
@@ -351,7 +374,7 @@ async function startServer() {
           return res.send(content);
         }
       }
-      return res.redirect('https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8');
+      return res.redirect('https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8');
     }
 
     for (const p of possiblePaths) {
@@ -395,14 +418,9 @@ async function startServer() {
       return res.redirect(`/api/proxy-stream?url=${encodeURIComponent('https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8')}`);
     }
 
-    // If Stars Brazzaville stream is requested via /live/, route to cle_star_1m_ay2q.m3u8 secours
+    // If Stars Brazzaville stream is requested via /live/, route to active cle_star_1m_nmo2.m3u8
     if (filename.includes('star') || filename.includes('cle_star')) {
-      return res.redirect('https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8');
-    }
-
-    // Auto-alias for CCPV TV Montréal: legacy keys -> cle_ccpvtv_inf_mxq (flux actif)
-    if (filename.includes('cle_ccpvtv_inf_mxg') || filename.includes('cle_ccpvtv_1m_9miq')) {
-      return res.redirect('/live/cle_ccpvtv_inf_mxq.m3u8');
+      return res.redirect('https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8');
     }
 
     // Auto-alias for Malaïka Actu: legacy keys -> cle_malaika_1m_p461 (flux actif)
@@ -748,7 +766,7 @@ async function startServer() {
         ch.id = 'ch_stars_brazza';
         ch.nom = 'STARS BRAZZAVILLE BY AFRICA';
         ch.ch = '1';
-        ch.lien = 'https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8';
+        ch.lien = 'https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8';
         ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8';
         ch.categorie = 'MUSIQUE';
         ch.cat = 'MUSIQUE';
@@ -756,9 +774,9 @@ async function startServer() {
         ch.qualite = 'HD';
         ch.direct = true;
         ch.logo = '/logos/stars_brazzaville.png';
-        ch.desc = 'STARS BRAZZAVILLE BY AFRICA - Chaîne N° 1 Musique & Culture (Brazzaville) • Direct HLS Régie (Secours M3U8 cle_star_1m_ay2q)';
-        ch.cloudRemix = 'https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8';
-        ch.youtubeBackup = 'https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8';
+        ch.desc = 'STARS BRAZZAVILLE BY AFRICA - Chaîne N° 1 Musique & Culture (Brazzaville) • Direct HLS Régie (cle_star_1m_nmo2)';
+        ch.cloudRemix = 'https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8';
+        ch.youtubeBackup = 'https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8';
         return true;
       }
 

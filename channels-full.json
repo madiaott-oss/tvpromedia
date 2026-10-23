@@ -154,19 +154,20 @@
   {
     "id": "ch_stars_brazza",
     "nom": "STARS BRAZZAVILLE BY AFRICA",
-    "ch": "10",
+    "ch": "1",
     "categorie": "MUSIQUE",
     "cat": "MUSIQUE",
     "pays": "CONGO",
     "qualite": "HD",
     "direct": true,
-    "lien": "https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8",
-    "m3u8Source": "https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8",
+    "lien": "https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8",
+    "m3u8Source": "https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
     "rtmpKey": "cle_star_1m_ay2q",
     "logo": "/logos/stars_brazzaville.png",
     "desc": "STARS BRAZZAVILLE BY AFRICA - Chaîne N° 1 Musique & Culture (Brazzaville) • Direct HLS Régie (cle_star_1m_ay2q)",
-    "bouquet": "TVPRO_VPS"
+    "bouquet": "TVPRO_VPS",
+    "cloudRemix": "https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8"
   },
   {
     "id": "ch_mcprod",
@@ -201,7 +202,7 @@
   },
   {
     "id": "ch_24",
-    "nom": "CCPV TV MONTRÉAL",
+    "nom": "CCPTV MONTRÉAL (CCPV TV)",
     "ch": "24",
     "categorie": "RELIGIEUX",
     "cat": "RELIGIEUX",
@@ -214,7 +215,8 @@
     "rtmpKey": "cle_ccpvtv_inf_mxq",
     "logo": "https://i.imgur.com/jM4K6Kz.png",
     "desc": "CCPV TV Montréal (Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com",
-    "bouquet": "TVPRO_VPS"
+    "bouquet": "TVPRO_VPS",
+    "cloudRemix": "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8"
   },
   {
     "id": "ch_28",

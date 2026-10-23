@@ -134,15 +134,15 @@
   {
     "id": "ch_stars_brazza",
     "nom": "STARS BRAZZAVILLE BY AFRICA",
-    "ch": "10",
+    "ch": "1",
     "categorie": "MUSIQUE",
     "cat": "MUSIQUE",
     "pays": "BRAZZAVILLE",
     "qualite": "HD",
     "direct": true,
-    "lien": "https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8",
+    "lien": "https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8",
     "m3u8Source": "https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8",
-    "cloudRemix": "https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8",
+    "cloudRemix": "https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8",
     "logo": "/logos/stars_brazzaville.png",
     "desc": "STARS BRAZZAVILLE BY AFRICA - Chaîne N° 1 Musique & Culture (Brazzaville)",
     "bouquet": "TVPRO_VPS"

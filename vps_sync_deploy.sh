@@ -52,7 +52,11 @@ fi
 cd "$APP_DIR"
 
 # 3. Synchronisation du code & des chaînes
-echo -e "${CYAN}[2/6] Téléchargement et synchronisation du catalogue de chaînes et du code...${NC}"
+echo -e "${CYAN}[2/6] Nettoyage des anciens fichiers corrompus et synchronisation...${NC}"
+
+# Nettoyage des anciens fichiers statiques corrompus (qui masquaient le flux live SRS)
+rm -f /var/www/hls/cle_ccpvtv*.m3u8 /var/www/hls/live/cle_ccpvtv*.m3u8 /var/www/tvpromedia/public/live/cle_ccpvtv*.m3u8 /var/www/tvpromedia/dist/live/cle_ccpvtv*.m3u8 /var/www/html/live/cle_ccpvtv*.m3u8 /var/www/tvpromedia/public/cle_ccpvtv*.m3u8 2>/dev/null || true
+rm -f /var/www/hls/cle_baladetv*.m3u8 /var/www/hls/live/cle_baladetv*.m3u8 /var/www/tvpromedia/public/live/cle_baladetv*.m3u8 /var/www/tvpromedia/dist/live/cle_baladetv*.m3u8 2>/dev/null || true
 
 # Télécharger le catalogue de chaînes à jour (sans aucun doublon, flux RTP mis à jour)
 mkdir -p "$APP_DIR/public" "$APP_DIR/dist"
@@ -147,6 +151,11 @@ server {
         return 302 https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8;
     }
 
+    # Alias automatique pour anciennes clés Stars Brazzaville -> cle_star_1m_nmo2.m3u8
+    location ~* ^/live/.*(cle_star_1m_ay2q) {
+        return 302 /live/cle_star_1m_nmo2.m3u8;
+    }
+
     # Relais direct Stars Brazzaville vers SRS 8080
     location ~* ^/live/.*(star|starsbrazza|cle_star) {
         proxy_pass http://127.0.0.1:8080;
@@ -155,12 +164,32 @@ server {
         add_header Access-Control-Allow-Headers '*' always;
     }
 
+    # Alias automatique pour anciennes clés CCPTV Montréal -> cle_ccpvtv_inf_mxq.m3u8
+    location ~* ^/live/.*(cle_ccpvtv_1m_9miq|cle_ccpvtv_inf_mxg) {
+        return 302 /live/cle_ccpvtv_inf_mxq.m3u8;
+    }
+
+    # Alias automatique si appel CCPTV sans extension
+    location = /live/cle_ccpvtv_inf_mxq {
+        return 302 /live/cle_ccpvtv_inf_mxq.m3u8;
+    }
+
     # Relais direct CCPV TV Montréal vers SRS port 8080
     location ~* ^/live/.*(ccpv|ccptv) {
         proxy_pass http://127.0.0.1:8080;
         add_header Access-Control-Allow-Origin * always;
         add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
         add_header Access-Control-Allow-Headers '*' always;
+    }
+
+    # Alias automatique pour anciennes clés Malaïka Actu -> cle_malaika_1m_p461.m3u8
+    location ~* ^/live/.*(cle_mala_ka_actu_3q6o5|cle_malaika_1m_vllq|cle_mala_ka_actu_3q6o) {
+        return 302 /live/cle_malaika_1m_p461.m3u8;
+    }
+
+    # Alias automatique si appel Malaïka sans extension
+    location = /live/cle_malaika_1m_p461 {
+        return 302 /live/cle_malaika_1m_p461.m3u8;
     }
 
     # Relais direct Malaïka Actu vers SRS port 8080

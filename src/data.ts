@@ -479,16 +479,16 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
   {
     id: 'ch_stars_brazza',
     nom: "STARS BRAZZAVILLE BY AFRICA",
-    lien: "https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8",
+    lien: "https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8",
     logo: "/logos/stars_brazzaville.png",
     cat: "MUSIQUE",
     ch: "1",
     qualite: "HD",
     pays: "BRAZZAVILLE",
-    desc: "STARS BRAZZAVILLE BY AFRICA - Chaîne N° 1 Musique & Culture (Brazzaville) • Direct HLS Régie (Secours M3U8 cle_star_1m_ay2q)",
+    desc: "STARS BRAZZAVILLE BY AFRICA - Chaîne N° 1 Musique & Culture (Brazzaville) • Direct HLS Régie (cle_star_1m_nmo2)",
     m3u8Source: "https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8",
-    cloudRemix: "https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8",
-    youtubeBackup: "https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8"
+    cloudRemix: "https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8",
+    youtubeBackup: "https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8"
   },
   {
     id: 'ch_100',
