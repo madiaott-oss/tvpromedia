@@ -506,15 +506,15 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
   {
     id: 'ch_85',
     nom: "AFRI TV",
-    lien: "https://www.tvpromedia.com/live/afri-tv.m3u8",
+    lien: "https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8",
     logo: AFRI_TV_LOGO,
     cat: "GENERALISTE",
     ch: "5",
     qualite: "HD",
     pays: "AFRIQUE",
     desc: "AFRI TV - L'Afrique en direct, informations, culture et divertissement en continu • Direct HD HLS (Flux Principal & Secours)",
-    m3u8Source: "https://www.tvpromedia.com/live/afri-tv.m3u8",
-    cloudRemix: "https://www.tvpromedia.com/live/afri-tv.m3u8"
+    m3u8Source: "https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8",
+    cloudRemix: "https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8"
   },
   {
     id: 'ch_ictv',
@@ -1227,16 +1227,16 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
   {
     id: 'ch_92',
     nom: "MALAÏKA ACTU",
-    lien: "https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8",
+    lien: "https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8",
     logo: MALAIKA_ACTU_LOGO,
     cat: "NEWS",
     ch: "92",
     qualite: "4K",
     pays: "RDC",
-    desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS (cle_malaika_1m_p461)",
+    desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS (cle_mala_ka_actu_3q6o5)",
     rtmpUrl: "rtmp://191.215.38.95/live",
-    rtmpKey: "cle_malaika_1m_p461",
-    m3u8Source: "https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8"
+    rtmpKey: "cle_mala_ka_actu_3q6o5",
+    m3u8Source: "https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8"
   },
   {
     id: 'ch_93',

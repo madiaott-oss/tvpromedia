@@ -184,9 +184,9 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.nom = 'AFRI TV';
       ch.ch = ch.ch || '5';
       ch.logo = AFRI_TV_LOGO;
-      ch.lien = 'https://www.tvpromedia.com/live/afri-tv.m3u8';
-      ch.m3u8Source = 'https://www.tvpromedia.com/live/afri-tv.m3u8';
-      ch.cloudRemix = 'https://www.tvpromedia.com/live/afri-tv.m3u8';
+      ch.lien = 'https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8';
+      ch.m3u8Source = 'https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8';
+      ch.cloudRemix = 'https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8';
       ch.youtubeBackup = '';
       ch.qualite = 'HD';
       ch.direct = true;
@@ -318,13 +318,13 @@ const deduplicateChannels = (channelList: Channel[]): Channel[] => {
       ch.nom = 'MALAÏKA ACTU';
       ch.ch = '92';
       ch.logo = MALAIKA_ACTU_LOGO;
-      ch.lien = 'https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8';
-      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8';
+      ch.lien = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
+      ch.m3u8Source = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
       delete (ch as any).cloudRemix;
       delete (ch as any).youtubeBackup;
-      ch.rtmpKey = 'cle_malaika_1m_p461';
+      ch.rtmpKey = 'cle_mala_ka_actu_3q6o5';
       ch.rtmpUrl = 'rtmp://191.215.38.95/live';
-      ch.desc = "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS (cle_malaika_1m_p461)";
+      ch.desc = "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS (cle_mala_ka_actu_3q6o5)";
       ch.cat = 'NEWS';
       return true;
     }
@@ -476,7 +476,7 @@ export default function App() {
   // Initialize data on load
   useEffect(() => {
     // 1. Core Catalog loading - refreshed with active VPS and Berosat channels including CCPTV Montréal
-    const CATALOG_VERSION = 'v51_ccpv_montreal_stream_fix_oct20_2026';
+    const CATALOG_VERSION = 'v52_afri_berosat_espec_oct28_2026';
     if (localStorage.getItem('chaines_tvpro_version') !== CATALOG_VERSION) {
       try {
         localStorage.removeItem('chaines_tvpro');
@@ -584,7 +584,7 @@ export default function App() {
                 cloudRemix: "https://stream.zeno.fm/bgblkbhq4kjuv",
                 desc: "RADIO EVI - Diffusion radio en direct continu • Flux Zeno.fm Stéréo",
                 cat: "RADIO",
-                ch: "3",
+                ch: "1",
                 qualite: "HD",
                 pays: "INTERNATIONAL",
                 direct: true
@@ -735,7 +735,7 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_3' || (ch.nom && ch.nom.toUpperCase().includes('ESPEC'))) {
-            if (ch.logo !== EGLISE_ESPEC_LOGO || ch.lien !== 'https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8' || ch.m3u8Source !== 'https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8' || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=Z4gy-GRZHr4') {
+            if (ch.logo !== EGLISE_ESPEC_LOGO || ch.lien !== 'https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8' || ch.m3u8Source !== 'https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8' || ch.youtubeBackup !== 'https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8') {
               migrated = true;
               ch = {
                 ...ch,
@@ -743,10 +743,10 @@ export default function App() {
                 logo: EGLISE_ESPEC_LOGO,
                 lien: "https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8",
                 m3u8Source: "https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8",
-                youtubeBackup: "https://www.youtube.com/watch?v=Z4gy-GRZHr4",
+                youtubeBackup: "https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8",
                 desc: "ESPEC TV - Église ESPEC International (Culte, enseignements et diffusion continue) • Direct HLS & Secours YouTube",
                 cat: "RELIGIEUX",
-                ch: "3"
+                ch: "1"
               };
             }
           }
@@ -1085,15 +1085,15 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_2' || (ch.nom && (ch.nom.trim().toUpperCase() === 'AFRI TV' || ch.nom.trim().toUpperCase() === 'AFRI'))) {
-            if (ch.lien !== 'https://www.tvpromedia.com/live/afri-tv.m3u8') {
+            if (ch.lien !== 'https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8') {
               migrated = true;
               ch = {
                 ...ch,
                 nom: "AFRI TV",
                 logo: AFRI_TV_LOGO,
-                lien: "https://www.tvpromedia.com/live/afri-tv.m3u8",
-                m3u8Source: "https://www.tvpromedia.com/live/afri-tv.m3u8",
-                cloudRemix: "https://www.tvpromedia.com/live/afri-tv.m3u8",
+                lien: "https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8",
+                m3u8Source: "https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8",
+                cloudRemix: "https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8",
                 qualite: "HD",
                 cat: "GENERALISTE",
                 ch: "5"
@@ -1137,9 +1137,9 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_92' || (ch.nom && (ch.nom.toUpperCase().includes('MALAIKA') || ch.nom.toUpperCase().includes('MALAÏKA')))) {
-            const targetMalaikaStream = 'https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8';
-            const backupMalaikaStream = 'https://tvpromedia.com/live/cle_malaika_1m_p461.m3u8';
-            if (ch.nom !== "MALAÏKA ACTU" || ch.logo !== MALAIKA_ACTU_LOGO || ch.lien !== targetMalaikaStream || ch.m3u8Source !== backupMalaikaStream || ch.rtmpKey !== 'cle_malaika_1m_p461') {
+            const targetMalaikaStream = 'https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
+            const backupMalaikaStream = 'https://tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8';
+            if (ch.nom !== "MALAÏKA ACTU" || ch.logo !== MALAIKA_ACTU_LOGO || ch.lien !== targetMalaikaStream || ch.m3u8Source !== backupMalaikaStream || ch.rtmpKey !== 'cle_mala_ka_actu_3q6o5') {
               migrated = true;
               ch = { 
                 ...ch, 
@@ -1150,8 +1150,8 @@ export default function App() {
                 lien: targetMalaikaStream,
                 m3u8Source: backupMalaikaStream,
                 rtmpUrl: "rtmp://191.215.38.95/live",
-                rtmpKey: "cle_malaika_1m_p461",
-                desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS (cle_malaika_1m_p461)",
+                rtmpKey: "cle_mala_ka_actu_3q6o5",
+                desc: "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS (cle_mala_ka_actu_3q6o5)",
                 cat: "NEWS",
                 pays: "RDC",
                 qualite: "4K"
@@ -1161,7 +1161,7 @@ export default function App() {
             }
           }
           if (ch.id === 'ch_3' || (ch.nom && ch.nom.toUpperCase().includes('ESPEC'))) {
-            if (ch.logo !== EGLISE_ESPEC_LOGO || ch.nom !== "ESPEC TV" || ch.ch !== "3" || ch.lien !== 'https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8' || ch.m3u8Source !== 'https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8' || ch.youtubeBackup !== 'https://www.youtube.com/watch?v=Z4gy-GRZHr4') {
+            if (ch.logo !== EGLISE_ESPEC_LOGO || ch.nom !== "ESPEC TV" || ch.ch !== "1" || ch.lien !== 'https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8' || ch.m3u8Source !== 'https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8' || ch.youtubeBackup !== 'https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8') {
               migrated = true;
               ch = { 
                 ...ch, 
@@ -1169,10 +1169,10 @@ export default function App() {
                 logo: EGLISE_ESPEC_LOGO,
                 lien: "https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8",
                 m3u8Source: "https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8",
-                youtubeBackup: "https://www.youtube.com/watch?v=Z4gy-GRZHr4",
+                youtubeBackup: "https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8",
                 desc: "ESPEC TV - Église ESPEC International (Culte, enseignements et diffusion continue) • Direct HLS & Secours YouTube",
                 cat: "RELIGIEUX",
-                ch: "3"
+                ch: "1"
               };
             }
           }

@@ -207,7 +207,7 @@ export default function VideoPlayer({
   const [backupMode, setBackupMode] = useState<'youtube' | 'video' | 'audio'>('youtube'); // Default to YouTube failover loop
   const [remixGenre, setRemixGenre] = useState<'lofi' | 'lounge' | 'retro'>('lofi');
   const [videoGenre, setVideoGenre] = useState<'secours' | 'mire' | 'nature'>('secours');
-  const [youtubeGenre, setYoutubeGenre] = useState<'custom' | 'vep_tv' | 'afri_tv' | 'espec_tv' | 'cem_tv' | 'borne_mpasa' | 'snl_kongo' | 'congo_flash' | 'trompette_media' | 'grace_tv' | 'alliance_mabanza' | 'parole_esperance' | 'horizon_2000' | 'ems_tv' | 'sm_video' | 'mstv' | 'adoration' | 'culte' | 'direct' | 'nature'>('borne_mpasa');
+  const [youtubeGenre, setYoutubeGenre] = useState<'custom' | 'vep_tv' | 'afri_tv' | 'espec_tv' | 'cem_tv' | 'afri_tv' | 'snl_kongo' | 'congo_flash' | 'trompette_media' | 'grace_tv' | 'alliance_mabanza' | 'parole_esperance' | 'horizon_2000' | 'ems_tv' | 'sm_video' | 'mstv' | 'adoration' | 'culte' | 'direct' | 'nature'>('afri_tv');
   const [customYoutubeInput, setCustomYoutubeInput] = useState('');
   const [activeCustomYoutubeId, setActiveCustomYoutubeId] = useState<string | null>(null);
 
@@ -237,7 +237,7 @@ export default function VideoPlayer({
   const isHostTvPro = typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com');
 
   const primaryStreamUrl = isMalaika 
-    ? (isHostTvPro ? '/live/cle_malaika_1m_p461.m3u8' : `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8')}`)
+    ? (isHostTvPro ? '/live/cle_mala_ka_actu_3q6o5.m3u8' : `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8')}`)
     : isCcptv
     ? (isHostTvPro ? '/live/cle_ccpvtv_inf_mxq.m3u8' : `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8')}`)
     : isBalade
@@ -245,7 +245,7 @@ export default function VideoPlayer({
     : (src || '');
 
   const secondaryBackupStream = isMalaika
-    ? (isHostTvPro ? `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_malaika_1m_p461.m3u8')}` : '/live/cle_malaika_1m_p461.m3u8')
+    ? (isHostTvPro ? `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_mala_ka_actu_3q6o5.m3u8')}` : '/live/cle_mala_ka_actu_3q6o5.m3u8')
     : isCcptv
     ? (isHostTvPro ? `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxq.m3u8')}` : '/live/cle_ccpvtv_inf_mxq.m3u8')
     : isBalade
@@ -688,16 +688,16 @@ export default function VideoPlayer({
       return 'https://www.youtube.com/watch?v=OwkjaS75qvA';
     }
 
-    // Auto-route MALAÏKA ACTU strictly to the official primary active VPS stream (cle_malaika_1m_p461)
+    // Auto-route MALAÏKA ACTU strictly to the official primary active VPS stream (cle_mala_ka_actu_3q6o5)
     if (
       (resolved && (resolved.includes('cle_malaika') || resolved.includes('cle_mala_ka') || resolved.includes('malaika.m3u8') || resolved.includes('malaikatv.m3u8'))) ||
       (title && (title.trim().toUpperCase().includes('MALAIKA') || title.trim().toUpperCase().includes('MALAÏKA'))) ||
       (channelNum === '92')
     ) {
       if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
-        return '/live/cle_malaika_1m_p461.m3u8';
+        return '/live/cle_mala_ka_actu_3q6o5.m3u8';
       }
-      return `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8')}`;
+      return `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8')}`;
     }
 
     // Auto-route CCPV TV (CCPTV) strictly to the official active VPS stream (cle_ccpvtv_inf_mxq)
@@ -1564,7 +1564,7 @@ export default function VideoPlayer({
               </span>
               <span>
                 {backupMode === 'youtube' 
-                  ? '🔴 FLUX DE SECOURS YOUTUBE EN BOUCLE (PANNE / COUPURE ÉLECTRICITÉ)' 
+                  ? '🔴 FLUX DE SECOURS M3U8 EN BOUCLE (PANNE / COUPURE ÉLECTRICITÉ)' 
                   : (backupMode === 'video' ? '📺 SECOURS HLS VIDÉO (15 MIN)' : '📻 SECOURS PLAYLIST AUDIO CLOUD (45 MIN)')}
               </span>
             </div>
