@@ -207,7 +207,7 @@ export default function VideoPlayer({
   const [backupMode, setBackupMode] = useState<'youtube' | 'video' | 'audio'>('youtube'); // Default to YouTube failover loop
   const [remixGenre, setRemixGenre] = useState<'lofi' | 'lounge' | 'retro'>('lofi');
   const [videoGenre, setVideoGenre] = useState<'secours' | 'mire' | 'nature'>('secours');
-  const [youtubeGenre, setYoutubeGenre] = useState<'custom' | 'vep_tv' | 'afri_tv' | 'espec_tv' | 'cem_tv' | 'borne_mpasa' | 'snl_kongo' | 'congo_flash' | 'trompette_media' | 'grace_tv' | 'alliance_mabanza' | 'parole_esperance' | 'horizon_2000' | 'ems_tv' | 'sm_video' | 'mstv' | 'adoration' | 'culte' | 'direct' | 'nature'>('borne_mpasa');
+  const [youtubeGenre, setYoutubeGenre] = useState<'custom' | 'vep_tv' | 'afri_tv' | 'espec_tv' | 'cem_tv' | 'afri_tv' | 'snl_kongo' | 'congo_flash' | 'trompette_media' | 'grace_tv' | 'alliance_mabanza' | 'parole_esperance' | 'horizon_2000' | 'ems_tv' | 'sm_video' | 'mstv' | 'adoration' | 'culte' | 'direct' | 'nature'>('afri_tv');
   const [customYoutubeInput, setCustomYoutubeInput] = useState('');
   const [activeCustomYoutubeId, setActiveCustomYoutubeId] = useState<string | null>(null);
 
@@ -234,37 +234,22 @@ export default function VideoPlayer({
     (channelNum === '28')
   );
 
-  const isStarsBrazza = !!(
-    (src && (src.includes('cle_star') || src.includes('star_15min') || src.includes('starsbrazza'))) ||
-    (title && (title.trim().toUpperCase().includes('STARS BRAZZAVILLE') || title.trim().toUpperCase().includes('STARS BRAZZA'))) ||
-    (channelNum === '1' && title && title.trim().toUpperCase().includes('STAR'))
-  );
-
-  const isHostTvPro = typeof window !== 'undefined' && (
-    window.location.hostname.includes('tvpromedia.com') ||
-    window.location.hostname.includes('191.215.38.95') ||
-    window.location.hostname === 'localhost' ||
-    window.location.hostname === '127.0.0.1'
-  );
+  const isHostTvPro = typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com');
 
   const primaryStreamUrl = isMalaika 
-    ? (isHostTvPro ? '/live/cle_malaika_1m_p461.m3u8' : `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8')}`)
+    ? (isHostTvPro ? '/live/cle_mala_ka_actu_3q6o5.m3u8' : `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8')}`)
     : isCcptv
-    ? (isHostTvPro ? '/live/cle_ccpvtv_inf_mxq.m3u8' : `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxq.m3u8')}`)
+    ? (isHostTvPro ? '/live/cle_ccpvtv_inf_mxq.m3u8' : `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8')}`)
     : isBalade
-    ? (isHostTvPro ? '/live/cle_baladetv_inf_gx5l.m3u8' : `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_baladetv_inf_gx5l.m3u8')}`)
-    : isStarsBrazza
-    ? (isHostTvPro ? '/live/cle_star_1m_nmo2.m3u8' : `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8')}`)
+    ? (isHostTvPro ? '/live/cle_baladetv_inf_gx5l.m3u8' : `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8')}`)
     : (src || '');
 
   const secondaryBackupStream = isMalaika
-    ? (isHostTvPro ? `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_malaika_1m_p461.m3u8')}` : '/live/cle_malaika_1m_p461.m3u8')
+    ? (isHostTvPro ? `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_mala_ka_actu_3q6o5.m3u8')}` : '/live/cle_mala_ka_actu_3q6o5.m3u8')
     : isCcptv
-    ? `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxq.m3u8')}`
+    ? (isHostTvPro ? `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxq.m3u8')}` : '/live/cle_ccpvtv_inf_mxq.m3u8')
     : isBalade
-    ? `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_baladetv_inf_gx5l.m3u8')}`
-    : isStarsBrazza
-    ? (isHostTvPro ? '/live/cle_star_1m_ay2q.m3u8' : `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8')}`)
+    ? (isHostTvPro ? `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_baladetv_inf_gx5l.m3u8')}` : '/live/cle_baladetv_inf_gx5l.m3u8')
     : (m3u8Source && m3u8Source !== src ? m3u8Source : null);
 
   // Stream Connection Diagnostic System
@@ -364,12 +349,11 @@ export default function VideoPlayer({
   };
 
   // Determine active media stream (Primary channel url, Manual/Auto stream override, or Backup loop)
-  const defaultStream = (isCcptv || isMalaika || isBalade || isStarsBrazza) ? primaryStreamUrl : (src || '');
   const activeStream = streamOverride 
     ? streamOverride 
     : (isCloudRemix 
         ? (backupMode === 'video' ? (cloudRemix || EMERGENCY_VIDEO_PRESETS[videoGenre]) : (cloudRemix || REMIX_PRESETS[remixGenre])) 
-        : defaultStream);
+        : src);
 
   // Auto-Detect M3U8 Stream Watchdog:
   // When in backupMode / isCloudRemix / direct YouTube mode, if an m3u8Source (or m3u8 link) exists,
@@ -446,8 +430,8 @@ export default function VideoPlayer({
     setStreamOverride(null);
     setIsDiagnosticOpen(false);
 
-    // MALAÏKA ACTU, CCPTV, STARS BRAZZA & BALADE : Never enter YouTube failover loops
-    if (isMalaika || isCcptv || isStarsBrazza || isBalade) {
+    // MALAÏKA ACTU & CCPTV : Never enter YouTube failover loops
+    if (isMalaika || isCcptv) {
       setIsCloudRemix(false);
       setBackupMode('video');
       return;
@@ -698,58 +682,46 @@ export default function VideoPlayer({
       (title && title.trim().toUpperCase().includes('CEM TV')) ||
       (channelNum === '93')
     ) {
-      if (isHostTvPro) {
+      if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
         return `/live/cle_cem_1m_lvt6.m3u8`;
       }
       return 'https://www.youtube.com/watch?v=OwkjaS75qvA';
     }
 
-    // Auto-route STARS BRAZZAVILLE strictly to the official active stream (cle_star_1m_nmo2.m3u8)
-    if (
-      (resolved && (resolved.includes('cle_star') || resolved.includes('star_15min') || resolved.includes('starsbrazza') || resolved.includes('cle_star_1m_ay2q') || resolved.includes('cle_star_1m_nmo2'))) ||
-      (title && (title.trim().toUpperCase().includes('STARS BRAZZAVILLE') || title.trim().toUpperCase().includes('STARS BRAZZA'))) ||
-      (channelNum === '1' && title && title.trim().toUpperCase().includes('STAR'))
-    ) {
-      if (isHostTvPro) {
-        return '/live/cle_star_1m_nmo2.m3u8';
-      }
-      return `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8')}`;
-    }
-
-    // Auto-route MALAÏKA ACTU strictly to the official primary active VPS stream (cle_malaika_1m_p461)
+    // Auto-route MALAÏKA ACTU strictly to the official primary active VPS stream (cle_mala_ka_actu_3q6o5)
     if (
       (resolved && (resolved.includes('cle_malaika') || resolved.includes('cle_mala_ka') || resolved.includes('malaika.m3u8') || resolved.includes('malaikatv.m3u8'))) ||
       (title && (title.trim().toUpperCase().includes('MALAIKA') || title.trim().toUpperCase().includes('MALAÏKA'))) ||
       (channelNum === '92')
     ) {
-      if (isHostTvPro) {
-        return '/live/cle_malaika_1m_p461.m3u8';
+      if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
+        return '/live/cle_mala_ka_actu_3q6o5.m3u8';
       }
-      return `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8')}`;
+      return `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_mala_ka_actu_3q6o5.m3u8')}`;
     }
 
-    // Auto-route CCPV TV (CCPTV MONTRÉAL) strictly to the official active VPS stream (cle_ccpvtv_inf_mxq.m3u8)
+    // Auto-route CCPV TV (CCPTV) strictly to the official active VPS stream (cle_ccpvtv_inf_mxq)
     if (
-      (resolved && (resolved.includes('cle_ccpvtv') || resolved.includes('ccpv.m3u8') || resolved.includes('ccpvtv.m3u8') || resolved.includes('ccptv.m3u8') || resolved.includes('cle_ccpvtv_inf_mxq') || resolved.includes('cle_ccpvtv_1m_9miq'))) ||
+      (resolved && (resolved.includes('cle_ccpvtv') || resolved.includes('ccpv.m3u8') || resolved.includes('ccpvtv.m3u8') || resolved.includes('ccptv.m3u8'))) ||
       (title && (title.trim().toUpperCase().includes('CCPV') || title.trim().toUpperCase().includes('CCPTV'))) ||
       (channelNum === '23' || channelNum === '24')
     ) {
-      if (isHostTvPro) {
+      if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
         return '/live/cle_ccpvtv_inf_mxq.m3u8';
       }
-      return `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_ccpvtv_inf_mxq.m3u8')}`;
+      return `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8')}`;
     }
 
-    // Auto-route BALADE MONDE TV strictly to the official active VPS stream (cle_baladetv_inf_gx5l.m3u8)
+    // Auto-route BALADE MONDE TV strictly to the official active VPS stream (cle_baladetv_inf_gx5l)
     if (
       (resolved && (resolved.includes('cle_baladetv') || resolved.includes('balade.m3u8') || resolved.includes('baladetv.m3u8'))) ||
       (title && (title.trim().toUpperCase().includes('BALADE MONDE') || title.trim().toUpperCase().includes('BALADE MODE'))) ||
       (channelNum === '28')
     ) {
-      if (isHostTvPro) {
+      if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
         return '/live/cle_baladetv_inf_gx5l.m3u8';
       }
-      return `/api/proxy-stream?url=${encodeURIComponent('http://191.215.38.95:8080/live/cle_baladetv_inf_gx5l.m3u8')}`;
+      return `/api/proxy-stream?url=${encodeURIComponent('https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8')}`;
     }
 
     // Auto-route MSTV strictly to official live stream
@@ -769,20 +741,19 @@ export default function VideoPlayer({
       return 'https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8';
     }
 
-    // Route all VPS 191.215.38.95 and tvpromedia.com/live/ SRS streams directly
-    if (resolved.includes('191.215.38.95:8080/live/') || resolved.includes('191.215.38.95/live/') || resolved.includes('tvpromedia.com/live/')) {
+    // Route all VPS 191.215.38.95 SRS streams directly through native HTTPS Nginx /live/ reverse proxy
+    if (resolved.includes('191.215.38.95:8080/live/') || resolved.includes('191.215.38.95/live/')) {
       const streamPart = resolved.split('/live/')[1];
-      const cleanStreamPart = (streamPart.endsWith('.m3u8') || streamPart.endsWith('.ts')) ? streamPart : `${streamPart}.m3u8`;
-      if (isHostTvPro) {
-        return `/live/${cleanStreamPart}`;
+      if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
+        return `/live/${streamPart}`;
       }
-      return `/api/proxy-stream?url=${encodeURIComponent(`https://www.tvpromedia.com/live/${cleanStreamPart}`)}`;
+      return `/api/proxy-stream?url=${encodeURIComponent(resolved)}`;
     }
 
     // Normalize tvpromedia.com / www.tvpromedia.com HLS stream paths
     if (resolved.includes('tvpromedia.com/hls/')) {
       const hlsPart = resolved.split('tvpromedia.com/hls/')[1];
-      if (isHostTvPro) {
+      if (typeof window !== 'undefined' && window.location.hostname.includes('tvpromedia.com')) {
         return `/hls/${hlsPart}`;
       }
       return `https://tvpromedia.com/hls/${hlsPart}`;
@@ -1593,7 +1564,7 @@ export default function VideoPlayer({
               </span>
               <span>
                 {backupMode === 'youtube' 
-                  ? '🔴 FLUX DE SECOURS YOUTUBE EN BOUCLE (PANNE / COUPURE ÉLECTRICITÉ)' 
+                  ? '🔴 FLUX DE SECOURS M3U8 EN BOUCLE (PANNE / COUPURE ÉLECTRICITÉ)' 
                   : (backupMode === 'video' ? '📺 SECOURS HLS VIDÉO (15 MIN)' : '📻 SECOURS PLAYLIST AUDIO CLOUD (45 MIN)')}
               </span>
             </div>
