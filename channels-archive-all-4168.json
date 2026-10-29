@@ -1,5 +1,16 @@
 [
   {
+    "id": "ch_3",
+    "nom": "ESPEC TV",
+    "lien": "https://stream.berosat.live/hls/espec-tv/espec-tv.m3u8",
+    "cat": "GENERALISTE",
+    "logo": "https://www.tvpromedia.com/logo/espec.png",
+    "ch": "1",
+    "qualite": "HD",
+    "description": "ESPEC TV - En Direct",
+    "categorie": "TOP"
+  },
+  {
     "id": "ch_stars_brazza",
     "nom": "STARS BRAZZAVILLE BY AFRICA",
     "ch": "1",

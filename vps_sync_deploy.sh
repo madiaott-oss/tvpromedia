@@ -1,300 +1,296 @@
-#!/usr/bin/env bash
-# ==============================================================================
-# TV PRO MEDIA - SCRIPT DE SYNCHRONISATION MULTI-DOMAINES, VPS ET GITHUB
-# Domaines cibles : tvpromedia.com, www.tvpromedia.com, tvpromedia.ai.studio
-# VPS : 191.215.38.95
-# Dépôt GitHub : https://github.com/madiaott-oss/tvpromedia.site.git
-# ==============================================================================
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Cookie check</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
 
-set -e
+      body {
+        font-family: 'Inter', Helvetica, Arial, sans-serif;
+        background: light-dark(#F8F8F7, #191919);
+        color: light-dark(#1f1f1f, #e3e3e3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+      }
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-YELLOW='\033[1;33m'
-CYAN='\033[0;36m'
-NC='\033[0m'
+      .container {
+        background: light-dark(#FFFFFF, #1F1F1F);
+        padding: 32px;
+        border-radius: 16px;
+        border: 1px solid light-dark(#E2E3E4, #3E3E3E);
+        max-width: min(80%, 500px);
+        width: 100%;
+        color: light-dark(#2B2D31, #D4D4D4);
+      }
 
-echo -e "${CYAN}================================================================${NC}"
-echo -e "${GREEN}    TV PRO MEDIA - SYNCHRONISATION DES CHAÎNES & DÉPLOIEMENT    ${NC}"
-echo -e "${CYAN}================================================================${NC}"
-echo -e "${BLUE}Domaines synchronisés :${NC} tvpromedia.com, www.tvpromedia.com, tvpromedia.ai.studio"
-echo -e "${BLUE}Serveur VPS :${NC} 191.215.38.95"
-echo -e "${BLUE}Dépôt GitHub :${NC} madiaott-oss/tvpromedia.site"
-echo ""
+      h1 {
+        font-size: 20px;
+        font-weight: 500;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        color: light-dark(#2B2D31, #D4D4D4);
+      }
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-APP_DIR="/var/www/tvpromedia"
-MASTER_URL="https://tvpromedia.ai.studio"
-BACKUP_URL="https://ais-pre-22v7n5rsoqfibioxsxj42n-987104672711.europe-west2.run.app"
-DEV_URL="https://ais-dev-22v7n5rsoqfibioxsxj42n-987104672711.europe-west2.run.app"
-PROD_URL="https://tvpromedia.com"
+      p {
+        font-size: 14px;
+        color: light-dark(#2B2D31, #D4D4D4);
+        line-height: 21px;
+        margin: 0 0 1.5rem 0;
+      }
 
-# 1. Vérification des permissions
-if [ "$EUID" -ne 0 ] && ! command -v sudo &> /dev/null; then
-  echo -e "${YELLOW}Note: Ce script s'exécute de préférence en root ou avec sudo.${NC}"
-fi
+      .icon {
+        margin-bottom: 1rem;
+        line-height: 0;
+      }
 
-# 2. Préparation du répertoire de déploiement
-if [ ! -d "$APP_DIR" ]; then
-  echo -e "${CYAN}[1/6] Création du dossier applicatif $APP_DIR...${NC}"
-  mkdir -p "$APP_DIR"
-fi
+      .button-container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 2rem;
+      }
 
-# Si exécuté depuis un clone externe (ex: ~/tvpromedia/tvpromedia), copier les fichiers vers APP_DIR
-if [ "$SCRIPT_DIR" != "$APP_DIR" ] && [ -f "$SCRIPT_DIR/package.json" ]; then
-  echo -e "${CYAN}Copie des fichiers récents depuis $SCRIPT_DIR vers $APP_DIR...${NC}"
-  mkdir -p "$APP_DIR"
-  cp -rf "$SCRIPT_DIR"/* "$APP_DIR"/ 2>/dev/null || true
-  [ -d "$SCRIPT_DIR/.git" ] && cp -rf "$SCRIPT_DIR/.git" "$APP_DIR"/ 2>/dev/null || true
-fi
+      button {
+        background-color: light-dark(#fff, #323232);
+        color: light-dark(#2B2D31, #FCFCFC);
+        border: 1px solid light-dark(#E2E3E4, #3E3E3E);
+        border-radius: 12px;
+        padding: 8px 12px;
+        font-size: 14px;
+        line-height: 21px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        font-weight: 400;
+        font-family: 'Inter', Helvetica, Arial, sans-serif;
+        width: 100%;
+      }
 
-cd "$APP_DIR"
+      button:hover {
+        background-color: light-dark(#EAEAEB, #424242);
+      }
 
-# 3. Synchronisation du code & des chaînes
-echo -e "${CYAN}[2/6] Nettoyage des anciens fichiers corrompus et synchronisation...${NC}"
+      .hidden {
+        display: none;
+      }
 
-# Nettoyage des anciens fichiers statiques corrompus (qui masquaient le flux live SRS)
-rm -f /var/www/hls/cle_ccpvtv*.m3u8 /var/www/hls/live/cle_ccpvtv*.m3u8 /var/www/tvpromedia/public/live/cle_ccpvtv*.m3u8 /var/www/tvpromedia/dist/live/cle_ccpvtv*.m3u8 /var/www/html/live/cle_ccpvtv*.m3u8 /var/www/tvpromedia/public/cle_ccpvtv*.m3u8 2>/dev/null || true
-rm -f /var/www/hls/cle_baladetv*.m3u8 /var/www/hls/live/cle_baladetv*.m3u8 /var/www/tvpromedia/public/live/cle_baladetv*.m3u8 /var/www/tvpromedia/dist/live/cle_baladetv*.m3u8 2>/dev/null || true
+      /* Loading Spinner Animation */
+      .spinner {
+        margin: 0 auto 1.5rem auto;
+        width: 40px;
+        height: 40px;
+        border: 4px solid light-dark(#f0f0f0, #262626);
+        border-top: 4px solid light-dark(#076eff, #87a9ff); /* Blue color */
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
 
-# Télécharger le catalogue de chaînes à jour (sans aucun doublon, flux RTP mis à jour)
-mkdir -p "$APP_DIR/public" "$APP_DIR/dist"
-echo "Récupération du fichier channels.json..."
-curl -sSL -f "$MASTER_URL/channels.json" -o "$APP_DIR/public/channels.json" || \
-curl -sSL -f "$MASTER_URL/api/channels" -o "$APP_DIR/public/channels.json" || \
-curl -sSL -f "$DEV_URL/channels.json" -o "$APP_DIR/public/channels.json" || \
-curl -sSL -f "$BACKUP_URL/channels.json" -o "$APP_DIR/public/channels.json" || true
+      .logo {
+        border-radius: 10px;
+        display: block;
+        margin: 0 auto 2rem auto;
+      }
 
-if [ -f "$APP_DIR/public/channels.json" ]; then
-  cp -f "$APP_DIR/public/channels.json" "$APP_DIR/dist/channels.json" 2>/dev/null || true
-  COUNT=$(grep -o '"id":' "$APP_DIR/public/channels.json" | wc -l || echo "6941")
-  echo -e "${GREEN}✓ Catalogue channels.json synchronisé ($COUNT chaînes uniques, zéro doublon)${NC}"
-fi
+      .logo.hidden {
+        display: none;
+      }
 
-# Si le dépôt git existe dans /var/www/tvpromedia, faire git pull
-if [ -d "$APP_DIR/.git" ]; then
-  echo "Mise à jour via Git depuis madiaott-oss/tvpromedia.site..."
-  git remote set-url origin https://github.com/madiaott-oss/tvpromedia.site.git 2>/dev/null || true
-  git fetch origin main 2>/dev/null || true
-  git merge origin/main --no-edit 2>/dev/null || true
-else
-  # Récupérer l'archive ZIP complète depuis l'instance maîtresse
-  echo "Téléchargement de l'archive complète de l'application..."
-  TMP_ZIP="/tmp/tvpro_sync.zip"
-  if curl -sSL -f "$DEV_URL/api/download-zip" -o "$TMP_ZIP" || curl -sSL -f "$BACKUP_URL/api/download-zip" -o "$TMP_ZIP" || curl -sSL -f "$MASTER_URL/api/download-zip" -o "$TMP_ZIP"; then
-    command -v unzip &>/dev/null || (apt-get update -qq && apt-get install -y -qq unzip)
-    unzip -q -o "$TMP_ZIP" -d "$APP_DIR"
-    rm -f "$TMP_ZIP"
-    echo -e "${GREEN}✓ Code source complet synchronisé avec succès.${NC}"
-  else
-    echo -e "${YELLOW}Attention: Impossible de télécharger le zip complet, conservation des fichiers locaux.${NC}"
-  fi
-fi
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img
+        class="logo"
+        src="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-512dp/logo_ai_studio_color_1x_web_512dp.png"
+        alt="AI Studio Logo"
+        width="256"
+        height="256"
+      />
+      <div class="spinner"></div>
+      <div id="error-ui" class="hidden">
+        <div class="icon">
+          <svg
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="48px"
+            height="48px"
+            fill="#D73A49"
+          >
+            <path
+              d="M12,2C6.486,2,2,6.486,2,12s4.486,10,10,10s10-4.486,10-10S17.514,2,12,2z M13,17h-2v-2h2V17z M13,13h-2V7h2V13z"
+            />
+          </svg>
+        </div>
+        <div id="stepOne" class="text-container">
+          <h1>Action required to load your app</h1>
+          <p>
+            It looks like your browser is blocking a required security cookie, which is common on
+            older versions of iOS and Safari.
+          </p>
+          <div class="button-container">
+            <button id="authInSeparateWindowButton" onclick="redirectToReturnUrl(true)">Authenticate in new window</button>
+          </div>
+        </div>
+        <div id="stepTwo" class="text-container hidden">
+          <h1>Action required to load your app</h1>
+          <p>
+            It looks like your browser is blocking a required security cookie, which is common on
+            older versions of iOS and Safari.
+          </p>
+          <div class="button-container">
+            <button id="interactButton" onclick="redirectToReturnUrl(false)">Close and continue</button>
+          </div>
+        </div>
+        <div id="stepThree" class="text-container hidden">
+          <h1>Almost there!</h1>
+          <p>
+            Grant permission for the required security cookie below.
+          </p>
+          <div class="button-container">
+            <button id="grantPermissionButton" onclick="grantStorageAccess()">Grant permission</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const AUTH_FLOW_TEST_COOKIE_NAME = '__SECURE-aistudio_auth_flow_may_set_cookies';
+      const COOKIE_VALUE = 'true';
 
-# 4. Installation des dépendances & Compilation
-echo -e "${CYAN}[3/6] Installation des modules et compilation de l'application...${NC}"
-if command -v npm &> /dev/null; then
-  npm install --legacy-peer-deps --no-audit --no-fund --production=false
-  # Garantir la présence de react-is pour rollup / recharts
-  npm install react-is@^19.0.0 --legacy-peer-deps --no-audit --no-fund 2>/dev/null || true
-  npm run build
-  echo -e "${GREEN}✓ Build de production généré dans dist/${NC}"
-  cp -f "$APP_DIR/public/channels.json" "$APP_DIR/dist/channels.json" 2>/dev/null || true
-else
-  echo -e "${RED}Erreur : Node.js et npm ne sont pas installés.${NC}"
-  exit 1
-fi
+      function getCookie(name) {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          let cookie = cookies[i].trim();
+          if (cookie.startsWith(name + '=')) {
+            return cookie.substring(name.length + 1);
+          }
+        }
+        return null;
+      }
 
-# 5. Configuration Nginx pour tous les domaines
-echo -e "${CYAN}[4/6] Configuration Nginx pour tvpromedia.com, www.tvpromedia.com & tvpromedia.ai.studio...${NC}"
-cat > /etc/nginx/sites-available/tvpromedia << 'EOF'
-server {
-    listen 80;
-    listen [::]:80;
-    server_name tvpromedia.com www.tvpromedia.com tvpromedia.ai.studio;
-    return 301 https://$host$request_uri;
-}
+      function setAuthFlowTestCookie() {
+        // Set the cookie's TTL to 1 minute. This is a short lived cookie because it is only used
+        // when the user does not have an auth token or their auth token needs to be reset.
+        // Making this cookie too long-lived allows the user to get into a state where they can't
+        // mint a new auth token.
+        document.cookie = `${AUTH_FLOW_TEST_COOKIE_NAME}=${COOKIE_VALUE}; Path=/; Secure; SameSite=None; Domain=${window.location.hostname}; Partitioned; Max-Age=60;`;
+      }
 
-server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-    server_name tvpromedia.com www.tvpromedia.com tvpromedia.ai.studio;
+      /**
+       * Returns true if the test cookie is set, false otherwise.
+       */
+      function authFlowTestCookieIsSet() {
+        return getCookie(AUTH_FLOW_TEST_COOKIE_NAME) === COOKIE_VALUE;
+      }
 
-    # Certificats SSL Let's Encrypt (adapter si nécessaire)
-    ssl_certificate /etc/letsencrypt/live/tvpromedia.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/tvpromedia.com/privkey.pem;
+      /**
+       * Redirects to the return url. If autoClose is true, then the return url will be opened in a
+       * new window, and it will be closed automatically when the page loads.
+       * Options:
+       *   storageAccessGranted: if true, appends __storage_access_granted=1 to
+       *   the return url so the Lua auth script can set the test cookie
+       *   server-side (needed for Safari/iOS where document.cookie is blocked).
+       */
+      async function redirectToReturnUrl(autoClose, storageAccessGranted = false) {
+        const initialReturnUrlStr = new URLSearchParams(window.location.search).get('return_url');
+        const returnUrl = initialReturnUrlStr ? new URL(initialReturnUrlStr) : null;
 
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers HIGH:!aNULL:!MD5;
+        // Prevent potentially malicious URLs from being used
+        if (returnUrl.protocol.toLowerCase() === 'javascript:') {
+          console.error('Potentially malicious return URL blocked');
+          return;
+        }
 
-    # En-têtes CORS universels pour applications TV, mobiles et navigateurs
-    add_header Access-Control-Allow-Origin * always;
-    add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS, PUT, DELETE' always;
-    add_header Access-Control-Allow-Headers 'X-Requested-With, Content-Type, Authorization, Range' always;
-    add_header Access-Control-Expose-Headers 'Content-Length, Content-Range, Content-Type' always;
+        if (storageAccessGranted) {
+          returnUrl.searchParams.set('__storage_access_granted', '1');
+        }
 
-    # Cache statique direct pour le catalogue de chaînes
-    location = /channels.json {
-        root /var/www/tvpromedia/public;
-        add_header Content-Type application/json;
-        add_header Access-Control-Allow-Origin * always;
-        add_header Cache-Control "public, max-age=60, s-maxage=60";
-    }
+        if (autoClose) {
+          returnUrl.searchParams.set('__auto_close', '1');
+          const url = new URL(window.location.href);
+          url.searchParams.set('return_url', returnUrl.toString());
+          // Land on the cookie check page first, so the user can interact with it before proceeding
+          // to the return url where cookies can be set.
+          window.open(url.toString(), '_blank');
+          const hasAccess = await document.hasStorageAccess();
+          document.querySelector('#stepOne').classList.add('hidden');
+          if (!hasAccess) {
+            document.querySelector('#stepThree').classList.remove('hidden');
+          } else {
+            window.location.reload();
+          }
+        } else {
+          window.location.href = returnUrl.toString();
+        }
+      }
 
-    # Relais HLS direct vers le serveur de streaming SRS / MediaMTX (port 8080)
-    # Règle prioritaire pour RTP : routage direct vers le flux officiel HD BeroSat
-    location ~* ^/live/.*(rtp|cle_rtptv) {
-        add_header Access-Control-Allow-Origin * always;
-        add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
-        add_header Access-Control-Allow-Headers '*' always;
-        return 302 https://stream.berosat.live/hls/rtp-hd/rtp-hd.m3u8;
-    }
+      /**
+       * Grants the browser permission to set cookies. If successful, then it redirects to the
+       * return url.
+       */
+      async function grantStorageAccess() {
+        try {
+          await document.requestStorageAccess();
+          // Recent Safari/iOS versions block document.cookie entirely in
+          // cross-site iframes, even after requestStorageAccess(). Only
+          // server-side Set-Cookie headers work. Signal to the Lua auth script
+          // via query param so it can set the test cookie server-side.
+          redirectToReturnUrl(false, /* storageAccessGranted= */ true);
+        } catch (err) {
+          console.log('error after button click: ', err);
+        }
+      }
 
-    # Alias automatique pour anciennes clés Stars Brazzaville -> cle_star_1m_nmo2.m3u8
-    location ~* ^/live/.*(cle_star_1m_ay2q) {
-        return 302 /live/cle_star_1m_nmo2.m3u8;
-    }
+      /**
+       * Verifies that the browser can set cookies. If it can, then it redirects to the return url.
+       * If it can't, then it shows the error UI.
+       */
+      function verifyCanSetCookies() {
+        setAuthFlowTestCookie();
+        if (authFlowTestCookieIsSet()) {
+          // Check if we are on the auto-close flow, and if so show the interact button.
+          const returnUrl = new URLSearchParams(window.location.search).get('return_url');
+          const autoClose = new URL(returnUrl).searchParams.has('__auto_close');
+          if (autoClose) {
+            document.querySelector('#stepOne').classList.add('hidden');
+            document.querySelector('#stepTwo').classList.remove('hidden');
+          } else {
+            redirectToReturnUrl(false);
+            return;
+          }
+        }
+        // The cookie could not be set, so initiate the recovery flow.
+        document.querySelector('.logo').classList.add('hidden');
+        document.querySelector('.spinner').classList.add('hidden');
+        document.querySelector('#error-ui').classList.remove('hidden');
+      }
 
-    # Relais direct Stars Brazzaville vers SRS 8080
-    location ~* ^/live/.*(star|starsbrazza|cle_star) {
-        proxy_pass http://127.0.0.1:8080;
-        add_header Access-Control-Allow-Origin * always;
-        add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
-        add_header Access-Control-Allow-Headers '*' always;
-    }
-
-    # Alias automatique pour anciennes clés CCPTV Montréal -> cle_ccpvtv_inf_mxq.m3u8
-    location ~* ^/live/.*(cle_ccpvtv_1m_9miq|cle_ccpvtv_inf_mxg) {
-        return 302 /live/cle_ccpvtv_inf_mxq.m3u8;
-    }
-
-    # Alias automatique si appel CCPTV sans extension
-    location = /live/cle_ccpvtv_inf_mxq {
-        return 302 /live/cle_ccpvtv_inf_mxq.m3u8;
-    }
-
-    # Relais direct CCPV TV Montréal vers SRS port 8080
-    location ~* ^/live/.*(ccpv|ccptv) {
-        proxy_pass http://127.0.0.1:8080;
-        add_header Access-Control-Allow-Origin * always;
-        add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
-        add_header Access-Control-Allow-Headers '*' always;
-    }
-
-    # Alias automatique pour anciennes clés Malaïka Actu -> cle_malaika_1m_p461.m3u8
-    location ~* ^/live/.*(cle_mala_ka_actu_3q6o5|cle_malaika_1m_vllq|cle_mala_ka_actu_3q6o) {
-        return 302 /live/cle_malaika_1m_p461.m3u8;
-    }
-
-    # Alias automatique si appel Malaïka sans extension
-    location = /live/cle_malaika_1m_p461 {
-        return 302 /live/cle_malaika_1m_p461.m3u8;
-    }
-
-    # Relais direct Malaïka Actu vers SRS port 8080
-    location ~* ^/live/.*(malaika|mala_ka) {
-        proxy_pass http://127.0.0.1:8080;
-        add_header Access-Control-Allow-Origin * always;
-        add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
-        add_header Access-Control-Allow-Headers '*' always;
-    }
-
-    # Relais direct Balade Monde TV vers SRS port 8080
-    location ~* ^/live/.*(balade|baladetv) {
-        proxy_pass http://127.0.0.1:8080;
-        add_header Access-Control-Allow-Origin * always;
-        add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
-        add_header Access-Control-Allow-Headers '*' always;
-    }
-
-    # Fichiers HLS statiques (boucles de secours star_15min, etc.)
-    location /hls/ {
-        alias /var/www/hls/;
-        add_header Access-Control-Allow-Origin * always;
-        add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
-        add_header Access-Control-Allow-Headers '*' always;
-        expires -1;
-        add_header Cache-Control no-cache;
-    }
-
-    location /live/ {
-        proxy_pass http://127.0.0.1:8080/live/;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        add_header Access-Control-Allow-Origin * always;
-        add_header Access-Control-Allow-Methods 'GET, OPTIONS, HEAD' always;
-    }
-
-    # Application Web & API Node.js / Express (port 3000)
-    location / {
-        proxy_pass http://127.0.0.1:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
-EOF
-
-ln -sf /etc/nginx/sites-available/tvpromedia /etc/nginx/sites-enabled/tvpromedia 2>/dev/null || true
-if command -v nginx &> /dev/null; then
-  nginx -t && systemctl reload nginx
-  echo -e "${GREEN}✓ Nginx configuré et rechargé avec succès.${NC}"
-fi
-
-# 5.bis Activation des services d'arrière-plan RTP BeroSat si disponibles
-if [ -d "$APP_DIR/infra/systemd" ]; then
-  cp -f "$APP_DIR/infra/systemd/"*.service /etc/systemd/system/ 2>/dev/null || true
-  systemctl daemon-reload 2>/dev/null || true
-  systemctl stop malaika 2>/dev/null || true
-  systemctl disable malaika 2>/dev/null || true
-  systemctl enable --now rtptv rtp-aac 2>/dev/null || true
-  echo -e "${GREEN}✓ Services systemd RTP HD BeroSat configurés (boucles CPU désactivées).${NC}"
-fi
-
-# 6. Redémarrage du service Node.js
-echo -e "${CYAN}[5/6] Redémarrage du service d'application Node.js...${NC}"
-if command -v pm2 &> /dev/null; then
-  pm2 describe tvpromedia &>/dev/null && pm2 restart tvpromedia || pm2 start dist/server.cjs --name tvpromedia
-  pm2 save 2>/dev/null || true
-  echo -e "${GREEN}✓ Processus PM2 'tvpromedia' actif et redémarré.${NC}"
-elif systemctl is-active --quiet tvpromedia 2>/dev/null; then
-  systemctl restart tvpromedia
-  echo -e "${GREEN}✓ Service systemd tvpromedia redémarré.${NC}"
-else
-  # Démarrage avec nohup si ni pm2 ni systemd ne sont configurés
-  pkill -f "dist/server.cjs" 2>/dev/null || true
-  nohup node dist/server.cjs > /var/log/tvpromedia.log 2>&1 &
-  echo -e "${GREEN}✓ Node.js lancé en arrière-plan (PID: $!).${NC}"
-fi
-
-# 7. Sauvegarde vers GitHub madiaott-oss/tvpromedia.site
-echo -e "${CYAN}[6/6] Synchronisation vers GitHub madiaott-oss/tvpromedia.site...${NC}"
-if [ -d "$APP_DIR/.git" ]; then
-  git add -A
-  if ! git diff-index --quiet HEAD -- 2>/dev/null; then
-    git commit -m "Auto-sync chaînes & déploiement VPS $(date -u +'%Y-%m-%d %H:%M:%S UTC')" 2>/dev/null || true
-    echo "Poussée vers GitHub (main)..."
-    git push origin main 2>/dev/null || echo -e "${YELLOW}Note: Configuration d'authentification requise pour git push automatique.${NC}"
-  else
-    echo "Dépôt Git déjà à jour."
-  fi
-fi
-
-echo ""
-echo -e "${GREEN}================================================================${NC}"
-echo -e "${GREEN}  ✓ SYNCHRONISATION TERMINÉE AVEC SUCCÈS SUR TOUS LES DOMAINES !${NC}"
-echo -e "${GREEN}================================================================${NC}"
-echo -e "• Site Web public : ${CYAN}https://tvpromedia.com${NC}"
-echo -e "• Alias Web : ${CYAN}https://www.tvpromedia.com${NC}"
-echo -e "• Instance AI Studio : ${CYAN}https://tvpromedia.ai.studio${NC}"
-echo -e "• API Chaînes : ${CYAN}https://tvpromedia.com/api/channels${NC} ou ${CYAN}/channels.json${NC}"
-echo -e "• Playlist M3U : ${CYAN}https://tvpromedia.com/api/playlist.m3u${NC}"
-echo -e "• Serveur VPS Ingest : ${CYAN}rtmp://191.215.38.95/live${NC}"
-echo ""
+      // Start the cookie verification process.
+      verifyCanSetCookies();
+    </script>
+  </body>
+</html>

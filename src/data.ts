@@ -508,7 +508,7 @@ const RAW_DEFAULT_CHANNELS: Channel[] = [
     nom: "AFRI TV",
     lien: "https://stream.berosat.live:19360/afri-tv/afri-tv.m3u8",
     logo: AFRI_TV_LOGO,
-    cat: "GENERALISTE",
+    cat: "AFRIQUE",
     ch: "5",
     qualite: "HD",
     pays: "AFRIQUE",
