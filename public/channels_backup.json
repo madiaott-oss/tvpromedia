@@ -15014,5 +15014,17 @@
     "desc": "Famille Rakuten TV - Films grand public pour petits et grands",
     "m3u8Source": "https://jmp2.uk/stvp-FR2600001PI",
     "categorie": "FILMS"
+  },
+  {
+    "id": "ch_berosat_monde24h",
+    "nom": "LE MONDE EN 24H",
+    "lien": "https://stream.berosat.live/hls/monde24h-tv-index/monde24h-tv-index.m3u8",
+    "logo": "",
+    "cat": "NEWS",
+    "qualite": "HD",
+    "pays": "RDC",
+    "desc": "LE MONDE EN 24H - Berosat Live",
+    "m3u8Source": "https://stream.berosat.live/hls/monde24h-tv-index/monde24h-tv-index.m3u8",
+    "categorie": "NEWS"
   }
 ]
