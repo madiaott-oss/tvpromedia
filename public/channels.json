@@ -22,11 +22,11 @@
     "categorie": "CONGO",
     "lien": "https://www.tvpromedia.com/live/espoir-tv-stream.m3u8",
     "m3u8Source": "https://www.tvpromedia.com/live/espoir-tv-stream.m3u8",
-    "desc": "ESPOIR TV HD - Télévision d'information, culture et divertissement • Direct HD HLS (Flux Principal)",
+    "desc": "ESPOIR TV HD - T\u00e9l\u00e9vision d'information, culture et divertissement \u2022 Direct HD HLS (Flux Principal)",
     "ch": "1",
     "id": "ch_1",
     "cat": "GENERALISTE",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 240\" width=\"100%\" height=\"100%\"><rect width=\"600\" height=\"240\" fill=\"%23ffffff\"/><circle cx=\"120\" cy=\"120\" r=\"95\" fill=\"%23ff1a1a\"/><circle cx=\"120\" cy=\"120\" r=\"85\" fill=\"%23ffd700\"/><circle cx=\"120\" cy=\"120\" r=\"75\" fill=\"%230015b0\"/><text x=\"75\" y=\"160\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"115\" fill=\"%23ffe600\">E</text><text x=\"220\" y=\"140\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"75\" fill=\"%23ff0000\" letter-spacing=\"-1\">ESPOIR TV</text><line x1=\"220\" y1=\"165\" x2=\"570\" y2=\"165\" stroke=\"%23ff0000\" stroke-width=\"12\"/><text x=\"270\" y=\"215\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"42\" fill=\"%230015b0\">Télévision</text><path d=\"M 360,55 Q 430,10 490,40\" fill=\"none\" stroke=\"%23ff0000\" stroke-width=\"6\"/><circle cx=\"430\" cy=\"22\" r=\"10\" fill=\"%230015b0\"/><circle cx=\"480\" cy=\"38\" r=\"8\" fill=\"%23ffe600\"/><circle cx=\"445\" cy=\"85\" r=\"9\" fill=\"%23ff0000\"/></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 240\" width=\"100%\" height=\"100%\"><rect width=\"600\" height=\"240\" fill=\"%23ffffff\"/><circle cx=\"120\" cy=\"120\" r=\"95\" fill=\"%23ff1a1a\"/><circle cx=\"120\" cy=\"120\" r=\"85\" fill=\"%23ffd700\"/><circle cx=\"120\" cy=\"120\" r=\"75\" fill=\"%230015b0\"/><text x=\"75\" y=\"160\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"115\" fill=\"%23ffe600\">E</text><text x=\"220\" y=\"140\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"75\" fill=\"%23ff0000\" letter-spacing=\"-1\">ESPOIR TV</text><line x1=\"220\" y1=\"165\" x2=\"570\" y2=\"165\" stroke=\"%23ff0000\" stroke-width=\"12\"/><text x=\"270\" y=\"215\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"42\" fill=\"%230015b0\">T\u00e9l\u00e9vision</text><path d=\"M 360,55 Q 430,10 490,40\" fill=\"none\" stroke=\"%23ff0000\" stroke-width=\"6\"/><circle cx=\"430\" cy=\"22\" r=\"10\" fill=\"%230015b0\"/><circle cx=\"480\" cy=\"38\" r=\"8\" fill=\"%23ffe600\"/><circle cx=\"445\" cy=\"85\" r=\"9\" fill=\"%23ff0000\"/></svg>",
     "cloudRemix": "https://www.tvpromedia.com/live/espoir-tv-stream.m3u8",
     "qualite": "HD",
     "direct": true
@@ -40,7 +40,7 @@
     "ch": "1",
     "qualite": "HD",
     "pays": "BRAZZAVILLE",
-    "desc": "STARS BRAZZAVILLE BY AFRICA - Chaîne N° 1 Musique & Culture (Brazzaville) • Direct HLS Régie (Secours M3U8 cle_star_1m_ay2q)",
+    "desc": "STARS BRAZZAVILLE BY AFRICA - Cha\u00eene N\u00b0 1 Musique & Culture (Brazzaville) \u2022 Direct HLS R\u00e9gie (Secours M3U8 cle_star_1m_ay2q)",
     "m3u8Source": "https://www.tvpromedia.com/live/cle_star_1m_nmo2.m3u8",
     "cloudRemix": "https://tvpromedia.com/live/cle_star_1m_ay2q.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -58,7 +58,7 @@
     "ch": "2",
     "qualite": "FHD",
     "pays": "INTERNATIONAL",
-    "desc": "EVI TV LIVE - Chaîne de télévision évangélique et chrétienne en direct 24h/24 en haute définition Full HD",
+    "desc": "EVI TV LIVE - Cha\u00eene de t\u00e9l\u00e9vision \u00e9vang\u00e9lique et chr\u00e9tienne en direct 24h/24 en haute d\u00e9finition Full HD",
     "m3u8Source": "https://mistserver.evi-tv.com/hls/evi_tv_live/index.m3u8",
     "cloudRemix": "https://mistserver.evi-tv.com/hls/evi_tv_live/index.m3u8",
     "direct": true,
@@ -73,7 +73,7 @@
     "ch": "3",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "RADIO EVI - Diffusion radio en direct continu • Flux Zeno.fm Stéréo",
+    "desc": "RADIO EVI - Diffusion radio en direct continu \u2022 Flux Zeno.fm St\u00e9r\u00e9o",
     "m3u8Source": "https://stream.zeno.fm/bgblkbhq4kjuv",
     "cloudRemix": "https://stream.zeno.fm/bgblkbhq4kjuv",
     "direct": true,
@@ -83,12 +83,12 @@
     "id": "ch_rtp",
     "nom": "RTP",
     "lien": "https://www.tvpromedia.com/live/rtp-hd.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 320\" width=\"100%\" height=\"100%\"><defs><radialGradient id=\"rtp-red-sphere\" cx=\"38%\" cy=\"32%\" r=\"62%\"><stop offset=\"0%\" stop-color=\"%23ff7b7b\"/><stop offset=\"25%\" stop-color=\"%23ff1a1a\"/><stop offset=\"65%\" stop-color=\"%23cc0000\"/><stop offset=\"100%\" stop-color=\"%234d0000\"/></radialGradient><linearGradient id=\"rtp-blue-plate\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%234361ee\"/><stop offset=\"35%\" stop-color=\"%231d39c4\"/><stop offset=\"70%\" stop-color=\"%23091a7a\"/><stop offset=\"100%\" stop-color=\"%23030852\"/></linearGradient><linearGradient id=\"rtp-outer-chrome\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23ffffff\"/><stop offset=\"20%\" stop-color=\"%23d1d5db\"/><stop offset=\"40%\" stop-color=\"%239ca3af\"/><stop offset=\"60%\" stop-color=\"%23ffffff\"/><stop offset=\"80%\" stop-color=\"%236b7280\"/><stop offset=\"100%\" stop-color=\"%231f2937\"/></linearGradient><linearGradient id=\"rtp-letters-chrome\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23ffffff\"/><stop offset=\"42%\" stop-color=\"%23f8fafc\"/><stop offset=\"48%\" stop-color=\"%2394a3b8\"/><stop offset=\"52%\" stop-color=\"%2364748b\"/><stop offset=\"58%\" stop-color=\"%23e2e8f0\"/><stop offset=\"100%\" stop-color=\"%23ffffff\"/></linearGradient><filter id=\"rtp-drop-shadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"6\" stdDeviation=\"6\" flood-color=\"%23000000\" flood-opacity=\"0.9\"/></filter><filter id=\"rtp-emboss\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\"><feDropShadow dx=\"2\" dy=\"4\" stdDeviation=\"3\" flood-color=\"%23000000\" flood-opacity=\"0.8\"/></filter></defs><rect width=\"500\" height=\"320\" rx=\"16\" fill=\"%23000000\"/><g filter=\"url(%23rtp-drop-shadow)\" transform=\"translate(25, 20)\"><path d=\"M 210 50 L 415 50 C 438 50 455 68 455 92 L 455 168 C 455 192 438 210 415 210 L 210 210 Z\" fill=\"url(%23rtp-outer-chrome)\" stroke=\"%23374151\" stroke-width=\"2\"/><path d=\"M 210 58 L 410 58 C 428 58 442 72 442 92 L 442 168 C 442 188 428 202 410 202 L 210 202 Z\" fill=\"%230f172a\"/><path d=\"M 210 64 L 406 64 C 422 64 434 76 434 94 L 434 166 C 434 184 422 196 406 196 L 210 196 Z\" fill=\"url(%23rtp-blue-plate)\"/><ellipse cx=\"320\" cy=\"85\" rx=\"85\" ry=\"16\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"130\" cy=\"130\" r=\"108\" fill=\"url(%23rtp-outer-chrome)\" stroke=\"%23374151\" stroke-width=\"2\"/><circle cx=\"130\" cy=\"130\" r=\"100\" fill=\"%231e293b\"/><circle cx=\"130\" cy=\"130\" r=\"94\" fill=\"url(%23rtp-red-sphere)\"/><ellipse cx=\"106\" cy=\"82\" rx=\"55\" ry=\"30\" fill=\"%23ffffff\" opacity=\"0.45\" transform=\"rotate(-20 106 82)\"/><g filter=\"url(%23rtp-emboss)\"><text x=\"80\" y=\"168\" font-family=\"'Arial Black', 'Impact', sans-serif\" font-weight=\"900\" font-size=\"114\" fill=\"%23090d16\" letter-spacing=\"-2\">R</text><text x=\"180\" y=\"168\" font-family=\"'Arial Black', 'Impact', sans-serif\" font-weight=\"900\" font-size=\"114\" fill=\"%23090d16\" letter-spacing=\"-2\">T</text><text x=\"280\" y=\"168\" font-family=\"'Arial Black', 'Impact', sans-serif\" font-weight=\"900\" font-size=\"114\" fill=\"%23090d16\" letter-spacing=\"-2\">P</text><text x=\"80\" y=\"164\" font-family=\"'Arial Black', 'Impact', sans-serif\" font-weight=\"900\" font-size=\"114\" fill=\"url(%23rtp-letters-chrome)\" stroke=\"%23ffffff\" stroke-width=\"1.5\" letter-spacing=\"-2\">R</text><text x=\"180\" y=\"164\" font-family=\"'Arial Black', 'Impact', sans-serif\" font-weight=\"900\" font-size=\"114\" fill=\"url(%23rtp-letters-chrome)\" stroke=\"%23ffffff\" stroke-width=\"1.5\" letter-spacing=\"-2\">T</text><text x=\"280\" y=\"164\" font-family=\"'Arial Black', 'Impact', sans-serif\" font-weight=\"900\" font-size=\"114\" fill=\"url(%23rtp-letters-chrome)\" stroke=\"%23ffffff\" stroke-width=\"1.5\" letter-spacing=\"-2\">P</text></g></g><text x=\"250\" y=\"295\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"16\" fill=\"%239ca3af\" text-anchor=\"middle\" letter-spacing=\"4\">RADIO TÉLÉVISION PUISSANCE • CANAL 4</text></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 320\" width=\"100%\" height=\"100%\"><defs><radialGradient id=\"rtp-red-sphere\" cx=\"38%\" cy=\"32%\" r=\"62%\"><stop offset=\"0%\" stop-color=\"%23ff7b7b\"/><stop offset=\"25%\" stop-color=\"%23ff1a1a\"/><stop offset=\"65%\" stop-color=\"%23cc0000\"/><stop offset=\"100%\" stop-color=\"%234d0000\"/></radialGradient><linearGradient id=\"rtp-blue-plate\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%234361ee\"/><stop offset=\"35%\" stop-color=\"%231d39c4\"/><stop offset=\"70%\" stop-color=\"%23091a7a\"/><stop offset=\"100%\" stop-color=\"%23030852\"/></linearGradient><linearGradient id=\"rtp-outer-chrome\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23ffffff\"/><stop offset=\"20%\" stop-color=\"%23d1d5db\"/><stop offset=\"40%\" stop-color=\"%239ca3af\"/><stop offset=\"60%\" stop-color=\"%23ffffff\"/><stop offset=\"80%\" stop-color=\"%236b7280\"/><stop offset=\"100%\" stop-color=\"%231f2937\"/></linearGradient><linearGradient id=\"rtp-letters-chrome\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23ffffff\"/><stop offset=\"42%\" stop-color=\"%23f8fafc\"/><stop offset=\"48%\" stop-color=\"%2394a3b8\"/><stop offset=\"52%\" stop-color=\"%2364748b\"/><stop offset=\"58%\" stop-color=\"%23e2e8f0\"/><stop offset=\"100%\" stop-color=\"%23ffffff\"/></linearGradient><filter id=\"rtp-drop-shadow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\"><feDropShadow dx=\"0\" dy=\"6\" stdDeviation=\"6\" flood-color=\"%23000000\" flood-opacity=\"0.9\"/></filter><filter id=\"rtp-emboss\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\"><feDropShadow dx=\"2\" dy=\"4\" stdDeviation=\"3\" flood-color=\"%23000000\" flood-opacity=\"0.8\"/></filter></defs><rect width=\"500\" height=\"320\" rx=\"16\" fill=\"%23000000\"/><g filter=\"url(%23rtp-drop-shadow)\" transform=\"translate(25, 20)\"><path d=\"M 210 50 L 415 50 C 438 50 455 68 455 92 L 455 168 C 455 192 438 210 415 210 L 210 210 Z\" fill=\"url(%23rtp-outer-chrome)\" stroke=\"%23374151\" stroke-width=\"2\"/><path d=\"M 210 58 L 410 58 C 428 58 442 72 442 92 L 442 168 C 442 188 428 202 410 202 L 210 202 Z\" fill=\"%230f172a\"/><path d=\"M 210 64 L 406 64 C 422 64 434 76 434 94 L 434 166 C 434 184 422 196 406 196 L 210 196 Z\" fill=\"url(%23rtp-blue-plate)\"/><ellipse cx=\"320\" cy=\"85\" rx=\"85\" ry=\"16\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"130\" cy=\"130\" r=\"108\" fill=\"url(%23rtp-outer-chrome)\" stroke=\"%23374151\" stroke-width=\"2\"/><circle cx=\"130\" cy=\"130\" r=\"100\" fill=\"%231e293b\"/><circle cx=\"130\" cy=\"130\" r=\"94\" fill=\"url(%23rtp-red-sphere)\"/><ellipse cx=\"106\" cy=\"82\" rx=\"55\" ry=\"30\" fill=\"%23ffffff\" opacity=\"0.45\" transform=\"rotate(-20 106 82)\"/><g filter=\"url(%23rtp-emboss)\"><text x=\"80\" y=\"168\" font-family=\"'Arial Black', 'Impact', sans-serif\" font-weight=\"900\" font-size=\"114\" fill=\"%23090d16\" letter-spacing=\"-2\">R</text><text x=\"180\" y=\"168\" font-family=\"'Arial Black', 'Impact', sans-serif\" font-weight=\"900\" font-size=\"114\" fill=\"%23090d16\" letter-spacing=\"-2\">T</text><text x=\"280\" y=\"168\" font-family=\"'Arial Black', 'Impact', sans-serif\" font-weight=\"900\" font-size=\"114\" fill=\"%23090d16\" letter-spacing=\"-2\">P</text><text x=\"80\" y=\"164\" font-family=\"'Arial Black', 'Impact', sans-serif\" font-weight=\"900\" font-size=\"114\" fill=\"url(%23rtp-letters-chrome)\" stroke=\"%23ffffff\" stroke-width=\"1.5\" letter-spacing=\"-2\">R</text><text x=\"180\" y=\"164\" font-family=\"'Arial Black', 'Impact', sans-serif\" font-weight=\"900\" font-size=\"114\" fill=\"url(%23rtp-letters-chrome)\" stroke=\"%23ffffff\" stroke-width=\"1.5\" letter-spacing=\"-2\">T</text><text x=\"280\" y=\"164\" font-family=\"'Arial Black', 'Impact', sans-serif\" font-weight=\"900\" font-size=\"114\" fill=\"url(%23rtp-letters-chrome)\" stroke=\"%23ffffff\" stroke-width=\"1.5\" letter-spacing=\"-2\">P</text></g></g><text x=\"250\" y=\"295\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"16\" fill=\"%239ca3af\" text-anchor=\"middle\" letter-spacing=\"4\">RADIO T\u00c9L\u00c9VISION PUISSANCE \u2022 CANAL 4</text></svg>",
     "cat": "NEWS",
     "ch": "4",
     "qualite": "HD",
     "pays": "ALBANIE",
-    "desc": "RTP - Radio Télévision Puissance • Direct HD HLS (Flux Principal & Secours)",
+    "desc": "RTP - Radio T\u00e9l\u00e9vision Puissance \u2022 Direct HD HLS (Flux Principal & Secours)",
     "m3u8Source": "https://www.tvpromedia.com/live/rtp-hd.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/rtp-hd.m3u8",
     "youtubeBackup": "",
@@ -160,7 +160,7 @@
     "lien": "https://www.tvpromedia.com/live/ictv.m3u8",
     "m3u8Source": "https://www.tvpromedia.com/live/ictv.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/ictv.m3u8",
-    "desc": "IC-TV - Information, Culture & Divertissement • Direct HD HLS (Flux Principal)",
+    "desc": "IC-TV - Information, Culture & Divertissement \u2022 Direct HD HLS (Flux Principal)",
     "lien_secours": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
     "m3u8_secours": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
     "secours": "https://stream.berosat.live/hls/ictv/ictv.m3u8",
@@ -243,7 +243,7 @@
   },
   {
     "id": "iptv_houa7d8",
-    "nom": "MCI Televisión",
+    "nom": "MCI Televisi\u00f3n",
     "lien": "https://video.ejeserver.com/live/mcitelevision.m3u8",
     "cat": "FILMS",
     "logo": "https://pbs.twimg.com/profile_images/1836009952420274177/FfYonU6r_400x400.jpg",
@@ -276,7 +276,7 @@
   },
   {
     "id": "ch_24",
-    "nom": "CCPTV MONTRÉAL (CCPV TV)",
+    "nom": "CCPTV MONTR\u00c9AL (CCPV TV)",
     "ch": "24",
     "categorie": "RELIGIEUX",
     "cat": "RELIGIEUX",
@@ -288,13 +288,13 @@
     "cloudRemix": "https://www.tvpromedia.com/live/cle_ccpvtv_inf_mxq.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
     "rtmpKey": "cle_ccpvtv_inf_mxq",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 350\" width=\"100%\" height=\"100%\"><rect width=\"600\" height=\"350\" fill=\"%23000000\"/><g transform=\"translate(35, 40)\"><polygon points=\"10,20 100,20 80,180 1,180\" fill=\"%2360c0ea\" stroke=\"%23000\" stroke-width=\"2\"/><path d=\"M 40,75 Q 50,55 60,75 Q 50,105 40,75 M 35,105 Q 50,90 65,105 Q 50,120 35,105\" fill=\"%230a2540\"/><path d=\"M 45,65 Q 50,45 55,65\" fill=\"none\" stroke=\"%23fff\" stroke-width=\"3\"/><polygon points=\"105,20 195,20 175,180 85,180\" fill=\"%2360c0ea\" stroke=\"%23000\" stroke-width=\"2\"/><text x=\"115\" y=\"140\" font-family=\"Arial Black, sans-serif\" font-weight=\"900\" font-size=\"100\" fill=\"%23ffffff\">C</text><polygon points=\"200,20 290,20 270,180 180,180\" fill=\"%2360c0ea\" stroke=\"%23000\" stroke-width=\"2\"/><text x=\"210\" y=\"140\" font-family=\"Arial Black, sans-serif\" font-weight=\"900\" font-size=\"100\" fill=\"%23ffffff\">C</text><polygon points=\"295,20 385,20 365,180 275,180\" fill=\"%2360c0ea\" stroke=\"%23000\" stroke-width=\"2\"/><text x=\"310\" y=\"140\" font-family=\"Arial Black, sans-serif\" font-weight=\"900\" font-size=\"100\" fill=\"%23ffffff\">P</text><polygon points=\"390,20 530,20 510,180 370,180\" fill=\"%2360c0ea\" stroke=\"%23000\" stroke-width=\"2\"/><text x=\"400\" y=\"140\" font-family=\"Arial Black, sans-serif\" font-weight=\"900\" font-size=\"95\" fill=\"%23ffffff\">V</text><text x=\"465\" y=\"140\" font-family=\"Arial Black, sans-serif\" font-weight=\"900\" font-size=\"80\" fill=\"%230a2560\">TV</text><text x=\"95\" y=\"174\" font-family=\"Arial, sans-serif\" font-weight=\"900\" font-size=\"13\" fill=\"%230a2560\" letter-spacing=\"1\">CENTRE CHRETIEN PAROLE DE VIE</text><rect x=\"0\" y=\"185\" width=\"520\" height=\"45\" fill=\"%23ffffff\" rx=\"4\"/><text x=\"135\" y=\"220\" font-family=\"Arial Black, sans-serif\" font-weight=\"900\" font-size=\"32\" fill=\"%2300bcd4\" letter-spacing=\"2\">MONTRÉAL</text></g></svg>",
-    "desc": "CCPTV MONTRÉAL (CCPV TV Montréal - Centre Chrétien Parole de Vie) • Canal 24 • Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 350\" width=\"100%\" height=\"100%\"><rect width=\"600\" height=\"350\" fill=\"%23000000\"/><g transform=\"translate(35, 40)\"><polygon points=\"10,20 100,20 80,180 1,180\" fill=\"%2360c0ea\" stroke=\"%23000\" stroke-width=\"2\"/><path d=\"M 40,75 Q 50,55 60,75 Q 50,105 40,75 M 35,105 Q 50,90 65,105 Q 50,120 35,105\" fill=\"%230a2540\"/><path d=\"M 45,65 Q 50,45 55,65\" fill=\"none\" stroke=\"%23fff\" stroke-width=\"3\"/><polygon points=\"105,20 195,20 175,180 85,180\" fill=\"%2360c0ea\" stroke=\"%23000\" stroke-width=\"2\"/><text x=\"115\" y=\"140\" font-family=\"Arial Black, sans-serif\" font-weight=\"900\" font-size=\"100\" fill=\"%23ffffff\">C</text><polygon points=\"200,20 290,20 270,180 180,180\" fill=\"%2360c0ea\" stroke=\"%23000\" stroke-width=\"2\"/><text x=\"210\" y=\"140\" font-family=\"Arial Black, sans-serif\" font-weight=\"900\" font-size=\"100\" fill=\"%23ffffff\">C</text><polygon points=\"295,20 385,20 365,180 275,180\" fill=\"%2360c0ea\" stroke=\"%23000\" stroke-width=\"2\"/><text x=\"310\" y=\"140\" font-family=\"Arial Black, sans-serif\" font-weight=\"900\" font-size=\"100\" fill=\"%23ffffff\">P</text><polygon points=\"390,20 530,20 510,180 370,180\" fill=\"%2360c0ea\" stroke=\"%23000\" stroke-width=\"2\"/><text x=\"400\" y=\"140\" font-family=\"Arial Black, sans-serif\" font-weight=\"900\" font-size=\"95\" fill=\"%23ffffff\">V</text><text x=\"465\" y=\"140\" font-family=\"Arial Black, sans-serif\" font-weight=\"900\" font-size=\"80\" fill=\"%230a2560\">TV</text><text x=\"95\" y=\"174\" font-family=\"Arial, sans-serif\" font-weight=\"900\" font-size=\"13\" fill=\"%230a2560\" letter-spacing=\"1\">CENTRE CHRETIEN PAROLE DE VIE</text><rect x=\"0\" y=\"185\" width=\"520\" height=\"45\" fill=\"%23ffffff\" rx=\"4\"/><text x=\"135\" y=\"220\" font-family=\"Arial Black, sans-serif\" font-weight=\"900\" font-size=\"32\" fill=\"%2300bcd4\" letter-spacing=\"2\">MONTR\u00c9AL</text></g></svg>",
+    "desc": "CCPTV MONTR\u00c9AL (CCPV TV Montr\u00e9al - Centre Chr\u00e9tien Parole de Vie) \u2022 Canal 24 \u2022 Direct HLS VPS cle_ccpvtv_inf_mxq sur www.tvpromedia.com",
     "bouquet": "TVPRO_VPS"
   },
   {
     "id": "iptv_mcekj8r",
-    "nom": "M95 Televisión Marbella",
+    "nom": "M95 Televisi\u00f3n Marbella",
     "lien": "https://limited2.todostreaming.es/live/m95-livestream.m3u8",
     "cat": "NEWS",
     "logo": "https://i.imgur.com/RzAkP1V.png",
@@ -339,7 +339,7 @@
     "cloudRemix": "https://www.tvpromedia.com/live/cle_baladetv_inf_gx5l.m3u8",
     "rtmpKey": "cle_baladetv_inf_gx5l",
     "rtmpUrl": "rtmp://191.215.38.95/live",
-    "desc": "BALADE MONDE TV - Découverte, voyages et reportages internationaux en direct • Direct HLS VPS cle_baladetv_inf_gx5l sur www.tvpromedia.com",
+    "desc": "BALADE MONDE TV - D\u00e9couverte, voyages et reportages internationaux en direct \u2022 Direct HLS VPS cle_baladetv_inf_gx5l sur www.tvpromedia.com",
     "pays": "RDC"
   },
   {
@@ -366,7 +366,7 @@
     "m3u8Source": "https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8",
     "cloudRemix": "https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8",
     "youtubeBackup": "https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8",
-    "desc": "MSTV - Télévision Généraliste (Brazzaville) • Direct HLS & Secours HLS",
+    "desc": "MSTV - T\u00e9l\u00e9vision G\u00e9n\u00e9raliste (Brazzaville) \u2022 Direct HLS & Secours HLS",
     "pays": "BRAZZAVILLE"
   },
   {
@@ -415,7 +415,7 @@
   },
   {
     "id": "iptv_u6kqmhn",
-    "nom": "Alsacias Televisión (ATV | Canal 28)",
+    "nom": "Alsacias Televisi\u00f3n (ATV | Canal 28)",
     "lien": "https://s.emisoras.tv:8081/atv/index.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/SbuD1UW.png",
@@ -437,7 +437,7 @@
   },
   {
     "id": "iptv_5dwueq1",
-    "nom": "Auténtica Televisión",
+    "nom": "Aut\u00e9ntica Televisi\u00f3n",
     "lien": "https://live.obslivestream.com/autenticatvmux/index.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/bEJK3RN.png",
@@ -448,7 +448,7 @@
   },
   {
     "id": "iptv_flpz2my",
-    "nom": "BUM Televisión",
+    "nom": "BUM Televisi\u00f3n",
     "lien": "https://movil.ejeserver.com/live/visiondorada.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/I0eGYI0.png",
@@ -470,7 +470,7 @@
   },
   {
     "id": "iptv_1tvj304",
-    "nom": "Canal Más Televisión",
+    "nom": "Canal M\u00e1s Televisi\u00f3n",
     "lien": "https://movil.ejeserver.com/live/teledoradahd.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/ODMa27W.jpg",
@@ -492,7 +492,7 @@
   },
   {
     "id": "iptv_77u5h2a",
-    "nom": "Claro Televisión Dominicana",
+    "nom": "Claro Televisi\u00f3n Dominicana",
     "lien": "https://streamunoapp.com:3960/live/claroteledomlive.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/fJD7OxB.png",
@@ -503,7 +503,7 @@
   },
   {
     "id": "iptv_ml2jltc",
-    "nom": "CR Televisión Moyobamba",
+    "nom": "CR Televisi\u00f3n Moyobamba",
     "lien": "https://live.obslivestream.com/crtvmux/index.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/oxycMeA.png",
@@ -580,7 +580,7 @@
   },
   {
     "id": "iptv_g0d05kw",
-    "nom": "Jihočeská televize",
+    "nom": "Jiho\u010desk\u00e1 televize",
     "lien": "https://vysilani.zaktv.cz/broadcast/hls/jtv/index.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/Hi8hZzl.png",
@@ -602,7 +602,7 @@
   },
   {
     "id": "iptv_zkacmqt",
-    "nom": "Majestad Televisión",
+    "nom": "Majestad Televisi\u00f3n",
     "lien": "https://livetv.305streamhd.com:3667/live/majestadtvlive.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/BJhrvtL.png",
@@ -745,7 +745,7 @@
   },
   {
     "id": "iptv_qfjsp25",
-    "nom": "Radio y Televisión Martí",
+    "nom": "Radio y Televisi\u00f3n Mart\u00ed",
     "lien": "https://ocb-ingest.akamaized.net/hls/live/2037032/tvmc01/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/J2ZMa4g.png",
@@ -758,12 +758,12 @@
     "id": "ch_68",
     "nom": "A LA UNE TELEVISION",
     "lien": "https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 300\" width=\"100%\" height=\"100%\"><rect width=\"600\" height=\"300\" fill=\"%23000000\"/><g transform=\"translate(140, 70)\"><text x=\"0\" y=\"80\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"70\" fill=\"%23ffffff\" letter-spacing=\"-2\">À LA UNE</text><path d=\"M 320 40 A 25 25 0 0 1 320 80\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"8\" stroke-linecap=\"round\"/><path d=\"M 335 30 A 40 40 0 0 1 335 90\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"8\" stroke-linecap=\"round\"/><polygon points=\"20,100 240,100 220,150 0,150\" fill=\"%232e7d32\"/><text x=\"20\" y=\"138\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"36\" fill=\"%23ffffff\">télévision</text></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 300\" width=\"100%\" height=\"100%\"><rect width=\"600\" height=\"300\" fill=\"%23000000\"/><g transform=\"translate(140, 70)\"><text x=\"0\" y=\"80\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"70\" fill=\"%23ffffff\" letter-spacing=\"-2\">\u00c0 LA UNE</text><path d=\"M 320 40 A 25 25 0 0 1 320 80\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"8\" stroke-linecap=\"round\"/><path d=\"M 335 30 A 40 40 0 0 1 335 90\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"8\" stroke-linecap=\"round\"/><polygon points=\"20,100 240,100 220,150 0,150\" fill=\"%232e7d32\"/><text x=\"20\" y=\"138\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"36\" fill=\"%23ffffff\">t\u00e9l\u00e9vision</text></g></svg>",
     "cat": "GENERALISTE",
     "ch": "68",
     "qualite": "4K",
     "pays": "RDC",
-    "desc": "A la une Music toujours en mouvement avec tonton Guez kuama avec invité Benjamin PENGE • Canal 68",
+    "desc": "A la une Music toujours en mouvement avec tonton Guez kuama avec invit\u00e9 Benjamin PENGE \u2022 Canal 68",
     "youtubeBackup": "https://files.catbox.moe/0ssfyb.mp4",
     "m3u8Source": "https://www.tvpromedia.com/live/cle_alaunetv_1m_r8vj.m3u8",
     "cloudRemix": "https://files.catbox.moe/0ssfyb.mp4",
@@ -794,7 +794,7 @@
   },
   {
     "id": "iptv_gj1chcr",
-    "nom": "RTP Açores",
+    "nom": "RTP A\u00e7ores",
     "lien": "https://streaming-live.rtp.pt/liverepeater/smil:rtpacores.smil/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://cdn-images.rtp.pt/common/img/channels/logos/color/horizontal/rtpacores_2026.png",
@@ -816,7 +816,7 @@
   },
   {
     "id": "iptv_8hi6dpo",
-    "nom": "RTP Memória",
+    "nom": "RTP Mem\u00f3ria",
     "lien": "https://streaming-live.rtp.pt/liverepeater/smil:rtpmem.smil/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://cdn-images.rtp.pt/common/img/channels/logos/color/horizontal/rtpmemoria_2026.png",
@@ -937,7 +937,7 @@
   },
   {
     "id": "iptv_tfhuksg",
-    "nom": "Venevisión Internacional",
+    "nom": "Venevisi\u00f3n Internacional",
     "lien": "https://vod2live.univtec.com/manifest/4c41c0d8-e2e4-43cc-bd43-79afe715e1b3.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/vtGED07.jpg",
@@ -948,7 +948,7 @@
   },
   {
     "id": "iptv_pd19pb5",
-    "nom": "Vía Televisión",
+    "nom": "V\u00eda Televisi\u00f3n",
     "lien": "https://videoserver.tmcreativos.com:19360/cablerasvia/cablerasvia.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/FiptbGQ.png",
@@ -1025,14 +1025,14 @@
   },
   {
     "id": "ch_92",
-    "nom": "MALAÏKA ACTU",
+    "nom": "MALA\u00cfKA ACTU",
     "lien": "https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1150 460\" width=\"100%\" height=\"100%\"><rect width=\"1150\" height=\"460\" fill=\"%23ffffff\"/><g transform=\"translate(0, 0)\"><rect x=\"50\" y=\"50\" width=\"1050\" height=\"220\" rx=\"36\" fill=\"%23ffffff\" stroke=\"%23000000\" stroke-width=\"15\"/><g id=\"malaika-word\"><polygon points=\"95,90 128,90 160,172 192,90 225,90 225,230 195,230 195,140 169,208 151,208 125,140 125,230 95,230\" fill=\"%23000000\"/><polygon points=\"277,90 317,230 287,230 277,140 267,230 237,230\" fill=\"%23000000\"/><polygon points=\"330,90 360,90 360,198 402,198 402,230 330,230\" fill=\"%23000000\"/><polygon points=\"447,90 487,230 457,230 447,140 437,230 407,230\" fill=\"%23000000\"/><rect x=\"500\" y=\"90\" width=\"28\" height=\"140\" fill=\"%23000000\"/><polygon points=\"542,90 572,90 572,148 610,90 648,90 598,158 650,230 612,230 572,170 572,230 542,230\" fill=\"%23000000\"/><polygon points=\"667,90 707,230 677,230 667,140 657,230 627,230\" fill=\"%23000000\"/></g><rect x=\"718\" y=\"84\" width=\"250\" height=\"152\" rx=\"24\" fill=\"%23d80000\"/><text x=\"843\" y=\"196\" font-family=\"'Montserrat', 'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"104\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"2\">ACTU</text><rect x=\"978\" y=\"84\" width=\"105\" height=\"152\" rx=\"20\" fill=\"none\" stroke=\"%23000000\" stroke-width=\"12\"/><text x=\"1030.5\" y=\"196\" font-family=\"'Montserrat', 'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"94\" fill=\"%23000000\" text-anchor=\"middle\" letter-spacing=\"-3\">TV</text><line x1=\"120\" y1=\"340\" x2=\"250\" y2=\"340\" stroke=\"%23000000\" stroke-width=\"6\" stroke-linecap=\"round\"/><text x=\"575\" y=\"352\" font-family=\"'Montserrat', 'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"38\" fill=\"%23000000\" text-anchor=\"middle\" letter-spacing=\"10\">AU CŒUR DE L'ACTUALITÉ</text><line x1=\"900\" y1=\"340\" x2=\"1030\" y2=\"340\" stroke=\"%23000000\" stroke-width=\"6\" stroke-linecap=\"round\"/><line x1=\"505\" y1=\"390\" x2=\"645\" y2=\"390\" stroke=\"%23d80000\" stroke-width=\"10\" stroke-linecap=\"round\"/></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1150 460\" width=\"100%\" height=\"100%\"><rect width=\"1150\" height=\"460\" fill=\"%23ffffff\"/><g transform=\"translate(0, 0)\"><rect x=\"50\" y=\"50\" width=\"1050\" height=\"220\" rx=\"36\" fill=\"%23ffffff\" stroke=\"%23000000\" stroke-width=\"15\"/><g id=\"malaika-word\"><polygon points=\"95,90 128,90 160,172 192,90 225,90 225,230 195,230 195,140 169,208 151,208 125,140 125,230 95,230\" fill=\"%23000000\"/><polygon points=\"277,90 317,230 287,230 277,140 267,230 237,230\" fill=\"%23000000\"/><polygon points=\"330,90 360,90 360,198 402,198 402,230 330,230\" fill=\"%23000000\"/><polygon points=\"447,90 487,230 457,230 447,140 437,230 407,230\" fill=\"%23000000\"/><rect x=\"500\" y=\"90\" width=\"28\" height=\"140\" fill=\"%23000000\"/><polygon points=\"542,90 572,90 572,148 610,90 648,90 598,158 650,230 612,230 572,170 572,230 542,230\" fill=\"%23000000\"/><polygon points=\"667,90 707,230 677,230 667,140 657,230 627,230\" fill=\"%23000000\"/></g><rect x=\"718\" y=\"84\" width=\"250\" height=\"152\" rx=\"24\" fill=\"%23d80000\"/><text x=\"843\" y=\"196\" font-family=\"'Montserrat', 'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"104\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"2\">ACTU</text><rect x=\"978\" y=\"84\" width=\"105\" height=\"152\" rx=\"20\" fill=\"none\" stroke=\"%23000000\" stroke-width=\"12\"/><text x=\"1030.5\" y=\"196\" font-family=\"'Montserrat', 'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"94\" fill=\"%23000000\" text-anchor=\"middle\" letter-spacing=\"-3\">TV</text><line x1=\"120\" y1=\"340\" x2=\"250\" y2=\"340\" stroke=\"%23000000\" stroke-width=\"6\" stroke-linecap=\"round\"/><text x=\"575\" y=\"352\" font-family=\"'Montserrat', 'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"38\" fill=\"%23000000\" text-anchor=\"middle\" letter-spacing=\"10\">AU C\u0152UR DE L'ACTUALIT\u00c9</text><line x1=\"900\" y1=\"340\" x2=\"1030\" y2=\"340\" stroke=\"%23000000\" stroke-width=\"6\" stroke-linecap=\"round\"/><line x1=\"505\" y1=\"390\" x2=\"645\" y2=\"390\" stroke=\"%23d80000\" stroke-width=\"10\" stroke-linecap=\"round\"/></g></svg>",
     "cat": "NEWS",
     "ch": "92",
     "qualite": "4K",
     "pays": "RDC",
-    "desc": "Malaïka Actu Magazine - Grand Magazine d'Actualités, Économie & Société • Direct HLS (cle_malaika_1m_p461)",
+    "desc": "Mala\u00efka Actu Magazine - Grand Magazine d'Actualit\u00e9s, \u00c9conomie & Soci\u00e9t\u00e9 \u2022 Direct HLS (cle_malaika_1m_p461)",
     "m3u8Source": "https://www.tvpromedia.com/live/cle_malaika_1m_p461.m3u8",
     "rtmpKey": "cle_malaika_1m_p461",
     "rtmpUrl": "rtmp://191.215.38.95/live"
@@ -1057,7 +1057,7 @@
     "ch": "93",
     "qualite": "4K",
     "pays": "RDC",
-    "desc": "CEM TV - Centre Évangélique Mahanaïm • Direct HLS VPS www.europe.tvpromedia.com (Flux Principal cle_cem_1m_lvt6)",
+    "desc": "CEM TV - Centre \u00c9vang\u00e9lique Mahana\u00efm \u2022 Direct HLS VPS www.europe.tvpromedia.com (Flux Principal cle_cem_1m_lvt6)",
     "youtubeBackup": "https://www.youtube.com/watch?v=OwkjaS75qvA",
     "m3u8Source": "https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_cem_1m_lvt6.m3u8",
@@ -1121,7 +1121,7 @@
   },
   {
     "id": "iptv_6k7iies",
-    "nom": "Canal 9 Bío Bío Televisión",
+    "nom": "Canal 9 B\u00edo B\u00edo Televisi\u00f3n",
     "lien": "https://unlimited6-cl.dps.live/c9/c9.smil/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/J2G1WMs.png",
@@ -1132,7 +1132,7 @@
   },
   {
     "id": "iptv_15u175l",
-    "nom": "Estepona Televisión",
+    "nom": "Estepona Televisi\u00f3n",
     "lien": "https://cloudvideo.servers10.com:8081/8022/index.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/rMAB720.png",
@@ -1176,7 +1176,7 @@
   },
   {
     "id": "iptv_giqln58",
-    "nom": "Santa María Televisión",
+    "nom": "Santa Mar\u00eda Televisi\u00f3n",
     "lien": "https://pantera1-100gb-cl-movistar.dps.live/smtv/smtv.smil/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/SnbGpoK.png",
@@ -1187,7 +1187,7 @@
   },
   {
     "id": "iptv_cnmamdq",
-    "nom": "SET Televisión Canal 26.1",
+    "nom": "SET Televisi\u00f3n Canal 26.1",
     "lien": "https://5d0d1d7a6be9e.streamlock.net/sicom/canal1/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/dbJKErB.png",
@@ -1253,7 +1253,7 @@
   },
   {
     "id": "iptv_51pzfcy",
-    "nom": "Televisión Aranda",
+    "nom": "Televisi\u00f3n Aranda",
     "lien": "https://cloud.streamingconnect.tv/hls/telearanda/telearanda.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/FwIIdKG.png",
@@ -1308,7 +1308,7 @@
   },
   {
     "id": "iptv_4tzr641",
-    "nom": "Transmedia Televisión Morelia",
+    "nom": "Transmedia Televisi\u00f3n Morelia",
     "lien": "http://streamingcws20.com:1935/tmtv/videotmtv/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/jYMpVQA.png",
@@ -1319,7 +1319,7 @@
   },
   {
     "id": "iptv_b0lrpir",
-    "nom": "TRC Televisión",
+    "nom": "TRC Televisi\u00f3n",
     "lien": "https://5fe2654d6127d.streamlock.net/trc/videotrc/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/W4xwCdl.png",
@@ -1341,7 +1341,7 @@
   },
   {
     "id": "iptv_gwmo4yc",
-    "nom": "Univalle Televisión",
+    "nom": "Univalle Televisi\u00f3n",
     "lien": "https://master.tucableip.com/univalletv/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/qgrWDIs.png",
@@ -1362,7 +1362,7 @@
     "lien": "https://streaming-live.rtp.pt/livetvhlsDVR/rtpnHDdvr.smil/playlist.m3u8",
     "m3u8Source": "https://streaming-live.rtp.pt/livetvhlsDVR/rtpnHDdvr.smil/playlist.m3u8",
     "logo": "https://cdn-images.rtp.pt/common/img/channels/logos/color/horizontal/rtpnoticias_2026.png",
-    "desc": "RTP Noticias (720p) [Not 24/7] - Chaîne TV en direct",
+    "desc": "RTP Noticias (720p) [Not 24/7] - Cha\u00eene TV en direct",
     "ch": "122",
     "cat": "NEWS"
   },
@@ -1378,7 +1378,7 @@
     "lien": "https://rtp.noxun.net/hls720/stream3.m3u8",
     "m3u8Source": "https://rtp.noxun.net/hls720/stream3.m3u8",
     "logo": "https://i.imgur.com/cECNvvr.png",
-    "desc": "RTP (576p) - Chaîne TV en direct",
+    "desc": "RTP (576p) - Cha\u00eene TV en direct",
     "ch": "123",
     "cat": "GENERALISTE"
   },
@@ -1394,13 +1394,13 @@
     "lien": "https://live-evg7.tv360.bitel.com.pe/bitel/rtp/playlist.m3u8",
     "m3u8Source": "https://live-evg7.tv360.bitel.com.pe/bitel/rtp/playlist.m3u8",
     "logo": "https://i.imgur.com/nHMqAHn.jpeg",
-    "desc": "RTP (720p) - Chaîne TV en direct",
+    "desc": "RTP (720p) - Cha\u00eene TV en direct",
     "ch": "124",
     "cat": "GENERALISTE"
   },
   {
     "id": "iptv_rtpaores720p_1903",
-    "nom": "RTP Açores (720p) [Not 24/7]",
+    "nom": "RTP A\u00e7ores (720p) [Not 24/7]",
     "categorie": "GENERALISTE",
     "pays": "INT",
     "langue": "fr",
@@ -1410,7 +1410,7 @@
     "lien": "https://streaming-live.rtp.pt/liverepeater/smil:rtpacoresHD.smil/playlist.m3u8",
     "m3u8Source": "https://streaming-live.rtp.pt/liverepeater/smil:rtpacoresHD.smil/playlist.m3u8",
     "logo": "https://cdn-images.rtp.pt/common/img/channels/logos/color/horizontal/rtpacores_2026.png",
-    "desc": "RTP Açores (720p) [Not 24/7] - Chaîne TV en direct",
+    "desc": "RTP A\u00e7ores (720p) [Not 24/7] - Cha\u00eene TV en direct",
     "ch": "125",
     "cat": "GENERALISTE"
   },
@@ -1426,7 +1426,7 @@
     "lien": "https://tls-cl.cdnz.cl/televida/live/playlist.m3u8",
     "m3u8Source": "https://tls-cl.cdnz.cl/televida/live/playlist.m3u8",
     "logo": "https://i.imgur.com/bmNA8hq.png",
-    "desc": "Televida (1080p) - Chaîne TV en direct",
+    "desc": "Televida (1080p) - Cha\u00eene TV en direct",
     "ch": "126",
     "cat": "RELIGIEUX"
   },
@@ -1454,7 +1454,7 @@
   },
   {
     "id": "iptv_7mdttr1",
-    "nom": "Más Noticias Televisión",
+    "nom": "M\u00e1s Noticias Televisi\u00f3n",
     "lien": "https://www.amixtv.com:8081/mntvh/index.m3u8",
     "cat": "NEWS",
     "logo": "https://i.imgur.com/FG4nfRX.jpg",
@@ -1465,7 +1465,7 @@
   },
   {
     "id": "iptv_lpy75oy",
-    "nom": "Milenio Televisión",
+    "nom": "Milenio Televisi\u00f3n",
     "lien": "https://jmp2.uk/plu-652e922db4b047000825f975.m3u8",
     "cat": "NEWS",
     "logo": "https://i.imgur.com/TG1T5Oh.png",
@@ -1520,7 +1520,7 @@
   },
   {
     "id": "iptv_aexfvb9",
-    "nom": "BD Televisión",
+    "nom": "BD Televisi\u00f3n",
     "lien": "https://stream.oursnetworktv.com/latin/telegtmb/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.ibb.co/VBJhHkJ/Fda27b8e352949c39c8d88de33a284a4.png",
@@ -1531,7 +1531,7 @@
   },
   {
     "id": "iptv_6bqu9jq",
-    "nom": "Canal Luz Televisión",
+    "nom": "Canal Luz Televisi\u00f3n",
     "lien": "https://5d8d85cf2c308.streamlock.net:1936/CanalLuz/enDirecto/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/H3JzQ1G.jpg",
@@ -1597,7 +1597,7 @@
   },
   {
     "id": "iptv_cz486v6",
-    "nom": "Huasco Televisión",
+    "nom": "Huasco Televisi\u00f3n",
     "lien": "https://paneltv.online:1936/8024/8024/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/Fo2DV70.png",
@@ -1630,7 +1630,7 @@
   },
   {
     "id": "iptv_19tyf4h",
-    "nom": "Lleida Televisió",
+    "nom": "Lleida Televisi\u00f3",
     "lien": "https://liveingesta318.cdnmedia.tv/lleidatvlive/smil:live.smil/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/xWY2568.png",
@@ -1641,7 +1641,7 @@
   },
   {
     "id": "iptv_bkyqi8a",
-    "nom": "Mataró Televisió",
+    "nom": "Matar\u00f3 Televisi\u00f3",
     "lien": "https://liveingesta318.cdnmedia.tv/m1tvlive/smil:live.smil/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/FTGbu8A.png",
@@ -1674,7 +1674,7 @@
   },
   {
     "id": "iptv_2jtevh4",
-    "nom": "Oasis Televisión",
+    "nom": "Oasis Televisi\u00f3n",
     "lien": "http://vcp1.myplaytv.com/oasistv/oasistv/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/TEr1U90.png",
@@ -1685,7 +1685,7 @@
   },
   {
     "id": "iptv_7d2yyfw",
-    "nom": "Penedès Televisió",
+    "nom": "Pened\u00e8s Televisi\u00f3",
     "lien": "https://liveingesta318.cdnmedia.tv/rtvvilafrancalive/smil:live.smil/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/mNuv3OL.png",
@@ -1718,7 +1718,7 @@
   },
   {
     "id": "iptv_zldcxu2",
-    "nom": "Radio televizija Rožaje",
+    "nom": "Radio televizija Ro\u017eaje",
     "lien": "https://glb.bozztv.com/glb/ssh101/tvrozaje/index.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/vTZjEC5.png",
@@ -1729,7 +1729,7 @@
   },
   {
     "id": "iptv_lc6yxu7",
-    "nom": "Rioja Televisión",
+    "nom": "Rioja Televisi\u00f3n",
     "lien": "https://5924d3ad0efcf.streamlock.net/riojatv/riojatvlive/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.ibb.co/nRq3YfT/Logo-Rioja-Televisi-n-S-A.png",
@@ -1762,7 +1762,7 @@
   },
   {
     "id": "iptv_drsq3d2",
-    "nom": "Televisión Metrópolis 19.1",
+    "nom": "Televisi\u00f3n Metr\u00f3polis 19.1",
     "lien": "https://5e85d90130e77.streamlock.net/6028/6028/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/X5C1GzB.png",
@@ -1773,7 +1773,7 @@
   },
   {
     "id": "iptv_nrxf779",
-    "nom": "Televisión Metrópolis 19.2",
+    "nom": "Televisi\u00f3n Metr\u00f3polis 19.2",
     "lien": "https://5e85d90130e77.streamlock.net/6014/6014/playlist.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/QaocW5x.png",
@@ -1861,7 +1861,7 @@
   },
   {
     "id": "iptv_zcf5lhn",
-    "nom": "Radio y Televisión Crisol de la Alegría",
+    "nom": "Radio y Televisi\u00f3n Crisol de la Alegr\u00eda",
     "lien": "https://omegaingenieria.com:19360/CRisolTVdigital-Live_abr/CRisolTVdigital-Live_abr.m3u8",
     "cat": "RELIGIEUX",
     "logo": "https://i.imgur.com/EW2z5Ko.jpg",
@@ -1883,7 +1883,7 @@
   },
   {
     "id": "iptv_esn8qgy",
-    "nom": "NORTEvisión",
+    "nom": "NORTEvisi\u00f3n",
     "lien": "http://amaru.dyndns.org:8870/0.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/C5SYw7B.png",
@@ -1894,7 +1894,7 @@
   },
   {
     "id": "iptv_ifg2g44",
-    "nom": "RN Televisión",
+    "nom": "RN Televisi\u00f3n",
     "lien": "https://videoserver.tmcreativos.com:19360/rnyurimaguas/rnyurimaguas.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/oFGiW7u.png",
@@ -1916,7 +1916,7 @@
   },
   {
     "id": "iptv_r876e7k",
-    "nom": "Televisión Comayagua Canal 40",
+    "nom": "Televisi\u00f3n Comayagua Canal 40",
     "lien": "https://mediacp.us:8081/8034/index.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/uDLhsDM.png",
@@ -1927,7 +1927,7 @@
   },
   {
     "id": "iptv_qhwp2wk",
-    "nom": "Tlaxcala Televisión",
+    "nom": "Tlaxcala Televisi\u00f3n",
     "lien": "https://vid26.mega00.com:5443/live/streams/qNmc7nulmq8zPYZE1582752735050.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/5vaEhfy.png",
@@ -1938,7 +1938,7 @@
   },
   {
     "id": "iptv_3gcth45",
-    "nom": "Tunevisión",
+    "nom": "Tunevisi\u00f3n",
     "lien": "https://cdn.streamhispanatv.net:3852/live/tunevisionlive.m3u8",
     "cat": "GENERALISTE",
     "logo": "https://i.imgur.com/XNiXqgj.png",
@@ -1959,7 +1959,7 @@
     "lien": "http://185.81.240.65:15000/udp/233.233.233.39:12000",
     "m3u8Source": "http://185.81.240.65:15000/udp/233.233.233.39:12000",
     "logo": "https://i.imgur.com/astdRrE.png",
-    "desc": "Federalna televizija (720p) - Chaîne TV en direct",
+    "desc": "Federalna televizija (720p) - Cha\u00eene TV en direct",
     "ch": "174",
     "cat": "GENERALISTE"
   },
@@ -1975,13 +1975,13 @@
     "lien": "",
     "m3u8Source": "",
     "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 500\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"500\" fill=\"%2304091e\"/><circle cx=\"250\" cy=\"250\" r=\"235\" fill=\"none\" stroke=\"%23d4af37\" stroke-width=\"18\"/><circle cx=\"250\" cy=\"250\" r=\"222\" fill=\"%230b2484\"/><text x=\"80\" y=\"310\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"250\" fill=\"%23ffffff\">CV</text><g transform=\"translate(290, 185)\"><rect x=\"0\" y=\"0\" width=\"140\" height=\"110\" rx=\"28\" fill=\"%23ffffff\" stroke=\"%23d4af37\" stroke-width=\"4\"/><line x1=\"40\" y1=\"-25\" x2=\"60\" y2=\"0\" stroke=\"%23cccccc\" stroke-width=\"4\"/><line x1=\"100\" y1=\"-25\" x2=\"80\" y2=\"0\" stroke=\"%23cccccc\" stroke-width=\"4\"/><circle cx=\"40\" cy=\"-25\" r=\"5\" fill=\"%23cccccc\"/><circle cx=\"100\" cy=\"-25\" r=\"5\" fill=\"%23cccccc\"/><text x=\"18\" y=\"78\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"75\" fill=\"%231b5e20\">T</text><text x=\"62\" y=\"78\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"75\" fill=\"%23d50000\">V</text></g><text x=\"250\" y=\"380\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"24\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"1\">CENTRAL VOICE TELEVISION</text><g transform=\"translate(130, 400)\"><rect x=\"10\" y=\"20\" width=\"14\" height=\"30\" rx=\"6\" fill=\"%23ffffff\"/><rect x=\"35\" y=\"0\" width=\"14\" height=\"50\" rx=\"6\" fill=\"%23d50000\"/><rect x=\"60\" y=\"15\" width=\"14\" height=\"35\" rx=\"6\" fill=\"%232979ff\"/><rect x=\"85\" y=\"25\" width=\"14\" height=\"25\" rx=\"6\" fill=\"%23ffffff\"/><rect x=\"110\" y=\"5\" width=\"14\" height=\"45\" rx=\"6\" fill=\"%23d50000\"/><rect x=\"135\" y=\"18\" width=\"14\" height=\"32\" rx=\"6\" fill=\"%23ffffff\"/><rect x=\"160\" y=\"10\" width=\"14\" height=\"40\" rx=\"6\" fill=\"%232979ff\"/><rect x=\"185\" y=\"0\" width=\"14\" height=\"50\" rx=\"6\" fill=\"%23d50000\"/><rect x=\"210\" y=\"22\" width=\"14\" height=\"28\" rx=\"6\" fill=\"%232979ff\"/></g></svg>",
-    "desc": "like Gecko) Chrome/118.0.4044.138 Safari/537.36\" group-title=\"General\",Korean Central Television (KCTV) (576p) - Chaîne TV en direct",
+    "desc": "like Gecko) Chrome/118.0.4044.138 Safari/537.36\" group-title=\"General\",Korean Central Television (KCTV) (576p) - Cha\u00eene TV en direct",
     "ch": "175",
     "cat": "GENERALISTE"
   },
   {
     "id": "iptv_majestadtele_1317",
-    "nom": "Majestad Televisión (720p)",
+    "nom": "Majestad Televisi\u00f3n (720p)",
     "categorie": "GENERALISTE",
     "pays": "INT",
     "langue": "fr",
@@ -1991,7 +1991,7 @@
     "lien": "https://videoserver.tmcreativos.com:19360/majestadtv/majestadtv.m3u8",
     "m3u8Source": "https://videoserver.tmcreativos.com:19360/majestadtv/majestadtv.m3u8",
     "logo": "https://i.imgur.com/d1GWRnm.png",
-    "desc": "Majestad Televisión (720p) - Chaîne TV en direct",
+    "desc": "Majestad Televisi\u00f3n (720p) - Cha\u00eene TV en direct",
     "ch": "176",
     "cat": "GENERALISTE"
   },
@@ -2004,7 +2004,7 @@
     "ch": "182",
     "qualite": "4K",
     "pays": "RDC",
-    "desc": "Horizon 2000 TV HD - Chaîne généraliste, actualités, informations, culture et direct • Direct HLS & Secours",
+    "desc": "Horizon 2000 TV HD - Cha\u00eene g\u00e9n\u00e9raliste, actualit\u00e9s, informations, culture et direct \u2022 Direct HLS & Secours",
     "youtubeBackup": "https://youtu.be/RyttaeEFYHc",
     "m3u8Source": "http://191.215.38.95:8080/live/cle_horizontv_12m_c0wv.m3u8"
   },
@@ -2017,7 +2017,7 @@
     "ch": "185",
     "qualite": "4K",
     "pays": "RDC",
-    "desc": "CONGO FLASH NEWS - Actualités, Débats & Informations 24/7 • Vidéo Principale YouTube",
+    "desc": "CONGO FLASH NEWS - Actualit\u00e9s, D\u00e9bats & Informations 24/7 \u2022 Vid\u00e9o Principale YouTube",
     "youtubeBackup": "https://www.youtube.com/watch?v=YUCkBgK-qac",
     "m3u8Source": "",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2032,7 +2032,7 @@
     "ch": "186",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "IPTV-ORG News 24/7 - Bouquet d'information internationale et actualités en direct • Direct HLS & Playlist www.tvpromedia.com",
+    "desc": "IPTV-ORG News 24/7 - Bouquet d'information internationale et actualit\u00e9s en direct \u2022 Direct HLS & Playlist www.tvpromedia.com",
     "m3u8Source": "",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_iptvorg_news.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2040,14 +2040,14 @@
   },
   {
     "id": "ch_369",
-    "nom": "ANTENNE RÉUNION HD",
+    "nom": "ANTENNE R\u00c9UNION HD",
     "lien": "https://live-antenne-reunion.zeop.tv/live/c3eds/antreunihd/hls_fta/antreunihd.m3u8",
     "logo": "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=200&auto=format&fit=crop&q=80",
     "cat": "GENERALISTE",
     "ch": "187",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Antenne Réunion HD - Première chaîne d'information et de divertissement de La Réunion • Direct HLS www.tvpromedia.com",
+    "desc": "Antenne R\u00e9union HD - Premi\u00e8re cha\u00eene d'information et de divertissement de La R\u00e9union \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://live-antenne-reunion.zeop.tv/live/c3eds/antreunihd/hls_fta/antreunihd.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_antennereunion.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2062,7 +2062,7 @@
     "ch": "188",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Brionnais TV - Télévision locale et régionale en Bourgogne du Sud, actualités, terroirs et culture • Direct HLS www.tvpromedia.com",
+    "desc": "Brionnais TV - T\u00e9l\u00e9vision locale et r\u00e9gionale en Bourgogne du Sud, actualit\u00e9s, terroirs et culture \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://stream2.mandarine.media/brionnaistv/brionnaistv/playlist.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_brionnaistv.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2070,14 +2070,14 @@
   },
   {
     "id": "ch_371",
-    "nom": "CANNES LÉRINS TV",
+    "nom": "CANNES L\u00c9RINS TV",
     "lien": "https://vdo2.pro-fhi.net:3628/live/uppodsfqlive.m3u8",
     "logo": "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=200&auto=format&fit=crop&q=80",
     "cat": "GENERALISTE",
     "ch": "189",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Cannes Lérins TV - Télévision locale de Cannes et de la Côte d'Azur en direct continu • Direct HLS www.tvpromedia.com",
+    "desc": "Cannes L\u00e9rins TV - T\u00e9l\u00e9vision locale de Cannes et de la C\u00f4te d'Azur en direct continu \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://vdo2.pro-fhi.net:3628/live/uppodsfqlive.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_canneslerins.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2092,7 +2092,7 @@
     "ch": "190",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "DBM TV (Debout les Médias) - Chaîne afro-urbaine, musique, culture et divertissement en continu • Direct HLS www.tvpromedia.com",
+    "desc": "DBM TV (Debout les M\u00e9dias) - Cha\u00eene afro-urbaine, musique, culture et divertissement en continu \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://dbmtv.vedge.infomaniak.com/livecast/dbmtv/playlist.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_dbmtv.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2107,7 +2107,7 @@
     "ch": "191",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Littoral FM TV - Radio visuelle, musique non-stop, tubes et actualités méditerranéennes • Direct HLS www.tvpromedia.com",
+    "desc": "Littoral FM TV - Radio visuelle, musique non-stop, tubes et actualit\u00e9s m\u00e9diterran\u00e9ennes \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://live.creacast.com/littoralfm-ch1/stream/playlist.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_littoralfm.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2122,7 +2122,7 @@
     "ch": "192",
     "qualite": "HD",
     "pays": "ALBANIE",
-    "desc": "News 24 Balkanweb - Chaîne d'information en continu d'Albanie et des Balkans en direct HD • Direct HLS www.tvpromedia.com",
+    "desc": "News 24 Balkanweb - Cha\u00eene d'information en continu d'Albanie et des Balkans en direct HD \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://tv.balkanweb.com/news24/livestream/playlist.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_news24albania.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2130,14 +2130,14 @@
   },
   {
     "id": "ch_375",
-    "nom": "R9 ÖSTERREICH TV",
+    "nom": "R9 \u00d6STERREICH TV",
     "lien": "https://ms01.w24.at/R9/smil:liveeventR9.smil/playlist.m3u8",
     "logo": "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=200&auto=format&fit=crop&q=80",
     "cat": "GENERALISTE",
     "ch": "193",
     "qualite": "HD",
     "pays": "AUTRICHE",
-    "desc": "R9 Österreich TV / W24 - Télévision régionale d'Autriche, informations fédérales et culture • Direct HLS www.tvpromedia.com",
+    "desc": "R9 \u00d6sterreich TV / W24 - T\u00e9l\u00e9vision r\u00e9gionale d'Autriche, informations f\u00e9d\u00e9rales et culture \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://ms01.w24.at/R9/smil:liveeventR9.smil/playlist.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_r9oesterreich.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2152,7 +2152,7 @@
     "ch": "194",
     "qualite": "HD",
     "pays": "INDE",
-    "desc": "22Scope News HD - Information, reportages, direct et actualités mondiales en continu 24/7 • Direct HLS www.tvpromedia.com",
+    "desc": "22Scope News HD - Information, reportages, direct et actualit\u00e9s mondiales en continu 24/7 \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://thelegitpro.in/HDlive/22scope/index.fmp4.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_22scope.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2167,7 +2167,7 @@
     "ch": "195",
     "qualite": "HD",
     "pays": "ARGENTINE",
-    "desc": "CN247 TV (24/7 Canal de Noticias) - Actualités et information en direct continu 24h/24 • Direct HLS www.tvpromedia.com",
+    "desc": "CN247 TV (24/7 Canal de Noticias) - Actualit\u00e9s et information en direct continu 24h/24 \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://panel.host-live.com:19360/cn247tv/cn247tv.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_cn247tv.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2182,7 +2182,7 @@
     "ch": "196",
     "qualite": "HD",
     "pays": "MEXIQUE",
-    "desc": "ADN 40 HD - Télévision d'information, société, politique et journalisme en direct continu • Direct HLS www.tvpromedia.com",
+    "desc": "ADN 40 HD - T\u00e9l\u00e9vision d'information, soci\u00e9t\u00e9, politique et journalisme en direct continu \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://mdstrm.com/live-stream-playlist/60b578b060947317de7b57ac.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_adn40.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2190,14 +2190,14 @@
   },
   {
     "id": "ch_379",
-    "nom": "RTVS ŠPORT HD",
+    "nom": "RTVS \u0160PORT HD",
     "lien": "http://88.212.15.27/live/test_rtvs_sport_hevc/playlist.m3u8",
     "logo": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=200&auto=format&fit=crop&q=80",
     "cat": "SPORTS",
     "ch": "197",
     "qualite": "HD",
     "pays": "SLOVAQUIE",
-    "desc": "RTVS Šport HD - Chaîne de télévision publique sportive, compétitions et championnats en direct • Direct HLS www.tvpromedia.com",
+    "desc": "RTVS \u0160port HD - Cha\u00eene de t\u00e9l\u00e9vision publique sportive, comp\u00e9titions et championnats en direct \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "http://88.212.15.27/live/test_rtvs_sport_hevc/playlist.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_rtvssport.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2212,7 +2212,7 @@
     "ch": "198",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "Alfa Sports HD (Unitrust) - Directs sportifs, matchs et ligues internationales en haute définition • Direct HLS www.tvpromedia.com",
+    "desc": "Alfa Sports HD (Unitrust) - Directs sportifs, matchs et ligues internationales en haute d\u00e9finition \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://dev.aftermind.xyz/edge-hls/unitrust/alfasports/index.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_alfasports.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2227,7 +2227,7 @@
     "ch": "199",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "Arena Premium 1 HD - Football européen, ligues des champions et événements premium en direct • Direct HLS www.tvpromedia.com",
+    "desc": "Arena Premium 1 HD - Football europ\u00e9en, ligues des champions et \u00e9v\u00e9nements premium en direct \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://nl1.nghk.ai/ArenaPremium1HD/index.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_arenapremium1.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2242,7 +2242,7 @@
     "ch": "200",
     "qualite": "HD",
     "pays": "ITALIE",
-    "desc": "Rai 3 HD (Rai3.it) - Chaîne publique italienne, information approfondie, culture, débats et documentaires • Direct HLS www.tvpromedia.com",
+    "desc": "Rai 3 HD (Rai3.it) - Cha\u00eene publique italienne, information approfondie, culture, d\u00e9bats et documentaires \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://d3k8wzt41aflvx.cloudfront.net/RAI3/Live.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_rai3.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2257,7 +2257,7 @@
     "ch": "201",
     "qualite": "HD",
     "pays": "ITALIE",
-    "desc": "Rai 2 HD (Rai2.it) - Deuxième chaîne publique italienne, divertissement, fictions, séries et événements sportifs • Direct HLS www.tvpromedia.com",
+    "desc": "Rai 2 HD (Rai2.it) - Deuxi\u00e8me cha\u00eene publique italienne, divertissement, fictions, s\u00e9ries et \u00e9v\u00e9nements sportifs \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://d3k8wzt41aflvx.cloudfront.net/RAI2/Live.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_rai2.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2272,7 +2272,7 @@
     "ch": "202",
     "qualite": "HD",
     "pays": "ITALIE",
-    "desc": "Rai Storia HD - Chaîne thématique d'histoire, archives et patrimoine culturel de la Rai en direct continu • Direct HLS www.tvpromedia.com",
+    "desc": "Rai Storia HD - Cha\u00eene th\u00e9matique d'histoire, archives et patrimoine culturel de la Rai en direct continu \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://d3k8wzt41aflvx.cloudfront.net/RAIStoria/Live.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_raistoria.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2287,7 +2287,7 @@
     "ch": "203",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "McQuack Stream 378 - Diffusion continue en direct streaming HLS • Direct HLS www.tvpromedia.com",
+    "desc": "McQuack Stream 378 - Diffusion continue en direct streaming HLS \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "http://stream.mcquack.net/378/index.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_mcquack378.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2302,7 +2302,7 @@
     "ch": "204",
     "qualite": "HD",
     "pays": "BAHREIN",
-    "desc": "Bahrain Sports 2 HD - Chaîne sportive officielle du Royaume de Bahreïn, football et compétitions internationales • Direct HLS www.tvpromedia.com",
+    "desc": "Bahrain Sports 2 HD - Cha\u00eene sportive officielle du Royaume de Bahre\u00efn, football et comp\u00e9titions internationales \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://5c7b683162943.streamlock.net/live/ngrp:bahrainsportstwo_all/playlist.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_bahrainsports2.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2317,7 +2317,7 @@
     "ch": "205",
     "qualite": "HD",
     "pays": "SUEDE",
-    "desc": "ATG Kanal 75 HD - Courses équestres, trot et hippisme suédois en direct haute définition 1080p50 • Direct HLS www.tvpromedia.com",
+    "desc": "ATG Kanal 75 HD - Courses \u00e9questres, trot et hippisme su\u00e9dois en direct haute d\u00e9finition 1080p50 \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://kanal75xto-llhls.akamaized.net/live/Data/atg-kanal-15-02a-rr/HLS-Legacy-HL/atg-kanal-15-02a-rr.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_kanal75.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2332,7 +2332,7 @@
     "ch": "206",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "Nicktoons HD - Les meilleures séries animées jeunesse et cartoons Nickelodeon 24/7 • Direct HLS www.tvpromedia.com",
+    "desc": "Nicktoons HD - Les meilleures s\u00e9ries anim\u00e9es jeunesse et cartoons Nickelodeon 24/7 \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://stmv2.srvif.com/nicktoons/nicktoons/playlist.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_nicktoons.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2347,7 +2347,7 @@
     "ch": "207",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "3ABN Kids Network HD - Chaîne éducative et jeunesse avec programmes d'éveil, découverte et musique pour enfants • Direct HLS www.tvpromedia.com",
+    "desc": "3ABN Kids Network HD - Cha\u00eene \u00e9ducative et jeunesse avec programmes d'\u00e9veil, d\u00e9couverte et musique pour enfants \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://3abn.bozztv.com/3abn2/Kids_live/smil:Kids_live.smil/playlist.m3u8",
     "cloudRemix": "https://www.tvpromedia.com/live/cle_3abnkids.m3u8",
     "rtmpUrl": "rtmp://191.215.38.95/live",
@@ -2362,7 +2362,7 @@
     "ch": "212",
     "qualite": "HD",
     "pays": "ALBANIE",
-    "desc": "Ora News 24 - Chaîne d'information en continu, actualités, reportages et direct 24/7",
+    "desc": "Ora News 24 - Cha\u00eene d'information en continu, actualit\u00e9s, reportages et direct 24/7",
     "m3u8Source": "https://live1.mediadesk.al/oranews.m3u8"
   },
   {
@@ -2380,7 +2380,7 @@
     "id": "ch_13",
     "nom": "BALARUSIE 5",
     "lien": "https://ngtrk.dc.beltelecom.by/ngtrk/smil:belarus5.smil/playlist.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 500\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"500\" fill=\"%23d32f2f\" rx=\"60\"/><rect x=\"0\" y=\"370\" width=\"500\" height=\"130\" fill=\"%232e7d32\"/><text x=\"250\" y=\"310\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"320\" fill=\"%23ffffff\" text-anchor=\"middle\">5</text><text x=\"250\" y=\"460\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"62\" fill=\"%23ffffff\" text-anchor=\"middle\">БЕЛАРУСЬ</text></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 500\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"500\" fill=\"%23d32f2f\" rx=\"60\"/><rect x=\"0\" y=\"370\" width=\"500\" height=\"130\" fill=\"%232e7d32\"/><text x=\"250\" y=\"310\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"320\" fill=\"%23ffffff\" text-anchor=\"middle\">5</text><text x=\"250\" y=\"460\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"62\" fill=\"%23ffffff\" text-anchor=\"middle\">\u0411\u0415\u041b\u0410\u0420\u0423\u0421\u042c</text></svg>",
     "cat": "SPORTS",
     "ch": "214",
     "qualite": "4K",
@@ -2402,7 +2402,7 @@
     "id": "ch_15",
     "nom": "24 BELARUSIE",
     "lien": "https://ngtrk.dc.beltelecom.by/ngtrk/smil:belarus24.smil/playlist.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 500\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"500\" fill=\"%23d32f2f\" rx=\"60\"/><rect x=\"0\" y=\"370\" width=\"500\" height=\"130\" fill=\"%232e7d32\"/><text x=\"250\" y=\"300\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"250\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"-10\">24</text><text x=\"250\" y=\"460\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"62\" fill=\"%23ffffff\" text-anchor=\"middle\">БЕЛАРУСЬ</text></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 500\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"500\" fill=\"%23d32f2f\" rx=\"60\"/><rect x=\"0\" y=\"370\" width=\"500\" height=\"130\" fill=\"%232e7d32\"/><text x=\"250\" y=\"300\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"250\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"-10\">24</text><text x=\"250\" y=\"460\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"62\" fill=\"%23ffffff\" text-anchor=\"middle\">\u0411\u0415\u041b\u0410\u0420\u0423\u0421\u042c</text></svg>",
     "cat": "NEWS",
     "ch": "216",
     "qualite": "4K",
@@ -2451,7 +2451,7 @@
     "ch": "220",
     "qualite": "4K",
     "pays": "RDC",
-    "desc": "VIVO TV - Chaîne de télévision en direct",
+    "desc": "VIVO TV - Cha\u00eene de t\u00e9l\u00e9vision en direct",
     "m3u8Source": "http://www.coninfo.net:1935/tvlink/live/playlist.m3u8"
   },
   {
@@ -2482,7 +2482,7 @@
     "id": "ch_30",
     "nom": "PAROLE D'ESPERANCE TV",
     "lien": "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 320\" width=\"100%\" height=\"100%\"><rect width=\"600\" height=\"320\" fill=\"%23556b2f\"/><g transform=\"translate(30, 30)\"><polygon points=\"10,0 310,0 280,65 0,65\" fill=\"%23ff5722\"/><text x=\"50\" y=\"48\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"52\" fill=\"%23ffffff\">Parole</text><rect x=\"10\" y=\"65\" width=\"450\" height=\"130\" fill=\"%230a0e2a\"/><text x=\"25\" y=\"155\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"62\" fill=\"%23ffffff\">d'Espérance</text><g transform=\"translate(340, 115)\"><circle cx=\"60\" cy=\"40\" r=\"45\" fill=\"none\" stroke=\"%23ff5722\" stroke-width=\"6\" stroke-dasharray=\"4,6\"/><path d=\"M 20 60 Q 60 0 110 50\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"8\"/><path d=\"M 30 70 Q 70 20 120 60\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"6\"/><text x=\"35\" y=\"62\" font-family=\"'Arial Black', Impact, sans-serif\" font-style=\"italic\" font-weight=\"900\" font-size=\"55\" fill=\"%23ffffff\">TV</text></g></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 320\" width=\"100%\" height=\"100%\"><rect width=\"600\" height=\"320\" fill=\"%23556b2f\"/><g transform=\"translate(30, 30)\"><polygon points=\"10,0 310,0 280,65 0,65\" fill=\"%23ff5722\"/><text x=\"50\" y=\"48\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"52\" fill=\"%23ffffff\">Parole</text><rect x=\"10\" y=\"65\" width=\"450\" height=\"130\" fill=\"%230a0e2a\"/><text x=\"25\" y=\"155\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"62\" fill=\"%23ffffff\">d'Esp\u00e9rance</text><g transform=\"translate(340, 115)\"><circle cx=\"60\" cy=\"40\" r=\"45\" fill=\"none\" stroke=\"%23ff5722\" stroke-width=\"6\" stroke-dasharray=\"4,6\"/><path d=\"M 20 60 Q 60 0 110 50\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"8\"/><path d=\"M 30 70 Q 70 20 120 60\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"6\"/><text x=\"35\" y=\"62\" font-family=\"'Arial Black', Impact, sans-serif\" font-style=\"italic\" font-weight=\"900\" font-size=\"55\" fill=\"%23ffffff\">TV</text></g></g></svg>",
     "cat": "RELIGIEUX",
     "ch": "223",
     "qualite": "4K",
@@ -2542,7 +2542,7 @@
     "ch": "229",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "STV - Télévision régionale et généraliste en direct, actualités, divertissement et culture",
+    "desc": "STV - T\u00e9l\u00e9vision r\u00e9gionale et g\u00e9n\u00e9raliste en direct, actualit\u00e9s, divertissement et culture",
     "m3u8Source": "http://89.201.163.244:8080/hls/hdmi.m3u8"
   },
   {
@@ -2741,7 +2741,7 @@
     "ch": "247",
     "qualite": "HD",
     "pays": "RDC",
-    "desc": "SM Video TV - Diffusion vidéo officielle YouTube de secours en direct 24/7 au premier plan",
+    "desc": "SM Video TV - Diffusion vid\u00e9o officielle YouTube de secours en direct 24/7 au premier plan",
     "m3u8Source": "",
     "youtubeBackup": "https://www.youtube.com/watch?v=G0BaYZbQAgg"
   },
@@ -2765,7 +2765,7 @@
     "ch": "250",
     "qualite": "4K",
     "pays": "RDC",
-    "desc": "SNL Kongo TV - Télévision d'information, culture et divertissement",
+    "desc": "SNL Kongo TV - T\u00e9l\u00e9vision d'information, culture et divertissement",
     "youtubeBackup": "https://www.youtube.com/watch?v=_V573y2j2To",
     "m3u8Source": ""
   },
@@ -2778,7 +2778,7 @@
     "ch": "253",
     "qualite": "4K",
     "pays": "BRESIL",
-    "desc": "X Trema TV - Cinéma, films classiques et divertissement en direct",
+    "desc": "X Trema TV - Cin\u00e9ma, films classiques et divertissement en direct",
     "m3u8Source": "https://stmv6.voxtvhd.com.br/cineclasico/cineclasico/playlist.m3u8"
   },
   {
@@ -2790,7 +2790,7 @@
     "ch": "254",
     "qualite": "4K",
     "pays": "MEXIQUE",
-    "desc": "Las Estrellas - Télévision mexicaine, telenovelas, divertissement et séries en direct (Televisa)",
+    "desc": "Las Estrellas - T\u00e9l\u00e9vision mexicaine, telenovelas, divertissement et s\u00e9ries en direct (Televisa)",
     "m3u8Source": "https://channel01-onlymex.akamaized.net/hls/live/2022749/event01/index.m3u8"
   },
   {
@@ -2802,7 +2802,7 @@
     "ch": "255",
     "qualite": "4K",
     "pays": "MEXIQUE",
-    "desc": "Canal Once - Télévision publique mexicaine (IPN), culture, documentaires et information en direct",
+    "desc": "Canal Once - T\u00e9l\u00e9vision publique mexicaine (IPN), culture, documentaires et information en direct",
     "m3u8Source": "https://5ca9af4645e15.streamlock.net/teleradio/smil:teleradio.smil/playlist.m3u8"
   },
   {
@@ -2814,7 +2814,7 @@
     "ch": "256",
     "qualite": "HD",
     "pays": "ARABIE SAOUDITE",
-    "desc": "MBC Radio / MBC FM - Première station de radio musicale et divertissement du groupe MBC en direct",
+    "desc": "MBC Radio / MBC FM - Premi\u00e8re station de radio musicale et divertissement du groupe MBC en direct",
     "m3u8Source": "https://radio-loud-fm.mbc.net/radio-loud-fm_1.m3u8"
   },
   {
@@ -2826,7 +2826,7 @@
     "ch": "257",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Lune TV Enfant (DreamWorks) - Dessins animés, séries jeunesse et films d'animation pour enfants en direct",
+    "desc": "Lune TV Enfant (DreamWorks) - Dessins anim\u00e9s, s\u00e9ries jeunesse et films d'animation pour enfants en direct",
     "m3u8Source": "http://138.121.15.230:9002/DREAMWORKS/index.m3u8"
   },
   {
@@ -2838,7 +2838,7 @@
     "ch": "258",
     "qualite": "4K",
     "pays": "USA",
-    "desc": "History Channel - Documentaires historiques, sciences, civilisations, mystères et découvertes en direct",
+    "desc": "History Channel - Documentaires historiques, sciences, civilisations, myst\u00e8res et d\u00e9couvertes en direct",
     "m3u8Source": "http://190.93.224.42/HISTORY/index.m3u8"
   },
   {
@@ -2850,7 +2850,7 @@
     "ch": "259",
     "qualite": "4K",
     "pays": "USA",
-    "desc": "Nickelodeon (Nick) - Dessins animés cultes, séries jeunesse et divertissement pour enfants et adolescents en direct",
+    "desc": "Nickelodeon (Nick) - Dessins anim\u00e9s cultes, s\u00e9ries jeunesse et divertissement pour enfants et adolescents en direct",
     "m3u8Source": "http://190.93.224.42/NICK/index.m3u8"
   },
   {
@@ -2862,7 +2862,7 @@
     "ch": "260",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "NEWS BY (LeadStory & World News) - Chaîne d'information internationale continue 24/7, alertes info et analyses politiques",
+    "desc": "NEWS BY (LeadStory & World News) - Cha\u00eene d'information internationale continue 24/7, alertes info et analyses politiques",
     "m3u8Source": "https://amg02703-leadstory-leadstory-samsungau-rr75f.amagi.tv/playlist/amg02703-leadstory-leadstory-samsungau/playlist.m3u8"
   },
   {
@@ -2874,7 +2874,7 @@
     "ch": "261",
     "qualite": "4K",
     "pays": "USA",
-    "desc": "A&E TV (Arts & Entertainment Network) - Documentaires captivants, enquêtes criminelles, séries documentaires et émissions cultes",
+    "desc": "A&E TV (Arts & Entertainment Network) - Documentaires captivants, enqu\u00eates criminelles, s\u00e9ries documentaires et \u00e9missions cultes",
     "m3u8Source": "http://198.58.104.90:8989/aande/index.m3u8"
   },
   {
@@ -2886,7 +2886,7 @@
     "ch": "262",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "France 2 - Chaîne publique généraliste, actualités, talk-shows, téléfilms et culture",
+    "desc": "France 2 - Cha\u00eene publique g\u00e9n\u00e9raliste, actualit\u00e9s, talk-shows, t\u00e9l\u00e9films et culture",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/france2.m3u8"
   },
   {
@@ -2898,7 +2898,7 @@
     "ch": "263",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "France 3 - La chaîne des régions, journaux régionaux et nationaux, documentaires et fictions",
+    "desc": "France 3 - La cha\u00eene des r\u00e9gions, journaux r\u00e9gionaux et nationaux, documentaires et fictions",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/france3.m3u8"
   },
   {
@@ -2910,7 +2910,7 @@
     "ch": "264",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "France 4 / Okoo - Programmes jeunesse, spectacles vivants, culture et découvertes",
+    "desc": "France 4 / Okoo - Programmes jeunesse, spectacles vivants, culture et d\u00e9couvertes",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/france4.m3u8"
   },
   {
@@ -2922,7 +2922,7 @@
     "ch": "265",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "France 5 - La chaîne de la connaissance, documentaires scientifiques, histoire, nature et débats",
+    "desc": "France 5 - La cha\u00eene de la connaissance, documentaires scientifiques, histoire, nature et d\u00e9bats",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/france5.m3u8"
   },
   {
@@ -2934,7 +2934,7 @@
     "ch": "266",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "ARTE - Chaîne culturelle européenne : grands documentaires, cinéma d'auteur, concerts et investigations",
+    "desc": "ARTE - Cha\u00eene culturelle europ\u00e9enne : grands documentaires, cin\u00e9ma d'auteur, concerts et investigations",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/arte.m3u8"
   },
   {
@@ -2946,7 +2946,7 @@
     "ch": "267",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "LCP (La Chaîne Parlementaire / Assemblée Nationale) - Débats politiques, retransmissions et actualité citoyenne",
+    "desc": "LCP (La Cha\u00eene Parlementaire / Assembl\u00e9e Nationale) - D\u00e9bats politiques, retransmissions et actualit\u00e9 citoyenne",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/lcpps.m3u8"
   },
   {
@@ -2958,7 +2958,7 @@
     "ch": "268",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Gulli - La première chaîne jeunesse et famille en France : dessins animés, comédies et jeux",
+    "desc": "Gulli - La premi\u00e8re cha\u00eene jeunesse et famille en France : dessins anim\u00e9s, com\u00e9dies et jeux",
     "m3u8Source": "https://lbcdn.6cloud.fr/resource/m6web/l/gulli_hls_sd_short_q2hyb21h.m3u8"
   },
   {
@@ -2970,7 +2970,7 @@
     "ch": "269",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "franceinfo: - L'information en continu du service public, décryptages, vérifications et reportages de terrain",
+    "desc": "franceinfo: - L'information en continu du service public, d\u00e9cryptages, v\u00e9rifications et reportages de terrain",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/franceinfo.m3u8"
   },
   {
@@ -2982,7 +2982,7 @@
     "ch": "270",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "CSTAR - La chaîne musicale et divertissement du groupe Canal+ : clips, concerts, documentaires pop et séries",
+    "desc": "CSTAR - La cha\u00eene musicale et divertissement du groupe Canal+ : clips, concerts, documentaires pop et s\u00e9ries",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/canalplus/cstar.m3u8"
   },
   {
@@ -2994,7 +2994,7 @@
     "ch": "271",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "T18 - Chaîne généraliste, divertissement, émissions thématiques et culture",
+    "desc": "T18 - Cha\u00eene g\u00e9n\u00e9raliste, divertissement, \u00e9missions th\u00e9matiques et culture",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/dailymotion/t18.m3u8"
   },
   {
@@ -3006,31 +3006,31 @@
     "ch": "272",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Le Meilleur d'Arthur - Vendredi tout est permis, Les Enfants de la Télé, bêtisiers et fous rires garantis",
+    "desc": "Le Meilleur d'Arthur - Vendredi tout est permis, Les Enfants de la T\u00e9l\u00e9, b\u00eatisiers et fous rires garantis",
     "m3u8Source": "https://amg02393-awpg-amg02393c2-rakuten-uk-2464.playouts.now.amagi.tv/playlist/amg02393-awpg-lemeilleurdarthur-rakutenuk/playlist.m3u8"
   },
   {
     "id": "ch_148",
-    "nom": "ENQUÊTES DE CHOC",
+    "nom": "ENQU\u00caTES DE CHOC",
     "lien": "https://fastmedia-enquetesdechoc-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-fastmedia-enquetesdechoc-rakuten/CDN/playlist.m3u8",
     "logo": "https://freebox.cdn.scw.iliad.fr/medium_E02656638_HHSEUK_007310_Flag_A_Overlay_Home_Screen_1_1_Sq_1000x1000px_Template_v02_copie_8aaa923ce1.jpg",
     "cat": "DOCUMENTAIRE",
     "ch": "273",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Enquêtes de Choc - Reportages exclusifs en immersion auprès des forces de l'ordre, urgences et douanes",
+    "desc": "Enqu\u00eates de Choc - Reportages exclusifs en immersion aupr\u00e8s des forces de l'ordre, urgences et douanes",
     "m3u8Source": "https://fastmedia-enquetesdechoc-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-fastmedia-enquetesdechoc-rakuten/CDN/playlist.m3u8"
   },
   {
     "id": "ch_150",
-    "nom": "FRANCE TV SÉRIES",
+    "nom": "FRANCE TV S\u00c9RIES",
     "lien": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/series.m3u8",
     "logo": "https://i.ibb.co/9rmSGqP/frsr.png",
     "cat": "FILMS",
     "ch": "274",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "France TV Séries - Le meilleur des fictions françaises, séries policières, dramatiques et sagas cultes",
+    "desc": "France TV S\u00e9ries - Le meilleur des fictions fran\u00e7aises, s\u00e9ries polici\u00e8res, dramatiques et sagas cultes",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/series.m3u8"
   },
   {
@@ -3042,7 +3042,7 @@
     "ch": "275",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Novela Channel - Les plus passionnantes telenovelas d'Amérique Latine et séries romantiques doublées en français",
+    "desc": "Novela Channel - Les plus passionnantes telenovelas d'Am\u00e9rique Latine et s\u00e9ries romantiques doubl\u00e9es en fran\u00e7ais",
     "m3u8Source": "https://video1.getstreamhosting.com:1936/8494/8494/playlist.m3u8"
   },
   {
@@ -3054,7 +3054,7 @@
     "ch": "276",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "LG 1 - Chaîne de films et séries exclusives, blockbusters internationaux et divertissement cinéma",
+    "desc": "LG 1 - Cha\u00eene de films et s\u00e9ries exclusives, blockbusters internationaux et divertissement cin\u00e9ma",
     "m3u8Source": "https://stream.ads.ottera.tv/playlist.m3u8"
   },
   {
@@ -3066,7 +3066,7 @@
     "ch": "279",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Ciné Nanar - Le meilleur des films cultes, science-fiction kitsch, monstres géants et arts martiaux délirants",
+    "desc": "Cin\u00e9 Nanar - Le meilleur des films cultes, science-fiction kitsch, monstres g\u00e9ants et arts martiaux d\u00e9lirants",
     "m3u8Source": "https://zylo-cinenanar-rakuten.amagi.tv/playlist.m3u8"
   },
   {
@@ -3078,7 +3078,7 @@
     "ch": "280",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Ciné Western - Les grands classiques du western, western spaghetti, duels au soleil et légendes du Far West",
+    "desc": "Cin\u00e9 Western - Les grands classiques du western, western spaghetti, duels au soleil et l\u00e9gendes du Far West",
     "m3u8Source": "https://amg00711-zylo-amg00711c8-rakuten-uk-2686.playouts.now.amagi.tv/playlist/amg00711-zylofast-cinewestern-rakutenuk/playlist.m3u8"
   },
   {
@@ -3090,7 +3090,7 @@
     "ch": "281",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Emotion'L - Comédies romantiques, téléfilms feel-good, histoires passionnelles et drames émouvants",
+    "desc": "Emotion'L - Com\u00e9dies romantiques, t\u00e9l\u00e9films feel-good, histoires passionnelles et drames \u00e9mouvants",
     "m3u8Source": "https://amg00711-zylo-france-zylo-emotional-rakuten-frukp.amagi.tv/hls/amagi_hls_data_rakutenAA-zylo-emotional-rakuten/CDN/master.m3u8"
   },
   {
@@ -3102,7 +3102,7 @@
     "ch": "282",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Fréquence Novelas - Diffusion continue des sagas et séries novelas incontournables",
+    "desc": "Fr\u00e9quence Novelas - Diffusion continue des sagas et s\u00e9ries novelas incontournables",
     "m3u8Source": "https://amg00711-zylo-amg00711c4-rakuten-us-769.playouts.now.amagi.tv/playlist/amg00711-zylofast-frequencenovelas-rakutenus/playlist.m3u8"
   },
   {
@@ -3114,7 +3114,7 @@
     "ch": "283",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Scream'In - Cinéma d'horreur, thrillers angoissants, slashers et maisons hantées non-stop",
+    "desc": "Scream'In - Cin\u00e9ma d'horreur, thrillers angoissants, slashers et maisons hant\u00e9es non-stop",
     "m3u8Source": "https://zylo-screamin-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-zylo-screamin-rakuten/CDN/master.m3u8"
   },
   {
@@ -3126,19 +3126,19 @@
     "ch": "284",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "CNEWS Prime - Les grandes soirées d'actualité et débats en direct",
+    "desc": "CNEWS Prime - Les grandes soir\u00e9es d'actualit\u00e9 et d\u00e9bats en direct",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/canalplus/cnews_prime.m3u8"
   },
   {
     "id": "ch_178",
-    "nom": "ÉQUIDIA",
+    "nom": "\u00c9QUIDIA",
     "lien": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/equidia/equidia-live2.m3u8",
     "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/equidia-fr.png",
     "cat": "SPORTS",
     "ch": "285",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Équidia - La chaîne des courses hippiques en direct, analyses d'experts et pronostics",
+    "desc": "\u00c9quidia - La cha\u00eene des courses hippiques en direct, analyses d'experts et pronostics",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/equidia/equidia-live2.m3u8"
   },
   {
@@ -3155,14 +3155,14 @@
   },
   {
     "id": "ch_186",
-    "nom": "L'ÉQUIPE LIVE 1",
+    "nom": "L'\u00c9QUIPE LIVE 1",
     "lien": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/lequipe/lequipelive1.m3u8",
     "logo": "https://i.ibb.co/KXhYwm0/lequipe.png",
     "cat": "SPORTS",
     "ch": "287",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "L'Équipe Live 1 - Multiplex et compétitions sportives en direct",
+    "desc": "L'\u00c9quipe Live 1 - Multiplex et comp\u00e9titions sportives en direct",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/lequipe/lequipelive1.m3u8"
   },
   {
@@ -3174,7 +3174,7 @@
     "ch": "288",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "France TV Docs - Documentaires animaliers, expéditions scientifiques et découvertes",
+    "desc": "France TV Docs - Documentaires animaliers, exp\u00e9ditions scientifiques et d\u00e9couvertes",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/docs.m3u8"
   },
   {
@@ -3186,7 +3186,7 @@
     "ch": "289",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Fashion TV - Les défilés de haute couture mondiale, mannequins et designers internationaux",
+    "desc": "Fashion TV - Les d\u00e9fil\u00e9s de haute couture mondiale, mannequins et designers internationaux",
     "m3u8Source": "https://edge-fast3.evrideo.tv/bfdbb576-83f7-11f0-9f89-0200170e3e04_1000028043_HLS/manifest.m3u8"
   },
   {
@@ -3198,7 +3198,7 @@
     "ch": "290",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "My Zen TV - Bien-être, yoga, méditation, paysages relaxants et nutrition saine",
+    "desc": "My Zen TV - Bien-\u00eatre, yoga, m\u00e9ditation, paysages relaxants et nutrition saine",
     "m3u8Source": "https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01255-secomcofites-my-myzen-en-plex/playlist.m3u8"
   },
   {
@@ -3210,7 +3210,7 @@
     "ch": "291",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Mieux TV - Écologie, santé naturelle et consommation responsable",
+    "desc": "Mieux TV - \u00c9cologie, sant\u00e9 naturelle et consommation responsable",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/mieux.m3u8"
   },
   {
@@ -3222,31 +3222,31 @@
     "ch": "292",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "INA - Les plus grands trésors de l'histoire de la télévision et de la radio française",
+    "desc": "INA - Les plus grands tr\u00e9sors de l'histoire de la t\u00e9l\u00e9vision et de la radio fran\u00e7aise",
     "m3u8Source": "https://raw.githubusercontent.com/schumijo/iptv/main/playlists/francetv/ina.m3u8"
   },
   {
     "id": "ch_201",
-    "nom": "MÉLODY",
+    "nom": "M\u00c9LODY",
     "lien": "https://live.creacast.com/telemelody/smil:telemelody-yjvCxE7x.smil/playlist.m3u8",
     "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/melody-fr.png",
     "cat": "MUSIQUE",
     "ch": "293",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Télé Melody - La chaîne vintage des années 60, 70, 80 et 90 en chansons cultes",
+    "desc": "T\u00e9l\u00e9 Melody - La cha\u00eene vintage des ann\u00e9es 60, 70, 80 et 90 en chansons cultes",
     "m3u8Source": "https://live.creacast.com/telemelody/smil:telemelody-yjvCxE7x.smil/playlist.m3u8"
   },
   {
     "id": "ch_203",
-    "nom": "GÉNÉRATIONS TV",
+    "nom": "G\u00c9N\u00c9RATIONS TV",
     "lien": "https://edge11.vedge.infomaniak.com/livecast/ik:generation-tv/manifest.m3u8",
     "logo": "https://freebox.cdn.scw.iliad.fr/282_540a739064.png",
     "cat": "MUSIQUE",
     "ch": "294",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Générations TV - 100% Hip-Hop, Rap français et US, R&B et interviews d'artistes",
+    "desc": "G\u00e9n\u00e9rations TV - 100% Hip-Hop, Rap fran\u00e7ais et US, R&B et interviews d'artistes",
     "m3u8Source": "https://edge11.vedge.infomaniak.com/livecast/ik:generation-tv/manifest.m3u8"
   },
   {
@@ -3258,7 +3258,7 @@
     "ch": "295",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Trace Urban - N°1 de la musique urbaine, Afrobeats, Rap, Pop et charts internationaux",
+    "desc": "Trace Urban - N\u00b01 de la musique urbaine, Afrobeats, Rap, Pop et charts internationaux",
     "m3u8Source": "https://lightning-traceurban-samsungau.amagi.tv/playlist.m3u8"
   },
   {
@@ -3294,7 +3294,7 @@
     "ch": "298",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Madras FM TV - Radio visuelle caribéenne et tropicale 24/7",
+    "desc": "Madras FM TV - Radio visuelle carib\u00e9enne et tropicale 24/7",
     "m3u8Source": "https://edge17.vedge.infomaniak.com/livecast/ik:madrasfmtv/manifest.m3u8"
   },
   {
@@ -3306,7 +3306,7 @@
     "ch": "299",
     "qualite": "HD",
     "pays": "BELGIQUE",
-    "desc": "Bel RTL - Radio généraliste belge francophone d'information et musique",
+    "desc": "Bel RTL - Radio g\u00e9n\u00e9raliste belge francophone d'information et musique",
     "m3u8Source": "https://raw.githubusercontent.com/Paradise-91/ParaTV/main/streams/rtl/be/belrtl.m3u8"
   },
   {
@@ -3318,7 +3318,7 @@
     "ch": "300",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Le Figaro TV IDF - Débats d'actualité, culture et politique en Île-de-France",
+    "desc": "Le Figaro TV IDF - D\u00e9bats d'actualit\u00e9, culture et politique en \u00cele-de-France",
     "m3u8Source": "https://static.lefigaro.fr/secom/tnt.m3u8"
   },
   {
@@ -3330,19 +3330,19 @@
     "ch": "301",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "20 Minutes TV Île-de-France - Magazine urbain, sorties et direct francilien",
+    "desc": "20 Minutes TV \u00cele-de-France - Magazine urbain, sorties et direct francilien",
     "m3u8Source": "https://live-20minutestv.digiteka.com/1961167769/index.m3u8"
   },
   {
     "id": "ch_224",
-    "nom": "ÇA CHAUFFE EN CUISINE",
+    "nom": "\u00c7A CHAUFFE EN CUISINE",
     "lien": "",
     "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR34000032F_20260127T040246SQUARE.png",
     "cat": "GENERALISTE",
     "ch": "302",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Ça Chauffe en Cuisine - Concours culinaires, chefs renommés et recettes gourmandes",
+    "desc": "\u00c7a Chauffe en Cuisine - Concours culinaires, chefs renomm\u00e9s et recettes gourmandes",
     "m3u8Source": ""
   },
   {
@@ -3354,7 +3354,7 @@
     "ch": "303",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Les Anges de la Télé-Réalité - Toutes les saisons cultes à Miami, Los Angeles et Hawaï",
+    "desc": "Les Anges de la T\u00e9l\u00e9-R\u00e9alit\u00e9 - Toutes les saisons cultes \u00e0 Miami, Los Angeles et Hawa\u00ef",
     "m3u8Source": ""
   },
   {
@@ -3366,7 +3366,7 @@
     "ch": "304",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Le Meilleur des Jeux TV - Les jeux cultes de la télévision française",
+    "desc": "Le Meilleur des Jeux TV - Les jeux cultes de la t\u00e9l\u00e9vision fran\u00e7aise",
     "m3u8Source": ""
   },
   {
@@ -3378,7 +3378,7 @@
     "ch": "305",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Qui veut gagner des millions ? - Le jeu mythique présenté par Jean-Pierre Foucault et Camille Combal",
+    "desc": "Qui veut gagner des millions ? - Le jeu mythique pr\u00e9sent\u00e9 par Jean-Pierre Foucault et Camille Combal",
     "m3u8Source": ""
   },
   {
@@ -3390,7 +3390,7 @@
     "ch": "306",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Les Z'amours - Émissions cultes testant la complicité des couples",
+    "desc": "Les Z'amours - \u00c9missions cultes testant la complicit\u00e9 des couples",
     "m3u8Source": ""
   },
   {
@@ -3414,7 +3414,7 @@
     "ch": "308",
     "qualite": "HD",
     "pays": "JAPON",
-    "desc": "Yu-Gi-Oh! - Tous les duels de cartes légendaires de Yugi Muto et Seto Kaiba",
+    "desc": "Yu-Gi-Oh! - Tous les duels de cartes l\u00e9gendaires de Yugi Muto et Seto Kaiba",
     "m3u8Source": ""
   },
   {
@@ -3426,7 +3426,7 @@
     "ch": "309",
     "qualite": "HD",
     "pays": "JAPON",
-    "desc": "Beyblade - Les tournois de toupies et aventures animées",
+    "desc": "Beyblade - Les tournois de toupies et aventures anim\u00e9es",
     "m3u8Source": ""
   },
   {
@@ -3438,7 +3438,7 @@
     "ch": "310",
     "qualite": "4K",
     "pays": "UK",
-    "desc": "BBC Earth - Les chefs-d'œuvre documentaires de la nature et de la faune sauvage",
+    "desc": "BBC Earth - Les chefs-d'\u0153uvre documentaires de la nature et de la faune sauvage",
     "m3u8Source": ""
   },
   {
@@ -3450,19 +3450,19 @@
     "ch": "311",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Voyages & Saveurs - Évasions dépaysantes et dégustations des spécialités du monde",
+    "desc": "Voyages & Saveurs - \u00c9vasions d\u00e9paysantes et d\u00e9gustations des sp\u00e9cialit\u00e9s du monde",
     "m3u8Source": ""
   },
   {
     "id": "ch_253",
-    "nom": "ECHAPPÉES BELLES & CO",
+    "nom": "ECHAPP\u00c9ES BELLES & CO",
     "lien": "",
     "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBC3500002E4_20241015T040301SQUARE.png",
     "cat": "DOCUMENTAIRE",
     "ch": "312",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Échappées Belles & Co - Découverte des régions et pays du globe",
+    "desc": "\u00c9chapp\u00e9es Belles & Co - D\u00e9couverte des r\u00e9gions et pays du globe",
     "m3u8Source": ""
   },
   {
@@ -3486,7 +3486,7 @@
     "ch": "314",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Emotion Musique - Ballades et mélodies intemporelles",
+    "desc": "Emotion Musique - Ballades et m\u00e9lodies intemporelles",
     "m3u8Source": ""
   },
   {
@@ -3498,7 +3498,7 @@
     "ch": "315",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "100% Kidz - Dessins animés et divertissement pour toute la famille",
+    "desc": "100% Kidz - Dessins anim\u00e9s et divertissement pour toute la famille",
     "m3u8Source": ""
   },
   {
@@ -3510,7 +3510,7 @@
     "ch": "316",
     "qualite": "HD",
     "pays": "USA",
-    "desc": "Moviesphere - Le cinéma Lionsgate en streaming gratuit 24/7",
+    "desc": "Moviesphere - Le cin\u00e9ma Lionsgate en streaming gratuit 24/7",
     "m3u8Source": ""
   },
   {
@@ -3522,7 +3522,7 @@
     "ch": "317",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Trailers - Toutes les bandes-annonces des sorties cinéma et séries à venir",
+    "desc": "Trailers - Toutes les bandes-annonces des sorties cin\u00e9ma et s\u00e9ries \u00e0 venir",
     "m3u8Source": ""
   },
   {
@@ -3534,7 +3534,7 @@
     "ch": "318",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Top Sci-Fi - Les films et séries de science-fiction incontournables",
+    "desc": "Top Sci-Fi - Les films et s\u00e9ries de science-fiction incontournables",
     "m3u8Source": ""
   },
   {
@@ -3546,7 +3546,7 @@
     "ch": "319",
     "qualite": "HD",
     "pays": "USA",
-    "desc": "ACC Network - Direct des sports universitaires américains, basket, football américain et tournois NCAA ACC",
+    "desc": "ACC Network - Direct des sports universitaires am\u00e9ricains, basket, football am\u00e9ricain et tournois NCAA ACC",
     "m3u8Source": "http://23.239.31.26:8989/accnetwork/index.m3u8"
   },
   {
@@ -3558,7 +3558,7 @@
     "ch": "320",
     "qualite": "HD",
     "pays": "USA",
-    "desc": "ACC Digital Network (Raycom Sports) - Matchs, temps forts et reportages exclusifs de la conférence ACC",
+    "desc": "ACC Digital Network (Raycom Sports) - Matchs, temps forts et reportages exclusifs de la conf\u00e9rence ACC",
     "m3u8Source": "https://raycom-accdn-firetv.amagi.tv/playlist.m3u8"
   },
   {
@@ -3577,12 +3577,12 @@
     "id": "ch_326",
     "nom": "TV 360",
     "lien": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"t360-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23111827\"/><stop offset=\"100%\" stop-color=\"%231f2937\"/></linearGradient><linearGradient id=\"t360-red\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23e11d48\"/><stop offset=\"100%\" stop-color=\"%23be123c\"/></linearGradient></defs><rect width=\"500\" height=\"280\" fill=\"url(%23t360-bg)\" rx=\"30\"/><g transform=\"translate(45, 40)\"><circle cx=\"205\" cy=\"70\" r=\"60\" fill=\"none\" stroke=\"url(%23t360-red)\" stroke-width=\"10\"/><text x=\"145\" y=\"85\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"44\" fill=\"%23e11d48\">tv</text><text x=\"245\" y=\"88\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"52\" fill=\"%23ffffff\">360</text><rect x=\"30\" y=\"145\" width=\"350\" height=\"36\" rx=\"8\" fill=\"url(%23t360-red)\"/><text x=\"205\" y=\"170\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"16\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"6\">TÜRKMEDYA CANLI</text></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"t360-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23111827\"/><stop offset=\"100%\" stop-color=\"%231f2937\"/></linearGradient><linearGradient id=\"t360-red\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23e11d48\"/><stop offset=\"100%\" stop-color=\"%23be123c\"/></linearGradient></defs><rect width=\"500\" height=\"280\" fill=\"url(%23t360-bg)\" rx=\"30\"/><g transform=\"translate(45, 40)\"><circle cx=\"205\" cy=\"70\" r=\"60\" fill=\"none\" stroke=\"url(%23t360-red)\" stroke-width=\"10\"/><text x=\"145\" y=\"85\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"44\" fill=\"%23e11d48\">tv</text><text x=\"245\" y=\"88\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"52\" fill=\"%23ffffff\">360</text><rect x=\"30\" y=\"145\" width=\"350\" height=\"36\" rx=\"8\" fill=\"url(%23t360-red)\"/><text x=\"205\" y=\"170\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"16\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"6\">T\u00dcRKMEDYA CANLI</text></g></svg>",
     "cat": "GENERALISTE",
     "ch": "322",
     "qualite": "HD",
     "pays": "TURQUIE",
-    "desc": "TV360 - Chaîne nationale turque de divertissement, magazines, séries et art de vivre",
+    "desc": "TV360 - Cha\u00eene nationale turque de divertissement, magazines, s\u00e9ries et art de vivre",
     "m3u8Source": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8"
   },
   {
@@ -3594,7 +3594,7 @@
     "ch": "323",
     "qualite": "4K",
     "pays": "USA",
-    "desc": "ABC News Live - L'information américaine et mondiale 24h/24 en direct et décryptages",
+    "desc": "ABC News Live - L'information am\u00e9ricaine et mondiale 24h/24 en direct et d\u00e9cryptages",
     "m3u8Source": "https://abc-news-dmd-streams-1.akamaized.net/out/v1/701126012d044971b3fa89406a440133/index.m3u8"
   },
   {
@@ -3606,7 +3606,7 @@
     "ch": "324",
     "qualite": "HD",
     "pays": "BANGLADESH",
-    "desc": "Channel 24 - Chaîne d'information en continu, talk-shows, analyses et direct",
+    "desc": "Channel 24 - Cha\u00eene d'information en continu, talk-shows, analyses et direct",
     "m3u8Source": "https://segment.yuppcdn.net/110322/channel24/playlist.m3u8"
   },
   {
@@ -3618,7 +3618,7 @@
     "ch": "325",
     "qualite": "HD",
     "pays": "POLOGNE",
-    "desc": "BTB Live IPTV - Télévision numérique généraliste, divertissements et émissions",
+    "desc": "BTB Live IPTV - T\u00e9l\u00e9vision num\u00e9rique g\u00e9n\u00e9raliste, divertissements et \u00e9missions",
     "m3u8Source": "https://emisja2.btb.j00r.us/iptv/session/4/hls.m3u8"
   },
   {
@@ -3630,19 +3630,19 @@
     "ch": "326",
     "qualite": "HD",
     "pays": "INDE",
-    "desc": "Indywood TV - Cinéma indien, films, divertissement, musique et reportages cinéma",
+    "desc": "Indywood TV - Cin\u00e9ma indien, films, divertissement, musique et reportages cin\u00e9ma",
     "m3u8Source": "https://43wrzjnpqoxe-hls-live.wmncdn.net/indywood/indywoodtv/index.m3u8"
   },
   {
     "id": "ch_334",
     "nom": "AL JAZEERA ARABIC",
     "lien": "https://live-hls-apps-aja-fa.getaj.net/AJA/01.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"aja-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23854d0e\"/><stop offset=\"100%\" stop-color=\"%23451a03\"/></linearGradient><linearGradient id=\"aja-gold\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23fde047\"/><stop offset=\"100%\" stop-color=\"%23eab308\"/></linearGradient></defs><rect width=\"500\" height=\"280\" fill=\"url(%23aja-bg)\" rx=\"30\"/><g transform=\"translate(45, 35)\"><circle cx=\"105\" cy=\"75\" r=\"52\" fill=\"none\" stroke=\"url(%23aja-gold)\" stroke-width=\"8\"/><path d=\"M 85,90 C 85,60 125,50 120,95 C 105,100 95,95 85,90 Z\" fill=\"url(%23aja-gold)\"/><text x=\"260\" y=\"65\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"38\" fill=\"%23ffffff\" letter-spacing=\"1\">AL JAZEERA</text><rect x=\"180\" y=\"80\" width=\"160\" height=\"38\" rx=\"8\" fill=\"url(%23aja-gold)\"/><text x=\"260\" y=\"107\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"20\" fill=\"%23451a03\" text-anchor=\"middle\" letter-spacing=\"4\">ARABIC</text><text x=\"205\" y=\"175\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"16\" fill=\"%23fef08a\" text-anchor=\"middle\" letter-spacing=\"4\">قناة الجزيرة الإخبارية</text></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"aja-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23854d0e\"/><stop offset=\"100%\" stop-color=\"%23451a03\"/></linearGradient><linearGradient id=\"aja-gold\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23fde047\"/><stop offset=\"100%\" stop-color=\"%23eab308\"/></linearGradient></defs><rect width=\"500\" height=\"280\" fill=\"url(%23aja-bg)\" rx=\"30\"/><g transform=\"translate(45, 35)\"><circle cx=\"105\" cy=\"75\" r=\"52\" fill=\"none\" stroke=\"url(%23aja-gold)\" stroke-width=\"8\"/><path d=\"M 85,90 C 85,60 125,50 120,95 C 105,100 95,95 85,90 Z\" fill=\"url(%23aja-gold)\"/><text x=\"260\" y=\"65\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"38\" fill=\"%23ffffff\" letter-spacing=\"1\">AL JAZEERA</text><rect x=\"180\" y=\"80\" width=\"160\" height=\"38\" rx=\"8\" fill=\"url(%23aja-gold)\"/><text x=\"260\" y=\"107\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"20\" fill=\"%23451a03\" text-anchor=\"middle\" letter-spacing=\"4\">ARABIC</text><text x=\"205\" y=\"175\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"16\" fill=\"%23fef08a\" text-anchor=\"middle\" letter-spacing=\"4\">\u0642\u0646\u0627\u0629 \u0627\u0644\u062c\u0632\u064a\u0631\u0629 \u0627\u0644\u0625\u062e\u0628\u0627\u0631\u064a\u0629</text></g></svg>",
     "cat": "NEWS",
     "ch": "327",
     "qualite": "4K",
     "pays": "QATAR",
-    "desc": "Al Jazeera Arabic (AJA) - Chaîne d'information internationale de référence en langue arabe 24/7",
+    "desc": "Al Jazeera Arabic (AJA) - Cha\u00eene d'information internationale de r\u00e9f\u00e9rence en langue arabe 24/7",
     "m3u8Source": "https://live-hls-apps-aja-fa.getaj.net/AJA/01.m3u8"
   },
   {
@@ -3654,7 +3654,7 @@
     "ch": "328",
     "qualite": "HD",
     "pays": "USA",
-    "desc": "McQuack Toons - Dessins animés d'aventure, humour et séries jeunesse non-stop",
+    "desc": "McQuack Toons - Dessins anim\u00e9s d'aventure, humour et s\u00e9ries jeunesse non-stop",
     "m3u8Source": "http://stream.mcquack.net/131/index.m3u8"
   },
   {
@@ -3666,32 +3666,32 @@
     "ch": "329",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "Aleert TV - Émissions télévisées, actualités, reportages et flux direct continu",
+    "desc": "Aleert TV - \u00c9missions t\u00e9l\u00e9vis\u00e9es, actualit\u00e9s, reportages et flux direct continu",
     "m3u8Source": "https://itv.streams.ovh/ALEERT/ALEERT/playlist.m3u8"
   },
   {
     "id": "ch_337",
     "nom": "EMS TV",
     "lien": "",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"ems-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23000000\"/><stop offset=\"100%\" stop-color=\"%23080b14\"/></linearGradient><linearGradient id=\"ems-red\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23ff1e27\"/><stop offset=\"100%\" stop-color=\"%23c81018\"/></linearGradient><linearGradient id=\"ems-gold\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23ffd000\"/><stop offset=\"100%\" stop-color=\"%23f59e0b\"/></linearGradient><linearGradient id=\"ems-cyan\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%2300b4d8\"/><stop offset=\"100%\" stop-color=\"%230077b6\"/></linearGradient></defs><rect width=\"500\" height=\"280\" fill=\"url(%23ems-bg)\" rx=\"30\"/><g transform=\"translate(25, 20)\"><circle cx=\"85\" cy=\"120\" r=\"28\" fill=\"%231a1829\"/><path d=\"M 85,60 C 130,85 130,165 85,185 C 105,165 110,105 85,60 Z\" fill=\"url(%23ems-red)\"/><path d=\"M 98,35 C 160,65 160,195 98,215 C 132,190 138,95 98,35 Z\" fill=\"url(%23ems-gold)\"/><path d=\"M 125,12 C 205,45 205,225 125,238 C 172,210 180,85 125,12 Z\" fill=\"url(%23ems-cyan)\"/><path d=\"M 175,30 C 235,65 235,215 175,228 C 210,200 215,95 175,30 Z\" fill=\"%231e293b\" opacity=\"0.45\"/><g transform=\"translate(190, 20)\"><text x=\"140\" y=\"80\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"76\" fill=\"%23ffffff\" letter-spacing=\"2\">EMS</text><rect x=\"40\" y=\"98\" width=\"195\" height=\"46\" rx=\"12\" fill=\"url(%23ems-cyan)\"/><text x=\"137\" y=\"133\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"34\" fill=\"%23000000\" text-anchor=\"middle\" letter-spacing=\"4\">TELEVISION</text><text x=\"137\" y=\"180\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"15\" fill=\"%23ffd000\" text-anchor=\"middle\" letter-spacing=\"3\">ÉVANGILE &amp; RELIGION 24/7</text></g></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"ems-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23000000\"/><stop offset=\"100%\" stop-color=\"%23080b14\"/></linearGradient><linearGradient id=\"ems-red\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23ff1e27\"/><stop offset=\"100%\" stop-color=\"%23c81018\"/></linearGradient><linearGradient id=\"ems-gold\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23ffd000\"/><stop offset=\"100%\" stop-color=\"%23f59e0b\"/></linearGradient><linearGradient id=\"ems-cyan\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%2300b4d8\"/><stop offset=\"100%\" stop-color=\"%230077b6\"/></linearGradient></defs><rect width=\"500\" height=\"280\" fill=\"url(%23ems-bg)\" rx=\"30\"/><g transform=\"translate(25, 20)\"><circle cx=\"85\" cy=\"120\" r=\"28\" fill=\"%231a1829\"/><path d=\"M 85,60 C 130,85 130,165 85,185 C 105,165 110,105 85,60 Z\" fill=\"url(%23ems-red)\"/><path d=\"M 98,35 C 160,65 160,195 98,215 C 132,190 138,95 98,35 Z\" fill=\"url(%23ems-gold)\"/><path d=\"M 125,12 C 205,45 205,225 125,238 C 172,210 180,85 125,12 Z\" fill=\"url(%23ems-cyan)\"/><path d=\"M 175,30 C 235,65 235,215 175,228 C 210,200 215,95 175,30 Z\" fill=\"%231e293b\" opacity=\"0.45\"/><g transform=\"translate(190, 20)\"><text x=\"140\" y=\"80\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"76\" fill=\"%23ffffff\" letter-spacing=\"2\">EMS</text><rect x=\"40\" y=\"98\" width=\"195\" height=\"46\" rx=\"12\" fill=\"url(%23ems-cyan)\"/><text x=\"137\" y=\"133\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"34\" fill=\"%23000000\" text-anchor=\"middle\" letter-spacing=\"4\">TELEVISION</text><text x=\"137\" y=\"180\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"15\" fill=\"%23ffd000\" text-anchor=\"middle\" letter-spacing=\"3\">\u00c9VANGILE &amp; RELIGION 24/7</text></g></g></svg>",
     "cat": "RELIGIEUX",
     "ch": "330",
     "qualite": "4K",
     "pays": "RDC",
-    "desc": "EMS TV - Télévision chrétienne d'évangélisation, culte, louange et enseignements en continu",
+    "desc": "EMS TV - T\u00e9l\u00e9vision chr\u00e9tienne d'\u00e9vang\u00e9lisation, culte, louange et enseignements en continu",
     "youtubeBackup": "https://www.youtube.com/watch?v=memNv4dPDE0",
     "m3u8Source": ""
   },
   {
     "id": "ch_338",
-    "nom": "BUENÍSIMA TV",
+    "nom": "BUEN\u00cdSIMA TV",
     "lien": "https://canal.mediaserver.com.co/live/buenisimatv.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"buen-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%231f082e\"/><stop offset=\"100%\" stop-color=\"%2309020f\"/></linearGradient><linearGradient id=\"buen-pink\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23ec4899\"/><stop offset=\"100%\" stop-color=\"%23be185d\"/></linearGradient><linearGradient id=\"buen-gold\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23facc15\"/><stop offset=\"100%\" stop-color=\"%23ea580c\"/></linearGradient></defs><rect width=\"500\" height=\"280\" fill=\"url(%23buen-bg)\" rx=\"30\"/><g transform=\"translate(30, 35)\"><circle cx=\"85\" cy=\"85\" r=\"46\" fill=\"url(%23buen-pink)\"/><polygon points=\"73,65 107,85 73,105\" fill=\"%23ffffff\"/><circle cx=\"115\" cy=\"55\" r=\"10\" fill=\"url(%23buen-gold)\"/><g transform=\"translate(145, 30)\"><text x=\"0\" y=\"48\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"44\" fill=\"%23ffffff\" letter-spacing=\"2\">BUENÍSIMA</text><rect x=\"0\" y=\"62\" width=\"115\" height=\"42\" rx=\"10\" fill=\"url(%23buen-gold)\"/><text x=\"57\" y=\"93\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"28\" fill=\"%23000000\" text-anchor=\"middle\" letter-spacing=\"4\">TV</text></g><text x=\"220\" y=\"185\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"15\" fill=\"%23f472b6\" text-anchor=\"middle\" letter-spacing=\"4\">MÚSICA &amp; ENTRETENIMIENTO HD</text></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"buen-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%231f082e\"/><stop offset=\"100%\" stop-color=\"%2309020f\"/></linearGradient><linearGradient id=\"buen-pink\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23ec4899\"/><stop offset=\"100%\" stop-color=\"%23be185d\"/></linearGradient><linearGradient id=\"buen-gold\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23facc15\"/><stop offset=\"100%\" stop-color=\"%23ea580c\"/></linearGradient></defs><rect width=\"500\" height=\"280\" fill=\"url(%23buen-bg)\" rx=\"30\"/><g transform=\"translate(30, 35)\"><circle cx=\"85\" cy=\"85\" r=\"46\" fill=\"url(%23buen-pink)\"/><polygon points=\"73,65 107,85 73,105\" fill=\"%23ffffff\"/><circle cx=\"115\" cy=\"55\" r=\"10\" fill=\"url(%23buen-gold)\"/><g transform=\"translate(145, 30)\"><text x=\"0\" y=\"48\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"44\" fill=\"%23ffffff\" letter-spacing=\"2\">BUEN\u00cdSIMA</text><rect x=\"0\" y=\"62\" width=\"115\" height=\"42\" rx=\"10\" fill=\"url(%23buen-gold)\"/><text x=\"57\" y=\"93\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"28\" fill=\"%23000000\" text-anchor=\"middle\" letter-spacing=\"4\">TV</text></g><text x=\"220\" y=\"185\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"15\" fill=\"%23f472b6\" text-anchor=\"middle\" letter-spacing=\"4\">M\u00daSICA &amp; ENTRETENIMIENTO HD</text></g></svg>",
     "cat": "GENERALISTE",
     "ch": "331",
     "qualite": "HD",
     "pays": "COLOMBIE",
-    "desc": "Buenísima TV - Entretenimiento, música, programas variados y cultura en vivo 24/7",
+    "desc": "Buen\u00edsima TV - Entretenimiento, m\u00fasica, programas variados y cultura en vivo 24/7",
     "m3u8Source": "https://canal.mediaserver.com.co/live/buenisimatv.m3u8"
   },
   {
@@ -3703,67 +3703,67 @@
     "ch": "332",
     "qualite": "HD",
     "pays": "AMERIQUE LATINE",
-    "desc": "Latam VDO - Télévision de films, séries, vidéos et divertissement en continu d'Amérique Latine",
+    "desc": "Latam VDO - T\u00e9l\u00e9vision de films, s\u00e9ries, vid\u00e9os et divertissement en continu d'Am\u00e9rique Latine",
     "m3u8Source": "https://latamvdo.com:3870/hybrid/play.m3u8"
   },
   {
     "id": "ch_343",
     "nom": "RUMBA TV",
     "lien": "http://45.162.193.35/RUMBATV/index.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"rumba-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%237f1d1d\"/><stop offset=\"100%\" stop-color=\"%23450a0a\"/></linearGradient><linearGradient id=\"rumba-gold\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23facc15\"/><stop offset=\"100%\" stop-color=\"%23ea580c\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23rumba-bg)\"/><g transform=\"translate(40, 40)\"><circle cx=\"85\" cy=\"85\" r=\"48\" fill=\"url(%23rumba-gold)\"/><polygon points=\"73,65 107,85 73,105\" fill=\"%23450a0a\"/><g transform=\"translate(145, 30)\"><text x=\"0\" y=\"48\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"46\" fill=\"%23ffffff\" letter-spacing=\"2\">RUMBA</text><rect x=\"0\" y=\"62\" width=\"120\" height=\"42\" rx=\"10\" fill=\"url(%23rumba-gold)\"/><text x=\"60\" y=\"93\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"28\" fill=\"%23450a0a\" text-anchor=\"middle\" letter-spacing=\"4\">TV</text></g><text x=\"220\" y=\"185\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"15\" fill=\"%23fca5a5\" text-anchor=\"middle\" letter-spacing=\"4\">100% MÚSICA &amp; FIESTA LATINA</text></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"rumba-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%237f1d1d\"/><stop offset=\"100%\" stop-color=\"%23450a0a\"/></linearGradient><linearGradient id=\"rumba-gold\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23facc15\"/><stop offset=\"100%\" stop-color=\"%23ea580c\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23rumba-bg)\"/><g transform=\"translate(40, 40)\"><circle cx=\"85\" cy=\"85\" r=\"48\" fill=\"url(%23rumba-gold)\"/><polygon points=\"73,65 107,85 73,105\" fill=\"%23450a0a\"/><g transform=\"translate(145, 30)\"><text x=\"0\" y=\"48\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"46\" fill=\"%23ffffff\" letter-spacing=\"2\">RUMBA</text><rect x=\"0\" y=\"62\" width=\"120\" height=\"42\" rx=\"10\" fill=\"url(%23rumba-gold)\"/><text x=\"60\" y=\"93\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"28\" fill=\"%23450a0a\" text-anchor=\"middle\" letter-spacing=\"4\">TV</text></g><text x=\"220\" y=\"185\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"15\" fill=\"%23fca5a5\" text-anchor=\"middle\" letter-spacing=\"4\">100% M\u00daSICA &amp; FIESTA LATINA</text></g></svg>",
     "cat": "MUSIQUE",
     "ch": "333",
     "qualite": "HD",
     "pays": "COLOMBIE",
-    "desc": "Rumba TV - 100% musique festive, salsa, reggaeton, vallenato et clips vidéo non-stop",
+    "desc": "Rumba TV - 100% musique festive, salsa, reggaeton, vallenato et clips vid\u00e9o non-stop",
     "m3u8Source": "http://45.162.193.35/RUMBATV/index.m3u8"
   },
   {
     "id": "ch_344",
-    "nom": "CGTN FRANÇAIS",
+    "nom": "CGTN FRAN\u00c7AIS",
     "lien": "https://amg00405-rakutentv-cgtn-rakuten-i9tar.amagi.tv/master.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"cgtn-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23002b49\"/><stop offset=\"100%\" stop-color=\"%23001524\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23cgtn-bg)\"/><g transform=\"translate(45, 45)\"><text x=\"205\" y=\"65\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"64\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"4\">CGTN</text><rect x=\"40\" y=\"92\" width=\"330\" height=\"48\" rx=\"10\" fill=\"%23e11d48\"/><text x=\"205\" y=\"127\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"30\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"6\">FRANÇAIS</text><text x=\"205\" y=\"175\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"15\" fill=\"%2338bdf8\" text-anchor=\"middle\" letter-spacing=\"4\">DOCUMENTAIRES &amp; ACTUALITÉS</text></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"cgtn-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23002b49\"/><stop offset=\"100%\" stop-color=\"%23001524\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23cgtn-bg)\"/><g transform=\"translate(45, 45)\"><text x=\"205\" y=\"65\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"64\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"4\">CGTN</text><rect x=\"40\" y=\"92\" width=\"330\" height=\"48\" rx=\"10\" fill=\"%23e11d48\"/><text x=\"205\" y=\"127\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"30\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"6\">FRAN\u00c7AIS</text><text x=\"205\" y=\"175\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"15\" fill=\"%2338bdf8\" text-anchor=\"middle\" letter-spacing=\"4\">DOCUMENTAIRES &amp; ACTUALIT\u00c9S</text></g></svg>",
     "cat": "DOCUMENTAIRE",
     "ch": "334",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "CGTN Français - Chaîne internationale d'information, reportages culturels, documentaires et découvertes en français (Rakuten TV)",
+    "desc": "CGTN Fran\u00e7ais - Cha\u00eene internationale d'information, reportages culturels, documentaires et d\u00e9couvertes en fran\u00e7ais (Rakuten TV)",
     "m3u8Source": "https://amg00405-rakutentv-cgtn-rakuten-i9tar.amagi.tv/master.m3u8"
   },
   {
     "id": "ch_346",
     "nom": "ALTERNATIVA TV",
     "lien": "https://live20.bozztv.com/giatv/giatv-alternativatv/alternativatv/playlist.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"alt-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23064e3b\"/><stop offset=\"100%\" stop-color=\"%23022c22\"/></linearGradient><linearGradient id=\"alt-green\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%2310b981\"/><stop offset=\"100%\" stop-color=\"%23059669\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23alt-bg)\"/><g transform=\"translate(40, 45)\"><text x=\"210\" y=\"60\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"44\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"3\">ALTERNATIVA</text><rect x=\"40\" y=\"85\" width=\"340\" height=\"50\" rx=\"12\" fill=\"url(%23alt-green)\"/><text x=\"210\" y=\"122\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"34\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"8\">TELEVISIÓN</text><text x=\"210\" y=\"170\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"15\" fill=\"%236ee7b7\" text-anchor=\"middle\" letter-spacing=\"4\">INFORMACIÓN &amp; CULTURA VIVA</text></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"alt-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23064e3b\"/><stop offset=\"100%\" stop-color=\"%23022c22\"/></linearGradient><linearGradient id=\"alt-green\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%2310b981\"/><stop offset=\"100%\" stop-color=\"%23059669\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23alt-bg)\"/><g transform=\"translate(40, 45)\"><text x=\"210\" y=\"60\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"44\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"3\">ALTERNATIVA</text><rect x=\"40\" y=\"85\" width=\"340\" height=\"50\" rx=\"12\" fill=\"url(%23alt-green)\"/><text x=\"210\" y=\"122\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"34\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"8\">TELEVISI\u00d3N</text><text x=\"210\" y=\"170\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"15\" fill=\"%236ee7b7\" text-anchor=\"middle\" letter-spacing=\"4\">INFORMACI\u00d3N &amp; CULTURA VIVA</text></g></svg>",
     "cat": "GENERALISTE",
     "ch": "335",
     "qualite": "HD",
     "pays": "PEROU",
-    "desc": "Alternativa TV - Chaîne de libre expression, culture, débats et informations indépendantes",
+    "desc": "Alternativa TV - Cha\u00eene de libre expression, culture, d\u00e9bats et informations ind\u00e9pendantes",
     "m3u8Source": "https://live20.bozztv.com/giatv/giatv-alternativatv/alternativatv/playlist.m3u8"
   },
   {
     "id": "ch_347",
     "nom": "TELEBILBAO",
     "lien": "https://play.cdn.enetres.net/091DB7AFBD77442B9BA2F141DCC182F5021/live.smil/playlist.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"tb-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23991b1b\"/><stop offset=\"100%\" stop-color=\"%23581c87\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23tb-bg)\"/><g transform=\"translate(45, 45)\"><circle cx=\"100\" cy=\"70\" r=\"48\" fill=\"%23ffffff\"/><text x=\"100\" y=\"88\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"48\" fill=\"%23991b1b\" text-anchor=\"middle\">TB</text><text x=\"270\" y=\"70\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"40\" fill=\"%23ffffff\" letter-spacing=\"1\">TeleBilbao</text><rect x=\"40\" y=\"130\" width=\"330\" height=\"42\" rx=\"10\" fill=\"%23ffffff\"/><text x=\"205\" y=\"159\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"20\" fill=\"%23991b1b\" text-anchor=\"middle\" letter-spacing=\"5\">TELEVISIÓN DE BIZKAIA</text></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"tb-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23991b1b\"/><stop offset=\"100%\" stop-color=\"%23581c87\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23tb-bg)\"/><g transform=\"translate(45, 45)\"><circle cx=\"100\" cy=\"70\" r=\"48\" fill=\"%23ffffff\"/><text x=\"100\" y=\"88\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"48\" fill=\"%23991b1b\" text-anchor=\"middle\">TB</text><text x=\"270\" y=\"70\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"40\" fill=\"%23ffffff\" letter-spacing=\"1\">TeleBilbao</text><rect x=\"40\" y=\"130\" width=\"330\" height=\"42\" rx=\"10\" fill=\"%23ffffff\"/><text x=\"205\" y=\"159\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"20\" fill=\"%23991b1b\" text-anchor=\"middle\" letter-spacing=\"5\">TELEVISI\u00d3N DE BIZKAIA</text></g></svg>",
     "cat": "GENERALISTE",
     "ch": "336",
     "qualite": "HD",
     "pays": "ESPAGNE",
-    "desc": "TeleBilbao - La télévision locale de Bilbao et de la Biscaye, actualités basques, culture et sports",
+    "desc": "TeleBilbao - La t\u00e9l\u00e9vision locale de Bilbao et de la Biscaye, actualit\u00e9s basques, culture et sports",
     "m3u8Source": "https://play.cdn.enetres.net/091DB7AFBD77442B9BA2F141DCC182F5021/live.smil/playlist.m3u8"
   },
   {
     "id": "ch_348",
     "nom": "TVC CANARIAS",
     "lien": "https://cdn318.fractalmedia.es/318/live/hls/tvc/master.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"tvc-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%230284c7\"/><stop offset=\"100%\" stop-color=\"%230369a1\"/></linearGradient><linearGradient id=\"tvc-gold\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23facc15\"/><stop offset=\"100%\" stop-color=\"%23eab308\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23tvc-bg)\"/><g transform=\"translate(45, 45)\"><text x=\"205\" y=\"70\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"75\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"6\">tv<tspan fill=\"url(%23tvc-gold)\">c</tspan></text><rect x=\"35\" y=\"105\" width=\"340\" height=\"42\" rx=\"10\" fill=\"url(%23tvc-gold)\"/><text x=\"205\" y=\"134\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"20\" fill=\"%230369a1\" text-anchor=\"middle\" letter-spacing=\"4\">TELEVISIÓN CANARIA</text><text x=\"205\" y=\"175\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"%23bae6fd\" text-anchor=\"middle\" letter-spacing=\"4\">DIRECTO DESDE CANARIAS</text></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"tvc-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%230284c7\"/><stop offset=\"100%\" stop-color=\"%230369a1\"/></linearGradient><linearGradient id=\"tvc-gold\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23facc15\"/><stop offset=\"100%\" stop-color=\"%23eab308\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23tvc-bg)\"/><g transform=\"translate(45, 45)\"><text x=\"205\" y=\"70\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"75\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"6\">tv<tspan fill=\"url(%23tvc-gold)\">c</tspan></text><rect x=\"35\" y=\"105\" width=\"340\" height=\"42\" rx=\"10\" fill=\"url(%23tvc-gold)\"/><text x=\"205\" y=\"134\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"20\" fill=\"%230369a1\" text-anchor=\"middle\" letter-spacing=\"4\">TELEVISI\u00d3N CANARIA</text><text x=\"205\" y=\"175\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"%23bae6fd\" text-anchor=\"middle\" letter-spacing=\"4\">DIRECTO DESDE CANARIAS</text></g></svg>",
     "cat": "GENERALISTE",
     "ch": "337",
     "qualite": "HD",
     "pays": "ESPAGNE",
-    "desc": "Televisión Canaria (TVC) - Chaîne publique des îles Canaries, information en direct, culture et société",
+    "desc": "Televisi\u00f3n Canaria (TVC) - Cha\u00eene publique des \u00eeles Canaries, information en direct, culture et soci\u00e9t\u00e9",
     "m3u8Source": "https://cdn318.fractalmedia.es/318/live/hls/tvc/master.m3u8"
   },
   {
@@ -3775,19 +3775,19 @@
     "ch": "338",
     "qualite": "HD",
     "pays": "ESPAGNE",
-    "desc": "ETB 1 - Euskal Telebista, chaîne généraliste et sportive du Pays Basque (Euskadi) en direct",
+    "desc": "ETB 1 - Euskal Telebista, cha\u00eene g\u00e9n\u00e9raliste et sportive du Pays Basque (Euskadi) en direct",
     "m3u8Source": "https://cdn1.etbon.eus/oc1/index.m3u8"
   },
   {
     "id": "ch_350",
     "nom": "CADENA 103",
     "lien": "https://streamlov.alsolnet.com/cadena103/live/playlist.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"c103-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%234c0519\"/><stop offset=\"100%\" stop-color=\"%231e1b4b\"/></linearGradient><linearGradient id=\"c103-gold\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23fbbf24\"/><stop offset=\"100%\" stop-color=\"%23f97316\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23c103-bg)\"/><g transform=\"translate(45, 40)\"><text x=\"205\" y=\"55\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"44\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"4\">CADENA</text><rect x=\"60\" y=\"70\" width=\"290\" height=\"65\" rx=\"16\" fill=\"url(%23c103-gold)\"/><text x=\"205\" y=\"120\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"56\" fill=\"%231e1b4b\" text-anchor=\"middle\" letter-spacing=\"6\">103</text><text x=\"205\" y=\"175\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"15\" fill=\"%23fca5a5\" text-anchor=\"middle\" letter-spacing=\"4\">RADIO &amp; TELEVISIÓN EN VIVO</text></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"c103-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%234c0519\"/><stop offset=\"100%\" stop-color=\"%231e1b4b\"/></linearGradient><linearGradient id=\"c103-gold\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23fbbf24\"/><stop offset=\"100%\" stop-color=\"%23f97316\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23c103-bg)\"/><g transform=\"translate(45, 40)\"><text x=\"205\" y=\"55\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"44\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"4\">CADENA</text><rect x=\"60\" y=\"70\" width=\"290\" height=\"65\" rx=\"16\" fill=\"url(%23c103-gold)\"/><text x=\"205\" y=\"120\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"56\" fill=\"%231e1b4b\" text-anchor=\"middle\" letter-spacing=\"6\">103</text><text x=\"205\" y=\"175\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"15\" fill=\"%23fca5a5\" text-anchor=\"middle\" letter-spacing=\"4\">RADIO &amp; TELEVISI\u00d3N EN VIVO</text></g></svg>",
     "cat": "MUSIQUE",
     "ch": "339",
     "qualite": "HD",
     "pays": "ARGENTINE",
-    "desc": "Cadena 103 - Radio & Télévision musicale, divertissement et actualités en direct d'Argentine",
+    "desc": "Cadena 103 - Radio & T\u00e9l\u00e9vision musicale, divertissement et actualit\u00e9s en direct d'Argentine",
     "m3u8Source": "https://streamlov.alsolnet.com/cadena103/live/playlist.m3u8"
   },
   {
@@ -3799,7 +3799,7 @@
     "ch": "340",
     "qualite": "HD",
     "pays": "ARGENTINE",
-    "desc": "Canal 9 Litoral (9 Link) - Télévision régionale argentine, informations locales, direct et émissions",
+    "desc": "Canal 9 Litoral (9 Link) - T\u00e9l\u00e9vision r\u00e9gionale argentine, informations locales, direct et \u00e9missions",
     "m3u8Source": "http://coninfo.net:1935/9linklivert/smil:9linkmultibr.smil/playlist.m3u8"
   },
   {
@@ -3811,19 +3811,19 @@
     "ch": "341",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "MWD Movie Channel - Chaîne cinéma continue, longs métrages, séries d'action et divertissement",
+    "desc": "MWD Movie Channel - Cha\u00eene cin\u00e9ma continue, longs m\u00e9trages, s\u00e9ries d'action et divertissement",
     "m3u8Source": "http://203.81.84.130/hls/mwd_movie/index.m3u8"
   },
   {
     "id": "ch_354",
     "nom": "K100 TV",
     "lien": "https://k100streymi.mbl.is/beint/k100/index.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"k100-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%230284c7\"/><stop offset=\"100%\" stop-color=\"%230369a1\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23k100-bg)\"/><g transform=\"translate(45, 45)\"><text x=\"205\" y=\"70\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"76\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"4\">K100</text><rect x=\"45\" y=\"100\" width=\"320\" height=\"42\" rx=\"10\" fill=\"%23ffffff\"/><text x=\"205\" y=\"130\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"22\" fill=\"%230284c7\" text-anchor=\"middle\" letter-spacing=\"6\">SJÓNVARP TV</text><text x=\"205\" y=\"175\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"%23e0f2fe\" text-anchor=\"middle\" letter-spacing=\"4\">ICELAND HIT MUSIC &amp; SHOWS</text></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"k100-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%230284c7\"/><stop offset=\"100%\" stop-color=\"%230369a1\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23k100-bg)\"/><g transform=\"translate(45, 45)\"><text x=\"205\" y=\"70\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"76\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"4\">K100</text><rect x=\"45\" y=\"100\" width=\"320\" height=\"42\" rx=\"10\" fill=\"%23ffffff\"/><text x=\"205\" y=\"130\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"22\" fill=\"%230284c7\" text-anchor=\"middle\" letter-spacing=\"6\">SJ\u00d3NVARP TV</text><text x=\"205\" y=\"175\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"%23e0f2fe\" text-anchor=\"middle\" letter-spacing=\"4\">ICELAND HIT MUSIC &amp; SHOWS</text></g></svg>",
     "cat": "MUSIQUE",
     "ch": "342",
     "qualite": "HD",
     "pays": "ISLANDE",
-    "desc": "K100 Sjónvarp - Télévision et radio islandaise, hits musicaux, interviews et divertissement",
+    "desc": "K100 Sj\u00f3nvarp - T\u00e9l\u00e9vision et radio islandaise, hits musicaux, interviews et divertissement",
     "m3u8Source": "https://k100streymi.mbl.is/beint/k100/index.m3u8"
   },
   {
@@ -3835,19 +3835,19 @@
     "ch": "343",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "FashionTV Secrets (FTV) - Mode internationale, défilés, haute couture, coulisses et lifestyle 24/7",
+    "desc": "FashionTV Secrets (FTV) - Mode internationale, d\u00e9fil\u00e9s, haute couture, coulisses et lifestyle 24/7",
     "m3u8Source": "https://ssai.aniview.com/api/v1/hls/stream.m3u8"
   },
   {
     "id": "ch_356",
     "nom": "FRANCE 24 (FR)",
     "lien": "https://live.france24.com/hls/live/2037179-b/F24_FR_HI_HLS/master_5000.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"f24-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%230284c7\"/><stop offset=\"100%\" stop-color=\"%230369a1\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23f24-bg)\"/><g transform=\"translate(45, 40)\"><circle cx=\"95\" cy=\"70\" r=\"48\" fill=\"%23ffffff\"/><text x=\"95\" y=\"90\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"48\" fill=\"%230284c7\" text-anchor=\"middle\">24</text><g transform=\"translate(155, 30)\"><text x=\"0\" y=\"42\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"42\" fill=\"%23ffffff\" letter-spacing=\"2\">FRANCE</text><rect x=\"0\" y=\"56\" width=\"170\" height=\"34\" rx=\"8\" fill=\"%23ffffff\"/><text x=\"85\" y=\"80\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"18\" fill=\"%230284c7\" text-anchor=\"middle\" letter-spacing=\"4\">FRANÇAIS</text></g><text x=\"205\" y=\"175\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"%23bae6fd\" text-anchor=\"middle\" letter-spacing=\"4\">L'ACTUALITÉ INTERNATIONALE 24/7</text></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"f24-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%230284c7\"/><stop offset=\"100%\" stop-color=\"%230369a1\"/></linearGradient></defs><rect width=\"500\" height=\"280\" rx=\"30\" fill=\"url(%23f24-bg)\"/><g transform=\"translate(45, 40)\"><circle cx=\"95\" cy=\"70\" r=\"48\" fill=\"%23ffffff\"/><text x=\"95\" y=\"90\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"48\" fill=\"%230284c7\" text-anchor=\"middle\">24</text><g transform=\"translate(155, 30)\"><text x=\"0\" y=\"42\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"42\" fill=\"%23ffffff\" letter-spacing=\"2\">FRANCE</text><rect x=\"0\" y=\"56\" width=\"170\" height=\"34\" rx=\"8\" fill=\"%23ffffff\"/><text x=\"85\" y=\"80\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"18\" fill=\"%230284c7\" text-anchor=\"middle\" letter-spacing=\"4\">FRAN\u00c7AIS</text></g><text x=\"205\" y=\"175\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"%23bae6fd\" text-anchor=\"middle\" letter-spacing=\"4\">L'ACTUALIT\u00c9 INTERNATIONALE 24/7</text></g></svg>",
     "cat": "NEWS",
     "ch": "344",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "France 24 en Français - Chaîne d'information internationale 24/7 en direct, journaux télévisés, débats et reportages mondiaux",
+    "desc": "France 24 en Fran\u00e7ais - Cha\u00eene d'information internationale 24/7 en direct, journaux t\u00e9l\u00e9vis\u00e9s, d\u00e9bats et reportages mondiaux",
     "m3u8Source": "https://live.france24.com/hls/live/2037179-b/F24_FR_HI_HLS/master_5000.m3u8"
   },
   {
@@ -3859,7 +3859,7 @@
     "ch": "345",
     "qualite": "HD",
     "pays": "MAGHREB",
-    "desc": "MBC 5 - Chaîne de divertissement et séries pour le Maghreb • Direct HLS",
+    "desc": "MBC 5 - Cha\u00eene de divertissement et s\u00e9ries pour le Maghreb \u2022 Direct HLS",
     "m3u8Source": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-5/ee6b000cee0629411b666ab26cb13e9b/index.m3u8"
   },
   {
@@ -3871,7 +3871,7 @@
     "ch": "346",
     "qualite": "HD",
     "pays": "MAROC",
-    "desc": "Medi 1 TV Arabic - Information continue et reportages en arabe • Direct HLS",
+    "desc": "Medi 1 TV Arabic - Information continue et reportages en arabe \u2022 Direct HLS",
     "m3u8Source": "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-arabic_g90v4ec/playlist.m3u8"
   },
   {
@@ -3883,7 +3883,7 @@
     "ch": "347",
     "qualite": "HD",
     "pays": "MAGHREB",
-    "desc": "Medi 1 TV Maghreb - Actualités et débats maghrébins • Direct HLS",
+    "desc": "Medi 1 TV Maghreb - Actualit\u00e9s et d\u00e9bats maghr\u00e9bins \u2022 Direct HLS",
     "m3u8Source": "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-maghreb_jnbspmg/playlist.m3u8"
   },
   {
@@ -3895,7 +3895,7 @@
     "ch": "348",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "Story Channel - Récits bibliques, histoires et spiritualité • Direct HLS",
+    "desc": "Story Channel - R\u00e9cits bibliques, histoires et spiritualit\u00e9 \u2022 Direct HLS",
     "m3u8Source": "https://136044159.r.cdnsun.net/storychannel.m3u8"
   },
   {
@@ -3907,7 +3907,7 @@
     "ch": "349",
     "qualite": "HD",
     "pays": "THAILANDE",
-    "desc": "DLTV 1 - Télévision éducative et cours à distance en continu • Direct HLS",
+    "desc": "DLTV 1 - T\u00e9l\u00e9vision \u00e9ducative et cours \u00e0 distance en continu \u2022 Direct HLS",
     "m3u8Source": "https://cdn-live.dltv.ac.th/dltv01.m3u8"
   },
   {
@@ -3919,7 +3919,7 @@
     "ch": "350",
     "qualite": "HD",
     "pays": "ARGENTINE",
-    "desc": "Perfil TV - Chaîne d'information, société, économie et politique argentine • Direct HLS",
+    "desc": "Perfil TV - Cha\u00eene d'information, soci\u00e9t\u00e9, \u00e9conomie et politique argentine \u2022 Direct HLS",
     "m3u8Source": "https://unlimited1-us.dps.live/perfiltv/perfiltv.smil/perfiltv/livestream2/chunks.m3u8"
   },
   {
@@ -3931,19 +3931,19 @@
     "ch": "351",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "Streamlock 6052 - Chaîne de diffusion continue en direct HLS",
+    "desc": "Streamlock 6052 - Cha\u00eene de diffusion continue en direct HLS",
     "m3u8Source": "https://5e85d90130e77.streamlock.net/6052/6052/playlist.m3u8"
   },
   {
     "id": "ch_322",
     "nom": "EXTREMA KIDS",
     "lien": "https://627bb251f23c7.streamlock.net:444/ExtremaKids/ExtremaKids/playlist.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"ek-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%237c3aed\"/><stop offset=\"100%\" stop-color=\"%23ec4899\"/></linearGradient><linearGradient id=\"ek-yellow\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23fde047\"/><stop offset=\"100%\" stop-color=\"%23eab308\"/></linearGradient></defs><rect width=\"500\" height=\"280\" fill=\"url(%23ek-bg)\" rx=\"30\"/><g transform=\"translate(40, 40)\"><text x=\"210\" y=\"65\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-style=\"italic\" font-size=\"52\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"4\">EXTREMA</text><rect x=\"40\" y=\"90\" width=\"340\" height=\"60\" rx=\"18\" fill=\"url(%23ek-yellow)\"/><text x=\"210\" y=\"136\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"52\" fill=\"%237c3aed\" text-anchor=\"middle\" letter-spacing=\"8\">KIDS</text><text x=\"210\" y=\"180\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"16\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"4\">DESSINS ANIMÉS 24/7</text></g></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 280\" width=\"100%\" height=\"100%\"><defs><linearGradient id=\"ek-bg\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%237c3aed\"/><stop offset=\"100%\" stop-color=\"%23ec4899\"/></linearGradient><linearGradient id=\"ek-yellow\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"%23fde047\"/><stop offset=\"100%\" stop-color=\"%23eab308\"/></linearGradient></defs><rect width=\"500\" height=\"280\" fill=\"url(%23ek-bg)\" rx=\"30\"/><g transform=\"translate(40, 40)\"><text x=\"210\" y=\"65\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-style=\"italic\" font-size=\"52\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"4\">EXTREMA</text><rect x=\"40\" y=\"90\" width=\"340\" height=\"60\" rx=\"18\" fill=\"url(%23ek-yellow)\"/><text x=\"210\" y=\"136\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"52\" fill=\"%237c3aed\" text-anchor=\"middle\" letter-spacing=\"8\">KIDS</text><text x=\"210\" y=\"180\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"16\" fill=\"%23ffffff\" text-anchor=\"middle\" letter-spacing=\"4\">DESSINS ANIM\u00c9S 24/7</text></g></svg>",
     "cat": "ENFANTS",
     "ch": "352",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Extrema Kids - Dessins animés, séries jeunesse ludiques et programmation pour toute la famille",
+    "desc": "Extrema Kids - Dessins anim\u00e9s, s\u00e9ries jeunesse ludiques et programmation pour toute la famille",
     "m3u8Source": "https://627bb251f23c7.streamlock.net:444/ExtremaKids/ExtremaKids/playlist.m3u8"
   },
   {
@@ -4362,7 +4362,7 @@
     "ch": "390",
     "qualite": "HD",
     "pays": "BRAZZAVILLE",
-    "desc": "MS Radio - La voix radiophonique de MSTV en direct continu • Direct HLS www.tvpromedia.com",
+    "desc": "MS Radio - La voix radiophonique de MSTV en direct continu \u2022 Direct HLS www.tvpromedia.com",
     "m3u8Source": "https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8",
     "cloudRemix": "https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8",
     "youtubeBackup": "https://ip-pro.berosat.live/hls/live/MSTV/index.m3u8",
@@ -5438,7 +5438,7 @@
   },
   {
     "id": "iptv_ex8po64",
-    "nom": "Türkmenistan Sport",
+    "nom": "T\u00fcrkmenistan Sport",
     "lien": "https://alpha.tv.online.tm/hls/ch004.m3u8",
     "cat": "SPORTS",
     "logo": "https://i.imgur.com/n6vITLu.png",
@@ -5658,7 +5658,7 @@
   },
   {
     "id": "iptv_dk4fzhv",
-    "nom": "Астрахань.Ru Sport",
+    "nom": "\u0410\u0441\u0442\u0440\u0430\u0445\u0430\u043d\u044c.Ru Sport",
     "lien": "https://streaming.astrakhan.ru/astrakhanrusporthd/playlist.m3u8",
     "cat": "SPORTS",
     "logo": "https://i.imgur.com/BKaEtqL.png",
@@ -8320,7 +8320,7 @@
   },
   {
     "id": "iptv_kkdkbe7",
-    "nom": "Дом Кино Премиум HD",
+    "nom": "\u0414\u043e\u043c \u041a\u0438\u043d\u043e \u041f\u0440\u0435\u043c\u0438\u0443\u043c HD",
     "lien": "http://tele2dvrnat01-02.cdnvideo.ru/stream/NAT_Volga/hls/1920x1080@4504/playlist.m3u8",
     "cat": "FILMS",
     "logo": "https://i.imgur.com/xHs1pr1.png",
@@ -8518,7 +8518,7 @@
   },
   {
     "id": "iptv_1pkqajs",
-    "nom": "360° Новости",
+    "nom": "360\u00b0 \u041d\u043e\u0432\u043e\u0441\u0442\u0438",
     "lien": "https://cdn-evacoder-tv.facecast.io/evacoder_hls_hi/CkxfR1xNUAJwTgtXTBZTAJli/index.m3u8",
     "cat": "NEWS",
     "logo": "https://i.imgur.com/VTJqdoX.png",
@@ -10168,7 +10168,7 @@
   },
   {
     "id": "iptv_ylm006n",
-    "nom": "ČT24",
+    "nom": "\u010cT24",
     "lien": "http://178.134.1.158:8081/t24/index.m3u8",
     "cat": "NEWS",
     "logo": "https://i.imgur.com/1W6R14o.png",
@@ -10542,7 +10542,7 @@
   },
   {
     "id": "iptv_m0phnls",
-    "nom": "èTv Marche",
+    "nom": "\u00e8Tv Marche",
     "lien": "https://live.ipstream.it/etvmarche/etvmarche.stream/playlist.m3u8",
     "cat": "NEWS",
     "logo": "https://i.imgur.com/U6OW577.png",
@@ -10564,7 +10564,7 @@
   },
   {
     "id": "iptv_5i9dil8",
-    "nom": "èTv Rete 7",
+    "nom": "\u00e8Tv Rete 7",
     "lien": "https://live.ipstream.it/etv/etv.stream/playlist.m3u8",
     "cat": "NEWS",
     "logo": "https://i.imgur.com/xYVI5OC.png",
@@ -10762,7 +10762,7 @@
   },
   {
     "id": "iptv_l6dxlol",
-    "nom": "France 24 Español",
+    "nom": "France 24 Espa\u00f1ol",
     "lien": "https://live.france24.com/hls/live/2037220-b/F24_ES_HI_HLS/master_5000.m3u8",
     "cat": "NEWS",
     "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_FRANCE_24/images/LOGO_HD/image.png",
@@ -12655,7 +12655,7 @@
   },
   {
     "id": "iptv_6cyclzd",
-    "nom": "Olay Türk TV Kayseri",
+    "nom": "Olay T\u00fcrk TV Kayseri",
     "lien": "https://live.artidijitalmedya.com/artidijital_olayturk/olayturk/playlist.m3u8",
     "cat": "NEWS",
     "logo": "https://i.imgur.com/e9ca6gc.png",
@@ -13815,7 +13815,7 @@
     "id": "ch_27",
     "nom": "METEO TV",
     "lien": "https://stream.media.live:19360/meteotv.m3u8",
-    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 450\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"450\" fill=\"%23ffffff\"/><path d=\"M 180,70 L 320,70 L 380,140 L 400,240 L 360,320 L 320,360 L 260,340 L 200,320 L 160,250 L 140,150 Z\" fill=\"%2380d8ff\" opacity=\"0.6\" stroke=\"%2340c4ff\" stroke-width=\"4\"/><circle cx=\"170\" cy=\"120\" r=\"35\" fill=\"%23ffab00\"/><path d=\"M 140,150 C 130,130 160,110 190,120 C 210,100 250,110 260,130 C 280,130 290,160 270,180 C 250,190 140,190 140,150 Z\" fill=\"%23ffffff\" stroke=\"%23b3e5fc\" stroke-width=\"4\"/><polygon points=\"230,140 200,200 220,200 190,260 250,180 225,180\" fill=\"%23ffd600\" stroke=\"%23ffab00\" stroke-width=\"2\"/><g transform=\"translate(80, 160)\"><text x=\"0\" y=\"100\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"110\" fill=\"%23ffffff\" stroke=\"%2301579b\" stroke-width=\"12\" paint-order=\"stroke fill\">M</text><text x=\"110\" y=\"100\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"110\" fill=\"%23ffd600\" stroke=\"%2301579b\" stroke-width=\"12\" paint-order=\"stroke fill\">T</text><text x=\"210\" y=\"100\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"110\" fill=\"%2300e676\" stroke=\"%2301579b\" stroke-width=\"12\" paint-order=\"stroke fill\">V</text></g><rect x=\"140\" y=\"280\" width=\"220\" height=\"36\" fill=\"%232e7d32\" rx=\"4\"/><text x=\"250\" y=\"308\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"28\" fill=\"%23ffffff\" text-anchor=\"middle\">RDC</text><rect x=\"120\" y=\"325\" width=\"260\" height=\"34\" fill=\"%2301579b\" rx=\"4\"/><text x=\"250\" y=\"349\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"18\" fill=\"%23ffffff\" text-anchor=\"middle\">MÉTÉO TÉLÉVISION</text></svg>",
+    "logo": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 500 450\" width=\"100%\" height=\"100%\"><rect width=\"500\" height=\"450\" fill=\"%23ffffff\"/><path d=\"M 180,70 L 320,70 L 380,140 L 400,240 L 360,320 L 320,360 L 260,340 L 200,320 L 160,250 L 140,150 Z\" fill=\"%2380d8ff\" opacity=\"0.6\" stroke=\"%2340c4ff\" stroke-width=\"4\"/><circle cx=\"170\" cy=\"120\" r=\"35\" fill=\"%23ffab00\"/><path d=\"M 140,150 C 130,130 160,110 190,120 C 210,100 250,110 260,130 C 280,130 290,160 270,180 C 250,190 140,190 140,150 Z\" fill=\"%23ffffff\" stroke=\"%23b3e5fc\" stroke-width=\"4\"/><polygon points=\"230,140 200,200 220,200 190,260 250,180 225,180\" fill=\"%23ffd600\" stroke=\"%23ffab00\" stroke-width=\"2\"/><g transform=\"translate(80, 160)\"><text x=\"0\" y=\"100\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"110\" fill=\"%23ffffff\" stroke=\"%2301579b\" stroke-width=\"12\" paint-order=\"stroke fill\">M</text><text x=\"110\" y=\"100\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"110\" fill=\"%23ffd600\" stroke=\"%2301579b\" stroke-width=\"12\" paint-order=\"stroke fill\">T</text><text x=\"210\" y=\"100\" font-family=\"'Arial Black', Impact, sans-serif\" font-weight=\"900\" font-size=\"110\" fill=\"%2300e676\" stroke=\"%2301579b\" stroke-width=\"12\" paint-order=\"stroke fill\">V</text></g><rect x=\"140\" y=\"280\" width=\"220\" height=\"36\" fill=\"%232e7d32\" rx=\"4\"/><text x=\"250\" y=\"308\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"28\" fill=\"%23ffffff\" text-anchor=\"middle\">RDC</text><rect x=\"120\" y=\"325\" width=\"260\" height=\"34\" fill=\"%2301579b\" rx=\"4\"/><text x=\"250\" y=\"349\" font-family=\"'Arial Black', sans-serif\" font-weight=\"900\" font-size=\"18\" fill=\"%23ffffff\" text-anchor=\"middle\">M\u00c9T\u00c9O T\u00c9L\u00c9VISION</text></svg>",
     "cat": "METEO",
     "ch": "1258",
     "qualite": "4K",
@@ -13844,7 +13844,7 @@
     "ch": "1260",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Dessin Junior TV - Disney Channel & dessins animés en direct pour enfants",
+    "desc": "Dessin Junior TV - Disney Channel & dessins anim\u00e9s en direct pour enfants",
     "m3u8Source": "https://streamer.metronethn.com/DisneyChannel/index.m3u8",
     "categorie": "ENFANTS"
   },
@@ -13905,7 +13905,7 @@
     "ch": "1265",
     "qualite": "4K",
     "pays": "RDC",
-    "desc": "Toujours prêt à vous servir",
+    "desc": "Toujours pr\u00eat \u00e0 vous servir",
     "categorie": "GENERALISTE"
   },
   {
@@ -13941,7 +13941,7 @@
     "ch": "1269",
     "qualite": "4K",
     "pays": "MEXIQUE",
-    "desc": "TUDN TV Sport - Chaîne sportive en direct (Univision Deportes / Televisa), football, ligues majeures et événements sportifs",
+    "desc": "TUDN TV Sport - Cha\u00eene sportive en direct (Univision Deportes / Televisa), football, ligues majeures et \u00e9v\u00e9nements sportifs",
     "m3u8Source": "https://streamer.metronethn.com/TUDN/index.m3u8",
     "categorie": "SPORTS"
   },
@@ -13954,7 +13954,7 @@
     "ch": "1270",
     "qualite": "4K",
     "pays": "USA",
-    "desc": "ESPN America / ESPNU - Chaîne sportive américaine de premier plan, événements sportifs, football américain, basketball et analyses en direct",
+    "desc": "ESPN America / ESPNU - Cha\u00eene sportive am\u00e9ricaine de premier plan, \u00e9v\u00e9nements sportifs, football am\u00e9ricain, basketball et analyses en direct",
     "m3u8Source": "http://23.237.104.106:8080/USA_ESPNU/index.m3u8",
     "categorie": "SPORTS"
   },
@@ -13967,7 +13967,7 @@
     "ch": "1271",
     "qualite": "4K",
     "pays": "USA",
-    "desc": "Nick Jr. / Nickelodeon Junior - Chaîne jeunesse préscolaire et dessins animés d'animation (Paw Patrol, Peppa Pig, Dora)",
+    "desc": "Nick Jr. / Nickelodeon Junior - Cha\u00eene jeunesse pr\u00e9scolaire et dessins anim\u00e9s d'animation (Paw Patrol, Peppa Pig, Dora)",
     "m3u8Source": "https://streamer.metronethn.com/NickJr/index.m3u8",
     "categorie": "ENFANTS"
   },
@@ -13980,7 +13980,7 @@
     "ch": "1272",
     "qualite": "4K",
     "pays": "USA",
-    "desc": "AMC (American Movie Classics) - Séries cultes mondiales, films primés et cinéma en direct",
+    "desc": "AMC (American Movie Classics) - S\u00e9ries cultes mondiales, films prim\u00e9s et cin\u00e9ma en direct",
     "m3u8Source": "https://streamer.metronethn.com/AMC/index.m3u8",
     "categorie": "FILMS"
   },
@@ -13993,7 +13993,7 @@
     "ch": "1273",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Radio Nova - Le grand mix musical, musiques du monde, hip-hop, funk, afrobeat et découvertes sonores en direct",
+    "desc": "Radio Nova - Le grand mix musical, musiques du monde, hip-hop, funk, afrobeat et d\u00e9couvertes sonores en direct",
     "m3u8Source": "https://radionova.ice.infomaniak.ch/radionova-high.mp3",
     "categorie": "RADIO"
   },
@@ -14006,7 +14006,7 @@
     "ch": "1274",
     "qualite": "HD",
     "pays": "RDC",
-    "desc": "Radio Capital FM - Information continue, société, débats et musique urbaine",
+    "desc": "Radio Capital FM - Information continue, soci\u00e9t\u00e9, d\u00e9bats et musique urbaine",
     "m3u8Source": "https://stream.capitalradio.cd/live/capital-fm.m3u8",
     "categorie": "RADIO"
   },
@@ -14019,7 +14019,7 @@
     "ch": "1275",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "Radio Nostalgie - Les plus grands hits des années 70, 80 et 90 en continu",
+    "desc": "Radio Nostalgie - Les plus grands hits des ann\u00e9es 70, 80 et 90 en continu",
     "m3u8Source": "https://stream.nostalgie.live/nostalgie.mp3",
     "categorie": "RADIO"
   },
@@ -14032,7 +14032,7 @@
     "ch": "1276",
     "qualite": "4K",
     "pays": "INTERNATIONAL",
-    "desc": "Canal 12 - Télévision généraliste, actualités en continu, magazines de société, divertissement et séries en direct",
+    "desc": "Canal 12 - T\u00e9l\u00e9vision g\u00e9n\u00e9raliste, actualit\u00e9s en continu, magazines de soci\u00e9t\u00e9, divertissement et s\u00e9ries en direct",
     "m3u8Source": "https://sv-canal12-canal12-live.ned.media/canal12/smil:canal12.smil/playlist.m3u8",
     "categorie": "GENERALISTE"
   },
@@ -14045,7 +14045,7 @@
     "ch": "1277",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "M6 (Métropole Télévision) - Grande chaîne française généraliste, grands reportages, divertissement, Top Chef, Capital et séries",
+    "desc": "M6 (M\u00e9tropole T\u00e9l\u00e9vision) - Grande cha\u00eene fran\u00e7aise g\u00e9n\u00e9raliste, grands reportages, divertissement, Top Chef, Capital et s\u00e9ries",
     "m3u8Source": "https://origin-m6web.live.6cloud.fr/out/v1/6play/6play-m6/cmaf_q2hyb21h/index-hd720.m3u8",
     "categorie": "GENERALISTE"
   },
@@ -14058,7 +14058,7 @@
     "ch": "1278",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "TF1 - La première chaîne de télévision française : information, grands événements, fictions et divertissement",
+    "desc": "TF1 - La premi\u00e8re cha\u00eene de t\u00e9l\u00e9vision fran\u00e7aise : information, grands \u00e9v\u00e9nements, fictions et divertissement",
     "m3u8Source": "https://alive-tf1-hls.cdn-0.diff.tf1.fr/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXAiOiIxNTkuMjYuMTEyLjgiLCJjbWNkIjoiIiwiZXhwIjoxNzg0MDQyMzU4LCJnaWQiOiJlNzIwMzhjMzU5NDg0MDc1YjgzOGUwNjY5NWI3ZDQ5NiIsImlhdCI6MTc4NDAyNzk1OCwiaXNzIjoiZGVsaXZlcnkiLCJtYXhiIjowLCJzdGVtIjoiL3Byb2QvVEYxL2NtYWYvb3V0Iiwic3ViIjoiZTcyMDM4YzM1OTQ4NDA3NWI4MzhlMDY2OTViN2Q0OTYifQ.guXEzaByDrfGQzirSrm7N3ONiaiz-evEgnKQHsTSVW4/prod/TF1/cmaf/out/TF1.m3u8",
     "categorie": "GENERALISTE"
   },
@@ -14071,7 +14071,7 @@
     "ch": "1279",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "TMC (Télé Monte-Carlo) - Quotidien, talk-shows, cinéma, séries et documentaires premium",
+    "desc": "TMC (T\u00e9l\u00e9 Monte-Carlo) - Quotidien, talk-shows, cin\u00e9ma, s\u00e9ries et documentaires premium",
     "m3u8Source": "https://live-tmc-hls.cdn-0.diff.tf1.fr/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXAiOiIxNTkuMjYuMTA1LjM2IiwiY21jZCI6IiIsImV4cCI6MTc4MDc0ODI5OCwiZ2lkIjoiZTcyMDM4YzM1OTQ4NDA3NWI4MzhlMDY2OTViN2Q0OTYiLCJpYXQiOjE3ODA3MzM4OTgsImlzcyI6ImRlbGl2ZXJ5IiwibWF4YiI6MCwic3RlbSI6Ii9vdXQvdjEvNDRmY2IxYzc3NjI4NGYyZGE3YzExZWY5NDhkN2VmMzQvdG1jLWNtYWYiLCJzdWIiOiJlNzIwMzhjMzU5NDg0MDc1YjgzOGUwNjY5NWI3ZDQ5NiJ9.Vjef493kGPqYaBy-6_874seveaOl-RwXDoZc9aJeR0E/out/v1/44fcb1c776284f2da7c11ef948d7ef34/tmc-cmaf/index.m3u8",
     "categorie": "GENERALISTE"
   },
@@ -14084,20 +14084,20 @@
     "ch": "1280",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "BFM TV - Première chaîne d'information en continu de France : direct non-stop, débats et alertes info",
+    "desc": "BFM TV - Premi\u00e8re cha\u00eene d'information en continu de France : direct non-stop, d\u00e9bats et alertes info",
     "m3u8Source": "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_TV/index.m3u8?start=LIVE&end=END",
     "categorie": "NEWS"
   },
   {
     "id": "ch_143",
-    "nom": "L'ÉQUIPE TV",
+    "nom": "L'\u00c9QUIPE TV",
     "lien": "https://dq37unyetkpcz.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-m04j89j7k5gtp/LEquipe_FR.m3u8",
     "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/lequipe-fr.png",
     "cat": "SPORTS",
     "ch": "1281",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "La chaîne L'Équipe - 100% sport en clair, compétitions en direct, L'Équipe du Soir et grands rendez-vous sportifs",
+    "desc": "La cha\u00eene L'\u00c9quipe - 100% sport en clair, comp\u00e9titions en direct, L'\u00c9quipe du Soir et grands rendez-vous sportifs",
     "m3u8Source": "https://dq37unyetkpcz.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-m04j89j7k5gtp/LEquipe_FR.m3u8",
     "categorie": "SPORTS"
   },
@@ -14110,20 +14110,20 @@
     "ch": "1282",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "RMC Story - La chaîne de la diversité et des histoires vraies, documentaires d'investigation et société",
+    "desc": "RMC Story - La cha\u00eene de la diversit\u00e9 et des histoires vraies, documentaires d'investigation et soci\u00e9t\u00e9",
     "m3u8Source": "https://d15aro46bnpfm8.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-fqkqiax1078up/RMC_Story_FR.m3u8",
     "categorie": "DOCUMENTAIRE"
   },
   {
     "id": "ch_145",
-    "nom": "RMC DÉCOUVERTE",
+    "nom": "RMC D\u00c9COUVERTE",
     "lien": "https://d16zzycxcd0m0r.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-hixvx5kymecr9/RMC_Decouverte_FR.m3u8",
     "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/france/rmc-decouverte-fr.png",
     "cat": "DOCUMENTAIRE",
     "ch": "1283",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "RMC Découverte - Documentaires XXL, moteurs, mécanique, constructions de l'extrême et aventures",
+    "desc": "RMC D\u00e9couverte - Documentaires XXL, moteurs, m\u00e9canique, constructions de l'extr\u00eame et aventures",
     "m3u8Source": "https://d16zzycxcd0m0r.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-hixvx5kymecr9/RMC_Decouverte_FR.m3u8",
     "categorie": "DOCUMENTAIRE"
   },
@@ -14136,7 +14136,7 @@
     "ch": "1284",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "RMC Life - Lifestyle, rénovations de maisons, bien-être et séries passionnantes",
+    "desc": "RMC Life - Lifestyle, r\u00e9novations de maisons, bien-\u00eatre et s\u00e9ries passionnantes",
     "m3u8Source": "https://d3dcdjv6dx07iz.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-eaaww2dyp3iih/RMC_Life_FR.m3u8",
     "categorie": "GENERALISTE"
   },
@@ -14149,7 +14149,7 @@
     "ch": "1285",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "TV5MONDE (France Belgique Suisse Monaco) - La chaîne culturelle internationale francophone",
+    "desc": "TV5MONDE (France Belgique Suisse Monaco) - La cha\u00eene culturelle internationale francophone",
     "m3u8Source": "https://ott.tv5monde.com/Content/HLS/Live/channel(fbs)/index.m3u8",
     "categorie": "GENERALISTE"
   },
@@ -14162,7 +14162,7 @@
     "ch": "1286",
     "qualite": "4K",
     "pays": "USA",
-    "desc": "Sony One : The Blacklist - La chaîne 24/7 dédiée à Raymond Reddington et aux affaires criminelles du FBI",
+    "desc": "Sony One : The Blacklist - La cha\u00eene 24/7 d\u00e9di\u00e9e \u00e0 Raymond Reddington et aux affaires criminelles du FBI",
     "m3u8Source": "https://06cb85ad6ccb4a6b97f561e62d16ad3f.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-822-FR-SONYONETHEBLACKLIST-LG_FR/playlist.m3u8",
     "categorie": "FILMS"
   },
@@ -14175,7 +14175,7 @@
     "ch": "1287",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "MGG TV - La première chaîne eSport & gaming : compétitions de jeux vidéo, analyses et actualité geek",
+    "desc": "MGG TV - La premi\u00e8re cha\u00eene eSport & gaming : comp\u00e9titions de jeux vid\u00e9o, analyses et actualit\u00e9 geek",
     "m3u8Source": "https://d1mdvi698umja9.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-kuib43fy5umqi-ssai-prd/mgg.m3u8",
     "categorie": "SPORTS"
   },
@@ -14188,7 +14188,7 @@
     "ch": "1288",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "GONG - Anime japonais, séries d'animation, culture pop et dramas asiatiques en continu",
+    "desc": "GONG - Anime japonais, s\u00e9ries d'animation, culture pop et dramas asiatiques en continu",
     "m3u8Source": "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01596-gongnetworks-gong-samsungfr/playlist.m3u8",
     "categorie": "ENFANTS"
   },
@@ -14201,7 +14201,7 @@
     "ch": "1289",
     "qualite": "4K",
     "pays": "USA",
-    "desc": "Sony One Hits Action - Blockbusters à sensations fortes, courses-poursuites et superproductions Sony Pictures",
+    "desc": "Sony One Hits Action - Blockbusters \u00e0 sensations fortes, courses-poursuites et superproductions Sony Pictures",
     "m3u8Source": "https://5098a8b860504a3690fd2e7c0a18d68f.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-817-FR-SONYONEHITSACTION-LG_FR/playlist.m3u8",
     "categorie": "FILMS"
   },
@@ -14214,7 +14214,7 @@
     "ch": "1290",
     "qualite": "4K",
     "pays": "USA",
-    "desc": "Sony One Hits Comédie - Comédies cultes du catalogue Sony Pictures, rires et moments inoubliables",
+    "desc": "Sony One Hits Com\u00e9die - Com\u00e9dies cultes du catalogue Sony Pictures, rires et moments inoubliables",
     "m3u8Source": "https://7aa9671895264ec9a384dfed1b992171.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-818-FR-SONYONEHITSCOMDIE-LG_FR/playlist.m3u8",
     "categorie": "FILMS"
   },
@@ -14227,7 +14227,7 @@
     "ch": "1291",
     "qualite": "4K",
     "pays": "USA",
-    "desc": "Sony One Favoris - Les films les plus plébiscités par le public, cinéma familial et chefs-d'œuvre",
+    "desc": "Sony One Favoris - Les films les plus pl\u00e9biscit\u00e9s par le public, cin\u00e9ma familial et chefs-d'\u0153uvre",
     "m3u8Source": "https://49d735318d6b4c30a24a7997ea594e1b.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-820-FR-SONYONEFAVORIS-LG_FR/playlist.m3u8",
     "categorie": "FILMS"
   },
@@ -14240,7 +14240,7 @@
     "ch": "1292",
     "qualite": "4K",
     "pays": "USA",
-    "desc": "Sony One Séries Comédies - Sitcoms et séries humoristiques légendaires en version française",
+    "desc": "Sony One S\u00e9ries Com\u00e9dies - Sitcoms et s\u00e9ries humoristiques l\u00e9gendaires en version fran\u00e7aise",
     "m3u8Source": "https://4f2a3e1ff5274297b115cf0f7da1c2cd.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-819-FR-SONYONESRIESCOMDIE-LG_FR/playlist.m3u8",
     "categorie": "FILMS"
   },
@@ -14253,7 +14253,7 @@
     "ch": "1293",
     "qualite": "4K",
     "pays": "USA",
-    "desc": "Sony One Séries Thriller - Séries d'espionnage, enquêtes policières et suspense psychologique",
+    "desc": "Sony One S\u00e9ries Thriller - S\u00e9ries d'espionnage, enqu\u00eates polici\u00e8res et suspense psychologique",
     "m3u8Source": "https://483a1e90c18641c9a6d27becd41ad892.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-821-FR-SONYONESRIESTHRILLER-LG_FR/playlist.m3u8",
     "categorie": "FILMS"
   },
@@ -14266,7 +14266,7 @@
     "ch": "1294",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "BFM TV 2 - Canal secondaire événementiel d'information en continu",
+    "desc": "BFM TV 2 - Canal secondaire \u00e9v\u00e9nementiel d'information en continu",
     "m3u8Source": "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM2/index.m3u8?start=LIVE&end=END",
     "categorie": "NEWS"
   },
@@ -14279,7 +14279,7 @@
     "ch": "1295",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "BFM Business - Première chaîne d'information économique et financière de France",
+    "desc": "BFM Business - Premi\u00e8re cha\u00eene d'information \u00e9conomique et financi\u00e8re de France",
     "m3u8Source": "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_BUSINESS/index.m3u8?start=LIVE&end=END",
     "categorie": "NEWS"
   },
@@ -14292,7 +14292,7 @@
     "ch": "1296",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "BFM TV Grands Reportages - Documentaires d'investigation, dossiers spéciaux et longs formats",
+    "desc": "BFM TV Grands Reportages - Documentaires d'investigation, dossiers sp\u00e9ciaux et longs formats",
     "m3u8Source": "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_GRANDSREPORTAGES/index.m3u8?start=LIVE&end=END",
     "categorie": "NEWS"
   },
@@ -14305,7 +14305,7 @@
     "ch": "1297",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "B SMART - La chaîne des audacieux, chefs d'entreprises, innovations et nouvelles technologies",
+    "desc": "B SMART - La cha\u00eene des audacieux, chefs d'entreprises, innovations et nouvelles technologies",
     "m3u8Source": "https://raw.githubusercontent.com/Sibprod/streams/main/ressources/dm/py/hls/bsmart.m3u8",
     "categorie": "NEWS"
   },
@@ -14318,7 +14318,7 @@
     "ch": "1298",
     "qualite": "4K",
     "pays": "INTERNATIONAL",
-    "desc": "Euronews Français - L'actualité européenne et mondiale sous une perspective internationale 24/7",
+    "desc": "Euronews Fran\u00e7ais - L'actualit\u00e9 europ\u00e9enne et mondiale sous une perspective internationale 24/7",
     "m3u8Source": "https://euronews-live-fre-fr.fast.rakuten.tv/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6564/bitok/e/26032/euronews-fr.m3u8",
     "categorie": "NEWS"
   },
@@ -14331,7 +14331,7 @@
     "ch": "1299",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "After Foot TV - L'émission référence du football avec Gilbert Brisbois et Daniel Riolo",
+    "desc": "After Foot TV - L'\u00e9mission r\u00e9f\u00e9rence du football avec Gilbert Brisbois et Daniel Riolo",
     "m3u8Source": "https://d278gam2ft6q08.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-0ic4hqa502el6/AfterfootTV_FR.m3u8",
     "categorie": "SPORTS"
   },
@@ -14344,20 +14344,20 @@
     "ch": "1300",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Museum TV - La première chaîne dédiée entièrement aux arts visuels, peinture, design et photographie",
+    "desc": "Museum TV - La premi\u00e8re cha\u00eene d\u00e9di\u00e9e enti\u00e8rement aux arts visuels, peinture, design et photographie",
     "m3u8Source": "https://amg01492-secomsasmediart-museumtv-fr-rakuten-5ofja.amagi.tv/hls/amagi_hls_data_rakutenAA-museumtv-fr-rakuten/CDN/master.m3u8",
     "categorie": "DOCUMENTAIRE"
   },
   {
     "id": "ch_192",
-    "nom": "L'ÉSPRIT SORCIER TV",
+    "nom": "L'\u00c9SPRIT SORCIER TV",
     "lien": "https://edge17.vedge.infomaniak.com/livecast/ik:bazikafrica/manifest.m3u8",
     "logo": "https://freebox.cdn.scw.iliad.fr/medium_220_Esprit_sorcier_alpha_orange_800x400_8e6009c26d.png",
     "cat": "DOCUMENTAIRE",
     "ch": "1301",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "L'Esprit Sorcier TV - La science pour tous avec Fred Courant et l'équipe de C'est pas sorcier",
+    "desc": "L'Esprit Sorcier TV - La science pour tous avec Fred Courant et l'\u00e9quipe de C'est pas sorcier",
     "m3u8Source": "https://edge17.vedge.infomaniak.com/livecast/ik:bazikafrica/manifest.m3u8",
     "categorie": "DOCUMENTAIRE"
   },
@@ -14370,7 +14370,7 @@
     "ch": "1302",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Tech & Co - L'actualité des nouvelles technologies, IA, smartphones et startups",
+    "desc": "Tech & Co - L'actualit\u00e9 des nouvelles technologies, IA, smartphones et startups",
     "m3u8Source": "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_TECHANDCO/index.m3u8?start=LIVE&end=END",
     "categorie": "NEWS"
   },
@@ -14383,7 +14383,7 @@
     "ch": "1303",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "RMC Mecanic - Restauration de véhicules cultes, garages d'exception et mécanique de précision",
+    "desc": "RMC Mecanic - Restauration de v\u00e9hicules cultes, garages d'exception et m\u00e9canique de pr\u00e9cision",
     "m3u8Source": "https://d31lyfwi8gzfyr.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-ebepfdmg74kzh/RMC_MECANIC_FR.m3u8",
     "categorie": "DOCUMENTAIRE"
   },
@@ -14396,7 +14396,7 @@
     "ch": "1304",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Clubbing TV - Musique électro, DJ sets en direct des plus grands festivals et clubs mondiaux",
+    "desc": "Clubbing TV - Musique \u00e9lectro, DJ sets en direct des plus grands festivals et clubs mondiaux",
     "m3u8Source": "https://d1j2csarxnwazk.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-uze1m6xh4fiyr-ssai-prd/master.m3u8",
     "categorie": "MUSIQUE"
   },
@@ -14409,7 +14409,7 @@
     "ch": "1305",
     "qualite": "HD",
     "pays": "BRESIL",
-    "desc": "Trace Brasil (Brazuca) - Samba, Funk brésilien, Pagode et culture musicale brésilienne",
+    "desc": "Trace Brasil (Brazuca) - Samba, Funk br\u00e9silien, Pagode et culture musicale br\u00e9silienne",
     "m3u8Source": "https://trace-brazuca-lg-fr.amagi.tv/hls/amagi_hls_data_tracetvAA-trace-brazuca-lg-fr/CDN/master.m3u8",
     "categorie": "MUSIQUE"
   },
@@ -14422,7 +14422,7 @@
     "ch": "1306",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "France 3 Paris Île-de-France - Journaux régionaux et actualités franciliennes",
+    "desc": "France 3 Paris \u00cele-de-France - Journaux r\u00e9gionaux et actualit\u00e9s franciliennes",
     "m3u8Source": "https://raw.githubusercontent.com/ipstreet312/freeiptv/master/ressources/ftv/py/fidf.m3u8",
     "categorie": "GENERALISTE"
   },
@@ -14435,20 +14435,20 @@
     "ch": "1307",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "France 3 Provence-Alpes - L'information régionale du Sud-Est",
+    "desc": "France 3 Provence-Alpes - L'information r\u00e9gionale du Sud-Est",
     "m3u8Source": "https://raw.githubusercontent.com/ipstreet312/freeiptv/master/ressources/ftv/py/fpra.m3u8",
     "categorie": "GENERALISTE"
   },
   {
     "id": "ch_212",
-    "nom": "FRANCE 3 RHÔNE ALPES",
+    "nom": "FRANCE 3 RH\u00d4NE ALPES",
     "lien": "https://raw.githubusercontent.com/ipstreet312/freeiptv/master/ressources/ftv/py/frha.m3u8",
     "logo": "https://i.ibb.co/C0KCQtV/fr3region.png",
     "cat": "GENERALISTE",
     "ch": "1308",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "France 3 Rhône-Alpes - Direct et infos régionales Lyon et Alpes",
+    "desc": "France 3 Rh\u00f4ne-Alpes - Direct et infos r\u00e9gionales Lyon et Alpes",
     "m3u8Source": "https://raw.githubusercontent.com/ipstreet312/freeiptv/master/ressources/ftv/py/frha.m3u8",
     "categorie": "GENERALISTE"
   },
@@ -14461,7 +14461,7 @@
     "ch": "1309",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "BFM Lyon - Toute l'info locale, trafic et météo de la métropole lyonnaise",
+    "desc": "BFM Lyon - Toute l'info locale, trafic et m\u00e9t\u00e9o de la m\u00e9tropole lyonnaise",
     "m3u8Source": "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_LYON/index.m3u8?start=LIVE&end=END",
     "categorie": "NEWS"
   },
@@ -14474,7 +14474,7 @@
     "ch": "1310",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "BFM Marseille Provence - Première chaîne info locale marseillaise",
+    "desc": "BFM Marseille Provence - Premi\u00e8re cha\u00eene info locale marseillaise",
     "m3u8Source": "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_MARSEILLEPROV/index.m3u8?start=LIVE&end=END",
     "categorie": "NEWS"
   },
@@ -14487,7 +14487,7 @@
     "ch": "1311",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "BFM Nice Côte d'Azur - Info locale continue azuréenne",
+    "desc": "BFM Nice C\u00f4te d'Azur - Info locale continue azur\u00e9enne",
     "m3u8Source": "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_NICECOTEDAZUR/index.m3u8?start=LIVE&end=END",
     "categorie": "NEWS"
   },
@@ -14500,7 +14500,7 @@
     "ch": "1312",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "BFM Grand Lille - Actualités métropole lilloise et Nord",
+    "desc": "BFM Grand Lille - Actualit\u00e9s m\u00e9tropole lilloise et Nord",
     "m3u8Source": "https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFMGRANDLILLE/index.m3u8?start=LIVE&end=END",
     "categorie": "NEWS"
   },
@@ -14513,7 +14513,7 @@
     "ch": "1313",
     "qualite": "4K",
     "pays": "BELGIQUE",
-    "desc": "RTL TVI - La première chaîne privée belge francophone d'information et de divertissement",
+    "desc": "RTL TVI - La premi\u00e8re cha\u00eene priv\u00e9e belge francophone d'information et de divertissement",
     "m3u8Source": "https://tvi-live-hls.akamaized.net/hls/live/2038650/TVI-Live-HLS/master.m3u8",
     "categorie": "GENERALISTE"
   },
@@ -14526,7 +14526,7 @@
     "ch": "1314",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Un si grand soleil - La chaîne 24/7 dédiée à la série culte de Montpellier",
+    "desc": "Un si grand soleil - La cha\u00eene 24/7 d\u00e9di\u00e9e \u00e0 la s\u00e9rie culte de Montpellier",
     "m3u8Source": "https://jmp2.uk/stvp-FR3600001R1",
     "categorie": "FILMS"
   },
@@ -14539,7 +14539,7 @@
     "ch": "1315",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Top Films Rakuten TV - Blockbusters et cinéma grand public en continu",
+    "desc": "Top Films Rakuten TV - Blockbusters et cin\u00e9ma grand public en continu",
     "m3u8Source": "https://jmp2.uk/stvp-FR2600007CB",
     "categorie": "FILMS"
   },
@@ -14552,7 +14552,7 @@
     "ch": "1316",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Plus Belle La Vie - Les épisodes emblématiques du quartier du Mistral 24/7",
+    "desc": "Plus Belle La Vie - Les \u00e9pisodes embl\u00e9matiques du quartier du Mistral 24/7",
     "m3u8Source": "https://jmp2.uk/stvp-FRBD37000020Y",
     "categorie": "FILMS"
   },
@@ -14565,20 +14565,20 @@
     "ch": "1317",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "RMC Wow - Les phénomènes spectaculaires, exploits humains et merveilles de la planète",
+    "desc": "RMC Wow - Les ph\u00e9nom\u00e8nes spectaculaires, exploits humains et merveilles de la plan\u00e8te",
     "m3u8Source": "https://jmp2.uk/stvp-FR300001M1",
     "categorie": "DOCUMENTAIRE"
   },
   {
     "id": "ch_227",
-    "nom": "RMC MYSTÈRE",
+    "nom": "RMC MYST\u00c8RE",
     "lien": "https://jmp2.uk/stvp-FR300006GF",
     "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR300006GF_20241106T142644SQUARE.png",
     "cat": "DOCUMENTAIRE",
     "ch": "1318",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "RMC Mystère - Enquêtes paranormales, énigmes non résolues et secrets de l'histoire",
+    "desc": "RMC Myst\u00e8re - Enqu\u00eates paranormales, \u00e9nigmes non r\u00e9solues et secrets de l'histoire",
     "m3u8Source": "https://jmp2.uk/stvp-FR300006GF",
     "categorie": "DOCUMENTAIRE"
   },
@@ -14591,7 +14591,7 @@
     "ch": "1319",
     "qualite": "HD",
     "pays": "USA",
-    "desc": "Catfish : Fausse Identité - Enquêtes sur les faux profils et romances en ligne",
+    "desc": "Catfish : Fausse Identit\u00e9 - Enqu\u00eates sur les faux profils et romances en ligne",
     "m3u8Source": "https://jmp2.uk/stvp-FRAJ38000050Z",
     "categorie": "GENERALISTE"
   },
@@ -14604,7 +14604,7 @@
     "ch": "1320",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Juste Pour Rire Les Gags - Les meilleures caméras cachées et fous rires du monde",
+    "desc": "Juste Pour Rire Les Gags - Les meilleures cam\u00e9ras cach\u00e9es et fous rires du monde",
     "m3u8Source": "https://jmp2.uk/stvp-FRBA3300035UK",
     "categorie": "GENERALISTE"
   },
@@ -14630,7 +14630,7 @@
     "ch": "1323",
     "qualite": "4K",
     "pays": "FRANCE",
-    "desc": "Epicurieux avec Jamy Gourmaud - Vulgarisation scientifique, nature et culture générale",
+    "desc": "Epicurieux avec Jamy Gourmaud - Vulgarisation scientifique, nature et culture g\u00e9n\u00e9rale",
     "m3u8Source": "https://jmp2.uk/stvp-FRBD5100003TP",
     "categorie": "DOCUMENTAIRE"
   },
@@ -14643,7 +14643,7 @@
     "ch": "1324",
     "qualite": "HD",
     "pays": "USA",
-    "desc": "MTV Classics - Les plus grands clips musicaux des années 80, 90 et 2000",
+    "desc": "MTV Classics - Les plus grands clips musicaux des ann\u00e9es 80, 90 et 2000",
     "m3u8Source": "https://jmp2.uk/stvp-FRAJ3800004CC",
     "categorie": "MUSIQUE"
   },
@@ -14670,14 +14670,14 @@
   },
   {
     "id": "ch_243",
-    "nom": "FAITES ENTRER L'ACCUSÉ",
+    "nom": "FAITES ENTRER L'ACCUS\u00c9",
     "lien": "https://jmp2.uk/stvp-FR1400002XF",
     "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR1400002XF_20251111T012047SQUARE.png",
     "cat": "DOCUMENTAIRE",
     "ch": "1326",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Faites entrer l'accusé - Les grandes affaires criminelles de l'histoire judiciaire française",
+    "desc": "Faites entrer l'accus\u00e9 - Les grandes affaires criminelles de l'histoire judiciaire fran\u00e7aise",
     "m3u8Source": "https://jmp2.uk/stvp-FR1400002XF",
     "categorie": "DOCUMENTAIRE"
   },
@@ -14696,14 +14696,14 @@
   },
   {
     "id": "ch_246",
-    "nom": "MAYDAY CATASTROPHE AÉRIENNE",
+    "nom": "MAYDAY CATASTROPHE A\u00c9RIENNE",
     "lien": "https://jmp2.uk/stvp-FR40000413",
     "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR40000413_20251209T004503SQUARE.png",
     "cat": "DOCUMENTAIRE",
     "ch": "1328",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Mayday : Dangers dans le Ciel - Les enquêtes minutieuses sur les crashs d'avions",
+    "desc": "Mayday : Dangers dans le Ciel - Les enqu\u00eates minutieuses sur les crashs d'avions",
     "m3u8Source": "https://jmp2.uk/stvp-FR40000413",
     "categorie": "DOCUMENTAIRE"
   },
@@ -14716,7 +14716,7 @@
     "ch": "1329",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Chefclub TV - Recettes créatives, astuces gourmandes et cuisine en vidéo",
+    "desc": "Chefclub TV - Recettes cr\u00e9atives, astuces gourmandes et cuisine en vid\u00e9o",
     "m3u8Source": "https://jmp2.uk/stvp-FRBB3900001PZ",
     "categorie": "GENERALISTE"
   },
@@ -14729,7 +14729,7 @@
     "ch": "1330",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Pluto TV Cuisine - Émissions gastronomiques, compétitions et découvertes culinaires",
+    "desc": "Pluto TV Cuisine - \u00c9missions gastronomiques, comp\u00e9titions et d\u00e9couvertes culinaires",
     "m3u8Source": "https://jmp2.uk/stvp-FRBA3300044VR",
     "categorie": "GENERALISTE"
   },
@@ -14742,7 +14742,7 @@
     "ch": "1331",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Invitation au voyage - Échappées culturelles et patrimoniales",
+    "desc": "Invitation au voyage - \u00c9chapp\u00e9es culturelles et patrimoniales",
     "m3u8Source": "https://jmp2.uk/stvp-FR3700004HZ",
     "categorie": "DOCUMENTAIRE"
   },
@@ -14755,7 +14755,7 @@
     "ch": "1332",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "TV5MONDE+ Chefs - Les toqués de la gastronomie francophone et internationale",
+    "desc": "TV5MONDE+ Chefs - Les toqu\u00e9s de la gastronomie francophone et internationale",
     "m3u8Source": "https://jmp2.uk/stvp-FR1300003HM",
     "categorie": "GENERALISTE"
   },
@@ -14768,7 +14768,7 @@
     "ch": "1333",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "TV5 Monde Voyage - Les plus beaux horizons de la planète",
+    "desc": "TV5 Monde Voyage - Les plus beaux horizons de la plan\u00e8te",
     "m3u8Source": "https://jmp2.uk/stvp-FR1800004EP",
     "categorie": "DOCUMENTAIRE"
   },
@@ -14807,7 +14807,7 @@
     "ch": "1337",
     "qualite": "HD",
     "pays": "USA",
-    "desc": "Vevo Pop - Les hits pop internationaux et vidéoclips les plus streamés",
+    "desc": "Vevo Pop - Les hits pop internationaux et vid\u00e9oclips les plus stream\u00e9s",
     "m3u8Source": "https://jmp2.uk/stvp-FRBC2100001YY",
     "categorie": "MUSIQUE"
   },
@@ -14820,20 +14820,20 @@
     "ch": "1338",
     "qualite": "HD",
     "pays": "USA",
-    "desc": "Vevo Hip-Hop & R&B - Le son urbain américain et mondial non-stop",
+    "desc": "Vevo Hip-Hop & R&B - Le son urbain am\u00e9ricain et mondial non-stop",
     "m3u8Source": "https://jmp2.uk/stvp-FRBC2100002JA",
     "categorie": "MUSIQUE"
   },
   {
     "id": "ch_270",
-    "nom": "VEVO RÉTRO",
+    "nom": "VEVO R\u00c9TRO",
     "lien": "https://jmp2.uk/stvp-FRBD1900013CB",
     "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD1900013CB_20250513T005804SQUARE.png",
     "cat": "MUSIQUE",
     "ch": "1339",
     "qualite": "HD",
     "pays": "USA",
-    "desc": "Vevo Rétro - Les plus grands clips des légendes de la musique",
+    "desc": "Vevo R\u00e9tro - Les plus grands clips des l\u00e9gendes de la musique",
     "m3u8Source": "https://jmp2.uk/stvp-FRBD1900013CB",
     "categorie": "MUSIQUE"
   },
@@ -14846,7 +14846,7 @@
     "ch": "1340",
     "qualite": "HD",
     "pays": "COREE DU SUD",
-    "desc": "K-POP by CJ ENM - Les groupes coréens phares, chorégraphies et performances lives",
+    "desc": "K-POP by CJ ENM - Les groupes cor\u00e9ens phares, chor\u00e9graphies et performances lives",
     "m3u8Source": "https://jmp2.uk/stvp-FR3900001AC",
     "categorie": "MUSIQUE"
   },
@@ -14859,7 +14859,7 @@
     "ch": "1341",
     "qualite": "HD",
     "pays": "COREE DU SUD",
-    "desc": "NEW KPOP - Les nouvelles sorties et idoles de la pop sud-coréenne",
+    "desc": "NEW KPOP - Les nouvelles sorties et idoles de la pop sud-cor\u00e9enne",
     "m3u8Source": "https://jmp2.uk/stvp-FR1700002OZ",
     "categorie": "MUSIQUE"
   },
@@ -14872,7 +14872,7 @@
     "ch": "1342",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Cool Summer Channel - Hits estivaux et sons lounge ensoleillés",
+    "desc": "Cool Summer Channel - Hits estivaux et sons lounge ensoleill\u00e9s",
     "m3u8Source": "https://jmp2.uk/stvp-FR2500001BS",
     "categorie": "MUSIQUE"
   },
@@ -14885,7 +14885,7 @@
     "ch": "1343",
     "qualite": "HD",
     "pays": "CANADA",
-    "desc": "Caillou - Les découvertes du quotidien pour les tout-petits",
+    "desc": "Caillou - Les d\u00e9couvertes du quotidien pour les tout-petits",
     "m3u8Source": "https://jmp2.uk/stvp-FR4800002NE",
     "categorie": "ENFANTS"
   },
@@ -14898,7 +14898,7 @@
     "ch": "1344",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "LooLoo Kids - Comptines animées et chansons d'éveil pour enfants",
+    "desc": "LooLoo Kids - Comptines anim\u00e9es et chansons d'\u00e9veil pour enfants",
     "m3u8Source": "https://jmp2.uk/stvp-FR5000001UH",
     "categorie": "ENFANTS"
   },
@@ -14911,7 +14911,7 @@
     "ch": "1345",
     "qualite": "HD",
     "pays": "ESPAGNE",
-    "desc": "Pocoyo - Aventures ludiques et colorées de Pocoyo et ses amis",
+    "desc": "Pocoyo - Aventures ludiques et color\u00e9es de Pocoyo et ses amis",
     "m3u8Source": "https://jmp2.uk/stvp-FR700001VJ",
     "categorie": "ENFANTS"
   },
@@ -14924,20 +14924,20 @@
     "ch": "1346",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Wonderland Kids TV - Programmes d'animation féériques",
+    "desc": "Wonderland Kids TV - Programmes d'animation f\u00e9\u00e9riques",
     "m3u8Source": "https://jmp2.uk/stvp-FR1800002C4",
     "categorie": "ENFANTS"
   },
   {
     "id": "ch_279",
-    "nom": "LES LAPINS CRÉTINS",
+    "nom": "LES LAPINS CR\u00c9TINS",
     "lien": "https://jmp2.uk/stvp-FRBD2300002CM",
     "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBD2300002CM_20251209T004459SQUARE.png",
     "cat": "ENFANTS",
     "ch": "1347",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "Les Lapins Crétins (Rabbids Invasion) - Bêtises et folie pure non-stop",
+    "desc": "Les Lapins Cr\u00e9tins (Rabbids Invasion) - B\u00eatises et folie pure non-stop",
     "m3u8Source": "https://jmp2.uk/stvp-FRBD2300002CM",
     "categorie": "ENFANTS"
   },
@@ -14950,7 +14950,7 @@
     "ch": "1348",
     "qualite": "HD",
     "pays": "INTERNATIONAL",
-    "desc": "Masha et Michka - La petite fille espiègle et son ami l'ours dans la forêt",
+    "desc": "Masha et Michka - La petite fille espi\u00e8gle et son ami l'ours dans la for\u00eat",
     "m3u8Source": "https://jmp2.uk/stvp-FR38000024W",
     "categorie": "ENFANTS"
   },
@@ -14963,7 +14963,7 @@
     "ch": "1349",
     "qualite": "HD",
     "pays": "USA",
-    "desc": "Charlotte aux Fraises - Les aventures douces et parfumées de Fraisi-Paradis",
+    "desc": "Charlotte aux Fraises - Les aventures douces et parfum\u00e9es de Fraisi-Paradis",
     "m3u8Source": "https://jmp2.uk/stvp-FRBD1900012T7",
     "categorie": "ENFANTS"
   },
@@ -14976,20 +14976,20 @@
     "ch": "1350",
     "qualite": "HD",
     "pays": "FRANCE",
-    "desc": "SuperToons TV - Dessins animés jeunesse classiques et contemporains",
+    "desc": "SuperToons TV - Dessins anim\u00e9s jeunesse classiques et contemporains",
     "m3u8Source": "https://jmp2.uk/stvp-FRBD5100002NL",
     "categorie": "ENFANTS"
   },
   {
     "id": "ch_284",
-    "nom": "BOB L'ÉPONGE",
+    "nom": "BOB L'\u00c9PONGE",
     "lien": "https://jmp2.uk/stvp-FRAJ3800010QO",
     "logo": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRAJ3800010QO_20241106T142544SQUARE.png",
     "cat": "ENFANTS",
     "ch": "1351",
     "qualite": "HD",
     "pays": "USA",
-    "desc": "Bob l'Éponge - Les aventures hilarantes de Bikini Bottom avec Patrick et Carlo",
+    "desc": "Bob l'\u00c9ponge - Les aventures hilarantes de Bikini Bottom avec Patrick et Carlo",
     "m3u8Source": "https://jmp2.uk/stvp-FRAJ3800010QO",
     "categorie": "ENFANTS"
   },
@@ -15002,7 +15002,7 @@
     "ch": "1352",
     "qualite": "HD",
     "pays": "USA",
-    "desc": "Pluto TV Toons - Les cartoons cultes et séries d'animation",
+    "desc": "Pluto TV Toons - Les cartoons cultes et s\u00e9ries d'animation",
     "m3u8Source": "https://jmp2.uk/stvp-FRAJ38000035M",
     "categorie": "ENFANTS"
   },
@@ -15015,7 +15015,7 @@
     "ch": "1353",
     "qualite": "HD",
     "pays": "USA",
-    "desc": "iCarly - La série comique ado Nickelodeon culte",
+    "desc": "iCarly - La s\u00e9rie comique ado Nickelodeon culte",
     "m3u8Source": "https://jmp2.uk/stvp-FRAJ38000061J",
     "categorie": "ENFANTS"
   },
@@ -15031,5 +15031,33 @@
     "desc": "Famille Rakuten TV - Films grand public pour petits et grands",
     "m3u8Source": "https://jmp2.uk/stvp-FR2600001PI",
     "categorie": "FILMS"
+  },
+  {
+    "nom": "EEV TV",
+    "lien": "https://www.tvpromedia.com/live/cle_evv_3m_1g5q.m3u8",
+    "cat": "RELIGIEUSE",
+    "logo": "",
+    "ch": "1322",
+    "qualite": "HD",
+    "pays": "RDC",
+    "m3u8Source": "https://www.tvpromedia.com/live/cle_evv_3m_1g5q.m3u8",
+    "youtubeBackup": "https://www.tvpromedia.com/live/cle_evv_3m_1g5q.m3u8",
+    "subscriptionDurationMonths": 3,
+    "expiresAt": "2027-01-30",
+    "issuedAt": "2026-10-30"
+  },
+  {
+    "nom": "TRP TV",
+    "lien": "https://www.tvpromedia.com/live/cle_trp_3m_ng14.m3u8",
+    "cat": "RELIGIEUSE",
+    "logo": "",
+    "ch": "1323",
+    "qualite": "HD",
+    "pays": "RDC",
+    "m3u8Source": "https://www.tvpromedia.com/live/cle_trp_3m_ng14.m3u8",
+    "youtubeBackup": "https://www.tvpromedia.com/live/cle_trp_3m_ng14.m3u8",
+    "subscriptionDurationMonths": 3,
+    "expiresAt": "2027-01-30",
+    "issuedAt": "2026-10-30"
   }
 ]
