@@ -84,16 +84,6 @@
     "m3u8Source": "https://stream.berosat.live:19360/espoir-tv-stream/espoir-tv-stream.m3u8"
   },
   {
-    "nom": "CENTRAL OF VOICE TV",
-    "categorie": "CONGO",
-    "lien": "https://stream.berosat.live:19360/central-voice/central-voice.m3u8",
-    "m3u8Source": "https://stream.berosat.live:19360/central-voice/central-voice.m3u8",
-    "desc": "CENTRAL OF VOICE TV Berosat",
-    "ch": "5",
-    "id": "ch_auto_5",
-    "url": "https://stream.berosat.live:19360/central-voice/central-voice.m3u8"
-  },
-  {
     "nom": "NURU TV",
     "categorie": "CONGO",
     "lien": "https://stream.berosat.live:19360/nuru-tv/nuru-tv.m3u8",
@@ -132,16 +122,6 @@
     "ch": "9",
     "id": "ch_auto_9",
     "url": "https://stream.berosat.live/hls/monde24h-tv-index/monde24h-tv-index.m3u8"
-  },
-  {
-    "nom": "Der TV",
-    "categorie": "CONGO",
-    "lien": "https://stream.berosat.live/hls/der-tv/der-tv.m3u8",
-    "m3u8Source": "https://stream.berosat.live/hls/der-tv/der-tv.m3u8",
-    "desc": "Der TV Berosat",
-    "ch": "10",
-    "id": "ch_auto_10",
-    "url": "https://stream.berosat.live/hls/der-tv/der-tv.m3u8"
   },
   {
     "nom": "Lider TV",
@@ -17822,5 +17802,21 @@
     "aLaUne": true,
     "visible": true,
     "active": true
+  },
+  {
+    "nom": "KMK TV",
+    "ch": "10",
+    "categorie": "GENERALISTE",
+    "lien": "https://stream.berosat.live/hls/kmk-index/kmk-index.m3u8",
+    "m3u8Source": "https://stream.berosat.live/hls/kmk-index/kmk-index.m3u8",
+    "source": "https://stream.berosat.live/hls/kmk-index/kmk-index.m3u8",
+    "url": "https://stream.berosat.live/hls/kmk-index/kmk-index.m3u8",
+    "desc": "KMK TV",
+    "id": "ch_kmk_tv",
+    "pays": "",
+    "qualite": "HD",
+    "direct": true,
+    "logo": "/logo/kmk-tv.jpeg",
+    "bouquet": "BEROSAT"
   }
 ]
