@@ -284,21 +284,6 @@
     "bouquet": "BEROSAT"
   },
   {
-    "id": "ch_59",
-    "nom": "CENTRAL OF VOICE TV",
-    "ch": "59",
-    "categorie": "RELIGIEUX",
-    "cat": "RELIGIEUX",
-    "pays": "RDC",
-    "qualite": "HD",
-    "direct": true,
-    "lien": "https://stream.berosat.live:19360/central-voice/central-voice.m3u8",
-    "m3u8Source": "https://stream.berosat.live:19360/central-voice/central-voice.m3u8",
-    "logo": "https://i.imgur.com/vH3yPqL.png",
-    "desc": "Central of Voice TV - Chaîne en direct sur le réseau Berosat",
-    "bouquet": "BEROSAT"
-  },
-  {
     "id": "ch_60",
     "nom": "NURU TV",
     "ch": "60",
